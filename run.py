@@ -104,4 +104,7 @@ windowUI.PROJECT_NAME = project.get("ProjectName")
 window = windowUI.main()
 
 
+print("test")
+
+
 
