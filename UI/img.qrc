@@ -1,0 +1,28 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>icons/add-line.png</file>
+    <file>icons/alipay-line.png</file>
+    <file>icons/arrow-drop-down-line.png</file>
+    <file>icons/arrow-drop-up-line.png</file>
+    <file>icons/arrow-left-s-line.png</file>
+    <file>icons/arrow-right-s-line.png</file>
+    <file>icons/bilibili-line.png</file>
+    <file>icons/CardA.py</file>
+    <file>icons/checkbox-blank-circle-line.png</file>
+    <file>icons/checkbox-circle-fill.png</file>
+    <file>icons/delete-bin-6-fill.png</file>
+    <file>icons/delete-bin-6-line.png</file>
+    <file>icons/file-3-line.png</file>
+    <file>icons/folder-3-line.png</file>
+    <file>icons/layout-grid-line.png</file>
+    <file>icons/layout-left-2-line.png</file>
+    <file>icons/layout-left-line.png</file>
+    <file>icons/menu-fill.png</file>
+    <file>icons/more-fill.png</file>
+    <file>icons/more-line.png</file>
+    <file>icons/wechat-2-fill.png</file>
+    <file>icons/wechat-fill.png</file>
+    <file>icons/weibo-fill.png</file>
+    <file>icons/windows-fill.png</file>
+  </qresource>
+</RCC>
