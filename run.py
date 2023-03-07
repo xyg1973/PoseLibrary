@@ -54,7 +54,7 @@ windowUI.PROJECT_NAME = project.get("ProjectName")
 # window = windowUI.test()
 window = windowUI.main()
 
-
+print("test")
 
 
 
