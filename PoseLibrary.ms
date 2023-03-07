@@ -1,4 +1,4 @@
 scriptpathname = getThisScriptFilename()
 scriptpath  = getFilenamePath scriptpathname
-pypath = scriptpath+"\run.py"
+pypath = scriptpath+"//run.py"
 python.ExecuteFile pypath

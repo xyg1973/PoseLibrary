@@ -12,7 +12,8 @@ from pymxs import runtime as rt
 import pymxs
 import gc
 import os
-from Tools import file , QTcommand
+from Tools import file
+from  Tools import QTcommand
 from UI import PoseWindow
 from Maxcommand import pose as pose
 
@@ -57,7 +58,9 @@ class MainWindow(QtWidgets.QMainWindow):
         # Load widgets from "gui\uis\main_window\ui_main.py"
         # ///////////////////////////////////////////////////////////////
         self.ui = PoseWindow.Ui_MainWindow()
+
         self.ui.setupUi(self)
+        self.setWindowTitle("PoseLibrary")
         #隐藏window 抬头
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         #self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
@@ -66,7 +69,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self._timer.timeout.connect(self.handle_timeout)
         self._timer.setSingleShot(True)
         self.show()
-        self.creat_contion()
         self.workflow()
 
         # SHOW MAIN WINDOW
@@ -206,12 +208,14 @@ class MainWindow(QtWidgets.QMainWindow):
         selected_items = self.ui.treeWidget_2.selectedItems()
         for item in selected_items:
             path = get_item_path(item)
+            path = path[0].encode("utf-8").decode("unicode_escape")
+            print(path)
             LISTITEMPATH = '/'.join(path)
 
         if not self.ui.treeWidget_2.selectedItems():
             QTcommand.updataLibraryItem(PROJECT_PATH, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
         else:
-            QTcommand.updataLibraryItem(PROJECT_PATH+"//"+LISTITEMPATH, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
+            QTcommand.updataLibraryItem(PROJECT_PATH+"//"+ unicode(LISTITEMPATH), self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
 
         return LISTITEMPATH
 
@@ -257,6 +261,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.stepWindowUi()
             self.creat_contion()
             self.UpdataLibrary()
+
             self.ui.frame_9.setVisible(False)
             #创建目录
             pass
@@ -351,6 +356,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
         else:
             self.showMaximized()
+
+    def evenrfilter(self):
+        self.installEventFilter(self)
+
 def main():
     global  PROJECT_PATH
     global  LISTITEMPATH

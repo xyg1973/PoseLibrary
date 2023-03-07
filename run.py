@@ -1,7 +1,7 @@
 import os
 import sys
 import json
-pypath = "F:\poselibray"
+pypath = "J:\work\Git\PoseLibrary"
 if pypath in sys.path:
     pass
 else:
@@ -23,7 +23,7 @@ def reload_module(module_name):
             importlib.reload(sys.modules[module_name])
     else:
         pass
-
+#
 reload_module('UI.windowUI')
 reload_module('Tools.file')
 

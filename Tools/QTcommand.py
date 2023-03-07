@@ -8,41 +8,74 @@ pypath = ""
 
 
 class MyWidget(QtWidgets.QWidget):
-    def __init__(self, row, column, table_widget, parent=None):
-        super(MyWidget,self ).__init__(parent)
-        self.row = row
-        self.column = column
-        self.table_widget = table_widget
+	def __init__(self, row, column, table_widget, pngpath,parent=None):
+		super(MyWidget,self ).__init__(parent)
+		self.row = row
+		self.column = column
+		self.table_widget = table_widget
 
-        # 创建子小部件
-        frame = QtWidgets.QFrame(self)
-        self.layout = QtWidgets.QVBoxLayout(frame)
-        self.button = QtWidgets.QPushButton(frame)
-        self.lineEdit = QtWidgets.QLineEdit(frame)
+		# 创建子小部件
+		self.layout = QtWidgets.QVBoxLayout(self)
+		self.button = QtWidgets.QPushButton()
+		self.button .setFocusPolicy(QtCore.Qt.NoFocus)
+		self.button.setStyleSheet("QPushButton {\n"
+										"    background-color:argb(10, 10, 10,40);\n"
+										"    color: rgb(225, 225, 225);\n"
+										"    border-width: 0px;\n"
+										"    border-radius: 3px;\n"
+										"    border-color: beige;\n"
+										"    padding: 2px;\n"
+										"\n"
+										"}\n"
+										"QPushButton:hover {\n"
+										"    background-color:argb(10, 10, 10,40);\n"
+										"}\n"
+										"QPushButton:pressed {\n"
+										"    background-color: argb(10, 10, 10,40);\n"
+										"    border-style: inset;\n"
+										"}\n"
+										"")
+		# pixmap = QtGui.QPixmap(pngpath)
+		# pixmap.scaled(40, 40)
+		# self.label.setPixmap(pixmap)
+		# self.label.resize(QtCore.QSize(40,40))
+		self.lineEdit = QtWidgets.QLineEdit()
+		self.lineEdit.setStyleSheet("QLineEdit{\n"
+								"    background-color:transparent;\n"
+								"    color:rgb(176, 176, 176);\n"
+								"    border-style: outset;\n"
+								"    border-width: 0px;\n"
+								"    border-radius: 3px;\n"
+								"    border-color: beige;\n"
+								"    padding: 2px;\n"
+								"    text-align:left\n"
+								"}\n"
+								"")
 
-        # 添加到布局中
-        self.layout.addWidget(self.button)
-        self.layout.addWidget(self.lineEdit)
+		# 添加到布局中
+		self.layout.addWidget(self.button)
+		self.layout.addWidget(self.lineEdit)
 
-        # 安装事件过滤器
-        frame.installEventFilter(self)
-        self.button.installEventFilter(self)
-        self.lineEdit.installEventFilter(self)
+		# 安装事件过滤器
+		self.installEventFilter(self)
+		self.button.installEventFilter(self)
+		self.lineEdit.installEventFilter(self)
 
-	#信号事件选中item中部件会同时选中item
-    def eventFilter(self, watched,event ):
-        if event.type() == QtCore.QEvent.MouseButtonPress:
-            self.table_widget.setCurrentCell(self.row,self.column )
-            item = self.table_widget.item(self.row,self.column )
-            self.table_widget.setItemSelected(item,True )
-            return True
-        return super(MyWidget,self ).eventFilter(watched,event )
+	# 信号事件选中item中部件会同时选中item
+	def eventFilter(self, watched,event ):
+		if event.type() == QtCore.QEvent.MouseButtonPress:
+			self.table_widget.setCurrentCell(self.row,self.column )
+			item = self.table_widget.item(self.row,self.column )
+			self.table_widget.setItemSelected(item,True )
+			return True
+		return super(MyWidget,self ).eventFilter(watched,event )
+
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
-    window = QtWidgets.QMainWindow()
-    tableWidget = QtWidgets.QTableWidget(4 ,4 ,window )
-    window.setCentralWidget(tableWidget)
+	app = QtWidgets.QApplication([])
+	window = QtWidgets.QMainWindow()
+	tableWidget = QtWidgets.QTableWidget(4 ,4 ,window )
+	window.setCentralWidget(tableWidget)
 
 def updataListItem(path,TreeWidge):
 	global pypath
@@ -164,30 +197,36 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 # 		FrameALayout.addWidget(BtnA)
 # 		FrameALayout.addWidget(LineEditA)
 		# TableWidget.setCellWidget(row, column, FrameA)
+		myWidget = MyWidget(row,column ,TableWidget ,pngfile[i] )
+		#myWidget.resize(QtCore.QSize(90,itemWidth))
 
-		myWidget = MyWidget(row,column ,TableWidget )
-		myWidget.resize(QtCore.QSize(90,itemWidth))
+
+		# myWidget.label.setPixmap(pixmap)
+		# myWidget.label.resize(QtCore.QSize(30, 30))
+
 
 		icon_img = QtGui.QIcon()
 		icon_img.addPixmap(QtGui.QPixmap(pngfile[i]), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 		myWidget.button.setIcon(icon_img)
-		myWidget.button.setIconSize(QtCore.QSize(30, 30))
+		myWidget.button.setIconSize(QtCore.QSize(65, 65))
 		#BtnA.setEnabled(False)
-		myWidget.button.setStyleSheet("QpushButton {background-color:transparent;")
-		myWidget.lineEdit.setStyleSheet("QLineEdit{\n"
-"    background-color:transparent;\n"
-"    color:rgb(176, 176, 176);\n"
-"    border-style: outset;\n"
-"    border-width: 0px;\n"
-"    border-radius: 3px;\n"
-"    border-color: beige;\n"
-"    padding: 2px;\n"
-"    text-align:left\n"
-"}\n"
-"")
+		#myWidget.button.setStyleSheet("QpushButton {background-color:transparent;")
+# 		myWidget.lineEdit.setStyleSheet("QLineEdit{\n"
+# "    background-color:transparent;\n"
+# "    color:rgb(176, 176, 176);\n"
+# "    border-style: outset;\n"
+# "    border-width: 0px;\n"
+# "    border-radius: 3px;\n"
+# "    border-color: beige;\n"
+# "    padding: 2px;\n"
+# "    text-align:left\n"
+# "}\n"
+# "")
+
+		# myWidget.label.setPixmap(myWidget.Pixmap.scaled(itemWidth - 300 ,-210))
 		LineEditText = file.getfileName(pngfile[i])
 		myWidget.lineEdit.setText(LineEditText)
-		myWidget.lineEdit.setAlignment(QtCore.Qt.AlignCenter)
+		# myWidget.lineEdit.setAlignment(QtCore.Qt.AlignCenter)
 
 		TableWidget.setCellWidget(row, column, myWidget)
 		#设置宽高
@@ -196,7 +235,8 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 		AllItemFrame.append(myWidget)
 		TableWidget.setFocusPolicy(QtCore.Qt.NoFocus)
 		myWidget.lineEdit.setFocusPolicy(QtCore.Qt.NoFocus)
-		myWidget.button.setFocusPolicy(QtCore.Qt.NoFocus)
+		eventlist = myWidget.eventFilter
+
 	for row in range(TableWidget.rowCount()):
 		for column in range(TableWidget.columnCount()):
 			if TableWidget.cellWidget(row, column) is None:
@@ -207,7 +247,7 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 
 
 
-	return AllItemFrame
+	return eventlist
 
 #获取全部item和位置
 def itemsort(TableWidget,AllItemFrame):
@@ -267,18 +307,18 @@ def BtnSetIcons(PushButton,iconsPath):
 
 
 def add_child(treeweiget):
-    # Get the current selected item
-    current = treeweiget.currentItem()
-    if current:
-        # Get the number of children
-        count = current.childCount()
-        # Create a new child item
-        child = QtWidgets.QTreeWidgetItem()
-        # child.setText(0, f"Child {count + 1}")
-        child.setText(0, "未命名文件夹")
-        # Set the child item to be editable
-        child.setFlags(child.flags() | QtCore.Qt.ItemIsEditable)
-        # Add the child item to the current item
-        current.addChild(child)
+	# Get the current selected item
+	current = treeweiget.currentItem()
+	if current:
+		# Get the number of children
+		count = current.childCount()
+		# Create a new child item
+		child = QtWidgets.QTreeWidgetItem()
+		# child.setText(0, f"Child {count + 1}")
+		child.setText(0, "未命名文件夹")
+		# Set the child item to be editable
+		child.setFlags(child.flags() | QtCore.Qt.ItemIsEditable)
+		# Add the child item to the current item
+		current.addChild(child)
 
 	return child

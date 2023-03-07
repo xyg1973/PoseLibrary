@@ -1,52 +1,28 @@
 import sys
-from PySide2.QtWidgets import QApplication, QTreeWidget, QTreeWidgetItem, QPushButton, QVBoxLayout, QWidget
-from PySide2.QtCore import Qt
+from PySide2 import QtCore, QtWidgets
+from view_cortes2 import Ui_MainWindow
 
-# Create the application object
-app = QApplication(sys.argv)
+class MainWindow_EXEC(QtWidgets.QMainWindow):
+    def __init__(self):
+        super(MainWindow_EXEC, self).__init__()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+        self.ui.listWidget.installEventFilter(self)
 
-# Create the tree widget
-tree = QTreeWidget()
-tree.setColumnCount(2)
-tree.setHeaderLabels(["Name", "Type"])
+    def eventFilter(self, obj, event):
+        if obj == self.ui.listWidget:
+            if event.type() == QtCore.QEvent.KeyPress:
+                key = event.key()
+                if key == QtCore.Qt.Key_Return:
+                    print("Enter pressed")
+                    return True
+                elif key == QtCore.Qt.Key_Escape:
+                    print("Escape pressed")
+                    return True
+        return super(MainWindow_EXEC, self).eventFilter(obj, event)
 
-# Create some top-level items
-cities = QTreeWidgetItem(tree)
-cities.setText(0, "Cities")
-osloItem = QTreeWidgetItem(cities)
-osloItem.setText(0, "Oslo")
-osloItem.setText(1, "Yes")
-berlinItem = QTreeWidgetItem(cities)
-berlinItem.setText(0, "Berlin")
-berlinItem.setText(1, "Yes")
-
-# Create a button and a slot function
-button = QPushButton("Add child")
-def add_child():
-    # Get the current selected item
-    current = tree.currentItem()
-    if current:
-        # Get the number of children
-        count = current.childCount()
-        # Create a new child item
-        child = QTreeWidgetItem()
-        child.setText(0, f"Child {count + 1}")
-        child.setText(1, "No")
-        # Set the child item to be editable
-        child.setFlags(child.flags() | Qt.ItemIsEditable)
-        # Add the child item to the current item
-        current.addChild(child)
-
-# Connect the button to the slot function
-button.clicked.connect(add_child)
-
-# Create a widget and a layout to hold the tree and the button
-widget = QWidget()
-layout = QVBoxLayout()
-layout.addWidget(tree)
-layout.addWidget(button)
-widget.setLayout(layout)
-
-# Show the widget and execute the application
-widget.show()
-sys.exit(app.exec_())
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    window = MainWindow_EXEC()
+    window.show()
+    sys.exit(app.exec_())
