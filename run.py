@@ -1,8 +1,7 @@
-
 import os
 import sys
 import json
-pypath = os.getcwd()
+pypath = "F:\poselibray"
 if pypath in sys.path:
     pass
 else:
@@ -25,7 +24,7 @@ def reload_module(module_name):
     else:
         pass
 
-# reload_module('UI.windowUI')
+reload_module('UI.windowUI')
 reload_module('Tools.file')
 
 
@@ -39,7 +38,7 @@ file_path = file.check_and_create_file(my_documents_path, 'poselibrary', 'poseli
 
 
 
-ProjectPath = "H:\pycharm_maya_work\Design"
+ProjectPath = "F:\Myself\cache\Project_text"
 project = file.AddProject(ProjectPath)
 file.write_data_to_file(file_path,project)  #写入项目路径数据
 common = file.read_file(file_path)
@@ -49,8 +48,9 @@ print(common)
 #读取文件数据
 
 #设置项目路径
-# windowUI.PROJECT_PATH = common.get("ProjectPath")
-# windowUI.PROJECT_NAME = common.get("ProjectName")
+windowUI.pypath = pypath
+windowUI.PROJECT_PATH = project.get("ProjectPath")
+windowUI.PROJECT_NAME = project.get("ProjectName")
 # window = windowUI.test()
 window = windowUI.main()
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>947</width>
-    <height>564</height>
+    <width>993</width>
+    <height>571</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -36,22 +36,7 @@ background-color:rgb(68, 68, 68);
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0">
-    <property name="spacing">
-     <number>0</number>
-    </property>
-    <property name="leftMargin">
-     <number>0</number>
-    </property>
-    <property name="topMargin">
-     <number>0</number>
-    </property>
-    <property name="rightMargin">
-     <number>0</number>
-    </property>
-    <property name="bottomMargin">
-     <number>0</number>
-    </property>
+   <layout class="QVBoxLayout" name="verticalLayout_4">
     <item>
      <widget class="QFrame" name="library_frame">
       <property name="styleSheet">
@@ -573,6 +558,258 @@ QTableWidget::item:selected {
           <number>0</number>
          </property>
         </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame_9">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="1" column="3">
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="2">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="2">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="0">
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="2">
+        <widget class="QFrame" name="frame_10">
+         <property name="minimumSize">
+          <size>
+           <width>320</width>
+           <height>160</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QFrame#frame_10{
+	background-color:rgb(60, 60, 60);
+	border-radius:10px;
+}
+</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <property name="spacing">
+           <number>15</number>
+          </property>
+          <property name="leftMargin">
+           <number>23</number>
+          </property>
+          <property name="topMargin">
+           <number>23</number>
+          </property>
+          <property name="rightMargin">
+           <number>23</number>
+          </property>
+          <property name="bottomMargin">
+           <number>23</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="styleSheet">
+               <string notr="true">QLabel{
+    background-color:transparent;
+	color:rgb(225, 225, 225);
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+</string>
+              </property>
+              <property name="text">
+               <string>创建资源库</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_13">
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="styleSheet">
+               <string notr="true">QLabel{
+    background-color:transparent;
+	color:rgb(176, 176, 176);
+
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+</string>
+              </property>
+              <property name="text">
+               <string>请输入资源库库名称，并且点击下方按钮选择资源保存的路径。</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_15">
+            <item>
+             <widget class="QLineEdit" name="lineEdit_2">
+              <property name="styleSheet">
+               <string notr="true">QLineEdit{
+background-color:rgb(42, 42, 42);
+color:rgb(255, 255, 255);
+border-radius: 5px; 
+border: 1px solid rgb(25, 25, 25);
+padding: 2px;
+}
+</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_14">
+            <item>
+             <spacer name="horizontalSpacer_8">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_6">
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+    background-color:rgb(94, 94, 94);
+	color: rgb(255, 255, 255);
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+
+}
+QPushButton:hover {
+    background-color:rgb(80, 80, 80);
+}
+QPushButton:pressed {
+    background-color: rgb(70, 70, 70);
+    border-style: inset;
+}
+
+</string>
+              </property>
+              <property name="text">
+               <string>取消</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_5">
+              <property name="minimumSize">
+               <size>
+                <width>120</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+    background-color:rgb(40, 105, 254);
+	color: rgb(255, 255, 255);
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+
+}
+QPushButton:hover {
+    background-color:rgb(14, 59, 229);
+}
+QPushButton:pressed {
+    background-color: rgb(1, 33, 154);
+    border-style: inset;
+}
+
+</string>
+              </property>
+              <property name="text">
+               <string>选择保存的路径</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
        </item>
       </layout>
      </widget>

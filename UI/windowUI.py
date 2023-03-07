@@ -24,6 +24,8 @@ LISTITEMPATH =""
 JSONPATH = ""
 pypath = os.getcwd()
 
+QTcommand.pypath = pypath
+
 # pypath ="H:\pycharm_maya_work\Design"
 print("windowUI的路径是" + pypath)
 def reload_module(module_name):
@@ -64,9 +66,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self._timer.timeout.connect(self.handle_timeout)
         self._timer.setSingleShot(True)
         self.show()
-        self.stepWindowUi()
         self.creat_contion()
-        self.UpdataLibrary()
+        self.workflow()
 
         # SHOW MAIN WINDOW
         # ///////////////////////////////////////////////////////////////
@@ -85,6 +86,67 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Btn_HomePagge.clicked.connect(self.Btn_HomePaggeEvent)
         self.ui.Btn_Creat.clicked.connect(self.CreatPose)
         self.ui.Btn_Apply.clicked.connect(self.ApplyPose)
+        self.ui.pushButton_5.clicked.connect(self.creatProject)
+        self.ui.Btn_Add.clicked.connect(self.AddFolder)
+        self.ui.Btn_Expand.clicked.connect(self.Expandmin)
+        self.ui.pushButton_3.clicked.connect(self.Expandmax)
+
+    def Expandmin(self):
+        self.ui.dockWidget.setVisible(False)
+        self.ui.dockWidget_2.setVisible(False)
+        self.ui.dockWidget_top.setVisible(False)
+        self.ui.pushButton_3.setVisible(True)
+
+    def Expandmax(self):
+        self.ui.dockWidget.setVisible(True)
+        self.ui.dockWidget_2.setVisible(True)
+        self.ui.dockWidget_top.setVisible(True)
+        self.ui.pushButton_3.setVisible(False)
+
+    def AddFolder(self):
+        global PROJECT_PATH
+        if not self.ui.treeWidget_2.selectedItems():
+            item = QtWidgets.QTreeWidgetItem(["未命名文件夹"])
+            icon5 = QtGui.QIcon()
+            icon5.addPixmap(QtGui.QPixmap(pypath + "\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
+                            QtGui.QIcon.Off)
+            item.setIcon(0, icon5)
+            self.ui.treeWidget_2.insertTopLevelItems(0, [item])
+
+            print("未选择Item")
+        else:
+            item = QTcommand.add_child(self.ui.treeWidget_2)
+            icon5 = QtGui.QIcon()
+            icon5.addPixmap(QtGui.QPixmap(pypath + "\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
+                            QtGui.QIcon.Off)
+            item.setIcon(0, icon5)
+            print("xu")
+
+    def creatProject(self):
+        global PROJECT_NAME
+        global PROJECT_PATH
+        name = self.ui.lineEdit_2.text()
+        if name ==[]:
+            pass
+        else:
+            dialog = QtWidgets.QFileDialog(self, '选择文件夹', './')
+            dialog.resize(300, 150)  # 设置窗口大小
+            folder_path = dialog.getExistingDirectory()
+
+            os.makedirs(folder_path+"\\"+name)#创建工程文件夹
+            PROJECT_PATH = folder_path+"\\"+name
+            PROJECT_NAME = name
+            self.stepWindowUi()
+            self.creat_contion()
+            self.UpdataLibrary()
+
+            self.ui.dockWidget.setVisible(True)
+            self.ui.dockWidget_2.setVisible(True)
+            self.ui.UI_Library_frame.setVisible(True)
+            self.ui.dockWidget_top.setVisible(True)
+            self.ui.frame_9.setVisible(False)
+            print(PROJECT_PATH)
+            print(PROJECT_NAME)
 
     def Btn_HomePaggeEvent(self):
         #设置item没有选中
@@ -188,13 +250,28 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def workflow(self):
         if PROJECT_PATH =="":
-
+            self.startWindwoUi()
 
         else:
-            #创建目录
 
-            QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
-            QTcommand.updataLibraryItem(PROJECT_PATH, self.ui.tableWidget,self.ui.centralwidget.frameGeometry().width())
+            self.stepWindowUi()
+            self.creat_contion()
+            self.UpdataLibrary()
+            self.ui.frame_9.setVisible(False)
+            #创建目录
+            pass
+            # QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
+            # QTcommand.updataLibraryItem(PROJECT_PATH, self.ui.tableWidget,self.ui.centralwidget.frameGeometry().width())
+
+
+    def startWindwoUi(self):
+        self.ui.dockWidget.setVisible(False)
+        self.ui.dockWidget_2.setVisible(False)
+        self.ui.UI_Library_frame.setVisible(False)
+        self.ui.dockWidget_top.setVisible(False)
+
+
+
     def stepWindowUi(self):
         # window.ui.statusbar.setVisible(False)
         #self.ui.statusbar.setFixedSize(600,5)
@@ -211,12 +288,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.dockWidget_top.setTitleBarWidget(self.docktitle_top)
         self.ui.pushButton_3.setVisible(False)
         self.ui.pushButton.setVisible(False)
-
         QTcommand.BtnSetIcons(self.ui.Btn_Menu, pypath+"\img//cube-iso-clay.png")
+        print (pypath+"\img//cube-iso-clay.png")
         QTcommand.BtnSetIcons(self.ui.Btn_Add, pypath+"\img//new-folder-dynamic-color.png")
         QTcommand.BtnSetIcons(self.ui.Btn_Expand, pypath+"\img//figma-dynamic-clay.png")
         QTcommand.BtnSetIcons(self.ui.Btn_Creat, pypath+"\img//plus-dynamic-clay.png")
         QTcommand.BtnSetIcons(self.ui.pushButton_4, pypath+"\img//picture-dynamic-clay.png")
+        QTcommand.BtnSetIcons(self.ui.pushButton_3, pypath+"\img//figma-dynamic-clay.png")
 
         self.ui.dockWidget.widget().setMinimumSize(QtCore.QSize(120, 150))
         self.ui.dockWidget.widget().setMaximumSize(QtCore.QSize(200, 150000))

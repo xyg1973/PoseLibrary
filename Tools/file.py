@@ -20,7 +20,7 @@ def getforce(path):
 
 def getforceName(path):
     """
-
+    获取路径下的文件夹，返回列表
     :param path: 所有文件夹名称
     :return: forceName 文件夹列表
     """
@@ -50,7 +50,7 @@ def getfile(path,filetype):
 
 
     # 获取路径下的png文件列表
-    allfile = os.listdir(path)                     #获取item的路径下的文件和文件夹                               #定义变量存储.json文件
+    allfile = os.listdir(unicode(path))                    #获取item的路径下的文件和文件夹                               #定义变量存储.json文件
     for i in allfile :
         if i.rfind(filetype)!=-1:         #字符串从右边开始查找包含“.json”的文件，如果没有找到返回-1，如果不等于-1表示这个文件是json文件
             filelist.append(path+"/"+i)
@@ -73,6 +73,11 @@ def getfileName(path):
 
 
 def read_file(file_path):
+    """
+
+    :param file_path:
+    :return:
+    """
     common = None
 
     # 检查文件是否存在

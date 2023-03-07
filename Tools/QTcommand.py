@@ -4,6 +4,9 @@ import os
 from PySide2 import QtCore, QtGui, QtWidgets
 from Tools import file
 
+pypath = ""
+
+
 class MyWidget(QtWidgets.QWidget):
     def __init__(self, row, column, table_widget, parent=None):
         super(MyWidget,self ).__init__(parent)
@@ -42,6 +45,7 @@ if __name__ == "__main__":
     window.setCentralWidget(tableWidget)
 
 def updataListItem(path,TreeWidge):
+	global pypath
 	"""
 
 	:param path:
@@ -59,7 +63,7 @@ def updataListItem(path,TreeWidge):
 		#print(force_name)
 		item = QtWidgets.QTreeWidgetItem([force_name])  # 创建item
 		icon5 = QtGui.QIcon()
-		icon5.addPixmap(QtGui.QPixmap("H:\pycharm_max_work\poselibray\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
+		icon5.addPixmap(QtGui.QPixmap(pypath+"\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
 						QtGui.QIcon.Off)
 		item.setIcon(0, icon5)
 
@@ -116,7 +120,7 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 	print(TableWidgetWidth)
 	AllItemFrame = []
 	itemWidth = 80
-	pngfile = file.getfile(path, ".png")
+	pngfile = file.getfile(unicode(path), ".png")
 
 	columnCount = TableWidgetWidth // itemWidth  # 列数
 	rowCount = len(pngfile) // columnCount+1			# 行数
@@ -259,3 +263,21 @@ def BtnSetIcons(PushButton,iconsPath):
 	PushButton.setIcon(icon_img)
 	PushButton.setIconSize(QtCore.QSize(22, 22))
 	PushButton.setText("")
+
+
+def add_child(treeweiget):
+    # Get the current selected item
+    current = treeweiget.currentItem()
+    if current:
+        # Get the number of children
+        count = current.childCount()
+        # Create a new child item
+        child = QtWidgets.QTreeWidgetItem()
+        # child.setText(0, f"Child {count + 1}")
+        child.setText(0, "未命名文件夹")
+        # Set the child item to be editable
+        child.setFlags(child.flags() | QtCore.Qt.ItemIsEditable)
+        # Add the child item to the current item
+        current.addChild(child)
+
+	return child
