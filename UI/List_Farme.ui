@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Frame</class>
+ <widget class="QFrame" name="Frame">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>213</width>
+    <height>537</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Frame</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QFrame{
+background-color: transparent;
+
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QDockWidget" name="dockWidget">
+     <widget class="QWidget" name="dockWidgetContents_2">
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="leftMargin">
+          <number>9</number>
+         </property>
+         <property name="rightMargin">
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="Btn_Menu">
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+QPushButton:hover {
+    background-color: rgb(150, 150, 150);
+}
+QPushButton:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}</string>
+           </property>
+           <property name="text">
+            <string>三</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Btn_Add">
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+QPushButton:hover {
+    background-color: rgb(150, 150, 150);
+}
+QPushButton:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}</string>
+           </property>
+           <property name="text">
+            <string>Add</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Btn_Expand">
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+QPushButton:hover {
+    background-color: rgb(150, 150, 150);
+}
+QPushButton:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}</string>
+           </property>
+           <property name="text">
+            <string>田</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <property name="leftMargin">
+          <number>9</number>
+         </property>
+         <item>
+          <widget class="QComboBox" name="CBox_Project">
+           <property name="styleSheet">
+            <string notr="true">QComboBox {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+QPushButton:hover {
+    background-color: rgb(150, 150, 150);
+}
+QPushButton:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}</string>
+           </property>
+           <property name="editable">
+            <bool>false</bool>
+           </property>
+           <item>
+            <property name="text">
+             <string>project</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="leftMargin">
+          <number>3</number>
+         </property>
+         <item>
+          <layout class="QFormLayout" name="formLayout_2">
+           <item row="0" column="0">
+            <widget class="QLabel" name="Lbl_Collection">
+             <property name="styleSheet">
+              <string notr="true">QLabel{
+    background-color:transparent;
+	color:rgb(176, 176, 176);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+</string>
+             </property>
+             <property name="text">
+              <string>收藏夹</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QTreeWidget" name="treeWidget_2">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Ignored" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QTreeWidget
+{
+background-color: transparent;
+color:rgb(255, 255, 255);
+border: 0px solid rgb(17, 17, 17);
+}    
+QTreeWidget::item {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+QTreeWidget::item:hover {
+    background-color: rgb(150, 150, 150);
+}
+QTreeWidget::item:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}
+
+</string>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
+           </property>
+           <property name="autoExpandDelay">
+            <number>-1</number>
+           </property>
+           <property name="indentation">
+            <number>6</number>
+           </property>
+           <property name="headerHidden">
+            <bool>true</bool>
+           </property>
+           <attribute name="headerVisible">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="headerCascadingSectionResizes">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="headerStretchLastSection">
+            <bool>true</bool>
+           </attribute>
+           <column>
+            <property name="text">
+             <string>Name</string>
+            </property>
+           </column>
+           <item>
+            <property name="text">
+             <string>New Item</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>New Item</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>New Item</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <property name="leftMargin">
+          <number>3</number>
+         </property>
+         <item>
+          <layout class="QFormLayout" name="formLayout">
+           <property name="formAlignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <item row="0" column="0">
+            <widget class="QLabel" name="Lbl_Folder">
+             <property name="styleSheet">
+              <string notr="true">QLabel{
+    background-color:transparent;
+	color:rgb(176, 176, 176);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+</string>
+             </property>
+             <property name="text">
+              <string>文件夹</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QPushButton" name="Btn_FolderAdd">
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:Right
+}
+QPushButton:hover {
+    background-color: rgb(150, 150, 150);
+}
+QPushButton:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}</string>
+             </property>
+             <property name="text">
+              <string>Add</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QTreeWidget" name="treeWidget">
+           <property name="styleSheet">
+            <string notr="true">QTreeWidget
+{
+background-color: transparent;
+color:rgb(255, 255, 255);
+border: 0px solid rgb(17, 17, 17);
+}    
+QTreeWidget::item {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+QTreeWidget::item:hover {
+    background-color: rgb(150, 150, 150);
+}
+QTreeWidget::item:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}
+
+</string>
+           </property>
+           <property name="indentation">
+            <number>6</number>
+           </property>
+           <property name="headerHidden">
+            <bool>true</bool>
+           </property>
+           <column>
+            <property name="text">
+             <string>Name</string>
+            </property>
+           </column>
+           <item>
+            <property name="text">
+             <string>New Item</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>New Item</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>New Item</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>New Item</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <property name="leftMargin">
+          <number>9</number>
+         </property>
+         <property name="rightMargin">
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_Search">
+           <property name="styleSheet">
+            <string notr="true">QLineEdit{
+background-color: rgb(38, 39, 42);
+color:rgb(255, 255, 255);
+border-radius: 5px; 
+border: 1px solid rgb(17, 17, 17);
+padding: 2px;
+}
+</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>120</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

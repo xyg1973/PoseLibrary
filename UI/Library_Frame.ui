@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Library_Frame</class>
+ <widget class="QFrame" name="Library_Frame">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>408</width>
+    <height>329</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Frame</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QFrame{
+	background-color:rgb(48, 49, 53);
+	border-radius:0px;
+}
+
+
+QScrollBar:vertical {
+border: 0px ;
+background-color:rgba(48, 49, 53,0);
+width:6px;
+}
+QScrollBar::handle:vertical{
+background:rgb(162, 162, 162);
+min-height: 0px;
+}
+QScrollBar::add-line:vertical {
+background: rgb(255, 0, 0);
+       height: 0px;
+     subcontrol-position: bottom;
+        subcontrol-origin: margin;
+    }
+#QScrollBar::sub-line:vertical {
+ background: rgb(0, 255, 17);
+    height: 0 px;
+     subcontrol-position: top;
+  subcontrol-origin: margin;
+    }</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_A">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="leftMargin">
+      <number>3</number>
+     </property>
+     <property name="topMargin">
+      <number>3</number>
+     </property>
+     <property name="rightMargin">
+      <number>5</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="Btn_Menu">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+QPushButton:hover {
+    background-color: rgb(150, 150, 150);
+}
+QPushButton:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string>三</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Btn_Expand">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+QPushButton:hover {
+    background-color: rgb(150, 150, 150);
+}
+QPushButton:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string>田</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Btn_Back">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+QPushButton:hover {
+    background-color: rgb(150, 150, 150);
+}
+QPushButton:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}
+</string>
+       </property>
+       <property name="text">
+        <string>&lt;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Btn_Forward">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+QPushButton:hover {
+    background-color: rgb(150, 150, 150);
+}
+QPushButton:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string>&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Btn_Force">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+QPushButton:hover {
+    background-color: rgb(150, 150, 150);
+}
+QPushButton:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string>force</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>5</width>
+         <height>5</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Btn_Search">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+QPushButton:hover {
+    background-color: rgb(150, 150, 150);
+}
+QPushButton:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string>搜索</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit_Search_2">
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{
+background-color: rgb(38, 39, 42);
+color:rgb(255, 255, 255);
+border-radius: 5px; 
+border: 1px solid rgb(17, 17, 17);
+padding: 2px;
+}
+</string>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhNone</set>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_B">
+     <item>
+      <widget class="QComboBox" name="CBox_Type">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+QPushButton:hover {
+    background-color: rgb(150, 150, 150);
+}
+QPushButton:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>类型</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="CBox_Time">
+       <property name="styleSheet">
+        <string notr="true">QComboBox {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+QPushButton:hover {
+    background-color: rgb(150, 150, 150);
+}
+QPushButton:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="CBox_Label">
+       <property name="styleSheet">
+        <string notr="true">QComboBox {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+QPushButton:hover {
+    background-color: rgb(150, 150, 150);
+}
+QPushButton:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="CBox_Path">
+       <property name="styleSheet">
+        <string notr="true">QComboBox {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+QPushButton:hover {
+    background-color: rgb(150, 150, 150);
+}
+QPushButton:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QSlider" name="horizontalSlider">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_C">
+     <item>
+      <widget class="QLabel" name="Lbl_Subfile">
+       <property name="styleSheet">
+        <string notr="true">QLabel{
+    background-color:transparent;
+	color:rgb(176, 176, 176);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+</string>
+       </property>
+       <property name="text">
+        <string>子文件夹</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="CekBox_Subfile">
+       <property name="styleSheet">
+        <string notr="true">QCheckBox{
+    background-color:transparent;
+	color:rgb(176, 176, 176);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+</string>
+       </property>
+       <property name="text">
+        <string>显示子文件夹内容</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="styleSheet">
+      <string notr="true">QTableWidget
+{
+background-color: transparent;
+color:rgb(255, 255, 255);
+border: 0px solid rgb(17, 17, 17);
+}    
+QTableWidget::item {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+QTableWidget::item:hover {
+    background-color: rgb(150, 150, 150);
+}
+QTableWidget::item:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}
+
+
+
+</string>
+     </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAsNeeded</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="showGrid">
+      <bool>false</bool>
+     </property>
+     <property name="gridStyle">
+      <enum>Qt::NoPen</enum>
+     </property>
+     <attribute name="horizontalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderHighlightSections">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+    </widget>
+   </item>
+   <item>
+    <widget class="QProgressBar" name="progressBar">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>5</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>5</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>1</pointsize>
+      </font>
+     </property>
+     <property name="value">
+      <number>25</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="invertedAppearance">
+      <bool>false</bool>
+     </property>
+     <property name="textDirection">
+      <enum>QProgressBar::TopToBottom</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
