@@ -29,14 +29,14 @@ class MyWidget(QtWidgets.QWidget):
         self.button.installEventFilter(self)
         self.lineEdit.installEventFilter(self)
 
-	# #信号事件选中item中部件会同时选中item
-    # def eventFilter(self, watched,event ):
-    #     if event.type() == QtCore.QEvent.MouseButtonPress:
-    #         self.table_widget.setCurrentCell(self.row,self.column )
-    #         item = self.table_widget.item(self.row,self.column )
-    #         self.table_widget.setItemSelected(item,True )
-    #         return True
-    #     return super(MyWidget,self ).eventFilter(watched,event )
+	#信号事件选中item中部件会同时选中item
+    def eventFilter(self, watched,event ):
+        if event.type() == QtCore.QEvent.MouseButtonPress:
+            self.table_widget.setCurrentCell(self.row,self.column )
+            item = self.table_widget.item(self.row,self.column )
+            self.table_widget.setItemSelected(item,True )
+            return True
+        return super(MyWidget,self ).eventFilter(watched,event )
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
@@ -166,11 +166,12 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 		# TableWidget.setCellWidget(row, column, FrameA)
 
 		myWidget = MyWidget(row,column ,TableWidget )
-		myWidget.button
+		myWidget.resize(QtCore.QSize(90,itemWidth))
+
 		icon_img = QtGui.QIcon()
 		icon_img.addPixmap(QtGui.QPixmap(pngfile[i]), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 		myWidget.button.setIcon(icon_img)
-		myWidget.button.setIconSize(QtCore.QSize(60, 60))
+		myWidget.button.setIconSize(QtCore.QSize(30, 30))
 		#BtnA.setEnabled(False)
 		myWidget.button.setStyleSheet("QpushButton {background-color:transparent;")
 		myWidget.lineEdit.setStyleSheet("QLineEdit{\n"
