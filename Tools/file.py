@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
-
+import json
 #获取文件夹
 def getforce(path):
     """
@@ -70,3 +70,58 @@ def getfileName(path):
     filename = filename[0:count]
     return filename
 #获取文件命名
+
+
+def read_file(file_path):
+    common = None
+
+    # 检查文件是否存在
+    if os.path.exists(file_path):
+        # 如果文件存在，则读取其内容并将其存储在变量common中
+        with open(file_path, 'r') as f:
+            common = f.read()
+
+    return common
+
+
+def check_and_create_file(folder_path, folder_name, file_name):
+    # 构建文件夹和文件的完整路径
+    poselibrary_path = os.path.join(folder_path, folder_name)
+    text_file_path = os.path.join(poselibrary_path, file_name)
+
+    # 检查文件夹是否存在
+    if not os.path.exists(poselibrary_path):
+        # 如果文件夹不存在，则创建它
+        os.makedirs(poselibrary_path)
+        # 在文件夹中创建一个空文件
+        open(text_file_path, 'w').close()
+    else:
+        # 如果文件夹存在，则检查文件是否存在
+        if not os.path.exists(text_file_path):
+            # 如果文件不存在，则创建它
+            open(text_file_path, 'w').close()
+
+    # 返回文件的完整路径
+    return text_file_path
+
+
+
+def AddProject(folder_path):
+    """
+
+    :param folder_path:
+    :return: ProjectPath,ProjectName,ProjectName,
+    """
+    # 获取文件夹名称
+    folder_name = os.path.basename(folder_path)
+    {folder_path: folder_name }
+    # 返回包含文件夹名称和完整路径的字典
+    return {"ProjectPath": folder_path,
+            "ProjectName": folder_name,
+            "IsCurrent": True
+            }
+
+
+def write_data_to_file(file, data):
+    with open(file, 'w') as f:
+        json.dump(data, f)

@@ -17,13 +17,14 @@ from UI import PoseWindow
 from Maxcommand import pose as pose
 
 #reload(PoseWindow)
-PROJECT_PATH ="H:\pycharm_maya_work\Design"
-PROJECT_NAME ="Design"
+PROJECT_PATH =""
+PROJECT_NAME =""
 SELECTITEMPATH = ""
 LISTITEMPATH =""
 JSONPATH = ""
 pypath = os.getcwd()
-pypath ="H:\pycharm_maya_work\Design"
+
+# pypath ="H:\pycharm_maya_work\Design"
 print("windowUI的路径是" + pypath)
 def reload_module(module_name):
     # 检查模块是否已经导入
@@ -184,6 +185,16 @@ class MainWindow(QtWidgets.QMainWindow):
             JSONPATH = path
         print(JSONPATH)
         return JSONPATH
+
+    def workflow(self):
+        if PROJECT_PATH =="":
+
+
+        else:
+            #创建目录
+
+            QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
+            QTcommand.updataLibraryItem(PROJECT_PATH, self.ui.tableWidget,self.ui.centralwidget.frameGeometry().width())
     def stepWindowUi(self):
         # window.ui.statusbar.setVisible(False)
         #self.ui.statusbar.setFixedSize(600,5)
@@ -214,8 +225,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ui.Lbl_Folder.setText (PROJECT_NAME)
         self.ui.treeWidget_2.clear()
-        QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
-        QTcommand.updataLibraryItem(PROJECT_PATH, self.ui.tableWidget,self.ui.centralwidget.frameGeometry().width())
         #print(self.ui.centralwidget.frameGeometry().width())
         # QtWidgets.QMainWindow.centralWidget()
 
