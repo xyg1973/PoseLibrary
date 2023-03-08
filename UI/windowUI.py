@@ -107,22 +107,46 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def AddFolder(self):
         global PROJECT_PATH
-        if not self.ui.treeWidget_2.selectedItems():
-            item = QtWidgets.QTreeWidgetItem(["未命名文件夹"])
-            icon5 = QtGui.QIcon()
-            icon5.addPixmap(QtGui.QPixmap(pypath + "\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
-                            QtGui.QIcon.Off)
-            item.setIcon(0, icon5)
-            self.ui.treeWidget_2.insertTopLevelItems(0, [item])
+        # if not self.ui.treeWidget_2.selectedItems():
+        folder_name = "folder"
 
-            print("未选择Item")
-        else:
-            item = QTcommand.add_child(self.ui.treeWidget_2)
-            icon5 = QtGui.QIcon()
-            icon5.addPixmap(QtGui.QPixmap(pypath + "\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
-                            QtGui.QIcon.Off)
-            item.setIcon(0, icon5)
-            print("xu")
+        # 设置要创建的文件夹路径
+        folder_path = os.path.join(os.getcwd(), folder_name)
+
+        # 初始化一个计数器
+        counter = 0
+
+        # 循环检查文件夹是否已经存在，如果存在则修改名称并增加计数器
+        while os.path.exists(folder_path):
+            counter += 1
+            folder_name = "folder_{}".format(counter)
+            folder_path = os.path.join(os.getcwd(), folder_name)
+
+        # 创建文件夹
+        os.mkdir(PROJECT_PATH+"\\"+folder_name)
+        counter = 0
+        item = QtWidgets.QTreeWidgetItem([folder_name])
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap(pypath + "\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
+                        QtGui.QIcon.Off)
+        item.setIcon(0, icon5)
+        self.ui.treeWidget_2.insertTopLevelItems(0, [item])
+
+
+        #添加子文件夹
+        # else:
+        #     item = QTcommand.add_child(self.ui.treeWidget_2)
+        #
+        #     icon5 = QtGui.QIcon()
+        #     icon5.addPixmap(QtGui.QPixmap(pypath + "\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
+        #                     QtGui.QIcon.Off)
+        #     item.setIcon(0, icon5)
+        #     itempath = QTcommand.get_item_path(item)
+        #
+        #     folderpath = PROJECT_PATH+"\\"+itempath
+        #     print(folderpath)
+            #创建文件
+            # print("xu")
 
     def creatProject(self):
         global PROJECT_NAME
@@ -210,12 +234,14 @@ class MainWindow(QtWidgets.QMainWindow):
             path = get_item_path(item)
             path = path[0].encode("utf-8").decode("unicode_escape")
             print(path)
-            LISTITEMPATH = '/'.join(path)
+            LISTITEMPATH = ''.join(path)
+
+        # print(LISTITEMPATH)
 
         if not self.ui.treeWidget_2.selectedItems():
             QTcommand.updataLibraryItem(PROJECT_PATH, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
         else:
-            QTcommand.updataLibraryItem(PROJECT_PATH+"//"+ unicode(LISTITEMPATH), self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
+            QTcommand.updataLibraryItem(PROJECT_PATH+"//"+ LISTITEMPATH, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
 
         return LISTITEMPATH
 

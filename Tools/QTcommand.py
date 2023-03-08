@@ -153,7 +153,7 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 	print(TableWidgetWidth)
 	AllItemFrame = []
 	itemWidth = 80
-	pngfile = file.getfile(unicode(path), ".png")
+	pngfile = file.getfile(path, ".png")
 
 	columnCount = TableWidgetWidth // itemWidth  # 列数
 	rowCount = len(pngfile) // columnCount+1			# 行数
@@ -322,3 +322,11 @@ def add_child(treeweiget):
 		current.addChild(child)
 
 	return child
+
+
+def get_item_path(item):
+	path = []
+	while item:
+		path.append(item.text(0))
+		item = item.parent()
+	return path[::-1]
