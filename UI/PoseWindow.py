@@ -333,6 +333,28 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName("horizontalLayout")
+        self.Btn_Apply2 = QtWidgets.QPushButton(self.library_frame)
+        self.Btn_Apply2.setMinimumSize(QtCore.QSize(50, 30))
+        self.Btn_Apply2.setStyleSheet("QPushButton {\n"
+"    background-color:rgb(40, 105, 254);\n"
+"    color: rgb(255, 255, 255);\n"
+"    border-width: 0px;\n"
+"    border-radius: 3px;\n"
+"    border-color: beige;\n"
+"    padding: 2px;\n"
+"\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color:rgb(14, 59, 229);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgb(1, 33, 154);\n"
+"    border-style: inset;\n"
+"}\n"
+"\n"
+"")
+        self.Btn_Apply2.setObjectName("Btn_Apply2")
+        self.horizontalLayout.addWidget(self.Btn_Apply2)
         self.verticalLayout_11.addLayout(self.horizontalLayout)
         self.verticalLayout_4.addWidget(self.library_frame)
         self.frame_9 = QtWidgets.QFrame(self.centralwidget)
@@ -1080,6 +1102,7 @@ class Ui_MainWindow(object):
         self.label_5.setText(_translate("MainWindow", "TextLabel"))
         self.label_6.setText(_translate("MainWindow", "现在开始添加你的pose"))
         self.pushButton_7.setText(_translate("MainWindow", "添加"))
+        self.Btn_Apply2.setText(_translate("MainWindow", "应用"))
         self.label_3.setText(_translate("MainWindow", "创建资源库"))
         self.label_4.setText(_translate("MainWindow", "请输入资源库库名称，并且点击下方按钮选择资源保存的路径。"))
         self.pushButton_6.setText(_translate("MainWindow", "取消"))

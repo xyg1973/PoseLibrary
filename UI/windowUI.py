@@ -91,6 +91,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Btn_HomePagge.clicked.connect(self.Btn_HomePaggeEvent)
         self.ui.Btn_Creat.clicked.connect(self.CreatPose)
         self.ui.Btn_Apply.clicked.connect(self.ApplyPose)
+        self.ui.Btn_Apply2.clicked.connect(self.ApplyPose)
         self.ui.pushButton_5.clicked.connect(self.creatProject)
         self.ui.Btn_Add.clicked.connect(self.AddFolder)
         self.ui.Btn_Expand.clicked.connect(self.Expandmin)
@@ -103,12 +104,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.dockWidget_2.setVisible(False)
         # self.ui.dockWidget_top.setVisible(False)
         self.ui.pushButton_3.setVisible(True)
+        self.ui.Btn_Apply2.setVisible(True)
+        self.UpdataLibrary()
 
     def Expandmax(self):
         self.ui.dockWidget.setVisible(True)
         self.ui.dockWidget_2.setVisible(True)
         # self.ui.dockWidget_top.setVisible(True)
         self.ui.pushButton_3.setVisible(False)
+        self.ui.Btn_Apply2.setVisible(False)
+        self.UpdataLibrary()
 
     def AddFolder(self):
         global PROJECT_PATH
@@ -297,8 +302,8 @@ class MainWindow(QtWidgets.QMainWindow):
         frame = self.ui.tableWidget.cellWidget(row, column)
         lineEdits = frame.findChildren(QtWidgets.QLineEdit)
         name = lineEdits[0].text()
-        SELECTITEMPATH = PROJECT_PATH+"//"+LISTITEMPATH+"//"+name+".png"
-        path = PROJECT_PATH+"//"+LISTITEMPATH+"//"+name+".json"
+        SELECTITEMPATH = PROJECT_PATH+"//"+name+".png"
+        path = PROJECT_PATH+"//"+name+".json"
         print(SELECTITEMPATH,LISTITEMPATH)
         QTcommand.BtnSetIcons(self.ui.pushButton_4, SELECTITEMPATH)
         self.ui.pushButton_4.setIconSize(QtCore.QSize(200, 200))
@@ -360,6 +365,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.pushButton_3.setVisible(False)
         self.ui.pushButton.setVisible(False)
         self.ui.dockWidget_top.setVisible(False)
+        self.ui.Btn_Apply2.setVisible(False)
+        self.ui.Btn_Apply2.setVisible(False)
         QTcommand.BtnSetIcons(self.ui.Btn_Menu, pypath+"\img//cube-iso-clay.png")
         print (pypath+"\img//cube-iso-clay.png")
         QTcommand.BtnSetIcons(self.ui.Btn_Add, pypath+"\img//new-folder-dynamic-color.png")
@@ -391,6 +398,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.treeWidget_2.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ui.Btn_Creat.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ui.pushButton_4.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.ui.Btn_Apply2.setFocusPolicy(QtCore.Qt.NoFocus)
         print("设置UI样式")
 
         self.ui.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)  #设置只能单选
@@ -402,10 +410,10 @@ class MainWindow(QtWidgets.QMainWindow):
         if not self._timer.isActive():
             self.size_changed.emit(event.size().width(), event.size().height())
             self._blocked = True
-            self._timer.start(500) # 屏蔽信号的时间，单位毫秒
+            self._timer.start(10) # 屏蔽信号的时间，单位毫秒
         elif not self._blocked:
             self._timer.stop()
-            self._timer.start(500)
+            self._timer.start(10)
             self._blocked = True
         super(MainWindow, self).resizeEvent(event)
 
@@ -451,7 +459,7 @@ def main():
 
 
     def eventItemSort(w, h):
-        QTimer.singleShot(250, itemsort)
+        QTimer.singleShot(50, itemsort)
         print("yes yes yes")
 
         gc.collect()  # python内置清除内存函数

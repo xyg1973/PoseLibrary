@@ -646,6 +646,39 @@ QPushButton:pressed {
          <property name="bottomMargin">
           <number>0</number>
          </property>
+         <item>
+          <widget class="QPushButton" name="Btn_Apply2">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(40, 105, 254);
+	color: rgb(255, 255, 255);
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+
+}
+QPushButton:hover {
+    background-color:rgb(14, 59, 229);
+}
+QPushButton:pressed {
+    background-color: rgb(1, 33, 154);
+    border-style: inset;
+}
+
+</string>
+           </property>
+           <property name="text">
+            <string>应用</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
       </layout>

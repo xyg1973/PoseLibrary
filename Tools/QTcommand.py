@@ -56,21 +56,21 @@ class MyWidget(QtWidgets.QWidget):
 		self.layout.addWidget(self.button)
 		self.layout.addWidget(self.lineEdit)
 
-		# 安装事件过滤器
-		# self.installEventFilter(self)
-		# self.button.installEventFilter(self)
-		# self.lineEdit.installEventFilter(self)
+		#安装事件过滤器
+		self.installEventFilter(self)
+		self.button.installEventFilter(self)
+		self.lineEdit.installEventFilter(self)
 
-	# # 信号事件选中item中部件会同时选中item
-	# def eventFilter(self, watched,tableweigetevent ):
-	# 	if tableweigetevent.type() == QtCore.QEvent.MouseButtonPress:
-	# 		self.table_widget.setCurrentCell(self.row,self.column )
-	# 		item = self.table_widget.item(self.row,self.column )
-	# 		self.table_widget.setItemSelected(item,True )
-	# 		return True
-	# 	if tableweigetevent.type() == QtCore.QEvent.MouseButtonDblClick:
-	# 		print("双击事件")
-	# 	return super(MyWidget,self ).eventFilter(watched,tableweigetevent )
+	# 信号事件选中item中部件会同时选中item
+	def eventFilter(self, watched,tableweigetevent ):
+		if tableweigetevent.type() == QtCore.QEvent.MouseButtonPress:
+			self.table_widget.setCurrentCell(self.row,self.column )
+			item = self.table_widget.item(self.row,self.column )
+			self.table_widget.setItemSelected(item,True )
+			return True
+		if tableweigetevent.type() == QtCore.QEvent.MouseButtonDblClick:
+			print("双击事件")
+		return super(MyWidget,self ).eventFilter(watched,tableweigetevent )
 
 
 if __name__ == "__main__":
