@@ -1,28 +1,20 @@
-import sys
-from PySide2 import QtCore, QtWidgets
-from view_cortes2 import Ui_MainWindow
+from PyQt5 import QtWidgets
 
-class MainWindow_EXEC(QtWidgets.QMainWindow):
-    def __init__(self):
-        super(MainWindow_EXEC, self).__init__()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
-        self.ui.listWidget.installEventFilter(self)
+class MyDelegate(QtWidgets.QStyledItemDelegate):
+    def editorEvent(self, event, model, option, index):
+        if event.type() == QtCore.QEvent.MouseButtonDblClick:
+            print(f'Row: {index.row()}, Column: {index.column()}')
+            # 在这里发送信号
+        return super().editorEvent(event, model, option, index)
 
-    def eventFilter(self, obj, event):
-        if obj == self.ui.listWidget:
-            if event.type() == QtCore.QEvent.KeyPress:
-                key = event.key()
-                if key == QtCore.Qt.Key_Return:
-                    print("Enter pressed")
-                    return True
-                elif key == QtCore.Qt.Key_Escape:
-                    print("Escape pressed")
-                    return True
-        return super(MainWindow_EXEC, self).eventFilter(obj, event)
-
-if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
-    window = MainWindow_EXEC()
-    window.show()
-    sys.exit(app.exec_())
+if __name__ == '__main__':
+    app = QtWidgets.QApplication([])
+    table = QtWidgets.QTableWidget()
+    table.setRowCount(3)
+    table.setColumnCount(3)
+    for i in range(3):
+        for j in range(3):
+            table.setItem(i, j, QtWidgets.QTableWidgetItem(f'Item ({i}, {j})'))
+    table.setItemDelegate(MyDelegate())
+    table.show()
+    app.exec_()

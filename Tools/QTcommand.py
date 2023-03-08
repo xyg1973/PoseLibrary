@@ -57,18 +57,20 @@ class MyWidget(QtWidgets.QWidget):
 		self.layout.addWidget(self.lineEdit)
 
 		# 安装事件过滤器
-		self.installEventFilter(self)
-		self.button.installEventFilter(self)
-		self.lineEdit.installEventFilter(self)
+		# self.installEventFilter(self)
+		# self.button.installEventFilter(self)
+		# self.lineEdit.installEventFilter(self)
 
-	# 信号事件选中item中部件会同时选中item
-	def eventFilter(self, watched,event ):
-		if event.type() == QtCore.QEvent.MouseButtonPress:
-			self.table_widget.setCurrentCell(self.row,self.column )
-			item = self.table_widget.item(self.row,self.column )
-			self.table_widget.setItemSelected(item,True )
-			return True
-		return super(MyWidget,self ).eventFilter(watched,event )
+	# # 信号事件选中item中部件会同时选中item
+	# def eventFilter(self, watched,tableweigetevent ):
+	# 	if tableweigetevent.type() == QtCore.QEvent.MouseButtonPress:
+	# 		self.table_widget.setCurrentCell(self.row,self.column )
+	# 		item = self.table_widget.item(self.row,self.column )
+	# 		self.table_widget.setItemSelected(item,True )
+	# 		return True
+	# 	if tableweigetevent.type() == QtCore.QEvent.MouseButtonDblClick:
+	# 		print("双击事件")
+	# 	return super(MyWidget,self ).eventFilter(watched,tableweigetevent )
 
 
 if __name__ == "__main__":
@@ -152,18 +154,18 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 	TableWidgetWidth = TableWidgetWidth
 	print(TableWidgetWidth)
 	AllItemFrame = []
-	itemWidth = 80
+	itemWidth = 90
 	pngfile = file.getfile(path, ".png")
 
-	columnCount = TableWidgetWidth // itemWidth  # 列数
-	rowCount = len(pngfile) // columnCount+1			# 行数
+	columnCount = TableWidgetWidth // itemWidth # 列数
+	rowCount = len(pngfile) // columnCount			# 行数
 
-	if len(AllItemFrame)%columnCount:
+	if len(pngfile)%columnCount:
 		rowCount+=1
 
 	TableWidget.setRowCount(rowCount)		#设置列数
 	TableWidget.setColumnCount(columnCount) 	#设置行数
-	itemWidth = (TableWidgetWidth-45)/(columnCount-1)		#重新计算itemWidth大小
+	itemWidth = (TableWidgetWidth-20)/(columnCount)		#重新计算itemWidth大小
 	print(itemWidth)
 
 	for i in range(len(pngfile)):
@@ -230,7 +232,7 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 
 		TableWidget.setCellWidget(row, column, myWidget)
 		#设置宽高
-		TableWidget.setRowHeight(row,90)
+		TableWidget.setRowHeight(row,itemWidth)
 		TableWidget.setColumnWidth(column,itemWidth)
 		AllItemFrame.append(myWidget)
 		TableWidget.setFocusPolicy(QtCore.Qt.NoFocus)
@@ -240,8 +242,10 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 	for row in range(TableWidget.rowCount()):
 		for column in range(TableWidget.columnCount()):
 			if TableWidget.cellWidget(row, column) is None:
+				# item = TableWidget.item(row, column)
+				# item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEnabled)
 				emptyItem = QtWidgets.QTableWidgetItem()
-				emptyItem.setFlags(QtCore.Qt.ItemIsEnabled)
+				emptyItem.setFlags(emptyItem.flags() & ~QtCore.Qt.ItemIsEnabled)
 				TableWidget.setItem(row, column, emptyItem)
 				TableWidget.setFocusPolicy(QtCore.Qt.NoFocus)  #点击有虚线
 

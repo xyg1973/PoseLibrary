@@ -14,7 +14,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(993, 571)
+        MainWindow.resize(1245, 974)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -223,66 +223,110 @@ class Ui_MainWindow(object):
         self.tableWidget.setWordWrap(True)
         self.tableWidget.setCornerButtonEnabled(True)
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(12)
-        self.tableWidget.setRowCount(14)
+        self.tableWidget.setColumnCount(2)
+        self.tableWidget.setRowCount(2)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setVerticalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setVerticalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(3, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(5, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(6, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(7, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(8, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(9, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(10, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(11, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(12, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(13, item)
-        item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(3, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(5, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(6, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(7, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(8, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(9, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(10, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(11, item)
         self.tableWidget.horizontalHeader().setVisible(False)
         self.tableWidget.horizontalHeader().setHighlightSections(True)
         self.tableWidget.verticalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setHighlightSections(True)
         self.verticalLayout_10.addWidget(self.tableWidget)
         self.verticalLayout_6.addWidget(self.frame_2)
+        self.frame_11 = QtWidgets.QFrame(self.UI_Library_frame)
+        self.frame_11.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_11.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_11.setObjectName("frame_11")
+        self.gridLayout = QtWidgets.QGridLayout(self.frame_11)
+        self.gridLayout.setObjectName("gridLayout")
+        self.frame_12 = QtWidgets.QFrame(self.frame_11)
+        self.frame_12.setMinimumSize(QtCore.QSize(250, 250))
+        self.frame_12.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_12.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_12.setObjectName("frame_12")
+        self.verticalLayout_18 = QtWidgets.QVBoxLayout(self.frame_12)
+        self.verticalLayout_18.setSpacing(12)
+        self.verticalLayout_18.setObjectName("verticalLayout_18")
+        self.verticalLayout_19 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_19.setObjectName("verticalLayout_19")
+        self.label_5 = QtWidgets.QLabel(self.frame_12)
+        self.label_5.setStyleSheet("QLabel{\n"
+"    background-color:transparent;\n"
+"    color:rgb(176, 176, 176);\n"
+"\n"
+"    border-width: 0px;\n"
+"    border-radius: 3px;\n"
+"    border-color: beige;\n"
+"    padding: 2px;\n"
+"    text-align:left\n"
+"}\n"
+"")
+        self.label_5.setObjectName("label_5")
+        self.verticalLayout_19.addWidget(self.label_5)
+        self.verticalLayout_18.addLayout(self.verticalLayout_19)
+        self.horizontalLayout_17 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_17.setObjectName("horizontalLayout_17")
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_17.addItem(spacerItem1)
+        self.label_6 = QtWidgets.QLabel(self.frame_12)
+        self.label_6.setStyleSheet("QLabel{\n"
+"    background-color:transparent;\n"
+"    color:rgb(176, 176, 176);\n"
+"\n"
+"    border-width: 0px;\n"
+"    border-radius: 3px;\n"
+"    border-color: beige;\n"
+"    padding: 2px;\n"
+"    text-align:left\n"
+"}\n"
+"")
+        self.label_6.setObjectName("label_6")
+        self.horizontalLayout_17.addWidget(self.label_6)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_17.addItem(spacerItem2)
+        self.verticalLayout_18.addLayout(self.horizontalLayout_17)
+        self.horizontalLayout_16 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_16.setObjectName("horizontalLayout_16")
+        self.pushButton_7 = QtWidgets.QPushButton(self.frame_12)
+        self.pushButton_7.setMinimumSize(QtCore.QSize(0, 30))
+        self.pushButton_7.setStyleSheet("QPushButton {\n"
+"    background-color:rgb(40, 105, 254);\n"
+"    color: rgb(255, 255, 255);\n"
+"    border-width: 0px;\n"
+"    border-radius: 3px;\n"
+"    border-color: beige;\n"
+"    padding: 2px;\n"
+"\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color:rgb(14, 59, 229);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgb(1, 33, 154);\n"
+"    border-style: inset;\n"
+"}\n"
+"\n"
+"")
+        self.pushButton_7.setObjectName("pushButton_7")
+        self.horizontalLayout_16.addWidget(self.pushButton_7)
+        self.verticalLayout_18.addLayout(self.horizontalLayout_16)
+        self.verticalLayout_18.setStretch(0, 1)
+        self.gridLayout.addWidget(self.frame_12, 1, 1, 1, 1)
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem3, 1, 0, 1, 1)
+        spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout.addItem(spacerItem4, 2, 1, 1, 1)
+        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout.addItem(spacerItem5, 0, 1, 1, 1)
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem6, 1, 2, 1, 1)
+        self.verticalLayout_6.addWidget(self.frame_11)
         self.horizontalLayout_2.addWidget(self.UI_Library_frame)
         self.verticalLayout_11.addLayout(self.horizontalLayout_2)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -297,14 +341,14 @@ class Ui_MainWindow(object):
         self.frame_9.setObjectName("frame_9")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.frame_9)
         self.gridLayout_2.setObjectName("gridLayout_2")
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_2.addItem(spacerItem1, 1, 3, 1, 1)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_2.addItem(spacerItem2, 0, 2, 1, 1)
-        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_2.addItem(spacerItem3, 2, 2, 1, 1)
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_2.addItem(spacerItem4, 1, 0, 1, 1)
+        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_2.addItem(spacerItem7, 1, 3, 1, 1)
+        spacerItem8 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout_2.addItem(spacerItem8, 0, 2, 1, 1)
+        spacerItem9 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout_2.addItem(spacerItem9, 2, 2, 1, 1)
+        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_2.addItem(spacerItem10, 1, 0, 1, 1)
         self.frame_10 = QtWidgets.QFrame(self.frame_9)
         self.frame_10.setMinimumSize(QtCore.QSize(320, 160))
         self.frame_10.setStyleSheet("QFrame#frame_10{\n"
@@ -368,8 +412,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_7.addLayout(self.horizontalLayout_15)
         self.horizontalLayout_14 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_14.setObjectName("horizontalLayout_14")
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_14.addItem(spacerItem5)
+        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_14.addItem(spacerItem11)
         self.pushButton_6 = QtWidgets.QPushButton(self.frame_10)
         self.pushButton_6.setMinimumSize(QtCore.QSize(50, 30))
         self.pushButton_6.setStyleSheet("QPushButton {\n"
@@ -483,8 +527,8 @@ class Ui_MainWindow(object):
 "}")
         self.Btn_Menu.setObjectName("Btn_Menu")
         self.horizontalLayout_10.addWidget(self.Btn_Menu)
-        spacerItem6 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_10.addItem(spacerItem6)
+        spacerItem12 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_10.addItem(spacerItem12)
         self.Btn_Add = QtWidgets.QPushButton(self.frame)
         self.Btn_Add.setMinimumSize(QtCore.QSize(23, 23))
         self.Btn_Add.setStyleSheet("QPushButton {\n"
@@ -552,8 +596,8 @@ class Ui_MainWindow(object):
 "")
         self.Lbl_Folder.setObjectName("Lbl_Folder")
         self.horizontalLayout_12.addWidget(self.Lbl_Folder)
-        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_12.addItem(spacerItem7)
+        spacerItem13 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_12.addItem(spacerItem13)
         self.Btn_HomePagge = QtWidgets.QPushButton(self.frame_8)
         self.Btn_HomePagge.setMinimumSize(QtCore.QSize(23, 23))
         self.Btn_HomePagge.setStyleSheet("QPushButton {\n"
@@ -642,8 +686,8 @@ class Ui_MainWindow(object):
         self.lineEdit_Search.setObjectName("lineEdit_Search")
         self.verticalLayout_3.addWidget(self.lineEdit_Search)
         self.verticalLayout.addLayout(self.verticalLayout_3)
-        spacerItem8 = QtWidgets.QSpacerItem(257, 4, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.verticalLayout.addItem(spacerItem8)
+        spacerItem14 = QtWidgets.QSpacerItem(257, 4, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.verticalLayout.addItem(spacerItem14)
         self.verticalLayout.setStretch(2, 1)
         self.verticalLayout_5.addWidget(self.frame)
         self.dockWidget.setWidget(self.dockWidgetContents)
@@ -663,8 +707,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_11.setSpacing(0)
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
-        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem9)
+        spacerItem15 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_11.addItem(spacerItem15)
         self.Btn_win_min = QtWidgets.QPushButton(self.dockWidgetContents_2)
         self.Btn_win_min.setMinimumSize(QtCore.QSize(23, 23))
         self.Btn_win_min.setStyleSheet("QPushButton {\n"
@@ -740,7 +784,7 @@ class Ui_MainWindow(object):
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_3.setObjectName("frame_3")
         self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.frame_3)
-        self.verticalLayout_8.setContentsMargins(5, 0, 10, 8)
+        self.verticalLayout_8.setContentsMargins(5, 8, 10, 8)
         self.verticalLayout_8.setSpacing(6)
         self.verticalLayout_8.setObjectName("verticalLayout_8")
         self.horizontalLayout_9 = QtWidgets.QHBoxLayout()
@@ -748,6 +792,30 @@ class Ui_MainWindow(object):
         self.horizontalLayout_9.setSpacing(0)
         self.horizontalLayout_9.setObjectName("horizontalLayout_9")
         self.verticalLayout_8.addLayout(self.horizontalLayout_9)
+        self.verticalLayout_20 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_20.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_20.setObjectName("verticalLayout_20")
+        self.pushButton_4 = QtWidgets.QPushButton(self.frame_3)
+        self.pushButton_4.setMinimumSize(QtCore.QSize(100, 100))
+        self.pushButton_4.setStyleSheet("QPushButton {\n"
+"    background-color:argb(10, 10, 10,40);\n"
+"    color: rgb(225, 225, 225);\n"
+"    border-width: 0px;\n"
+"    border-radius: 3px;\n"
+"    border-color: beige;\n"
+"    padding: 2px;\n"
+"\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color:argb(10, 10, 10,40);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: argb(10, 10, 10,40);\n"
+"    border-style: inset;\n"
+"}\n"
+"")
+        self.pushButton_4.setObjectName("pushButton_4")
+        self.verticalLayout_20.addWidget(self.pushButton_4)
         self.frame_7 = QtWidgets.QFrame(self.frame_3)
         self.frame_7.setStyleSheet("QFrame{\n"
 "background-color:rgb(60, 60, 60);\n"
@@ -784,31 +852,7 @@ class Ui_MainWindow(object):
 "")
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout_7.addWidget(self.pushButton_2)
-        self.verticalLayout_8.addWidget(self.frame_7)
-        self.verticalLayout_20 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_20.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_20.setObjectName("verticalLayout_20")
-        self.pushButton_4 = QtWidgets.QPushButton(self.frame_3)
-        self.pushButton_4.setMinimumSize(QtCore.QSize(100, 100))
-        self.pushButton_4.setStyleSheet("QPushButton {\n"
-"    background-color:argb(10, 10, 10,40);\n"
-"    color: rgb(225, 225, 225);\n"
-"    border-width: 0px;\n"
-"    border-radius: 3px;\n"
-"    border-color: beige;\n"
-"    padding: 2px;\n"
-"\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color:argb(10, 10, 10,40);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: argb(10, 10, 10,40);\n"
-"    border-style: inset;\n"
-"}\n"
-"")
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.verticalLayout_20.addWidget(self.pushButton_4)
+        self.verticalLayout_20.addWidget(self.frame_7)
         self.verticalLayout_8.addLayout(self.verticalLayout_20)
         self.frame_4 = QtWidgets.QFrame(self.frame_3)
         self.frame_4.setStyleSheet("QFrame{\n"
@@ -1010,8 +1054,8 @@ class Ui_MainWindow(object):
         self.Btn_Apply.setObjectName("Btn_Apply")
         self.verticalLayout_23.addWidget(self.Btn_Apply)
         self.verticalLayout_8.addLayout(self.verticalLayout_23)
-        spacerItem10 = QtWidgets.QSpacerItem(180, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_8.addItem(spacerItem10)
+        spacerItem16 = QtWidgets.QSpacerItem(180, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_8.addItem(spacerItem16)
         self.verticalLayout_16.addWidget(self.frame_3)
         self.dockWidget_2.setWidget(self.dockWidgetContents_3)
         MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(2), self.dockWidget_2)
@@ -1029,54 +1073,13 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "New Row"))
         item = self.tableWidget.verticalHeaderItem(1)
         item.setText(_translate("MainWindow", "New Row"))
-        item = self.tableWidget.verticalHeaderItem(2)
-        item.setText(_translate("MainWindow", "New Row"))
-        item = self.tableWidget.verticalHeaderItem(3)
-        item.setText(_translate("MainWindow", "New Row"))
-        item = self.tableWidget.verticalHeaderItem(4)
-        item.setText(_translate("MainWindow", "New Row"))
-        item = self.tableWidget.verticalHeaderItem(5)
-        item.setText(_translate("MainWindow", "New Row"))
-        item = self.tableWidget.verticalHeaderItem(6)
-        item.setText(_translate("MainWindow", "New Row"))
-        item = self.tableWidget.verticalHeaderItem(7)
-        item.setText(_translate("MainWindow", "New Row"))
-        item = self.tableWidget.verticalHeaderItem(8)
-        item.setText(_translate("MainWindow", "New Row"))
-        item = self.tableWidget.verticalHeaderItem(9)
-        item.setText(_translate("MainWindow", "New Row"))
-        item = self.tableWidget.verticalHeaderItem(10)
-        item.setText(_translate("MainWindow", "New Row"))
-        item = self.tableWidget.verticalHeaderItem(11)
-        item.setText(_translate("MainWindow", "New Row"))
-        item = self.tableWidget.verticalHeaderItem(12)
-        item.setText(_translate("MainWindow", "New Row"))
-        item = self.tableWidget.verticalHeaderItem(13)
-        item.setText(_translate("MainWindow", "New Row"))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "New Column"))
         item = self.tableWidget.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "New Column"))
-        item = self.tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "New Column"))
-        item = self.tableWidget.horizontalHeaderItem(3)
-        item.setText(_translate("MainWindow", "New Column"))
-        item = self.tableWidget.horizontalHeaderItem(4)
-        item.setText(_translate("MainWindow", "New Column"))
-        item = self.tableWidget.horizontalHeaderItem(5)
-        item.setText(_translate("MainWindow", "New Column"))
-        item = self.tableWidget.horizontalHeaderItem(6)
-        item.setText(_translate("MainWindow", "New Column"))
-        item = self.tableWidget.horizontalHeaderItem(7)
-        item.setText(_translate("MainWindow", "New Column"))
-        item = self.tableWidget.horizontalHeaderItem(8)
-        item.setText(_translate("MainWindow", "New Column"))
-        item = self.tableWidget.horizontalHeaderItem(9)
-        item.setText(_translate("MainWindow", "New Column"))
-        item = self.tableWidget.horizontalHeaderItem(10)
-        item.setText(_translate("MainWindow", "New Column"))
-        item = self.tableWidget.horizontalHeaderItem(11)
-        item.setText(_translate("MainWindow", "New Column"))
+        self.label_5.setText(_translate("MainWindow", "TextLabel"))
+        self.label_6.setText(_translate("MainWindow", "现在开始添加你的pose"))
+        self.pushButton_7.setText(_translate("MainWindow", "添加"))
         self.label_3.setText(_translate("MainWindow", "创建资源库"))
         self.label_4.setText(_translate("MainWindow", "请输入资源库库名称，并且点击下方按钮选择资源保存的路径。"))
         self.pushButton_6.setText(_translate("MainWindow", "取消"))
@@ -1095,8 +1098,8 @@ class Ui_MainWindow(object):
         self.Btn_win_min.setText(_translate("MainWindow", "一"))
         self.Btn_win_max.setText(_translate("MainWindow", "口"))
         self.Btn_win_close.setText(_translate("MainWindow", " X"))
-        self.pushButton_2.setText(_translate("MainWindow", "选择类型"))
         self.pushButton_4.setText(_translate("MainWindow", "PushButton"))
+        self.pushButton_2.setText(_translate("MainWindow", "选择类型"))
         self.label.setText(_translate("MainWindow", "文件信息"))
         self.Lbl_Name.setText(_translate("MainWindow", "name"))
         self.Lbl_ObjCount.setText(_translate("MainWindow", "TextLabel"))

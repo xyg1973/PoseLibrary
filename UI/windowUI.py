@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 import sys
 import json
 sys.path.append("H:/pycharm_max_work/poselibray")
@@ -60,6 +61,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui = PoseWindow.Ui_MainWindow()
 
         self.ui.setupUi(self)
+        self.ui.frame_11.setVisible(False)
         self.setWindowTitle("PoseLibrary")
         #隐藏window 抬头
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
@@ -68,8 +70,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self._timer = QtCore.QTimer(self)
         self._timer.timeout.connect(self.handle_timeout)
         self._timer.setSingleShot(True)
-        self.show()
         self.workflow()
+        self.resize(600, 300)
+
 
         # SHOW MAIN WINDOW
         # ///////////////////////////////////////////////////////////////
@@ -84,7 +87,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ui.treeWidget_2.itemClicked.connect(self.UpdataLibrary)
         self.ui.tableWidget.itemSelectionChanged.connect(self.UpdataCradData)  #单击事件
-        #self.ui.tableWidget.itemDoubleClicked.connect(self.apply_pose)#双击事件
+        self.ui.tableWidget.doubleClicked.connect(self.selectPose)#双击事件
         self.ui.Btn_HomePagge.clicked.connect(self.Btn_HomePaggeEvent)
         self.ui.Btn_Creat.clicked.connect(self.CreatPose)
         self.ui.Btn_Apply.clicked.connect(self.ApplyPose)
@@ -92,17 +95,19 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Btn_Add.clicked.connect(self.AddFolder)
         self.ui.Btn_Expand.clicked.connect(self.Expandmin)
         self.ui.pushButton_3.clicked.connect(self.Expandmax)
-
+        self.ui.pushButton_7.clicked.connect(self.CreatPose)
+    def selectPose(self):
+        print("选中物体")
     def Expandmin(self):
         self.ui.dockWidget.setVisible(False)
         self.ui.dockWidget_2.setVisible(False)
-        self.ui.dockWidget_top.setVisible(False)
+        # self.ui.dockWidget_top.setVisible(False)
         self.ui.pushButton_3.setVisible(True)
 
     def Expandmax(self):
         self.ui.dockWidget.setVisible(True)
         self.ui.dockWidget_2.setVisible(True)
-        self.ui.dockWidget_top.setVisible(True)
+        # self.ui.dockWidget_top.setVisible(True)
         self.ui.pushButton_3.setVisible(False)
 
     def AddFolder(self):
@@ -175,15 +180,28 @@ class MainWindow(QtWidgets.QMainWindow):
             print(PROJECT_NAME)
 
     def Btn_HomePaggeEvent(self):
+        global PROJECT_PATH
         #设置item没有选中
         self.ui.treeWidget_2.clearSelection()
+
+        filelist = file.getfile(PROJECT_PATH, ".png")
+        if filelist == []:
+            self.ui.frame_2.setVisible(False)
+            self.ui.frame_11.setVisible(True)
+
+        else:
+            self.ui.frame_11.setVisible(False)
+            self.ui.frame_2.setVisible(True)
         #刷新表格
-        QTcommand.updataLibraryItem(PROJECT_PATH,self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
+            QTcommand.updataLibraryItem(PROJECT_PATH,self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
 
     def CreatPose(self):
         global PROJECT_PATH
+        global LISTITEMPATH
         # pose.make_cylinder()
-        name = self.UI_addpose_inputDialog()
+        # name = self.UI_addpose_inputDialog()
+
+        name = "posefsa"
         jsonname = name + ".json"
         print(PROJECT_PATH)
         filepath = PROJECT_PATH +"\\"+jsonname
@@ -221,6 +239,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def UpdataLibrary(self):
         global LISTITEMPATH
+        global PROJECT_PATH
 
         def get_item_path(item):
             path = []
@@ -239,9 +258,25 @@ class MainWindow(QtWidgets.QMainWindow):
         # print(LISTITEMPATH)
 
         if not self.ui.treeWidget_2.selectedItems():
-            QTcommand.updataLibraryItem(PROJECT_PATH, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
+            filelist = file.getfile(PROJECT_PATH,".png")
+            if filelist ==[]:
+                self.ui.frame_2.setVisible(False)
+                self.ui.frame_11.setVisible(True)
+
+            else:
+                self.ui.frame_11.setVisible(False)
+                self.ui.frame_2.setVisible(True)
+                QTcommand.updataLibraryItem(PROJECT_PATH, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
         else:
-            QTcommand.updataLibraryItem(PROJECT_PATH+"//"+ LISTITEMPATH, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
+            filelist = file.getfile(PROJECT_PATH+"//"+ LISTITEMPATH, ".png")
+            if filelist == []:
+                self.ui.frame_2.setVisible(False)
+                self.ui.frame_11.setVisible(True)
+
+            else:
+                self.ui.frame_11.setVisible(False)
+                self.ui.frame_2.setVisible(True)
+                QTcommand.updataLibraryItem(PROJECT_PATH+"//"+ LISTITEMPATH, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
 
         return LISTITEMPATH
 
@@ -251,6 +286,7 @@ class MainWindow(QtWidgets.QMainWindow):
         :return:
         """
         #获取选中的ite
+        global PROJECT_PATH
         global LISTITEMPATH
         global JSONPATH
         selected = self.ui.tableWidget.selectedIndexes()
@@ -281,17 +317,21 @@ class MainWindow(QtWidgets.QMainWindow):
     def workflow(self):
         if PROJECT_PATH =="":
             self.startWindwoUi()
+            self.show()
 
         else:
 
             self.stepWindowUi()
             self.creat_contion()
-            self.UpdataLibrary()
+            self.ui.treeWidget_2.clearSelection()
+            self.Btn_HomePaggeEvent()
+            self.show()
+            self.Btn_HomePaggeEvent()
 
             self.ui.frame_9.setVisible(False)
             #创建目录
             pass
-            # QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
+            QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
             # QTcommand.updataLibraryItem(PROJECT_PATH, self.ui.tableWidget,self.ui.centralwidget.frameGeometry().width())
 
 
@@ -319,6 +359,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.dockWidget_top.setTitleBarWidget(self.docktitle_top)
         self.ui.pushButton_3.setVisible(False)
         self.ui.pushButton.setVisible(False)
+        self.ui.dockWidget_top.setVisible(False)
         QTcommand.BtnSetIcons(self.ui.Btn_Menu, pypath+"\img//cube-iso-clay.png")
         print (pypath+"\img//cube-iso-clay.png")
         QTcommand.BtnSetIcons(self.ui.Btn_Add, pypath+"\img//new-folder-dynamic-color.png")
@@ -326,6 +367,10 @@ class MainWindow(QtWidgets.QMainWindow):
         QTcommand.BtnSetIcons(self.ui.Btn_Creat, pypath+"\img//plus-dynamic-clay.png")
         QTcommand.BtnSetIcons(self.ui.pushButton_4, pypath+"\img//picture-dynamic-clay.png")
         QTcommand.BtnSetIcons(self.ui.pushButton_3, pypath+"\img//figma-dynamic-clay.png")
+        Pixmap = QtGui.QPixmap(pypath + "\ui//icons//file-3-line.png")
+        Pixmap.scaled(40, 40)
+        self.ui.label_5.setPixmap(Pixmap)
+
 
         self.ui.dockWidget.widget().setMinimumSize(QtCore.QSize(120, 150))
         self.ui.dockWidget.widget().setMaximumSize(QtCore.QSize(200, 150000))
@@ -348,6 +393,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.pushButton_4.setFocusPolicy(QtCore.Qt.NoFocus)
         print("设置UI样式")
 
+        self.ui.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)  #设置只能单选
+
     def handle_timeout(self):
         self._blocked = False
 
@@ -362,19 +409,19 @@ class MainWindow(QtWidgets.QMainWindow):
             self._blocked = True
         super(MainWindow, self).resizeEvent(event)
 
-    def mousePressEvent(self, event):
-        if event.button() ==QtCore.Qt.LeftButton and self.isMaximized() ==False:
-            self.m_flag = True
-            self.m_Position = event.globalPos() -self.pos()
-            event.accept()
-            self.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
-    def mouseMoveEvent(self, mouse_event):
-        if QtCore.Qt.LeftButton and self.m_flag:
-            self.move(mouse_event.globalPos() - self.m_Position)
-            mouse_event.accept()
-    def mouseReleaseEvent(self, mouse_event):
-        self.m_flag = False
-        self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+    # def mousePressEvent(self, event):
+    #     if event.button() ==QtCore.Qt.LeftButton and self.isMaximized() ==False:
+    #         self.m_flag = True
+    #         self.m_Position = event.globalPos() -self.pos()
+    #         event.accept()
+    #         self.setCursor(QtGui.QCursor(QtCore.Qt.OpenHandCursor))
+    # def mouseMoveEvent(self, mouse_event):
+    #     if QtCore.Qt.LeftButton and self.m_flag:
+    #         self.move(mouse_event.globalPos() - self.m_Position)
+    #         mouse_event.accept()
+    # def mouseReleaseEvent(self, mouse_event):
+    #     self.m_flag = False
+    #     self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
 
     def restore_or_maximize_window(self):
         if self.isMaximized():
@@ -383,8 +430,9 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.showMaximized()
 
-    def evenrfilter(self):
-        self.installEventFilter(self)
+    # def evenrfilter(self,eventlist):
+    #     for event in eventlist:
+    #         self.ui.Btn_Creat.installEventFilter(event)
 
 def main():
     global  PROJECT_PATH
