@@ -1,8 +1,8 @@
 import os
 import sys
 import json
-# pypath = "J:\work\Git\PoseLibrary"
-pypath = "F:\Myself\PoseLibrary"
+pypath = "J:\work\Git\PoseLibrary"
+# pypath = "F:\Myself\PoseLibrary"
 if pypath in sys.path:
     pass
 else:
@@ -44,7 +44,6 @@ project = file.AddProject(ProjectPath)
 file.write_data_to_file(file_path,project)  #写入项目路径数据
 common = file.read_file(file_path)
 
-print(common)
 
 #读取文件数据
 
@@ -55,7 +54,6 @@ windowUI.PROJECT_NAME = project.get("ProjectName")
 # window = windowUI.test()
 window = windowUI.main()
 
-print("test")
 
 
 

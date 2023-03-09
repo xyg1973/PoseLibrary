@@ -49,7 +49,20 @@ reload_module('Tools.file')
 reload_module('Tools.QTcommand')
 reload_module('UI.PoseWindow')
 reload_module('Maxcommand.pose')
+class RenameDialog(QtWidgets.QDialog):
+    def __init__(self):
+        super().__init__()
+        layout = QtWidgets.QVBoxLayout()
+        self.lineedit = QtWidgets.QLineEdit()
+        layout.addWidget(self.lineedit)
+        buttonBox = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Ok | QtWidgets.QDialogButtonBox.Cancel)
+        buttonBox.accepted.connect(self.accept)
+        buttonBox.rejected.connect(self.reject)
+        layout.addWidget(buttonBox)
+        self.setLayout(layout)
 
+    def textValue(self):
+        return self.lineedit.text()
 class MainWindow(QtWidgets.QMainWindow):
     size_changed = QtCore.Signal(int, int)
     m_flag = False
@@ -63,6 +76,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.ui.frame_11.setVisible(False)
         self.setWindowTitle("PoseLibrary")
+        self.ui.treeWidget_2.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         #隐藏window 抬头
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         #self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
@@ -97,6 +111,60 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Btn_Expand.clicked.connect(self.Expandmin)
         self.ui.pushButton_3.clicked.connect(self.Expandmax)
         self.ui.pushButton_7.clicked.connect(self.CreatPose)
+        self.ui.treeWidget_2.customContextMenuRequested.connect(self.TreeWeiget_rightMenuShow)
+
+    def TreeWeiget_rightMenuShow(self):
+        global PROJECT_PATH
+        try:
+            rightMenu = QtWidgets.QMenu(self.ui.treeWidget_2)
+            addChildAction= rightMenu.addAction(u"添加子文件夹")
+            removeAction = rightMenu.addAction(u"删除")
+            # copyAction = rightMenu.addAction(u"复制")
+            action = rightMenu.exec_(QtGui.QCursor.pos())
+            if action == removeAction:
+                for item in self.ui.treeWidget_2.selectedItems():
+                    index = self.ui.treeWidget_2.indexOfTopLevelItem(item)
+
+                    if index != -1:
+                        self.ui.treeWidget_2.takeTopLevelItem (index)
+                    else:
+                        parent = item.parent()
+                        parent.removeChild(item)
+
+            elif action == addChildAction:
+                for item in self.ui.treeWidget_2.selectedItems():
+                    index = self.ui.treeWidget_2.indexOfTopLevelItem(item)
+                    itempath = QTcommand.get_item_name(item)
+                    folder_name = "folder"
+                    if index != -1:
+
+
+                        # 获取要创建的文件夹路径
+                        folder_path = PROJECT_PATH + "//"+itempath+"//" + folder_name
+                        folder_path = file.create_folder(folder_path)
+                        folder_name = os.path.basename(folder_path)
+
+                        #创建item
+                        item = QTcommand.add_child(self.ui.treeWidget_2,name=folder_name)
+                        icon5 = QtGui.QIcon()
+                        icon5.addPixmap(QtGui.QPixmap(pypath + "\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
+                                        QtGui.QIcon.Off)
+                        item.setIcon(0, icon5)
+                    else:
+                        # 获取要创建的文件夹路径
+                        folder_path = PROJECT_PATH + "//" + itempath+ "//" + folder_name
+                        folder_path = file.create_folder(folder_path)
+                        folder_name = os.path.basename(folder_path)
+
+                        # 创建item
+                        child_item = QTcommand.add_child(self.ui.treeWidget_2,item,name=folder_name)
+                        icon5 = QtGui.QIcon()
+                        icon5.addPixmap(QtGui.QPixmap(pypath + "\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
+                                        QtGui.QIcon.Off)
+                        child_item.setIcon(0, icon5)
+
+        except Exception as e:
+            print(e)
     def selectPose(self):
         print("选中物体")
     def Expandmin(self):
@@ -130,10 +198,12 @@ class MainWindow(QtWidgets.QMainWindow):
         icon5.addPixmap(QtGui.QPixmap(pypath + "\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
                         QtGui.QIcon.Off)
         item.setIcon(0, icon5)
-        self.ui.treeWidget_2.insertTopLevelItems(0, [item])
 
-        self.ui.treeWidget_2.clear()
-        QTcommand.updataListItem(PROJECT_PATH,self.ui.treeWidget_2)
+        self.ui.treeWidget_2.insertTopLevelItems(0, [item])
+        self.ui.treeWidget_2.editItem(item)
+
+        # self.ui.treeWidget_2.clear()
+        # QTcommand.updataListItem(PROJECT_PATH,self.ui.treeWidget_2)
 
 
         #添加子文件夹
@@ -174,8 +244,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.UI_Library_frame.setVisible(True)
             self.ui.dockWidget_top.setVisible(True)
             self.ui.frame_9.setVisible(False)
-            print(PROJECT_PATH)
-            print(PROJECT_NAME)
 
     def Btn_HomePaggeEvent(self):
         global PROJECT_PATH
@@ -198,27 +266,57 @@ class MainWindow(QtWidgets.QMainWindow):
         global LISTITEMPATH
         # pose.make_cylinder()
         # name = self.UI_addpose_inputDialog()
-
         name = "posefsa"
         jsonname = name + ".json"
-        print(PROJECT_PATH)
-        filepath = PROJECT_PATH +"\\"+jsonname
-        pngpath = PROJECT_PATH +"\\"+name+".png"
-        open(filepath, 'w').close()
-        posedata = pose.savePose()
+        if not self.ui.treeWidget_2.selectedItems():
 
-        with open(filepath, 'w') as f:
-            json.dump(posedata, f)
 
-        pose.render_and_save(300,300,pngpath)
-        QTcommand.updataLibraryItem(PROJECT_PATH,self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
+            filepath = PROJECT_PATH +"\\"+jsonname
+            pngpath = PROJECT_PATH +"\\"+name+".png"
+            open(filepath, 'w').close()
+            posedata = pose.savePose()
+
+            with open(filepath, 'w') as f:
+                json.dump(posedata, f)
+
+            pose.render_and_save(300,300,pngpath)
+            QTcommand.updataLibraryItem(PROJECT_PATH,self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
+        else :
+            #获取路径
+            for item in self.ui.treeWidget_2.selectedItems():
+                index = self.ui.treeWidget_2.indexOfTopLevelItem(item)
+                itempath = QTcommand.get_item_name(item)
+
+                folder_path = PROJECT_PATH + "//" + itempath
+                filepath = folder_path + "\\" + jsonname
+                pngpath = folder_path + "\\" + name + ".png"
+                open(filepath, 'w').close()
+                posedata = pose.savePose()
+                with open(filepath, 'w') as f:
+                    json.dump(posedata, f)
+
+                pose.render_and_save(300, 300, pngpath)
+
+                filelist = file.getfile(folder_path, ".png")
+                if filelist == []:
+                    self.ui.frame_2.setVisible(False)
+                    self.ui.frame_11.setVisible(True)
+
+                else:
+                    self.ui.frame_11.setVisible(False)
+                    self.ui.frame_2.setVisible(True)
+
+                QTcommand.updataLibraryItem(folder_path, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
+
+
+
+
         return posedata
 
     def ApplyPose(self):
         global JSONPATH
         # 定位json路径
         path = JSONPATH
-        print(path)
         # 读取数据
         with open(path, 'r') as f:
             posedata = json.load(f)
@@ -239,21 +337,7 @@ class MainWindow(QtWidgets.QMainWindow):
         global LISTITEMPATH
         global PROJECT_PATH
 
-        def get_item_path(item):
-            path = []
-            while item:
-                path.append(item.text(0))
-                item = item.parent()
-            return path[::-1]
 
-        selected_items = self.ui.treeWidget_2.selectedItems()
-        for item in selected_items:
-            path = get_item_path(item)
-            path = path[0].encode("utf-8").decode("unicode_escape")
-            print(path)
-            LISTITEMPATH = ''.join(path)
-
-        # print(LISTITEMPATH)
 
         if not self.ui.treeWidget_2.selectedItems():
             filelist = file.getfile(PROJECT_PATH,".png")
@@ -266,6 +350,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.ui.frame_2.setVisible(True)
                 QTcommand.updataLibraryItem(PROJECT_PATH, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
         else:
+            LISTITEMPATH = QTcommand.get_item_path(self.ui.treeWidget_2)
             filelist = file.getfile(PROJECT_PATH+"//"+ LISTITEMPATH, ".png")
             if filelist == []:
                 self.ui.frame_2.setVisible(False)
@@ -297,7 +382,7 @@ class MainWindow(QtWidgets.QMainWindow):
         name = lineEdits[0].text()
         SELECTITEMPATH = PROJECT_PATH+"//"+name+".png"
         path = PROJECT_PATH+"//"+name+".json"
-        print(SELECTITEMPATH,LISTITEMPATH)
+        # print(SELECTITEMPATH,LISTITEMPATH)
         QTcommand.BtnSetIcons(self.ui.pushButton_4, SELECTITEMPATH)
         self.ui.pushButton_4.setIconSize(QtCore.QSize(200, 200))
         self.ui.Lbl_Name.setText("name: "+ name)
@@ -309,7 +394,7 @@ class MainWindow(QtWidgets.QMainWindow):
             JSONPATH = PROJECT_PATH +"//"+name+".json"
         else:
             JSONPATH = path
-        print(JSONPATH)
+        # print(JSONPATH)
         return JSONPATH
 
     def workflow(self):
@@ -366,7 +451,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Btn_Apply2.setVisible(False)
         self.ui.frame_9.setVisible(False)
         QTcommand.BtnSetIcons(self.ui.Btn_Menu, pypath+"\img//cube-iso-clay.png")
-        print (pypath+"\img//cube-iso-clay.png")
         QTcommand.BtnSetIcons(self.ui.Btn_Add, pypath+"\img//new-folder-dynamic-color.png")
         QTcommand.BtnSetIcons(self.ui.Btn_Expand, pypath+"\img//figma-dynamic-clay.png")
         QTcommand.BtnSetIcons(self.ui.Btn_Creat, pypath+"\img//plus-dynamic-clay.png")
@@ -397,7 +481,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Btn_Creat.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ui.pushButton_4.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ui.Btn_Apply2.setFocusPolicy(QtCore.Qt.NoFocus)
-        print("设置UI样式")
+        # print("设置UI样式")
 
         self.ui.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)  #设置只能单选
 
@@ -458,7 +542,7 @@ def main():
 
     def eventItemSort(w, h):
         QTimer.singleShot(50, itemsort)
-        print("yes yes yes")
+        # print("yes yes yes")
 
         gc.collect()  # python内置清除内存函数
 

@@ -48,7 +48,7 @@ def getfile(path,filetype):
     if path == None:
         return filelist
 
-    print(path)
+    # print(path)
     # 获取路径下的png文件列表
     allfile = os.listdir(path)                    #获取item的路径下的文件和文件夹                               #定义变量存储.json文件
     for i in allfile :

@@ -90,13 +90,11 @@ def updataListItem(path,TreeWidge):
 	"""
 	path = path  #加上unicode防止乱码
 	force_list = file.getforce(path)
-	print("Updatalistitem")
 	item_dirs = {}  # 创建的treeweiget_item字典
 
 	for i in range(len(force_list)):
 		part_force = os.path.abspath(force_list[i] + '\..')  # 父目录
 		force_name = force_list[i][len(part_force) + 1:]  # 文件夹名字,方法：文件路径通过切片操作，从开始切去父目录+1的长度，得到文件夹名字
-		#print(force_name)
 		item = QtWidgets.QTreeWidgetItem([force_name])  # 创建item
 		icon5 = QtGui.QIcon()
 		icon5.addPixmap(QtGui.QPixmap(pypath+"\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
@@ -154,21 +152,21 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 	global itemWidth
 	TableWidget.clear()
 	TableWidgetWidth = TableWidgetWidth
-	print(TableWidgetWidth)
+	# print(TableWidgetWidth)
 	AllItemFrame = []
 	itemWidth = itemWidth
 	pngfile = file.getfile(path, ".png")
 
 	columnCount = TableWidgetWidth // itemWidth+1 # 列数
-	rowCount = len(pngfile) // columnCount+1			# 行数
+	rowCount = len(pngfile) // columnCount			# 行数
 
 	if len(pngfile)%columnCount:
 		rowCount+=1
-
 	TableWidget.setRowCount(rowCount)		#设置列数
 	TableWidget.setColumnCount(columnCount) 	#设置行数
+
 	itemWidthA = (TableWidgetWidth-20)/(columnCount)		#重新计算itemWidth大小
-	print(itemWidthA)
+	# print(itemWidthA)
 
 	for i in range(len(pngfile)):
 		row = i // columnCount
@@ -312,7 +310,7 @@ def BtnSetIcons(PushButton,iconsPath):
 	PushButton.setText("")
 
 
-def add_child(treeweiget):
+def add_child(treeweiget,item=None,name="folder"):
 	# Get the current selected item
 	current = treeweiget.currentItem()
 	if current:
@@ -321,7 +319,7 @@ def add_child(treeweiget):
 		# Create a new child item
 		child = QtWidgets.QTreeWidgetItem()
 		# child.setText(0, f"Child {count + 1}")
-		child.setText(0, "未命名文件夹")
+		child.setText(0, name)
 		# Set the child item to be editable
 		child.setFlags(child.flags() | QtCore.Qt.ItemIsEditable)
 		# Add the child item to the current item
@@ -329,10 +327,23 @@ def add_child(treeweiget):
 
 	return child
 
-
-def get_item_path(item):
-	path = []
+def get_item_name(item):
+	namelist = []
 	while item:
-		path.append(item.text(0))
+		namelist.append(item.text(0))
 		item = item.parent()
-	return path[::-1]
+	path =""
+	for i in range(len(namelist)):
+		if i ==0 :
+			path = namelist[i]
+		else:
+			path = namelist[i]+"//"+path
+
+	return path
+def get_item_path(treeWidget):
+	selected_items = treeWidget.selectedItems()
+	for item in selected_items:
+		path = get_item_name(item)
+		# path = path.encode("utf-8").decode("unicode_escape")
+
+	return path
