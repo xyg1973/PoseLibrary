@@ -5,6 +5,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 from Tools import file
 
 pypath = ""
+itemWidth =200
 
 
 class MyWidget(QtWidgets.QWidget):
@@ -87,9 +88,9 @@ def updataListItem(path,TreeWidge):
 	:param TreeWidge: Qt TreeWidge
 	:return: TreeWidgeItem dirs
 	"""
-	path = unicode(path)  #加上unicode防止乱码
+	path = path  #加上unicode防止乱码
 	force_list = file.getforce(path)
-	print(force_list)
+	print("Updatalistitem")
 	item_dirs = {}  # 创建的treeweiget_item字典
 
 	for i in range(len(force_list)):
@@ -150,23 +151,24 @@ def updataListItem(path,TreeWidge):
 
 
 def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
+	global itemWidth
 	TableWidget.clear()
 	TableWidgetWidth = TableWidgetWidth
 	print(TableWidgetWidth)
 	AllItemFrame = []
-	itemWidth = 90
+	itemWidth = itemWidth
 	pngfile = file.getfile(path, ".png")
 
-	columnCount = TableWidgetWidth // itemWidth # 列数
-	rowCount = len(pngfile) // columnCount			# 行数
+	columnCount = TableWidgetWidth // itemWidth+1 # 列数
+	rowCount = len(pngfile) // columnCount+1			# 行数
 
 	if len(pngfile)%columnCount:
 		rowCount+=1
 
 	TableWidget.setRowCount(rowCount)		#设置列数
 	TableWidget.setColumnCount(columnCount) 	#设置行数
-	itemWidth = (TableWidgetWidth-20)/(columnCount)		#重新计算itemWidth大小
-	print(itemWidth)
+	itemWidthA = (TableWidgetWidth-20)/(columnCount)		#重新计算itemWidth大小
+	print(itemWidthA)
 
 	for i in range(len(pngfile)):
 		row = i // columnCount
@@ -210,7 +212,7 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 		icon_img = QtGui.QIcon()
 		icon_img.addPixmap(QtGui.QPixmap(pngfile[i]), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 		myWidget.button.setIcon(icon_img)
-		myWidget.button.setIconSize(QtCore.QSize(65, 65))
+		myWidget.button.setIconSize(QtCore.QSize(itemWidthA-30, itemWidthA-30))
 		#BtnA.setEnabled(False)
 		#myWidget.button.setStyleSheet("QpushButton {background-color:transparent;")
 # 		myWidget.lineEdit.setStyleSheet("QLineEdit{\n"
@@ -232,8 +234,8 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 
 		TableWidget.setCellWidget(row, column, myWidget)
 		#设置宽高
-		TableWidget.setRowHeight(row,itemWidth)
-		TableWidget.setColumnWidth(column,itemWidth)
+		TableWidget.setRowHeight(row,itemWidthA)
+		TableWidget.setColumnWidth(column,itemWidthA)
 		AllItemFrame.append(myWidget)
 		TableWidget.setFocusPolicy(QtCore.Qt.NoFocus)
 		myWidget.lineEdit.setFocusPolicy(QtCore.Qt.NoFocus)

@@ -29,7 +29,7 @@ pypath = os.getcwd()
 QTcommand.pypath = pypath
 
 # pypath ="H:\pycharm_maya_work\Design"
-print("windowUI的路径是" + pypath)
+# print("windowUI的路径是" + pypath)
 def reload_module(module_name):
     # 检查模块是否已经导入
     if module_name in sys.modules:
@@ -71,7 +71,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self._timer.timeout.connect(self.handle_timeout)
         self._timer.setSingleShot(True)
         self.workflow()
-        self.resize(600, 300)
+        self.resize(1000, 500)
 
 
         # SHOW MAIN WINDOW
@@ -121,26 +121,19 @@ class MainWindow(QtWidgets.QMainWindow):
         folder_name = "folder"
 
         # 设置要创建的文件夹路径
-        folder_path = os.path.join(os.getcwd(), folder_name)
+        folder_path = PROJECT_PATH+"//"+folder_name
+        folder_path = file.create_folder(folder_path)
 
-        # 初始化一个计数器
-        counter = 0
-
-        # 循环检查文件夹是否已经存在，如果存在则修改名称并增加计数器
-        while os.path.exists(folder_path):
-            counter += 1
-            folder_name = "folder_{}".format(counter)
-            folder_path = os.path.join(os.getcwd(), folder_name)
-
-        # 创建文件夹
-        os.mkdir(PROJECT_PATH+"\\"+folder_name)
-        counter = 0
+        folder_name = os.path.basename(folder_path)
         item = QtWidgets.QTreeWidgetItem([folder_name])
         icon5 = QtGui.QIcon()
         icon5.addPixmap(QtGui.QPixmap(pypath + "\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
                         QtGui.QIcon.Off)
         item.setIcon(0, icon5)
         self.ui.treeWidget_2.insertTopLevelItems(0, [item])
+
+        self.ui.treeWidget_2.clear()
+        QTcommand.updataListItem(PROJECT_PATH,self.ui.treeWidget_2)
 
 
         #添加子文件夹
@@ -320,6 +313,7 @@ class MainWindow(QtWidgets.QMainWindow):
         return JSONPATH
 
     def workflow(self):
+        global  pypath
         if PROJECT_PATH =="":
             self.startWindwoUi()
             self.show()
@@ -328,15 +322,17 @@ class MainWindow(QtWidgets.QMainWindow):
 
             self.stepWindowUi()
             self.creat_contion()
-            self.ui.treeWidget_2.clearSelection()
+
+            self.ui.frame_9.setVisible(False)
             self.Btn_HomePaggeEvent()
             self.show()
             self.Btn_HomePaggeEvent()
 
-            self.ui.frame_9.setVisible(False)
+
             #创建目录
-            pass
+            QTcommand.pypath = pypath
             QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
+            self.ui.treeWidget_2.clearSelection()
             # QTcommand.updataLibraryItem(PROJECT_PATH, self.ui.tableWidget,self.ui.centralwidget.frameGeometry().width())
 
 
@@ -345,6 +341,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.dockWidget_2.setVisible(False)
         self.ui.UI_Library_frame.setVisible(False)
         self.ui.dockWidget_top.setVisible(False)
+
 
 
 
@@ -367,6 +364,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.dockWidget_top.setVisible(False)
         self.ui.Btn_Apply2.setVisible(False)
         self.ui.Btn_Apply2.setVisible(False)
+        self.ui.frame_9.setVisible(False)
         QTcommand.BtnSetIcons(self.ui.Btn_Menu, pypath+"\img//cube-iso-clay.png")
         print (pypath+"\img//cube-iso-clay.png")
         QTcommand.BtnSetIcons(self.ui.Btn_Add, pypath+"\img//new-folder-dynamic-color.png")

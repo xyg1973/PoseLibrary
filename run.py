@@ -1,8 +1,8 @@
 import os
 import sys
 import json
-pypath = "J:\work\Git\PoseLibrary"
-# pypath = "F:\Myself\PoseLibrary"
+# pypath = "J:\work\Git\PoseLibrary"
+pypath = "F:\Myself\PoseLibrary"
 if pypath in sys.path:
     pass
 else:

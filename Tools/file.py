@@ -130,3 +130,22 @@ def AddProject(folder_path):
 def write_data_to_file(file, data):
     with open(file, 'w') as f:
         json.dump(data, f)
+
+
+def create_folder(path):
+    # 如果路径不存在，则直接创建目录
+    if not os.path.exists(path):
+        os.makedirs(path)
+        return path
+    else:
+        # 如果路径存在，则在后面加上数字
+        i = 1
+        while True:
+            new_path = path + "_" + str(i)
+            # 如果新路径不存在，则创建目录并返回
+            if not os.path.exists(new_path):
+                os.makedirs(new_path)
+                return new_path
+            else:
+                # 如果新路径存在，则递增数字并继续循环
+                i += 1
