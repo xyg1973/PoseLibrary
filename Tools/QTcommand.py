@@ -9,6 +9,7 @@ itemWidth =200
 
 
 class MyWidget(QtWidgets.QWidget):
+	_TableSignal = QtCore.Signal(int,int)
 	def __init__(self, row, column, table_widget, pngpath,parent=None):
 		super(MyWidget,self ).__init__(parent)
 		self.row = row
@@ -70,6 +71,8 @@ class MyWidget(QtWidgets.QWidget):
 			self.table_widget.setItemSelected(item,True )
 			return True
 		if tableweigetevent.type() == QtCore.QEvent.MouseButtonDblClick:
+			self.table_widget.setCurrentCell(self.row, self.column)
+			self._TableSignal.emit(self.row,self.column)
 			print("双击事件")
 		return super(MyWidget,self ).eventFilter(watched,tableweigetevent )
 
@@ -150,6 +153,18 @@ def updataListItem(path,TreeWidge):
 
 def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 	global itemWidth
+	selected_indexes = TableWidget.selectedIndexes()
+	selected_indexes = TableWidget.selectedIndexes()
+	for index in selected_indexes:
+		selectrow= index.row() + 1
+		selectcolumn = index.column() + 1
+
+	#行数*列数+列数
+		# selectindex =selectrow*(selectcolumn+1)+selectcolumn+1
+		print(selectrow)
+		print(selectcolumn)
+
+
 	TableWidget.clear()
 	TableWidgetWidth = TableWidgetWidth
 	# print(TableWidgetWidth)
@@ -249,7 +264,7 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 				TableWidget.setItem(row, column, emptyItem)
 				TableWidget.setFocusPolicy(QtCore.Qt.NoFocus)  #点击有虚线
 
-
+	print(eventlist)
 
 	return eventlist
 

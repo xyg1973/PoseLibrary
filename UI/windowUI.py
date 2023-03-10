@@ -63,9 +63,17 @@ class RenameDialog(QtWidgets.QDialog):
 
     def textValue(self):
         return self.lineedit.text()
+
+class KeyPressFilter(QtCore.QObject):
+    def eventFilter(self, obj, event):
+        if event.type() == QtCore.QEvent.KeyPress and event.key() == QtCore.Qt.Key_F10:
+            # 执行重命名操作
+            return True
+        return super(KeyPressFilter, self).eventFilter(obj, event)
 class MainWindow(QtWidgets.QMainWindow):
     size_changed = QtCore.Signal(int, int)
     m_flag = False
+    eventlist = []
     def __init__(self,parent=None):
         super(MainWindow, self).__init__(parent)
         # SETUP MAIN WINDOw
@@ -77,6 +85,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.frame_11.setVisible(False)
         self.setWindowTitle("PoseLibrary")
         self.ui.treeWidget_2.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+        self.ui.tableWidget.installEventFilter(self)
+
         #隐藏window 抬头
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         #self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
@@ -85,11 +95,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self._timer.timeout.connect(self.handle_timeout)
         self._timer.setSingleShot(True)
         self.workflow()
+        self.keyPressFilter = KeyPressFilter()
+        self.ui.tableWidget.installEventFilter(self.keyPressFilter)
         self.resize(1000, 500)
+
 
 
         # SHOW MAIN WINDOW
         # ///////////////////////////////////////////////////////////////
+
 
     def creat_contion(self):
         """
@@ -99,7 +113,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Btn_win_max.clicked.connect(self.restore_or_maximize_window)
         self.ui.Btn_win_close.clicked.connect(self.close)
 
-        self.ui.treeWidget_2.itemClicked.connect(self.UpdataLibrary)
+        self.ui.treeWidget_2.itemClicked.connect(self.Click_Treeweiget)
         self.ui.tableWidget.itemSelectionChanged.connect(self.UpdataCradData)  #单击事件
         self.ui.tableWidget.doubleClicked.connect(self.selectPose)#双击事件
         self.ui.Btn_HomePagge.clicked.connect(self.Btn_HomePaggeEvent)
@@ -112,6 +126,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.pushButton_3.clicked.connect(self.Expandmax)
         self.ui.pushButton_7.clicked.connect(self.CreatPose)
         self.ui.treeWidget_2.customContextMenuRequested.connect(self.TreeWeiget_rightMenuShow)
+        self.ui.horizontalSlider.valueChanged.connect(self.resize_TableItem)
+    def resize_TableItem(self):
+        current_value = self.ui.horizontalSlider.value()
+        minimum = self.ui.horizontalSlider.minimum()
+        maximum = self.ui.horizontalSlider.maximum()
+        normalized_value = (float(current_value) - float(minimum)) / (float(maximum) - float(minimum))
+        QTcommand.itemWidth = 60 * ((normalized_value + 0.5) * 3)
+        if self.ui.frame_2.isVisible():
+            self.UpdataLibrary()
 
     def TreeWeiget_rightMenuShow(self):
         global PROJECT_PATH
@@ -198,7 +221,6 @@ class MainWindow(QtWidgets.QMainWindow):
         icon5.addPixmap(QtGui.QPixmap(pypath + "\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
                         QtGui.QIcon.Off)
         item.setIcon(0, icon5)
-
         self.ui.treeWidget_2.insertTopLevelItems(0, [item])
         self.ui.treeWidget_2.editItem(item)
 
@@ -249,17 +271,18 @@ class MainWindow(QtWidgets.QMainWindow):
         global PROJECT_PATH
         #设置item没有选中
         self.ui.treeWidget_2.clearSelection()
-
-        filelist = file.getfile(PROJECT_PATH, ".png")
-        if filelist == []:
-            self.ui.frame_2.setVisible(False)
-            self.ui.frame_11.setVisible(True)
-
-        else:
-            self.ui.frame_11.setVisible(False)
-            self.ui.frame_2.setVisible(True)
-        #刷新表格
-            QTcommand.updataLibraryItem(PROJECT_PATH,self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
+        self.UpdataLibrary()
+        # filelist = file.getfile(PROJECT_PATH, ".png")
+        # if filelist == []:
+        #     self.ui.frame_2.setVisible(False)
+        #     self.ui.frame_11.setVisible(True)
+        #
+        #
+        # else:
+        #     self.ui.frame_11.setVisible(False)
+        #     self.ui.frame_2.setVisible(True)
+        # #刷新表格
+        #     QTcommand.updataLibraryItem(PROJECT_PATH,self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
 
     def CreatPose(self):
         global PROJECT_PATH
@@ -332,6 +355,9 @@ class MainWindow(QtWidgets.QMainWindow):
         name,ok = QtWidgets.QInputDialog.getText(self,"name","name",QtWidgets.QLineEdit.Normal,"pose")
         if ok :
             return name
+    def Click_Treeweiget(self):
+        self.removeCradData()
+        self.UpdataLibrary()
 
     def UpdataLibrary(self):
         global LISTITEMPATH
@@ -343,26 +369,37 @@ class MainWindow(QtWidgets.QMainWindow):
             filelist = file.getfile(PROJECT_PATH,".png")
             if filelist ==[]:
                 self.ui.frame_2.setVisible(False)
+                self.ui.horizontalSlider.setVisible(False)
                 self.ui.frame_11.setVisible(True)
 
             else:
                 self.ui.frame_11.setVisible(False)
                 self.ui.frame_2.setVisible(True)
+                self.ui.horizontalSlider.setVisible(True)
                 QTcommand.updataLibraryItem(PROJECT_PATH, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
         else:
             LISTITEMPATH = QTcommand.get_item_path(self.ui.treeWidget_2)
             filelist = file.getfile(PROJECT_PATH+"//"+ LISTITEMPATH, ".png")
             if filelist == []:
                 self.ui.frame_2.setVisible(False)
+                self.ui.horizontalSlider.setVisible(False)
                 self.ui.frame_11.setVisible(True)
 
             else:
                 self.ui.frame_11.setVisible(False)
                 self.ui.frame_2.setVisible(True)
+                self.ui.horizontalSlider.setVisible(True)
                 QTcommand.updataLibraryItem(PROJECT_PATH+"//"+ LISTITEMPATH, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
 
         return LISTITEMPATH
 
+
+    def removeCradData(self):
+        global pypath
+        self.ui.Lbl_Name.setText("name: " )
+        self.ui.Lbl_ObjCount.setText("None Objects")
+        QTcommand.BtnSetIcons(self.ui.pushButton_4, pypath+"\img//picture-dynamic-clay.png")
+        self.ui.pushButton_4.setIconSize(QtCore.QSize(200, 200))
     def UpdataCradData(self):
         """
         刷新预览图和文件信息
@@ -410,14 +447,16 @@ class MainWindow(QtWidgets.QMainWindow):
 
             self.ui.frame_9.setVisible(False)
             self.Btn_HomePaggeEvent()
+            QTcommand.pypath = pypath
+            QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
             self.show()
             self.Btn_HomePaggeEvent()
 
 
-            #创建目录
-            QTcommand.pypath = pypath
-            QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
-            self.ui.treeWidget_2.clearSelection()
+
+            # QTcommand.pypath = pypath
+            # QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
+            # self.ui.treeWidget_2.clearSelection()
             # QTcommand.updataLibraryItem(PROJECT_PATH, self.ui.tableWidget,self.ui.centralwidget.frameGeometry().width())
 
 
@@ -438,6 +477,10 @@ class MainWindow(QtWidgets.QMainWindow):
                                 "border: 1px solid red;"
                                 "border-radius: 3px;"
                                 "}")
+
+        self.ui.treeWidget_2.setStyleSheet("QTreeView::branch {background: transparent;}")
+        self.ui.treeWidget_2.setStyleSheet("QTreeView::branch:!adjoins-item {border-image: url(vline.png) 0;}")
+        self.ui.treeWidget_2.setStyleSheet("QTreeView::branch:adjoins-item {border-image: url(branch-more.png) 0;}")
         self.docktitle = QtWidgets.QWidget()
         self.docktitle_2 = QtWidgets.QWidget()
         self.docktitle_top = QtWidgets.QWidget()
@@ -456,8 +499,9 @@ class MainWindow(QtWidgets.QMainWindow):
         QTcommand.BtnSetIcons(self.ui.Btn_Creat, pypath+"\img//plus-dynamic-clay.png")
         QTcommand.BtnSetIcons(self.ui.pushButton_4, pypath+"\img//picture-dynamic-clay.png")
         QTcommand.BtnSetIcons(self.ui.pushButton_3, pypath+"\img//figma-dynamic-clay.png")
-        Pixmap = QtGui.QPixmap(pypath + "\ui//icons//file-3-line.png")
-        Pixmap.scaled(40, 40)
+        self.ui.pushButton_4.setIconSize(QtCore.QSize(200, 200))
+        Pixmap = QtGui.QPixmap(pypath + "\img//puzzle-dynamic-clay.png")
+        # Pixmap.scaled(40, 40)
         self.ui.label_5.setPixmap(Pixmap)
 
 
@@ -481,6 +525,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Btn_Creat.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ui.pushButton_4.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ui.Btn_Apply2.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.ui.horizontalSlider.setFocusPolicy(QtCore.Qt.NoFocus)
         # print("设置UI样式")
 
         self.ui.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)  #设置只能单选
@@ -520,10 +565,24 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.showMaximized()
 
+    # def wheelEvent(self, event):
+    #     if event.modifiers() == QtCore.Qt.ControlModifier:
+    #         self.ui.horizontalSlider.wheelEvent(event)
+
+    def eventFilter(self, watched, event):
+        if watched == self.ui.tableWidget and event.type() == QtCore.QEvent.Wheel:
+            if event.modifiers() == QtCore.Qt.ControlModifier:
+                # 在这里执行你想要绑定的操作
+                self.ui.horizontalSlider.wheelEvent(event)
+                return True
+        if watched == self.ui.tableWidget and event.type() == QtCore.QEvent.KeyPress:
+            if event.key() == QtCore.Qt.Key_F2:
+                print("重命名")
+
+        return super(MainWindow, self).eventFilter(watched, event)
     # def evenrfilter(self,eventlist):
     #     for event in eventlist:
     #         self.ui.Btn_Creat.installEventFilter(event)
-
 def main():
     global  PROJECT_PATH
     global  LISTITEMPATH
