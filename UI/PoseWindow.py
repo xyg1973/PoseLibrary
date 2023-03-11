@@ -14,7 +14,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1161, 1034)
+        MainWindow.resize(1157, 1097)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -91,6 +91,25 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.setContentsMargins(0, 0, 8, 0)
         self.horizontalLayout_4.setSpacing(2)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.Btn_Menu_2 = QtWidgets.QPushButton(self.UI_Library_frame)
+        self.Btn_Menu_2.setStyleSheet("QPushButton {\n"
+"    background-color:transparent;\n"
+"    color: rgb(255, 255, 255);\n"
+"    border-width: 0px;\n"
+"    border-radius: 3px;\n"
+"    border-color: beige;\n"
+"    padding: 2px;\n"
+"    text-align:left\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(150, 150, 150);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color:  rgb(210, 210, 210);\n"
+"    border-style: inset;\n"
+"}")
+        self.Btn_Menu_2.setObjectName("Btn_Menu_2")
+        self.horizontalLayout_4.addWidget(self.Btn_Menu_2)
         self.pushButton = QtWidgets.QPushButton(self.UI_Library_frame)
         self.pushButton.setMinimumSize(QtCore.QSize(23, 23))
         self.pushButton.setStyleSheet("QPushButton {\n"
@@ -165,6 +184,7 @@ class Ui_MainWindow(object):
         self.Btn_Creat.setObjectName("Btn_Creat")
         self.horizontalLayout_4.addWidget(self.Btn_Creat)
         self.lineEdit = QtWidgets.QLineEdit(self.UI_Library_frame)
+        self.lineEdit.setEnabled(False)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -540,7 +560,7 @@ class Ui_MainWindow(object):
         self.frame.setObjectName("frame")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.frame)
         self.verticalLayout.setContentsMargins(10, 8, 6, 8)
-        self.verticalLayout.setSpacing(10)
+        self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_10 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_10.setContentsMargins(0, -1, 0, -1)
@@ -619,31 +639,32 @@ class Ui_MainWindow(object):
         self.verticalLayout_15.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_15.setSpacing(0)
         self.verticalLayout_15.setObjectName("verticalLayout_15")
-        self.horizontalLayout_12 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_12.setContentsMargins(10, -1, -1, -1)
-        self.horizontalLayout_12.setObjectName("horizontalLayout_12")
+        self.verticalLayout_21 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_21.setContentsMargins(6, -1, -1, -1)
+        self.verticalLayout_21.setSpacing(0)
+        self.verticalLayout_21.setObjectName("verticalLayout_21")
         self.Lbl_Folder = QtWidgets.QLabel(self.frame_8)
         self.Lbl_Folder.setMinimumSize(QtCore.QSize(28, 28))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.Lbl_Folder.setFont(font)
         self.Lbl_Folder.setStyleSheet("QLabel{\n"
 "    background-color:transparent;\n"
 "    color:rgb(225, 225, 225);\n"
 "    border-width: 0px;\n"
 "    border-radius: 3px;\n"
 "    border-color: beige;\n"
-"    padding: 2px;\n"
+"    padding: 0px;\n"
 "    text-align:left\n"
 "}\n"
 "")
         self.Lbl_Folder.setObjectName("Lbl_Folder")
-        self.horizontalLayout_12.addWidget(self.Lbl_Folder)
-        spacerItem14 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_12.addItem(spacerItem14)
+        self.verticalLayout_21.addWidget(self.Lbl_Folder)
         self.Btn_HomePagge = QtWidgets.QPushButton(self.frame_8)
         self.Btn_HomePagge.setMinimumSize(QtCore.QSize(23, 23))
         self.Btn_HomePagge.setStyleSheet("QPushButton {\n"
 "    background-color:transparent;\n"
-"    color: rgb(225, 225, 225);\n"
-"    border-style: outset;\n"
+"    color: rgb(255, 255, 255);\n"
 "    border-width: 0px;\n"
 "    border-radius: 3px;\n"
 "    border-color: beige;\n"
@@ -656,12 +677,10 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {\n"
 "    background-color:  rgb(210, 210, 210);\n"
 "    border-style: inset;\n"
-"}\n"
-"\n"
-"")
+"}")
         self.Btn_HomePagge.setObjectName("Btn_HomePagge")
-        self.horizontalLayout_12.addWidget(self.Btn_HomePagge)
-        self.verticalLayout_15.addLayout(self.horizontalLayout_12)
+        self.verticalLayout_21.addWidget(self.Btn_HomePagge)
+        self.verticalLayout_15.addLayout(self.verticalLayout_21)
         self.verticalLayout.addWidget(self.frame_8)
         self.verticalLayout_17 = QtWidgets.QVBoxLayout()
         self.verticalLayout_17.setSpacing(0)
@@ -685,7 +704,8 @@ class Ui_MainWindow(object):
 "    border-radius: 3px;\n"
 "    border-color: beige;\n"
 "    padding: 2px;\n"
-"    text-align:left\n"
+"    text-align:left;\n"
+"    height:23px;\n"
 "}\n"
 "QTreeWidget::item:hover {\n"
 "    background-color: rgb(52, 95, 251);\n"
@@ -697,11 +717,13 @@ class Ui_MainWindow(object):
 "\n"
 "\n"
 "QTreeWidget::item:selected {\n"
-"    background-color: rgb(52, 95, 251);\n"
+"    background-color:rgb(40, 105, 254);\n"
 "    border-style: inset;\n"
 "}\n"
 "\n"
-"")
+"QTreeView::branch {background: transparent;}\n"
+"QTreeView::branch:adjoins-item {border-image: url(branch-more.png) 0;}\n"
+"QTreeView::branch:!adjoins-item {border-image: url(vline.png) 0;}")
         self.treeWidget_2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.treeWidget_2.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.treeWidget_2.setIndentation(10)
@@ -719,6 +741,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.lineEdit_Search = QtWidgets.QLineEdit(self.frame)
+        self.lineEdit_Search.setEnabled(False)
         self.lineEdit_Search.setMinimumSize(QtCore.QSize(23, 23))
         self.lineEdit_Search.setStyleSheet("QLineEdit{\n"
 "background-color:rgb(42, 42, 42);\n"
@@ -731,8 +754,8 @@ class Ui_MainWindow(object):
         self.lineEdit_Search.setObjectName("lineEdit_Search")
         self.verticalLayout_3.addWidget(self.lineEdit_Search)
         self.verticalLayout.addLayout(self.verticalLayout_3)
-        spacerItem15 = QtWidgets.QSpacerItem(257, 4, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.verticalLayout.addItem(spacerItem15)
+        spacerItem14 = QtWidgets.QSpacerItem(257, 4, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.verticalLayout.addItem(spacerItem14)
         self.verticalLayout.setStretch(2, 1)
         self.verticalLayout_5.addWidget(self.frame)
         self.dockWidget.setWidget(self.dockWidgetContents)
@@ -752,8 +775,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_11.setSpacing(0)
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
-        spacerItem16 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem16)
+        spacerItem15 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_11.addItem(spacerItem15)
         self.Btn_win_min = QtWidgets.QPushButton(self.dockWidgetContents_2)
         self.Btn_win_min.setMinimumSize(QtCore.QSize(23, 23))
         self.Btn_win_min.setStyleSheet("QPushButton {\n"
@@ -1115,11 +1138,143 @@ class Ui_MainWindow(object):
         self.Btn_Apply.setObjectName("Btn_Apply")
         self.verticalLayout_23.addWidget(self.Btn_Apply)
         self.verticalLayout_8.addLayout(self.verticalLayout_23)
-        spacerItem17 = QtWidgets.QSpacerItem(180, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_8.addItem(spacerItem17)
+        spacerItem16 = QtWidgets.QSpacerItem(180, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_8.addItem(spacerItem16)
         self.verticalLayout_16.addWidget(self.frame_3)
         self.dockWidget_2.setWidget(self.dockWidgetContents_3)
         MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(2), self.dockWidget_2)
+        self.dockWidget_down = QtWidgets.QDockWidget(MainWindow)
+        self.dockWidget_down.setObjectName("dockWidget_down")
+        self.dockWidgetContents_4 = QtWidgets.QWidget()
+        self.dockWidgetContents_4.setObjectName("dockWidgetContents_4")
+        self.verticalLayout_22 = QtWidgets.QVBoxLayout(self.dockWidgetContents_4)
+        self.verticalLayout_22.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_22.setSpacing(0)
+        self.verticalLayout_22.setObjectName("verticalLayout_22")
+        self.horizontalLayout_18 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_18.setObjectName("horizontalLayout_18")
+        self.line = QtWidgets.QFrame(self.dockWidgetContents_4)
+        self.line.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setObjectName("line")
+        self.horizontalLayout_18.addWidget(self.line)
+        spacerItem17 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_18.addItem(spacerItem17)
+        self.Btn_Temp_ResetPose = QtWidgets.QPushButton(self.dockWidgetContents_4)
+        self.Btn_Temp_ResetPose.setMinimumSize(QtCore.QSize(23, 23))
+        self.Btn_Temp_ResetPose.setStyleSheet("QPushButton {\n"
+"    background-color:rgb(40, 105, 254);\n"
+"    color: rgb(255, 255, 255);\n"
+"    border-width: 0px;\n"
+"    border-radius: 3px;\n"
+"    border-color: beige;\n"
+"    padding: 2px;\n"
+"\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color:rgb(14, 59, 229);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgb(1, 33, 154);\n"
+"    border-style: inset;\n"
+"}\n"
+"\n"
+"")
+        self.Btn_Temp_ResetPose.setObjectName("Btn_Temp_ResetPose")
+        self.horizontalLayout_18.addWidget(self.Btn_Temp_ResetPose)
+        self.Btn_Temp_CopyPose = QtWidgets.QPushButton(self.dockWidgetContents_4)
+        self.Btn_Temp_CopyPose.setMinimumSize(QtCore.QSize(23, 23))
+        self.Btn_Temp_CopyPose.setStyleSheet("QPushButton {\n"
+"    background-color:rgb(40, 105, 254);\n"
+"    color: rgb(255, 255, 255);\n"
+"    border-width: 0px;\n"
+"    border-radius: 3px;\n"
+"    border-color: beige;\n"
+"    padding: 2px;\n"
+"\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color:rgb(14, 59, 229);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgb(1, 33, 154);\n"
+"    border-style: inset;\n"
+"}\n"
+"\n"
+"")
+        self.Btn_Temp_CopyPose.setObjectName("Btn_Temp_CopyPose")
+        self.horizontalLayout_18.addWidget(self.Btn_Temp_CopyPose)
+        self.Btn_Temp_PastPose = QtWidgets.QPushButton(self.dockWidgetContents_4)
+        self.Btn_Temp_PastPose.setMinimumSize(QtCore.QSize(23, 23))
+        self.Btn_Temp_PastPose.setStyleSheet("QPushButton {\n"
+"    background-color:rgb(40, 105, 254);\n"
+"    color: rgb(255, 255, 255);\n"
+"    border-width: 0px;\n"
+"    border-radius: 3px;\n"
+"    border-color: beige;\n"
+"    padding: 2px;\n"
+"\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color:rgb(14, 59, 229);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgb(1, 33, 154);\n"
+"    border-style: inset;\n"
+"}\n"
+"\n"
+"")
+        self.Btn_Temp_PastPose.setObjectName("Btn_Temp_PastPose")
+        self.horizontalLayout_18.addWidget(self.Btn_Temp_PastPose)
+        self.Btn_Temp_CopyXform = QtWidgets.QPushButton(self.dockWidgetContents_4)
+        self.Btn_Temp_CopyXform.setMinimumSize(QtCore.QSize(23, 23))
+        self.Btn_Temp_CopyXform.setStyleSheet("QPushButton {\n"
+"    background-color:rgb(40, 105, 254);\n"
+"    color: rgb(255, 255, 255);\n"
+"    border-width: 0px;\n"
+"    border-radius: 3px;\n"
+"    border-color: beige;\n"
+"    padding: 2px;\n"
+"\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color:rgb(14, 59, 229);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgb(1, 33, 154);\n"
+"    border-style: inset;\n"
+"}\n"
+"\n"
+"")
+        self.Btn_Temp_CopyXform.setObjectName("Btn_Temp_CopyXform")
+        self.horizontalLayout_18.addWidget(self.Btn_Temp_CopyXform)
+        self.Btn_Temp_PastXform = QtWidgets.QPushButton(self.dockWidgetContents_4)
+        self.Btn_Temp_PastXform.setMinimumSize(QtCore.QSize(23, 23))
+        self.Btn_Temp_PastXform.setStyleSheet("QPushButton {\n"
+"    background-color:rgb(40, 105, 254);\n"
+"    color: rgb(255, 255, 255);\n"
+"    border-width: 0px;\n"
+"    border-radius: 3px;\n"
+"    border-color: beige;\n"
+"    padding: 2px;\n"
+"\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color:rgb(14, 59, 229);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgb(1, 33, 154);\n"
+"    border-style: inset;\n"
+"}\n"
+"\n"
+"")
+        self.Btn_Temp_PastXform.setObjectName("Btn_Temp_PastXform")
+        self.horizontalLayout_18.addWidget(self.Btn_Temp_PastXform)
+        spacerItem18 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_18.addItem(spacerItem18)
+        self.verticalLayout_22.addLayout(self.horizontalLayout_18)
+        self.dockWidget_down.setWidget(self.dockWidgetContents_4)
+        MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(8), self.dockWidget_down)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -1127,6 +1282,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.Btn_Menu_2.setText(_translate("MainWindow", "三"))
         self.pushButton.setText(_translate("MainWindow", "add"))
         self.pushButton_3.setText(_translate("MainWindow", "田"))
         self.Btn_Creat.setText(_translate("MainWindow", "添加"))
@@ -1171,3 +1327,8 @@ class Ui_MainWindow(object):
         self.checkBox_3.setText(_translate("MainWindow", "绝对位置"))
         self.checkBox_4.setText(_translate("MainWindow", "当前时间插入"))
         self.Btn_Apply.setText(_translate("MainWindow", "应用"))
+        self.Btn_Temp_ResetPose.setText(_translate("MainWindow", "重置pose"))
+        self.Btn_Temp_CopyPose.setText(_translate("MainWindow", "复制pose"))
+        self.Btn_Temp_PastPose.setText(_translate("MainWindow", "粘贴pose"))
+        self.Btn_Temp_CopyXform.setText(_translate("MainWindow", "复制Xform"))
+        self.Btn_Temp_PastXform.setText(_translate("MainWindow", "粘贴Xform"))

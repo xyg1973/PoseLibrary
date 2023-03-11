@@ -39,18 +39,18 @@ file_path = file.check_and_create_file(my_documents_path, 'poselibrary', 'poseli
 
 
 
-ProjectPath = "F:\Myself\cache\Project_text"
-project = file.AddProject(ProjectPath)
-file.write_data_to_file(file_path,project)  #写入项目路径数据
-common = file.read_file(file_path)
-
-
-#读取文件数据
-
-#设置项目路径
+# ProjectPath = "F:\Myself\cache\Project_text"
+# project = file.AddProject(ProjectPath)
+# file.write_data_to_file(file_path,project)  #写入项目路径数据
+# common = file.read_file(file_path)
+#
+#
+# #读取文件数据
+#
+# #设置项目路径
 windowUI.pypath = pypath
-windowUI.PROJECT_PATH = project.get("ProjectPath")
-windowUI.PROJECT_NAME = project.get("ProjectName")
+# windowUI.PROJECT_PATH = project.get("ProjectPath")
+# windowUI.PROJECT_NAME = project.get("ProjectName")
 # window = windowUI.test()
 window = windowUI.main()
 

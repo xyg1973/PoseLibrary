@@ -149,3 +149,33 @@ def create_folder(path):
             else:
                 # 如果新路径存在，则递增数字并继续循环
                 i += 1
+
+def create_file(path):
+    # 分离文件名和扩展名
+    name, ext = os.path.splitext(path)
+    # 如果文件不存在，则直接创建文件
+    if not os.path.exists(path):
+        open(path, 'w').close()
+        return path
+    else:
+        # 如果文件存在，则在后缀前加上数字
+        i = 1
+        while True:
+            new_path = "{}_{}{}".format(name, i, ext)
+
+            # 如果新路径不存在，则创建文件并返回
+            if not os.path.exists(new_path):
+                open(new_path, 'w').close()
+                return new_path
+            else:
+                # 如果新路径存在，则递增数字并继续循环
+                i += 1
+
+def remove_dir(path):
+    for root, dirs, files in os.walk(path, topdown=False):
+        for file in files:
+            os.remove(os.path.join(root, file))
+        for dir in dirs:
+            os.rmdir(os.path.join(root, dir))
+    os.rmdir(path)
+

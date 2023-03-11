@@ -74,81 +74,77 @@ class MyWidget(QtWidgets.QWidget):
 			self.table_widget.setCurrentCell(self.row, self.column)
 			self._TableSignal.emit(self.row,self.column)
 			print("双击事件")
-		return super(MyWidget,self ).eventFilter(watched,tableweigetevent )
-
+		try:
+			return super(MyWidget,self ).eventFilter(watched,tableweigetevent )
+		except:
+			return None
 
 if __name__ == "__main__":
 	app = QtWidgets.QApplication([])
 	window = QtWidgets.QMainWindow()
 	tableWidget = QtWidgets.QTableWidget(4 ,4 ,window )
 	window.setCentralWidget(tableWidget)
+def treeWidgetStyleSheet(treeWidget):
+	treeWidget.setStyleSheet("QTreeWidget\n"
+"{\n"
+"background-color: transparent;\n"
+"color:rgb(255, 255, 255);\n"
+"border: 0px solid rgb(17, 17, 17);\n"
+"}    \n"
+"QTreeWidget::item {\n"
+"    background-color:transparent;\n"
+"    color: rgb(255, 255, 255);\n"
+"    border-width: 0px;\n"
+"    border-radius: 3px;\n"
+"    border-color: beige;\n"
+"    padding: 2px;\n"
+"    text-align:left;\n"
+"    height:23px;\n"
+"}\n"
+"QTreeWidget::item:hover {\n"
+"    background-color: rgb(52, 95, 251);\n"
+"}\n"
+"QTreeWidget::item:pressed {\n"
+"    background-color: rgb(10, 50, 205);\n"
+"    border-style: inset;\n"
+"}\n"
+"\n"
+"\n"
+"QTreeWidget::item:selected {\n"
+"    background-color:rgb(40, 105, 254);\n"
+"    border-style: inset;\n"
+"}\n"
+"\n"
+"QTreeView::branch {background: transparent;}\n"
+"QTreeView::branch:adjoins-item {border-image: url(branch-more.png) 0;}\n"
+"QTreeView::branch:!adjoins-item {border-image: url(vline.png) 0;}")
 
-def updataListItem(path,TreeWidge):
-	global pypath
+
+def updataListItem(path,treeWidget):
 	"""
-
 	:param path:
 	:param TreeWidge: Qt TreeWidge
-	:return: TreeWidgeItem dirs
+	:return:
 	"""
-	path = path  #加上unicode防止乱码
-	force_list = file.getforce(path)
-	item_dirs = {}  # 创建的treeweiget_item字典
+	def populateTree(treeWidget, path, parentItem):
+		for name in os.listdir(path):
+			childPath = os.path.join(path, name)
+			if os.path.isdir(childPath):
+				childItem = QtWidgets.QTreeWidgetItem(parentItem)
+				childItem.setText(0, name)
+				icon = QtGui.QIcon()
+				icon.addPixmap(QtGui.QPixmap(pypath + "\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
+							   QtGui.QIcon.Off)
 
-	for i in range(len(force_list)):
-		part_force = os.path.abspath(force_list[i] + '\..')  # 父目录
-		force_name = force_list[i][len(part_force) + 1:]  # 文件夹名字,方法：文件路径通过切片操作，从开始切去父目录+1的长度，得到文件夹名字
-		item = QtWidgets.QTreeWidgetItem([force_name])  # 创建item
-		icon5 = QtGui.QIcon()
-		icon5.addPixmap(QtGui.QPixmap(pypath+"\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
-						QtGui.QIcon.Off)
-		item.setIcon(0, icon5)
-
-		# 创建第一个item
-		if i == 0:
-			item_dirs[force_list[i]] = item  # 记录创建的item，加入字典item_dirs
-			TreeWidge.addTopLevelItem(item)
+				childItem.setIcon(0, icon)
+				populateTree(treeWidget, childPath, childItem)
 
 
-		else:
-			# 如果父目录和项目路径相同
-			if path == part_force:
-				item_dirs[force_list[i]] = item  # 记录创建的item，加入字典item_dirs
-				TreeWidge.addTopLevelItem(item)
-			# 如果父目录和项目路径不同
-			else:
-				# 如果父目录已经创建item
-				if part_force in item_dirs:
-					# 获取父目录的item,把item设置为子对象
-					part_item = item_dirs.get(part_force)
-					part_item.addChild(item)
-					############################
-					item_dirs[force_list[i]] = item  # 记录创建的item，加入字典item_dirs
-					TreeWidge.addTopLevelItem(item)
+	treeWidget.clear()
+	populateTree(treeWidget, path, treeWidget.invisibleRootItem())
 
-				# 如果父目录还没有创建item
-				else:
-					item_dirs[force_list[i]] = item  # 记录创建的item，加入字典item_dirs
-					TreeWidge.addTopLevelItem(item)
-				# print(item_dirs)
-				# print("创建根目录2")
-
-	# 创建的treeweiget_item字典保存到list.json文件中
-
-	fileA = open(path + '\\' + 'list.json', 'w')
-	# print (file)
-	fileA.close()
-	fileptch = path + '\\' + 'list.json'
-
-	#data = json.dumps(force_list)
-	#with open(fileptch, 'w') as f:
-	#	json.dump(force_list, f)
-	# print item_dirs
-
-	itemfrist = item_dirs[force_list[0]]
-	itemfrist.setSelected(True)
-
-	return item_dirs
+	treeWidgetStyleSheet(treeWidget)
+	# return item_dirs
 
 
 def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
@@ -226,24 +222,10 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 		icon_img.addPixmap(QtGui.QPixmap(pngfile[i]), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 		myWidget.button.setIcon(icon_img)
 		myWidget.button.setIconSize(QtCore.QSize(itemWidthA-30, itemWidthA-30))
-		#BtnA.setEnabled(False)
-		#myWidget.button.setStyleSheet("QpushButton {background-color:transparent;")
-# 		myWidget.lineEdit.setStyleSheet("QLineEdit{\n"
-# "    background-color:transparent;\n"
-# "    color:rgb(176, 176, 176);\n"
-# "    border-style: outset;\n"
-# "    border-width: 0px;\n"
-# "    border-radius: 3px;\n"
-# "    border-color: beige;\n"
-# "    padding: 2px;\n"
-# "    text-align:left\n"
-# "}\n"
-# "")
 
-		# myWidget.label.setPixmap(myWidget.Pixmap.scaled(itemWidth - 300 ,-210))
 		LineEditText = file.getfileName(pngfile[i])
 		myWidget.lineEdit.setText(LineEditText)
-		# myWidget.lineEdit.setAlignment(QtCore.Qt.AlignCenter)
+		myWidget.lineEdit.setAlignment(QtCore.Qt.AlignCenter)
 
 		TableWidget.setCellWidget(row, column, myWidget)
 		#设置宽高
@@ -252,7 +234,7 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 		AllItemFrame.append(myWidget)
 		TableWidget.setFocusPolicy(QtCore.Qt.NoFocus)
 		myWidget.lineEdit.setFocusPolicy(QtCore.Qt.NoFocus)
-		eventlist = myWidget.eventFilter
+
 
 	for row in range(TableWidget.rowCount()):
 		for column in range(TableWidget.columnCount()):
@@ -264,9 +246,7 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 				TableWidget.setItem(row, column, emptyItem)
 				TableWidget.setFocusPolicy(QtCore.Qt.NoFocus)  #点击有虚线
 
-	print(eventlist)
-
-	return eventlist
+	return None
 
 #获取全部item和位置
 def itemsort(TableWidget,AllItemFrame):

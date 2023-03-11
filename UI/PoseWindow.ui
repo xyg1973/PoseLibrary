@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1161</width>
-    <height>1034</height>
+    <width>1157</width>
+    <height>1097</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -159,6 +159,31 @@ background: rgb(255, 0, 0);
                <number>0</number>
               </property>
               <item>
+               <widget class="QPushButton" name="Btn_Menu_2">
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+QPushButton:hover {
+    background-color: rgb(150, 150, 150);
+}
+QPushButton:pressed {
+    background-color:  rgb(210, 210, 210);
+    border-style: inset;
+}</string>
+                </property>
+                <property name="text">
+                 <string>三</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QPushButton" name="pushButton">
                 <property name="minimumSize">
                  <size>
@@ -300,6 +325,9 @@ QPushButton:pressed {
               </item>
               <item>
                <widget class="QLineEdit" name="lineEdit">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -1080,7 +1108,7 @@ QPushButton:pressed {
        </property>
        <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,1,0,0">
         <property name="spacing">
-         <number>10</number>
+         <number>0</number>
         </property>
         <property name="leftMargin">
          <number>10</number>
@@ -1244,9 +1272,12 @@ QPushButton:pressed {
             <number>0</number>
            </property>
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_12">
+            <layout class="QVBoxLayout" name="verticalLayout_21">
+             <property name="spacing">
+              <number>0</number>
+             </property>
              <property name="leftMargin">
-              <number>10</number>
+              <number>6</number>
              </property>
              <item>
               <widget class="QLabel" name="Lbl_Folder">
@@ -1256,6 +1287,11 @@ QPushButton:pressed {
                  <height>28</height>
                 </size>
                </property>
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
                <property name="styleSheet">
                 <string notr="true">QLabel{
     background-color:transparent;
@@ -1263,7 +1299,7 @@ QPushButton:pressed {
     border-width: 0px;
     border-radius: 3px;
     border-color: beige;
-    padding: 2px;
+    padding: 0px;
 	text-align:left
 }
 </string>
@@ -1272,19 +1308,6 @@ QPushButton:pressed {
                 <string>文件夹</string>
                </property>
               </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_3">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-              </spacer>
              </item>
              <item>
               <widget class="QPushButton" name="Btn_HomePagge">
@@ -1297,8 +1320,7 @@ QPushButton:pressed {
                <property name="styleSheet">
                 <string notr="true">QPushButton {
     background-color:transparent;
-	color: rgb(225, 225, 225);
-    border-style: outset;
+	color: rgb(255, 255, 255);
     border-width: 0px;
     border-radius: 3px;
     border-color: beige;
@@ -1311,9 +1333,7 @@ QPushButton:hover {
 QPushButton:pressed {
     background-color:  rgb(210, 210, 210);
     border-style: inset;
-}
-
-</string>
+}</string>
                </property>
                <property name="text">
                 <string>首页</string>
@@ -1352,7 +1372,8 @@ QTreeWidget::item {
     border-radius: 3px;
     border-color: beige;
     padding: 2px;
-	text-align:left
+	text-align:left;
+	height:23px;
 }
 QTreeWidget::item:hover {
     background-color: rgb(52, 95, 251);
@@ -1364,7 +1385,7 @@ QTreeWidget::item:pressed {
 
 
 QTreeWidget::item:selected {
-    background-color: rgb(52, 95, 251);
+    background-color:rgb(40, 105, 254);
     border-style: inset;
 }
 
@@ -1426,6 +1447,9 @@ QTreeView::branch:!adjoins-item {border-image: url(vline.png) 0;}</string>
           </property>
           <item>
            <widget class="QLineEdit" name="lineEdit_Search">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="minimumSize">
              <size>
               <width>23</width>
@@ -2210,6 +2234,232 @@ QPushButton:pressed {
         </item>
        </layout>
       </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockWidget_down">
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_4">
+    <layout class="QVBoxLayout" name="verticalLayout_22">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_18">
+       <item>
+        <widget class="Line" name="line">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_14">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="Btn_Temp_ResetPose">
+         <property name="minimumSize">
+          <size>
+           <width>23</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color:rgb(40, 105, 254);
+	color: rgb(255, 255, 255);
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+
+}
+QPushButton:hover {
+    background-color:rgb(14, 59, 229);
+}
+QPushButton:pressed {
+    background-color: rgb(1, 33, 154);
+    border-style: inset;
+}
+
+</string>
+         </property>
+         <property name="text">
+          <string>重置pose</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="Btn_Temp_CopyPose">
+         <property name="minimumSize">
+          <size>
+           <width>23</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color:rgb(40, 105, 254);
+	color: rgb(255, 255, 255);
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+
+}
+QPushButton:hover {
+    background-color:rgb(14, 59, 229);
+}
+QPushButton:pressed {
+    background-color: rgb(1, 33, 154);
+    border-style: inset;
+}
+
+</string>
+         </property>
+         <property name="text">
+          <string>复制pose</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="Btn_Temp_PastPose">
+         <property name="minimumSize">
+          <size>
+           <width>23</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color:rgb(40, 105, 254);
+	color: rgb(255, 255, 255);
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+
+}
+QPushButton:hover {
+    background-color:rgb(14, 59, 229);
+}
+QPushButton:pressed {
+    background-color: rgb(1, 33, 154);
+    border-style: inset;
+}
+
+</string>
+         </property>
+         <property name="text">
+          <string>粘贴pose</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="Btn_Temp_CopyXform">
+         <property name="minimumSize">
+          <size>
+           <width>23</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color:rgb(40, 105, 254);
+	color: rgb(255, 255, 255);
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+
+}
+QPushButton:hover {
+    background-color:rgb(14, 59, 229);
+}
+QPushButton:pressed {
+    background-color: rgb(1, 33, 154);
+    border-style: inset;
+}
+
+</string>
+         </property>
+         <property name="text">
+          <string>复制Xform</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="Btn_Temp_PastXform">
+         <property name="minimumSize">
+          <size>
+           <width>23</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color:rgb(40, 105, 254);
+	color: rgb(255, 255, 255);
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+
+}
+QPushButton:hover {
+    background-color:rgb(14, 59, 229);
+}
+QPushButton:pressed {
+    background-color: rgb(1, 33, 154);
+    border-style: inset;
+}
+
+</string>
+         </property>
+         <property name="text">
+          <string>粘贴Xform</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>
