@@ -61,7 +61,7 @@ class MyWidget(QtWidgets.QWidget):
 		#安装事件过滤器
 		self.installEventFilter(self)
 		self.button.installEventFilter(self)
-		self.lineEdit.installEventFilter(self)
+		# self.lineEdit.installEventFilter(self)
 
 	# 信号事件选中item中部件会同时选中item
 	def eventFilter(self, watched,tableweigetevent ):
@@ -157,8 +157,8 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 
 	#行数*列数+列数
 		# selectindex =selectrow*(selectcolumn+1)+selectcolumn+1
-		print(selectrow)
-		print(selectcolumn)
+		# print(selectrow)
+		# print(selectcolumn)
 
 
 	TableWidget.clear()
@@ -233,8 +233,9 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 		TableWidget.setColumnWidth(column,itemWidthA)
 		AllItemFrame.append(myWidget)
 		TableWidget.setFocusPolicy(QtCore.Qt.NoFocus)
-		myWidget.lineEdit.setFocusPolicy(QtCore.Qt.NoFocus)
-
+		myWidget.lineEdit.setReadOnly(False)
+		# myWidget.lineEdit.setFocusPolicy(QtCore.Qt.NoFocus)
+		myWidget.lineEdit.setEnabled(False)
 
 	for row in range(TableWidget.rowCount()):
 		for column in range(TableWidget.columnCount()):

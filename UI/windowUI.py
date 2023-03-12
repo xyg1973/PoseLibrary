@@ -17,6 +17,7 @@ from Tools import file
 from  Tools import QTcommand
 from UI import PoseWindow
 from Maxcommand import pose as pose
+import threading
 
 #reload(PoseWindow)
 PROJECT_PATH =""
@@ -24,9 +25,9 @@ PROJECT_NAME =""
 SELECTITEMPATH = ""
 LISTITEMPATH =""
 CellPath = ""
+CellRelativePath = ""
 JSONPATH = ""
 pypath = os.getcwd()
-
 QTcommand.pypath = pypath
 
 # pypath ="H:\pycharm_maya_work\Design"
@@ -50,6 +51,7 @@ reload_module('Tools.file')
 reload_module('Tools.QTcommand')
 reload_module('UI.PoseWindow')
 reload_module('Maxcommand.pose')
+reload_module('threading')
 class RenameDialog(QtWidgets.QDialog):
     def __init__(self):
         super().__init__()
@@ -87,7 +89,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.tableWidget.installEventFilter(self)
         self.ui.dockWidget_down.setVisible(False)
         self.ui.dockWidget_top.setVisible(False)
-
+        self.ui.progressBar.setVisible(False)
+        self.ui.progressBar.setTextVisible(False)
         #隐藏window 抬头
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         #self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
@@ -165,13 +168,17 @@ class MainWindow(QtWidgets.QMainWindow):
             elif action == ExitACtion:
                 pass
         except Exception as e:
-            print(e)
+            pass
+            # print(e)
     def TableWeiget_rightMenuShow(self):
         global PROJECT_PATH
+        global JSONPATH
         try:
             rightMenu = QtWidgets.QMenu(self.ui.tableWidget)
+            selectObjAction =  rightMenu.addAction(u"选择物体")
             resPoseAction = rightMenu.addAction(u"刷新pose")
             addPoseAction = rightMenu.addAction(u"添加pose")
+            renameAction =  rightMenu.addAction(u"重命名")
             removeAction = rightMenu.addAction(u"删除")
 
             action = rightMenu.exec_(QtGui.QCursor.pos())
@@ -180,14 +187,30 @@ class MainWindow(QtWidgets.QMainWindow):
                 os.remove(path+".png")
                 os.remove(path + ".json")
                 self.UpdataLibrary()
+
+            elif action == selectObjAction:
+
+                path = JSONPATH
+                # 读取数据
+                with open(path, 'r') as f:
+                    posedata = json.load(f)
+                # 获取设置
+
+                selectobj = pose.selectobj(posedata)
+
             elif action == resPoseAction:
                 self.resetPose()
 
             elif action == addPoseAction:
                 self.CreatPose()
+            elif action == renameAction:
+
+                self.TableWeiget_reanameItem()
+
 
         except Exception as e:
-            print(e)
+            pass
+            # print(e)
 
     def TreeWeiget_renameItem(self):
 
@@ -195,7 +218,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.treeWidget_2.closePersistentEditor(item, column)
         path = self.getCellPath()
         parent_path = os.path.dirname(path)
-        print(path)
+        # print(path)
         selectItem = self.ui.treeWidget_2.selectedItems()[0]
         row = self.ui.treeWidget_2.indexOfTopLevelItem(selectItem)
         self.ui.treeWidget_2.openPersistentEditor(selectItem, 0 )
@@ -203,9 +226,14 @@ class MainWindow(QtWidgets.QMainWindow):
             name = item.text(0)
             self.ui.treeWidget_2.closePersistentEditor(item,0)
             new_path = parent_path+"//"+name
-            os.rename(path, new_path)
+            new_path = u'{}'.format(new_path)
+            # print(new_path)
+            # print(path)
+            try:
+                os.rename(path, new_path)
+            except:
+                pass
 
-            print(new_path)
             return (name)
 
 
@@ -273,7 +301,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.TreeWeiget_renameItem()
 
         except Exception as e:
-            print(e)
+            pass
+            # print(e)
     def selectPose(self):
         print("选中物体")
     def Expandmin(self):
@@ -379,6 +408,57 @@ class MainWindow(QtWidgets.QMainWindow):
         # #刷新表格
         #     QTcommand.updataLibraryItem(PROJECT_PATH,self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
 
+    def TableWeiget_reanameItem(self):
+        global PROJECT_PATH
+        global LISTITEMPATH
+        if not self.ui.tableWidget.currentIndex():
+            print(test)
+            pass
+        else:
+            try:
+                path = self.getCellPath()
+            except:
+                pass
+            filepath = path + ".json"
+            pngpath = path + ".png"
+            parent_path = os.path.dirname(path)
+
+            selected = self.ui.tableWidget.selectedIndexes()
+            # print(selected)
+
+            for item in selected:
+                row = item.row()
+                column = item.column()
+            frame = self.ui.tableWidget.cellWidget(row, column)
+            lineEdits = frame.findChildren(QtWidgets.QLineEdit)
+            name = lineEdits[0].text()
+            lineEdits[0].setEnabled(True)
+            lineEdits[0].setReadOnly(False)
+            lineEdits[0].setSelection(0, len(lineEdits[0].text()))
+            # lineEdits[0].textChanged()
+
+            def onItemChanged(LEdit=lineEdits[0]):
+                name = LEdit.text()
+                LEdit.deselect()
+                LEdit.setReadOnly(True)
+                LEdit.setEnabled(False)
+                new_pngpath = parent_path + "//" + name + ".png"
+                new_filepath = parent_path + "//" + name + ".json"
+                new_pngpath = file.cheak_file(new_pngpath)
+                new_filepath = file.cheak_file(new_filepath)
+                try:
+                    os.rename(filepath,new_filepath)
+                    os.rename(pngpath, new_pngpath)
+                except:
+                    pass
+                self.UpdataLibrary()
+                # print(new_pngpath)
+                return (name)
+
+            # self.ui.treeWidget_2.closePersistentEditor(selectItem, 0)
+            lineEdits[0].editingFinished.connect(onItemChanged)
+
+
     def resetPose(self):
         global PROJECT_PATH
         global LISTITEMPATH
@@ -444,31 +524,33 @@ class MainWindow(QtWidgets.QMainWindow):
                 new_filepath = file.create_file(filepath)
                 new_pngpath = file.create_file(pngpath)
 
+                try:
+                    open(new_filepath, 'w').close()
+                    posedata = pose.savePose()
+                    with open(new_filepath, 'w') as f:
+                        json.dump(posedata, f)
 
-                open(new_filepath, 'w').close()
-                posedata = pose.savePose()
-                with open(new_filepath, 'w') as f:
-                    json.dump(posedata, f)
+                    pose.render_and_save(300, 300, new_pngpath)
 
-                pose.render_and_save(300, 300, new_pngpath)
+                    filelist = file.getfile(folder_path, ".png")
+                    if filelist == []:
+                        self.ui.frame_2.setVisible(False)
+                        self.ui.frame_11.setVisible(True)
 
-                filelist = file.getfile(folder_path, ".png")
-                if filelist == []:
-                    self.ui.frame_2.setVisible(False)
-                    self.ui.frame_11.setVisible(True)
+                    else:
+                        self.ui.frame_11.setVisible(False)
+                        self.ui.frame_2.setVisible(True)
 
-                else:
-                    self.ui.frame_11.setVisible(False)
-                    self.ui.frame_2.setVisible(True)
-
-                QTcommand.updataLibraryItem(folder_path, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
-
+                    QTcommand.updataLibraryItem(folder_path, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
+                except:
+                    pass
 
 
 
         return posedata
 
     def ApplyPose(self):
+        global progressBarValue
         global JSONPATH
         # 定位json路径
         path = JSONPATH
@@ -476,9 +558,19 @@ class MainWindow(QtWidgets.QMainWindow):
         with open(path, 'r') as f:
             posedata = json.load(f)
         #获取设置
+        selectobj = pose.ls()
+        # selectobj = pose.selectobj(posedata)
+        count = 2
 
-        selectobj = pose.selectobj(posedata)
-        pose.pastPose(posedata,selectobj)
+        self.ui.progressBar.setVisible(True)
+        #多线程
+        t = threading.Thread(target=pose.pastPose,args=(posedata,selectobj,count,self.ui.progressBar))
+        t.start()
+        t.join()
+        # pose.pastPose(posedata,selectobj,count,self.ui.progressBar)
+        pose.reViews()
+        self.ui.progressBar.setVisible(False)
+        # print(t)
         #pose.set_transform_keyframes(selectobj)
         #应用pose
 
@@ -532,6 +624,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Lbl_ObjCount.setText("None Objects")
         QTcommand.BtnSetIcons(self.ui.pushButton_4, pypath+"\img//picture-dynamic-clay.png")
         self.ui.pushButton_4.setIconSize(QtCore.QSize(200, 200))
+        self.ui.Lbl_Path.setText(("None Path"))
     def UpdataCradData(self):
         """
         刷新预览图和文件信息
@@ -541,18 +634,24 @@ class MainWindow(QtWidgets.QMainWindow):
         global PROJECT_PATH
         global LISTITEMPATH
         global JSONPATH
+        global CellRelativePath
 
         path = self.getCellPath()
 
         SELECTITEMPATH = path+".png"
         JSONPATH = path+".json"
-        jsondata = file.read_file(JSONPATH)
-
-        QTcommand.BtnSetIcons(self.ui.pushButton_4, SELECTITEMPATH)
-        self.ui.pushButton_4.setIconSize(QtCore.QSize(200, 200))
-        # self.ui.Lbl_Name.setText("name: "+ name)
-        # self.ui.Lbl_ObjCount.setText(name + (" Objects"))
-        self.ui.Lbl_Path.setText("path: "+ JSONPATH)
+        JSONPATH = u"{}".format(JSONPATH)
+        try:
+            with open(JSONPATH, 'r') as f:
+                posedata = json.load(f)
+            count = pose.getselectobjcount(posedata)
+            QTcommand.BtnSetIcons(self.ui.pushButton_4, SELECTITEMPATH)
+            self.ui.pushButton_4.setIconSize(QtCore.QSize(200, 200))
+            # self.ui.Lbl_Name.setText("name: "+ name)
+            self.ui.Lbl_ObjCount.setText("{} Objects".format(count))
+            self.ui.Lbl_Path.setText(CellRelativePath)
+        except:
+            pass
 
 
 
@@ -571,9 +670,9 @@ class MainWindow(QtWidgets.QMainWindow):
             PROJECT_NAME = projectdata["ProjectName"]
         except:
             pass
-        print(type(projectdata))
+        # print(type(projectdata))
 
-        print(PROJECT_PATH, PROJECT_NAME)
+        # print(PROJECT_PATH, PROJECT_NAME)
 
         if PROJECT_PATH =="":
             self.ui.pushButton_6.setFocusPolicy(QtCore.Qt.NoFocus)
@@ -618,10 +717,12 @@ class MainWindow(QtWidgets.QMainWindow):
     def getCellPath(self):
         global PROJECT_PATH
         global CellPath
+        global CellRelativePath
         if not self.ui.treeWidget_2.selectedItems():
             if not self.ui.tableWidget.selectedIndexes():
 
                 CellPath = PROJECT_PATH
+                CellRelativePath = ""
             else:
                 selected = self.ui.tableWidget.selectedIndexes()
                 # print(selected)
@@ -629,15 +730,20 @@ class MainWindow(QtWidgets.QMainWindow):
                 for item in selected:
                     row = item.row()
                     column = item.column()
-                frame = self.ui.tableWidget.cellWidget(row, column)
-                lineEdits = frame.findChildren(QtWidgets.QLineEdit)
-                name = lineEdits[0].text()
-                CellPath = PROJECT_PATH + "//" + name
+                try:
+                    frame = self.ui.tableWidget.cellWidget(row, column)
+                    lineEdits = frame.findChildren(QtWidgets.QLineEdit)
+                    name = lineEdits[0].text()
+                    CellPath = PROJECT_PATH + "//" + name
+                    CellRelativePath = name
+                except:
+                    pass
 
         else:
             itempath = QTcommand.get_item_path(self.ui.treeWidget_2)
             if not self.ui.tableWidget.selectedIndexes():
                 CellPath = PROJECT_PATH+"//"+itempath
+                CellRelativePath = itempath
             else:
                 selected = self.ui.tableWidget.selectedIndexes()
                 # print(selected)
@@ -645,11 +751,16 @@ class MainWindow(QtWidgets.QMainWindow):
                 for item in selected:
                     row = item.row()
                     column = item.column()
-                frame = self.ui.tableWidget.cellWidget(row, column)
-                lineEdits = frame.findChildren(QtWidgets.QLineEdit)
-                name = lineEdits[0].text()
-                CellPath = PROJECT_PATH + "//"+itempath+"//" + name
-
+                try:
+                    frame = self.ui.tableWidget.cellWidget(row, column)
+                    lineEdits = frame.findChildren(QtWidgets.QLineEdit)
+                    name = lineEdits[0].text()
+                    CellPath = PROJECT_PATH + "//"+itempath+"//" + name
+                    CellRelativePath = itempath+"//" + name
+                except:
+                    pass
+        CellPath = u"{}".format(CellPath)
+        CellRelativePath =  u"{}".format(CellRelativePath)
         return CellPath
     def stepWindowUi(self):
         # window.ui.statusbar.setVisible(False)
@@ -736,7 +847,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def center(self):
         self.setGeometry(12,120,900,600)
         qr = self.frameGeometry()
-        print(qr)
+        # print(qr)
         cp = QtWidgets.QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
 
@@ -786,9 +897,9 @@ class MainWindow(QtWidgets.QMainWindow):
                 # 在这里执行你想要绑定的操作
                 self.ui.horizontalSlider.wheelEvent(event)
                 return True
-        if watched == self.ui.tableWidget and event.type() == QtCore.QEvent.KeyPress:
-            if event.key() == QtCore.Qt.Key_F2:
-                print("重命名")
+        # if watched == self.ui.tableWidget and event.type() == QtCore.QEvent.KeyPress:
+        #     if event.key() == QtCore.Qt.Key_F2:
+                # print("重命名")
 
         return super(MainWindow, self).eventFilter(watched, event)
     # def evenrfilter(self,eventlist):

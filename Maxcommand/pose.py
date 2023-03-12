@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from pymxs import runtime as rt
 import pymxs
+import UI.windowUI
+
 
 def make_cylinder():
     cyl = rt.Cylinder(radius=10, height=30)
@@ -15,8 +17,6 @@ def ls():
     for obj in objs:
         allobj.append(obj)
     return allobj
-
-
 def savePose():
     """
     :param obj:
@@ -31,9 +31,9 @@ def savePose():
             objdata["objname"] = obj.name
             # objdata["objtype"] = obj.superclass
             objdata["objtransform"] = str(obj.transform)
-            # objdata["objposition"] = obj.position
-            # objdata["objrotation"] = obj.rotation
-            # objdata["objscale"] = obj.scale
+            # objdata["objposition"] = str(obj.position)
+            # objdata["objrotation"] = str(obj.rotation)
+            # objdata["objscale"] = str(obj.scale)
             posedata.append(objdata)
     return posedata
 
@@ -64,20 +64,41 @@ def data_to_rtMatrix3(transform):
     Matrix = rt.Matrix3(p1, p2, p3, p4)
     return Matrix
 
-def pastPose(posedata,selectobjs):
-
+def pastPose(posedata,selectobjs,count,progressBar):
+    """
+    count是迭代次数
+    :param posedata:
+    :param selectobjs:
+    :param count:
+    :return:
+    """
     posedata = posedata
-    for data in posedata:
-        obj = rt.getNodeByName(data.get('objname'))
-        if obj in selectobjs:
-            tm = data_to_rtMatrix3(data.get('objtransform'))
-            obj.transform = tm
-            # obj.rotation = rt.eulerAngles(x, y, z)
-            # obj.pos = rt.point3(x, y, z)
-            # obj.scale = rt.point3(x, y, z)
+    max = len(posedata)*count
+    print(max)
+    k = 1
+    for i in range(count):
+        for data in posedata:
+            progressBar.setValue(float(k)/float(max)*100)
+            # pymxs rt多线程标准格式
+            k = k+1
+            with pymxs.mxstoken():
+                obj = rt.getNodeByName(data.get('objname'))
+                if obj in selectobjs:
+                    tm = data_to_rtMatrix3(data.get('objtransform'))
+                    # pymxs rt多线程标准格式
+                    with pymxs.mxstoken():
+                        obj.transform = tm
+                        # obj.rotation = rt.eulerAngles(x, y, z)
+                        # obj.pos = rt.point3(x, y, z)
+                        # obj.scale = rt.point3(x, y, z)
     rt.redrawViews()
     return
-
+def reViews():
+    rt.redrawViews()
+def getselectobjcount(posedata):
+    objs = [rt.getNodeByName(data.get('objname')) for data in posedata]
+    selectobjcount = len(objs)
+    return selectobjcount
 def selectobj(posedata):
     objs = [rt.getNodeByName(data.get('objname')) for data in posedata]
     selectobjs = [obj for obj in objs if obj in rt.objects] #获取场景所有物体

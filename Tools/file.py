@@ -41,7 +41,8 @@ def getfile(path,filetype):
     :param flietype:
     :return: typefile path
     """
-    path=path
+
+    path= u"{}".format(path)
     filetype = filetype
     filelist = []
     #处理打开library窗口没有刷新文件的问题
@@ -149,6 +150,19 @@ def create_folder(path):
             else:
                 # 如果新路径存在，则递增数字并继续循环
                 i += 1
+def cheak_file(path):
+    name, ext = os.path.splitext(path)
+    if not os.path.exists(path):
+        return path
+    else:
+        i = 1
+        while True:
+            new_path = u"{}_{}{}".format(name, i, ext)#加U防止乱码
+            if not os.path.exists(new_path):
+                return new_path
+            else:
+                i += 1
+
 
 def create_file(path):
     # 分离文件名和扩展名
@@ -161,7 +175,7 @@ def create_file(path):
         # 如果文件存在，则在后缀前加上数字
         i = 1
         while True:
-            new_path = "{}_{}{}".format(name, i, ext)
+            new_path = u"{}_{}{}".format(name, i, ext)#加U防止乱码
 
             # 如果新路径不存在，则创建文件并返回
             if not os.path.exists(new_path):
