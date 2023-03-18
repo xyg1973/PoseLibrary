@@ -2,23 +2,23 @@
 
 import sys
 import json
-sys.path.append("H:/pycharm_max_work/poselibray")
+# sys.path.append("H:/pycharm_max_work/poselibray")
 from PySide2.QtGui import QIcon
 from PySide2 import QtCore
 from PySide2 import QtGui
 from PySide2 import QtWidgets
-from PySide2 import shiboken2
+# from PySide2 import shiboken2
 from PySide2.QtCore import QTimer
-from pymxs import runtime as rt
-import pymxs
+# from pymxs import runtime as rt
+# import pymxs
 import gc
 import os
-from Tools import file
-from  Tools import QTcommand
-from UI import PoseWindow
-from Maxcommand import pose as pose
+from PoseLibrary.Tools import file as file
+from  PoseLibrary.Tools import QTcommand as QTcommand
+from PoseLibrary.UI import PoseWindow as PoseWindow
+from PoseLibrary.Maxcommand import pose as pose
 import threading
-
+#
 #reload(PoseWindow)
 PROJECT_PATH =""
 PROJECT_NAME =""
@@ -27,9 +27,9 @@ LISTITEMPATH =""
 CellPath = ""
 CellRelativePath = ""
 JSONPATH = ""
-pypath = os.getcwd()
+pypath = ""
 QTcommand.pypath = pypath
-
+#
 # pypath ="H:\pycharm_maya_work\Design"
 # print("windowUI的路径是" + pypath)
 def reload_module(module_name):
@@ -46,11 +46,11 @@ def reload_module(module_name):
     else:
         # 如果没有导入，则正常导入
         __import__(module_name)
-
-reload_module('Tools.file')
-reload_module('Tools.QTcommand')
-reload_module('UI.PoseWindow')
-reload_module('Maxcommand.pose')
+# #
+reload_module('PoseLibrary.Tools.file')
+reload_module('PoseLibrary.Tools.QTcommand')
+reload_module('PoseLibrary.UI.PoseWindow')
+reload_module('PoseLibrary.Maxcommand.pose')
 reload_module('threading')
 class RenameDialog(QtWidgets.QDialog):
     def __init__(self):
@@ -505,11 +505,13 @@ class MainWindow(QtWidgets.QMainWindow):
             filelist = file.getfile(PROJECT_PATH, ".png")
             if filelist == []:
                 self.ui.frame_2.setVisible(False)
+                self.ui.horizontalSlider.setVisible(False)
                 self.ui.frame_11.setVisible(True)
 
             else:
                 self.ui.frame_11.setVisible(False)
                 self.ui.frame_2.setVisible(True)
+                self.ui.horizontalSlider.setVisible(True)
 
             QTcommand.updataLibraryItem(PROJECT_PATH,self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
         else :
@@ -535,11 +537,13 @@ class MainWindow(QtWidgets.QMainWindow):
                     filelist = file.getfile(folder_path, ".png")
                     if filelist == []:
                         self.ui.frame_2.setVisible(False)
+                        self.ui.horizontalSlider.setVisible(False)
                         self.ui.frame_11.setVisible(True)
 
                     else:
                         self.ui.frame_11.setVisible(False)
                         self.ui.frame_2.setVisible(True)
+                        self.ui.horizontalSlider.setVisible(True)
 
                     QTcommand.updataLibraryItem(folder_path, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
                 except:
@@ -908,6 +912,11 @@ class MainWindow(QtWidgets.QMainWindow):
 def main():
     global  PROJECT_PATH
     global  LISTITEMPATH
+    from PySide2 import shiboken2
+    from pymxs import runtime as rt
+    import pymxs
+    global pypath
+    print(pypath)
     # rt.resetMaxFile(rt.name('noPrompt'))
     # Cast the main window HWND to a QMainWindow for docking
     # First, get the QWidget corresponding to the Max windows HWND:
@@ -939,39 +948,17 @@ def main():
     return window
 
 def test():
+    pypath = os.getcwd()
+    # print (pypath)
+    if pypath in sys.path:
+        pass
+    else:
+        sys.path.append(pypath)
     app = QtWidgets.QApplication(sys.argv)
     window = MainWindow()
     sys.exit(app.exec_())
     return window
 
 if __name__ == "__main__":
-    #pycharme run code///////////////////////////////////
-    window = test()
-    #/////////////////////////////
-    #window = test()
-
-
-    #QTcommand.itemsort(window.ui.tableWidget, AllItemFrame)
-
-
-
-    # def itemsort(table=window.ui.tableWidget, allitem=AllItemFrame):
-    #     # time.sleep(0.25)
-    #     QTcommand.itemsort(table, allitem)
-
-
-    # def eventItemSort(w, h):
-    #     QTimer.singleShot(100, itemsort)
-        # print("yes yes yes")
-
-        #gc.collect()  # python内置清除内存函数
-
-    # # 创建事件信号
-    # size_changed_signal =window.size_changed
-    #
-    # # 给信号绑定事件
-    # size_changed_signal.connect(eventItemSort)
-
-    sys.exit(app.exec_())
-
-
+    pass
+    #pycharme run code//////////////

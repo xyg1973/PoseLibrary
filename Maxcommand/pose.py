@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from pymxs import runtime as rt
 import pymxs
-import UI.windowUI
+# from UI import windowUI
 
 
 def make_cylinder():
@@ -26,6 +26,8 @@ def savePose():
     posedata = []
     if objs:
         for obj in objs :
+            # objtype = rt.classOf(obj.name
+            # print(objtype)
             objdata = {}
             objdata["obj"] = str(obj)
             objdata["objname"] = obj.name
@@ -52,6 +54,8 @@ def render_and_save(width, height, file_path):
     # 保存位图
     rendered_image.filename = file_path
     rt.save(rendered_image)
+    #关闭预览窗口
+    rt.close(rendered_image)
 
 def data_to_rtMatrix3(transform):
     s = transform
@@ -113,4 +117,4 @@ def set_transform_keyframes(objects, frame=rt.sliderTime.frame):
             controller = getattr(obj.controller, prop)
             if controller.isKeyable:
                 rt.setKeyMode(rt.name(prop))
-                rt.setKey(obj, frame)
+                rt.setKey
