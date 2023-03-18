@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1157</width>
-    <height>1097</height>
+    <width>1155</width>
+    <height>1110</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -147,7 +147,7 @@ background: rgb(255, 0, 0);
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_4">
               <property name="spacing">
-               <number>2</number>
+               <number>3</number>
               </property>
               <property name="leftMargin">
                <number>0</number>
@@ -163,6 +163,12 @@ background: rgb(255, 0, 0);
               </property>
               <item>
                <widget class="QPushButton" name="Btn_Menu_2">
+                <property name="minimumSize">
+                 <size>
+                  <width>23</width>
+                  <height>23</height>
+                 </size>
+                </property>
                 <property name="styleSheet">
                  <string notr="true">QPushButton {
     background-color:transparent;
@@ -171,13 +177,13 @@ background: rgb(255, 0, 0);
     border-radius: 3px;
     border-color: beige;
     padding: 2px;
-	text-align:left
+
 }
 QPushButton:hover {
-    background-color: rgb(150, 150, 150);
+    background-color: rgb(90, 90, 90);
 }
 QPushButton:pressed {
-    background-color:  rgb(210, 210, 210);
+    background-color:  rgb(110, 110, 110);
     border-style: inset;
 }</string>
                 </property>
@@ -202,13 +208,13 @@ QPushButton:pressed {
     border-radius: 3px;
     border-color: beige;
     padding: 2px;
-	text-align:left
+
 }
 QPushButton:hover {
-    background-color: rgb(150, 150, 150);
+    background-color: rgb(90, 90, 90);
 }
 QPushButton:pressed {
-    background-color:  rgb(210, 210, 210);
+    background-color:  rgb(110, 110, 110);
     border-style: inset;
 }</string>
                 </property>
@@ -233,18 +239,49 @@ QPushButton:pressed {
     border-radius: 3px;
     border-color: beige;
     padding: 2px;
-	text-align:left
+
 }
 QPushButton:hover {
-    background-color: rgb(150, 150, 150);
+    background-color: rgb(90, 90, 90);
 }
 QPushButton:pressed {
-    background-color:  rgb(210, 210, 210);
+    background-color:  rgb(110, 110, 110);
     border-style: inset;
 }</string>
                 </property>
                 <property name="text">
                  <string>田</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="Btn_PathTip">
+                <property name="minimumSize">
+                 <size>
+                  <width>40</width>
+                  <height>23</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+    background-color:transparent;
+	color: rgb(255, 255, 255);
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+
+}
+QPushButton:hover {
+    background-color: rgb(90, 90, 90);
+}
+QPushButton:pressed {
+    background-color:  rgb(110, 110, 110);
+    border-style: inset;
+}</string>
+                </property>
+                <property name="text">
+                 <string>首页</string>
                 </property>
                </widget>
               </item>
@@ -297,7 +334,7 @@ QPushButton:pressed {
                <widget class="QPushButton" name="Btn_Creat">
                 <property name="minimumSize">
                  <size>
-                  <width>23</width>
+                  <width>40</width>
                   <height>23</height>
                  </size>
                 </property>
@@ -327,6 +364,25 @@ QPushButton:pressed {
                </widget>
               </item>
               <item>
+               <widget class="QLabel" name="label_8">
+                <property name="styleSheet">
+                 <string notr="true">QLabel{
+    background-color:transparent;
+	color:rgb(225, 225, 225);
+    border-width: 0px;
+    border-radius: 3px;
+    border-color: beige;
+    padding: 2px;
+	text-align:left
+}
+</string>
+                </property>
+                <property name="text">
+                 <string>搜索</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QLineEdit" name="lineEdit">
                 <property name="enabled">
                  <bool>false</bool>
@@ -348,10 +404,10 @@ QPushButton:pressed {
                 </property>
                 <property name="styleSheet">
                  <string notr="true">QLineEdit{
-background-color:rgb(42, 42, 42);
+background-color:rgb(50, 50, 50);
 color:rgb(255, 255, 255);
 border-radius: 5px; 
-border: 1px solid rgb(25, 25, 25);
+border: 1px solid rgb(40, 40, 40);
 padding: 2px;
 }
 </string>
@@ -1141,7 +1197,7 @@ QPushButton:pressed {
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,1,0,0">
+       <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,1,0,0">
         <property name="spacing">
          <number>0</number>
         </property>
@@ -1187,13 +1243,13 @@ QPushButton:pressed {
     border-radius: 3px;
     border-color: beige;
     padding: 2px;
-	text-align:left
+
 }
 QPushButton:hover {
-    background-color: rgb(150, 150, 150);
+    background-color: rgb(90, 90, 90);
 }
 QPushButton:pressed {
-    background-color:  rgb(210, 210, 210);
+    background-color:  rgb(110, 110, 110);
     border-style: inset;
 }</string>
             </property>
@@ -1231,13 +1287,13 @@ QPushButton:pressed {
     border-radius: 3px;
     border-color: beige;
     padding: 2px;
-	text-align:left
+
 }
 QPushButton:hover {
-    background-color: rgb(150, 150, 150);
+    background-color: rgb(90, 90, 90);
 }
 QPushButton:pressed {
-    background-color:  rgb(210, 210, 210);
+    background-color:  rgb(110, 110, 110);
     border-style: inset;
 }</string>
             </property>
@@ -1262,13 +1318,13 @@ QPushButton:pressed {
     border-radius: 3px;
     border-color: beige;
     padding: 2px;
-	text-align:left
+
 }
 QPushButton:hover {
-    background-color: rgb(150, 150, 150);
+    background-color: rgb(90, 90, 90);
 }
 QPushButton:pressed {
-    background-color:  rgb(210, 210, 210);
+    background-color:  rgb(110, 110, 110);
     border-style: inset;
 }</string>
             </property>
@@ -1278,6 +1334,19 @@ QPushButton:pressed {
            </widget>
           </item>
          </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>0</width>
+            <height>6</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item>
          <widget class="QFrame" name="frame_8">
@@ -1349,7 +1418,7 @@ QPushButton:pressed {
                <property name="minimumSize">
                 <size>
                  <width>23</width>
-                 <height>23</height>
+                 <height>26</height>
                 </size>
                </property>
                <property name="styleSheet">
@@ -1363,10 +1432,10 @@ QPushButton:pressed {
 	text-align:left
 }
 QPushButton:hover {
-    background-color: rgb(150, 150, 150);
+    background-color:rgb(52, 95, 251);
 }
 QPushButton:pressed {
-    background-color:  rgb(210, 210, 210);
+    background-color:  rgb(10, 50, 205);
     border-style: inset;
 }</string>
                </property>
@@ -1435,7 +1504,7 @@ QTreeView::branch:!adjoins-item {border-image: url(vline.png) 0;}</string>
              <enum>Qt::ScrollBarAlwaysOff</enum>
             </property>
             <property name="indentation">
-             <number>10</number>
+             <number>6</number>
             </property>
             <property name="rootIsDecorated">
              <bool>true</bool>
@@ -1493,10 +1562,10 @@ QTreeView::branch:!adjoins-item {border-image: url(vline.png) 0;}</string>
             </property>
             <property name="styleSheet">
              <string notr="true">QLineEdit{
-background-color:rgb(42, 42, 42);
+background-color:rgb(55, 55, 55);
 color:rgb(255, 255, 255);
 border-radius: 5px; 
-border: 1px solid rgb(25, 25, 25);
+border: 1px solid rgb(45, 45, 45);
 padding: 2px;
 }
 </string>
@@ -2133,6 +2202,51 @@ background-color:rgb(60, 60, 60);
     padding: 2px;
 	text-align:left
 }
+
+
+QCheckBox::indicator:unchecked {
+    background-color:rgb(180,180,180);
+border-radius: 3px;
+	padding: 2px;
+}
+
+QCheckBox::indicator:unchecked:hover {
+    background-color:rgb(40, 105, 254);
+border-radius: 3px;
+	padding: 2px;
+}
+
+QCheckBox::indicator:unchecked:pressed {
+    background-color:rgb(14, 59, 229);
+border-radius: 3px;
+	padding: 2px;
+}
+
+QCheckBox::indicator:checked:hover {
+    background-color:rgb(40, 105, 254);
+border-radius: 3px;
+	padding: 2px;
+}
+
+QCheckBox::indicator:checked:pressed {
+    background-color:rgb(220,220,220);
+border-radius: 3px;
+	padding: 2px;
+}
+
+QCheckBox::indicator:indeterminate:hover {
+    background-color:rgb(40, 105, 254);
+border-radius: 3px;
+	padding: 2px;
+}
+
+QCheckBox::indicator:indeterminate:pressed {
+    background-color:rgb(40, 105, 254);
+border-radius: 3px;
+	padding: 2px;
+}
+
+
 </string>
                </property>
                <property name="text">
@@ -2152,13 +2266,57 @@ background-color:rgb(60, 60, 60);
                 <string notr="true">QCheckBox{
     background-color:transparent;
 	color:rgb(176, 176, 176);
-
     border-width: 0px;
     border-radius: 3px;
     border-color: beige;
     padding: 2px;
 	text-align:left
 }
+
+
+QCheckBox::indicator:unchecked {
+    background-color:rgb(180,180,180);
+border-radius: 3px;
+	padding: 2px;
+}
+
+QCheckBox::indicator:unchecked:hover {
+    background-color:rgb(40, 105, 254);
+border-radius: 3px;
+	padding: 2px;
+}
+
+QCheckBox::indicator:unchecked:pressed {
+    background-color:rgb(14, 59, 229);
+border-radius: 3px;
+	padding: 2px;
+}
+
+QCheckBox::indicator:checked:hover {
+    background-color:rgb(40, 105, 254);
+border-radius: 3px;
+	padding: 2px;
+}
+
+QCheckBox::indicator:checked:pressed {
+    background-color:rgb(220,220,220);
+border-radius: 3px;
+	padding: 2px;
+}
+
+QCheckBox::indicator:indeterminate:hover {
+    background-color:rgb(40, 105, 254);
+border-radius: 3px;
+	padding: 2px;
+}
+
+QCheckBox::indicator:indeterminate:pressed {
+    background-color:rgb(40, 105, 254);
+border-radius: 3px;
+	padding: 2px;
+}
+
+
 </string>
                </property>
                <property name="text">

@@ -13,10 +13,8 @@ from PySide2.QtCore import QTimer
 # import pymxs
 import gc
 import os
-from PoseLibrary.Tools import file as file
-from  PoseLibrary.Tools import QTcommand as QTcommand
-from PoseLibrary.UI import PoseWindow as PoseWindow
-from PoseLibrary.Maxcommand import pose as pose
+
+import MaxPlus
 import threading
 #
 #reload(PoseWindow)
@@ -28,7 +26,7 @@ CellPath = ""
 CellRelativePath = ""
 JSONPATH = ""
 pypath = ""
-QTcommand.pypath = pypath
+
 #
 # pypath ="H:\pycharm_maya_work\Design"
 # print("windowUI的路径是" + pypath)
@@ -46,12 +44,22 @@ def reload_module(module_name):
     else:
         # 如果没有导入，则正常导入
         __import__(module_name)
-# #
-reload_module('PoseLibrary.Tools.file')
-reload_module('PoseLibrary.Tools.QTcommand')
-reload_module('PoseLibrary.UI.PoseWindow')
-reload_module('PoseLibrary.Maxcommand.pose')
-reload_module('threading')
+try:
+    from PoseLibrary.Tools import file as file
+    from  PoseLibrary.Tools import QTcommand as QTcommand
+    from PoseLibrary.UI import PoseWindow as PoseWindow
+    from PoseLibrary.Maxcommand import pose as pose
+
+    QTcommand.pypath = pypath
+    reload_module('PoseLibrary.Tools.file')
+    reload_module('PoseLibrary.Tools.QTcommand')
+    reload_module('PoseLibrary.UI.PoseWindow')
+    reload_module('PoseLibrary.Maxcommand.pose')
+    reload_module('threading')
+except:
+    pass
+
+
 class RenameDialog(QtWidgets.QDialog):
     def __init__(self):
         super().__init__()
@@ -69,6 +77,7 @@ class RenameDialog(QtWidgets.QDialog):
 
 
 class MainWindow(QtWidgets.QMainWindow):
+
     size_changed = QtCore.Signal(int, int)
     m_flag = False
     eventlist = []
@@ -84,7 +93,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setWindowTitle("PoseLibrary")
         self.ui.treeWidget_2.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.ui.treeWidget_2.installEventFilter(self)
-
+        self.size_changed.connect(self.eventItemSort)
         self.ui.tableWidget.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.ui.tableWidget.installEventFilter(self)
         self.ui.dockWidget_down.setVisible(False)
@@ -93,7 +102,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.progressBar.setTextVisible(False)
         #隐藏window 抬头
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        #self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
 
         self._timer = QtCore.QTimer(self)
         self._timer.timeout.connect(self.handle_timeout)
@@ -133,6 +142,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.horizontalSlider.valueChanged.connect(self.resize_TableItem)
         self.ui.Btn_Menu.clicked.connect(self.Btn_MenuShow)
         self.ui.Btn_Menu_2.clicked.connect(self.Btn_MenuShow)
+        self.ui.Btn_PathTip.clicked.connect(self.UpdataLibrary)
+
     def resize_TableItem(self):
         current_value = self.ui.horizontalSlider.value()
         minimum = self.ui.horizontalSlider.minimum()
@@ -175,9 +186,10 @@ class MainWindow(QtWidgets.QMainWindow):
         global JSONPATH
         try:
             rightMenu = QtWidgets.QMenu(self.ui.tableWidget)
+            addPoseAction = rightMenu.addAction(u"添加pose")
             selectObjAction =  rightMenu.addAction(u"选择物体")
             resPoseAction = rightMenu.addAction(u"刷新pose")
-            addPoseAction = rightMenu.addAction(u"添加pose")
+
             renameAction =  rightMenu.addAction(u"重命名")
             removeAction = rightMenu.addAction(u"删除")
 
@@ -211,7 +223,6 @@ class MainWindow(QtWidgets.QMainWindow):
         except Exception as e:
             pass
             # print(e)
-
     def TreeWeiget_renameItem(self):
 
         def onItemChanged(item, column):
@@ -219,9 +230,11 @@ class MainWindow(QtWidgets.QMainWindow):
         path = self.getCellPath()
         parent_path = os.path.dirname(path)
         # print(path)
+
         selectItem = self.ui.treeWidget_2.selectedItems()[0]
         row = self.ui.treeWidget_2.indexOfTopLevelItem(selectItem)
         self.ui.treeWidget_2.openPersistentEditor(selectItem, 0 )
+
         def onItemChanged(item=selectItem):
             name = item.text(0)
             self.ui.treeWidget_2.closePersistentEditor(item,0)
@@ -394,6 +407,7 @@ class MainWindow(QtWidgets.QMainWindow):
         global PROJECT_PATH
         #设置item没有选中
         # self.ui.Btn_HomePagge.setStyleSheet("QPushButton {  background-color:rgb(40, 105, 254);")
+        self.ui.Btn_PathTip.setText("首页")
         self.ui.treeWidget_2.clearSelection()
         self.UpdataLibrary()
         # filelist = file.getfile(PROJECT_PATH, ".png")
@@ -434,7 +448,12 @@ class MainWindow(QtWidgets.QMainWindow):
             name = lineEdits[0].text()
             lineEdits[0].setEnabled(True)
             lineEdits[0].setReadOnly(False)
-            lineEdits[0].setSelection(0, len(lineEdits[0].text()))
+            lineEdits[0].setStyleSheet("QLineEdit{\n"
+                                            "    background-color: rgb(255, 255, 255);\n"
+                                            "color: rgb(50, 50, 50);}")
+
+            # lineEdits[0].setSelection(0, len(lineEdits[0].text()))
+
             # lineEdits[0].textChanged()
 
             def onItemChanged(LEdit=lineEdits[0]):
@@ -457,6 +476,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
             # self.ui.treeWidget_2.closePersistentEditor(selectItem, 0)
             lineEdits[0].editingFinished.connect(onItemChanged)
+            editor.lineEdit.lineEdits[0]()
 
 
     def resetPose(self):
@@ -486,6 +506,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # name = self.UI_addpose_inputDialog()
         name = "pose"
         jsonname = name + ".json"
+        # print(pypath+"\img//picture-dynamic-clay.png")
         if not self.ui.treeWidget_2.selectedItems():
 
 
@@ -567,11 +588,16 @@ class MainWindow(QtWidgets.QMainWindow):
         count = 2
 
         self.ui.progressBar.setVisible(True)
-        #多线程
-        t = threading.Thread(target=pose.pastPose,args=(posedata,selectobj,count,self.ui.progressBar))
-        t.start()
-        t.join()
-        # pose.pastPose(posedata,selectobj,count,self.ui.progressBar)
+        # #多线程
+        # t = threading.Thread(target=pose.pastPose,args=(posedata,selectobj,count,self.ui.progressBar))
+        # t.start()
+        # t.join()
+        if self.ui.checkBox_3.isChecked():
+
+            pose.pastPose(posedata,selectobj,count,self.ui.progressBar)
+        else:
+            pose.pastPoseRot(posedata, selectobj, count, self.ui.progressBar)
+
         pose.reViews()
         self.ui.progressBar.setVisible(False)
         # print(t)
@@ -584,8 +610,12 @@ class MainWindow(QtWidgets.QMainWindow):
         if ok :
             return name
     def Click_Treeweiget(self):
+        path = self.getCellPath()
+        textA = os.path.basename(path)
+        self.ui.Btn_PathTip.setText(textA)
         self.removeCradData()
         self.UpdataLibrary()
+
 
     def UpdataLibrary(self):
         global LISTITEMPATH
@@ -645,13 +675,14 @@ class MainWindow(QtWidgets.QMainWindow):
         SELECTITEMPATH = path+".png"
         JSONPATH = path+".json"
         JSONPATH = u"{}".format(JSONPATH)
+        name = file.getfileName(SELECTITEMPATH)
         try:
             with open(JSONPATH, 'r') as f:
                 posedata = json.load(f)
             count = pose.getselectobjcount(posedata)
             QTcommand.BtnSetIcons(self.ui.pushButton_4, SELECTITEMPATH)
             self.ui.pushButton_4.setIconSize(QtCore.QSize(200, 200))
-            # self.ui.Lbl_Name.setText("name: "+ name)
+            self.ui.Lbl_Name.setText("name: "+ name)
             self.ui.Lbl_ObjCount.setText("{} Objects".format(count))
             self.ui.Lbl_Path.setText(CellRelativePath)
         except:
@@ -800,6 +831,7 @@ class MainWindow(QtWidgets.QMainWindow):
         QTcommand.BtnSetIcons(self.ui.Btn_Creat, pypath+"\img//plus-dynamic-clay.png")
         QTcommand.BtnSetIcons(self.ui.pushButton_4, pypath+"\img//picture-dynamic-clay.png")
         QTcommand.BtnSetIcons(self.ui.pushButton_3, pypath+"\img//figma-dynamic-clay.png")
+        QTcommand.BtnSetIcons(self.ui.Btn_HomePagge, pypath + "\img/folder-dynamic-color.png",Text = "首页",size = 16)
 
         self.ui.pushButton_4.setIconSize(QtCore.QSize(200, 200))
         Pixmap = QtGui.QPixmap(pypath + "\img//puzzle-dynamic-clay.png")
@@ -842,6 +874,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.horizontalSlider_2.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ui.pushButton_3.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ui.Btn_Menu_2.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.ui.Btn_PathTip.setFocusPolicy(QtCore.Qt.NoFocus)
+
+        self.ui.Btn_Add.setToolTip("添加文件夹")
+        self.ui.pushButton.setToolTip("添加文件夹")
+        self.ui.Btn_Expand.setToolTip("隐藏-左栏\右栏")
+        self.ui.pushButton_3.setToolTip("显示-左栏\右栏")
+        self.ui.Btn_Creat.setToolTip("添加Pose")
+        self.ui.Btn_Apply.setToolTip("应用Pose")
+        self.ui.Btn_Apply2.setToolTip("应用Pose")
+        self.ui.checkBox_3.setToolTip("")
+        self.ui.checkBox_4.setToolTip("")
 
 
         # print("设置UI样式")
@@ -895,6 +938,16 @@ class MainWindow(QtWidgets.QMainWindow):
     #     if event.modifiers() == QtCore.Qt.ControlModifier:
     #         self.ui.horizontalSlider.wheelEvent(event)
 
+    def itemsort(self):
+        # time.sleep(0.25)
+        self.UpdataLibrary()
+
+
+    def eventItemSort(self,w, h):
+        QTimer.singleShot(50, self.itemsort)
+        # print("yes yes yes")
+
+        gc.collect()  # python内置清除内存函数
     def eventFilter(self, watched, event):
         if watched == self.ui.tableWidget and event.type() == QtCore.QEvent.Wheel:
             if event.modifiers() == QtCore.Qt.ControlModifier:
@@ -916,36 +969,21 @@ def main():
     from pymxs import runtime as rt
     import pymxs
     global pypath
-    print(pypath)
     # rt.resetMaxFile(rt.name('noPrompt'))
     # Cast the main window HWND to a QMainWindow for docking
     # First, get the QWidget corresponding to the Max windows HWND:
     main_window_qwdgt = QtWidgets.QWidget.find(rt.windows.getMAXHWND())
     # Then cast it as a QMainWindow for docking purposes:
     main_window = shiboken2.wrapInstance(shiboken2.getCppPointer(main_window_qwdgt)[0], QtWidgets.QMainWindow)
+
+
+
     window = MainWindow(main_window)
+    print(window)
+    # window = MainWindow()
     path = PROJECT_PATH+"//"+LISTITEMPATH
-    def itemsort():
-        # time.sleep(0.25)
-        window.UpdataLibrary()
-
-
-    def eventItemSort(w, h):
-        QTimer.singleShot(50, itemsort)
-        # print("yes yes yes")
-
-        gc.collect()  # python内置清除内存函数
-
-    # 创建事件信号
-    size_changed_signal =window.size_changed
-
-    # 给信号绑定事件
-    size_changed_signal.connect(eventItemSort)
-
-
-
     window.show()
-    return window
+
 
 def test():
     pypath = os.getcwd()

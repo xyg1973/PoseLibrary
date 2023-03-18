@@ -68,7 +68,8 @@ def data_to_rtMatrix3(transform):
     Matrix = rt.Matrix3(p1, p2, p3, p4)
     return Matrix
 
-def pastPose(posedata,selectobjs,count,progressBar):
+
+def pastPoseTh(posedata,selectobjs,count,progressBar):
     """
     count是迭代次数
     :param posedata:
@@ -95,7 +96,65 @@ def pastPose(posedata,selectobjs,count,progressBar):
                         # obj.rotation = rt.eulerAngles(x, y, z)
                         # obj.pos = rt.point3(x, y, z)
                         # obj.scale = rt.point3(x, y, z)
-    rt.redrawViews()
+    return
+def pastPose(posedata,selectobjs,count,progressBar):
+    """
+    count是迭代次数
+    :param posedata:
+    :param selectobjs:
+    :param count:
+    :return:
+    """
+    posedata = posedata
+    max = len(posedata)*count
+    k = 1
+    with pymxs.undo(True):
+        for i in range(count):
+            for data in posedata:
+                progressBar.setValue(float(k)/float(max)*100)
+                k = k+1
+                obj = rt.getNodeByName(data.get('objname'))
+                if obj in selectobjs:
+                    mat3 = data_to_rtMatrix3(data.get('objtransform'))
+
+                    obj.transform = mat3
+                    # obj.rotation = rt.eulerAngles(x, y, z)
+                    # obj.pos = rt.point3(x, y, z)
+                    # obj.scale = rt.point3(x, y, z)
+    return
+
+def pastPoseRot(posedata,selectobjs,count,progressBar):
+    """
+    count是迭代次数
+    :param posedata:
+    :param selectobjs:
+    :param count:
+    :return:
+    """
+    posedata = posedata
+    max = len(posedata)*count
+    k = 1
+    with pymxs.undo(True):
+        for i in range(count):
+            for data in posedata:
+                progressBar.setValue(float(k)/float(max)*100)
+                k = k+1
+                obj = rt.getNodeByName(data.get('objname'))
+                if obj in selectobjs:
+
+
+                    mat3 = data_to_rtMatrix3(data.get('objtransform'))
+                    row1 = mat3.row1
+                    row2 = mat3.row2
+                    row3 = mat3.row3
+                    row4 = obj.transform.row4
+                    newmat3 = rt.matrix3(row1,row2,row3,row4)
+                    # remat3 = rt.XFormMat(parmat3,newmat3)
+
+                    obj.transform = newmat3
+                    # obj.rotation = rt.eulerAngles(x, y, z)
+                    # obj.pos = rt.point3(x, y, z)
+                    # obj.scale = rt.point3(x, y, z)
     return
 def reViews():
     rt.redrawViews()
@@ -104,9 +163,10 @@ def getselectobjcount(posedata):
     selectobjcount = len(objs)
     return selectobjcount
 def selectobj(posedata):
-    objs = [rt.getNodeByName(data.get('objname')) for data in posedata]
-    selectobjs = [obj for obj in objs if obj in rt.objects] #获取场景所有物体
-    rt.select(selectobjs)
+    with pymxs.undo(True):
+        objs = [rt.getNodeByName(data.get('objname')) for data in posedata]
+        selectobjs = [obj for obj in objs if obj in rt.objects] #获取场景所有物体
+        rt.select(selectobjs)
     rt.redrawViews()
     return selectobjs
 

@@ -3,7 +3,11 @@ import sys
 import os
 from PySide2 import QtCore, QtGui, QtWidgets
 from PoseLibrary.Tools import file
+from PoseLibrary.Maxcommand import pose
+import json
+from PoseLibrary.UI import  windowUI
 
+JSONPATH =  windowUI.JSONPATH
 pypath = ""
 itemWidth =200
 
@@ -66,14 +70,23 @@ class MyWidget(QtWidgets.QWidget):
 	# 信号事件选中item中部件会同时选中item
 	def eventFilter(self, watched,tableweigetevent ):
 		if tableweigetevent.type() == QtCore.QEvent.MouseButtonPress:
+			global JSONPATH
 			self.table_widget.setCurrentCell(self.row,self.column )
 			item = self.table_widget.item(self.row,self.column )
 			self.table_widget.setItemSelected(item,True )
+
+
 			return True
+		#双击事件
 		if tableweigetevent.type() == QtCore.QEvent.MouseButtonDblClick:
-			self.table_widget.setCurrentCell(self.row, self.column)
-			self._TableSignal.emit(self.row,self.column)
-			print("双击事件")
+			global JSONPATH
+
+			JSONPATH =  windowUI.JSONPATH
+			with open(JSONPATH, 'r') as f:
+				posedata = json.load(f)
+			pose.selectobj(posedata)
+
+
 		try:
 			return super(MyWidget,self ).eventFilter(watched,tableweigetevent )
 		except:
@@ -167,7 +180,7 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 	AllItemFrame = []
 	itemWidth = itemWidth
 	pngfile = file.getfile(path, ".png")
-
+	jsonfile = file.getfile(path, ".json")
 	columnCount = TableWidgetWidth // itemWidth+1 # 列数
 	rowCount = len(pngfile) // columnCount			# 行数
 
@@ -210,6 +223,7 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 # 		FrameALayout.addWidget(BtnA)
 # 		FrameALayout.addWidget(LineEditA)
 		# TableWidget.setCellWidget(row, column, FrameA)
+
 		myWidget = MyWidget(row,column ,TableWidget ,pngfile[i] )
 		#myWidget.resize(QtCore.QSize(90,itemWidth))
 
@@ -298,12 +312,12 @@ def itemsort(TableWidget,AllItemFrame):
 
 
 
-def BtnSetIcons(PushButton,iconsPath):
+def BtnSetIcons(PushButton,iconsPath,Text = "",size = 18):
 	icon_img = QtGui.QIcon()
 	icon_img.addPixmap(QtGui.QPixmap(iconsPath), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 	PushButton.setIcon(icon_img)
-	PushButton.setIconSize(QtCore.QSize(22, 22))
-	PushButton.setText("")
+	PushButton.setIconSize(QtCore.QSize(size, size))
+	PushButton.setText(Text)
 
 
 def add_child(treeweiget,item=None,name="folder"):

@@ -38,5 +38,5 @@ reload_module('PoseLibrary.Tools.file')
 #文档创建配置文件
 my_documents_path = os.path.expanduser('~/Documents')
 file_path = file.check_and_create_file(my_documents_path, 'poselibrary', 'poselibrary.txt')
-windowUI.pypath = pypath
+windowUI.pypath = pypath+"\PoseLibrary"
 window = windowUI.main()

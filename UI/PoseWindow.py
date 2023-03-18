@@ -14,7 +14,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1157, 1097)
+        MainWindow.resize(1155, 1110)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -90,9 +90,10 @@ class Ui_MainWindow(object):
         self.verticalLayout_6.setObjectName("verticalLayout_6")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_4.setContentsMargins(0, 0, 8, 0)
-        self.horizontalLayout_4.setSpacing(2)
+        self.horizontalLayout_4.setSpacing(3)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.Btn_Menu_2 = QtWidgets.QPushButton(self.UI_Library_frame)
+        self.Btn_Menu_2.setMinimumSize(QtCore.QSize(23, 23))
         self.Btn_Menu_2.setStyleSheet("QPushButton {\n"
 "    background-color:transparent;\n"
 "    color: rgb(255, 255, 255);\n"
@@ -100,13 +101,13 @@ class Ui_MainWindow(object):
 "    border-radius: 3px;\n"
 "    border-color: beige;\n"
 "    padding: 2px;\n"
-"    text-align:left\n"
+"\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: rgb(150, 150, 150);\n"
+"    background-color: rgb(90, 90, 90);\n"
 "}\n"
 "QPushButton:pressed {\n"
-"    background-color:  rgb(210, 210, 210);\n"
+"    background-color:  rgb(110, 110, 110);\n"
 "    border-style: inset;\n"
 "}")
         self.Btn_Menu_2.setObjectName("Btn_Menu_2")
@@ -120,13 +121,13 @@ class Ui_MainWindow(object):
 "    border-radius: 3px;\n"
 "    border-color: beige;\n"
 "    padding: 2px;\n"
-"    text-align:left\n"
+"\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: rgb(150, 150, 150);\n"
+"    background-color: rgb(90, 90, 90);\n"
 "}\n"
 "QPushButton:pressed {\n"
-"    background-color:  rgb(210, 210, 210);\n"
+"    background-color:  rgb(110, 110, 110);\n"
 "    border-style: inset;\n"
 "}")
         self.pushButton.setObjectName("pushButton")
@@ -140,17 +141,37 @@ class Ui_MainWindow(object):
 "    border-radius: 3px;\n"
 "    border-color: beige;\n"
 "    padding: 2px;\n"
-"    text-align:left\n"
+"\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: rgb(150, 150, 150);\n"
+"    background-color: rgb(90, 90, 90);\n"
 "}\n"
 "QPushButton:pressed {\n"
-"    background-color:  rgb(210, 210, 210);\n"
+"    background-color:  rgb(110, 110, 110);\n"
 "    border-style: inset;\n"
 "}")
         self.pushButton_3.setObjectName("pushButton_3")
         self.horizontalLayout_4.addWidget(self.pushButton_3)
+        self.Btn_PathTip = QtWidgets.QPushButton(self.UI_Library_frame)
+        self.Btn_PathTip.setMinimumSize(QtCore.QSize(40, 23))
+        self.Btn_PathTip.setStyleSheet("QPushButton {\n"
+"    background-color:transparent;\n"
+"    color: rgb(255, 255, 255);\n"
+"    border-width: 0px;\n"
+"    border-radius: 3px;\n"
+"    border-color: beige;\n"
+"    padding: 2px;\n"
+"\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(90, 90, 90);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color:  rgb(110, 110, 110);\n"
+"    border-style: inset;\n"
+"}")
+        self.Btn_PathTip.setObjectName("Btn_PathTip")
+        self.horizontalLayout_4.addWidget(self.Btn_PathTip)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem)
         self.horizontalSlider = QtWidgets.QSlider(self.UI_Library_frame)
@@ -163,7 +184,7 @@ class Ui_MainWindow(object):
         spacerItem1 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem1)
         self.Btn_Creat = QtWidgets.QPushButton(self.UI_Library_frame)
-        self.Btn_Creat.setMinimumSize(QtCore.QSize(23, 23))
+        self.Btn_Creat.setMinimumSize(QtCore.QSize(40, 23))
         self.Btn_Creat.setStyleSheet("QPushButton {\n"
 "    background-color:rgb(40, 105, 254);\n"
 "    color: rgb(255, 255, 255);\n"
@@ -184,6 +205,19 @@ class Ui_MainWindow(object):
 "")
         self.Btn_Creat.setObjectName("Btn_Creat")
         self.horizontalLayout_4.addWidget(self.Btn_Creat)
+        self.label_8 = QtWidgets.QLabel(self.UI_Library_frame)
+        self.label_8.setStyleSheet("QLabel{\n"
+"    background-color:transparent;\n"
+"    color:rgb(225, 225, 225);\n"
+"    border-width: 0px;\n"
+"    border-radius: 3px;\n"
+"    border-color: beige;\n"
+"    padding: 2px;\n"
+"    text-align:left\n"
+"}\n"
+"")
+        self.label_8.setObjectName("label_8")
+        self.horizontalLayout_4.addWidget(self.label_8)
         self.lineEdit = QtWidgets.QLineEdit(self.UI_Library_frame)
         self.lineEdit.setEnabled(False)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
@@ -194,10 +228,10 @@ class Ui_MainWindow(object):
         self.lineEdit.setMinimumSize(QtCore.QSize(23, 23))
         self.lineEdit.setAutoFillBackground(False)
         self.lineEdit.setStyleSheet("QLineEdit{\n"
-"background-color:rgb(42, 42, 42);\n"
+"background-color:rgb(50, 50, 50);\n"
 "color:rgb(255, 255, 255);\n"
 "border-radius: 5px; \n"
-"border: 1px solid rgb(25, 25, 25);\n"
+"border: 1px solid rgb(40, 40, 40);\n"
 "padding: 2px;\n"
 "}\n"
 "")
@@ -588,13 +622,13 @@ class Ui_MainWindow(object):
 "    border-radius: 3px;\n"
 "    border-color: beige;\n"
 "    padding: 2px;\n"
-"    text-align:left\n"
+"\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: rgb(150, 150, 150);\n"
+"    background-color: rgb(90, 90, 90);\n"
 "}\n"
 "QPushButton:pressed {\n"
-"    background-color:  rgb(210, 210, 210);\n"
+"    background-color:  rgb(110, 110, 110);\n"
 "    border-style: inset;\n"
 "}")
         self.Btn_Menu.setObjectName("Btn_Menu")
@@ -610,13 +644,13 @@ class Ui_MainWindow(object):
 "    border-radius: 3px;\n"
 "    border-color: beige;\n"
 "    padding: 2px;\n"
-"    text-align:left\n"
+"\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: rgb(150, 150, 150);\n"
+"    background-color: rgb(90, 90, 90);\n"
 "}\n"
 "QPushButton:pressed {\n"
-"    background-color:  rgb(210, 210, 210);\n"
+"    background-color:  rgb(110, 110, 110);\n"
 "    border-style: inset;\n"
 "}")
         self.Btn_Add.setObjectName("Btn_Add")
@@ -630,18 +664,20 @@ class Ui_MainWindow(object):
 "    border-radius: 3px;\n"
 "    border-color: beige;\n"
 "    padding: 2px;\n"
-"    text-align:left\n"
+"\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: rgb(150, 150, 150);\n"
+"    background-color: rgb(90, 90, 90);\n"
 "}\n"
 "QPushButton:pressed {\n"
-"    background-color:  rgb(210, 210, 210);\n"
+"    background-color:  rgb(110, 110, 110);\n"
 "    border-style: inset;\n"
 "}")
         self.Btn_Expand.setObjectName("Btn_Expand")
         self.horizontalLayout_10.addWidget(self.Btn_Expand)
         self.verticalLayout.addLayout(self.horizontalLayout_10)
+        spacerItem14 = QtWidgets.QSpacerItem(0, 6, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout.addItem(spacerItem14)
         self.frame_8 = QtWidgets.QFrame(self.frame)
         self.frame_8.setStyleSheet("")
         self.frame_8.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -673,7 +709,7 @@ class Ui_MainWindow(object):
         self.Lbl_Folder.setObjectName("Lbl_Folder")
         self.verticalLayout_21.addWidget(self.Lbl_Folder)
         self.Btn_HomePagge = QtWidgets.QPushButton(self.frame_8)
-        self.Btn_HomePagge.setMinimumSize(QtCore.QSize(23, 23))
+        self.Btn_HomePagge.setMinimumSize(QtCore.QSize(23, 26))
         self.Btn_HomePagge.setStyleSheet("QPushButton {\n"
 "    background-color:transparent;\n"
 "    color: rgb(255, 255, 255);\n"
@@ -684,10 +720,10 @@ class Ui_MainWindow(object):
 "    text-align:left\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: rgb(150, 150, 150);\n"
+"    background-color:rgb(52, 95, 251);\n"
 "}\n"
 "QPushButton:pressed {\n"
-"    background-color:  rgb(210, 210, 210);\n"
+"    background-color:  rgb(10, 50, 205);\n"
 "    border-style: inset;\n"
 "}")
         self.Btn_HomePagge.setObjectName("Btn_HomePagge")
@@ -738,7 +774,7 @@ class Ui_MainWindow(object):
 "QTreeView::branch:!adjoins-item {border-image: url(vline.png) 0;}")
         self.treeWidget_2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.treeWidget_2.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.treeWidget_2.setIndentation(10)
+        self.treeWidget_2.setIndentation(6)
         self.treeWidget_2.setRootIsDecorated(True)
         self.treeWidget_2.setWordWrap(False)
         self.treeWidget_2.setHeaderHidden(True)
@@ -756,19 +792,19 @@ class Ui_MainWindow(object):
         self.lineEdit_Search.setEnabled(False)
         self.lineEdit_Search.setMinimumSize(QtCore.QSize(23, 23))
         self.lineEdit_Search.setStyleSheet("QLineEdit{\n"
-"background-color:rgb(42, 42, 42);\n"
+"background-color:rgb(55, 55, 55);\n"
 "color:rgb(255, 255, 255);\n"
 "border-radius: 5px; \n"
-"border: 1px solid rgb(25, 25, 25);\n"
+"border: 1px solid rgb(45, 45, 45);\n"
 "padding: 2px;\n"
 "}\n"
 "")
         self.lineEdit_Search.setObjectName("lineEdit_Search")
         self.verticalLayout_3.addWidget(self.lineEdit_Search)
         self.verticalLayout.addLayout(self.verticalLayout_3)
-        spacerItem14 = QtWidgets.QSpacerItem(257, 4, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.verticalLayout.addItem(spacerItem14)
-        self.verticalLayout.setStretch(2, 1)
+        spacerItem15 = QtWidgets.QSpacerItem(257, 4, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.verticalLayout.addItem(spacerItem15)
+        self.verticalLayout.setStretch(3, 1)
         self.verticalLayout_5.addWidget(self.frame)
         self.dockWidget.setWidget(self.dockWidgetContents)
         MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.dockWidget)
@@ -787,8 +823,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_11.setSpacing(0)
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
-        spacerItem15 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem15)
+        spacerItem16 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_11.addItem(spacerItem16)
         self.Btn_win_min = QtWidgets.QPushButton(self.dockWidgetContents_2)
         self.Btn_win_min.setMinimumSize(QtCore.QSize(23, 23))
         self.Btn_win_min.setStyleSheet("QPushButton {\n"
@@ -1086,6 +1122,51 @@ class Ui_MainWindow(object):
 "    padding: 2px;\n"
 "    text-align:left\n"
 "}\n"
+"\n"
+"\n"
+"QCheckBox::indicator:unchecked {\n"
+"    background-color:rgb(180,180,180);\n"
+"border-radius: 3px;\n"
+"    padding: 2px;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:unchecked:hover {\n"
+"    background-color:rgb(40, 105, 254);\n"
+"border-radius: 3px;\n"
+"    padding: 2px;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:unchecked:pressed {\n"
+"    background-color:rgb(14, 59, 229);\n"
+"border-radius: 3px;\n"
+"    padding: 2px;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:checked:hover {\n"
+"    background-color:rgb(40, 105, 254);\n"
+"border-radius: 3px;\n"
+"    padding: 2px;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:checked:pressed {\n"
+"    background-color:rgb(220,220,220);\n"
+"border-radius: 3px;\n"
+"    padding: 2px;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:indeterminate:hover {\n"
+"    background-color:rgb(40, 105, 254);\n"
+"border-radius: 3px;\n"
+"    padding: 2px;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:indeterminate:pressed {\n"
+"    background-color:rgb(40, 105, 254);\n"
+"border-radius: 3px;\n"
+"    padding: 2px;\n"
+"}\n"
+"\n"
+"\n"
 "")
         self.checkBox_3.setObjectName("checkBox_3")
         self.verticalLayout_13.addWidget(self.checkBox_3)
@@ -1094,13 +1175,57 @@ class Ui_MainWindow(object):
         self.checkBox_4.setStyleSheet("QCheckBox{\n"
 "    background-color:transparent;\n"
 "    color:rgb(176, 176, 176);\n"
-"\n"
 "    border-width: 0px;\n"
 "    border-radius: 3px;\n"
 "    border-color: beige;\n"
 "    padding: 2px;\n"
 "    text-align:left\n"
 "}\n"
+"\n"
+"\n"
+"QCheckBox::indicator:unchecked {\n"
+"    background-color:rgb(180,180,180);\n"
+"border-radius: 3px;\n"
+"    padding: 2px;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:unchecked:hover {\n"
+"    background-color:rgb(40, 105, 254);\n"
+"border-radius: 3px;\n"
+"    padding: 2px;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:unchecked:pressed {\n"
+"    background-color:rgb(14, 59, 229);\n"
+"border-radius: 3px;\n"
+"    padding: 2px;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:checked:hover {\n"
+"    background-color:rgb(40, 105, 254);\n"
+"border-radius: 3px;\n"
+"    padding: 2px;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:checked:pressed {\n"
+"    background-color:rgb(220,220,220);\n"
+"border-radius: 3px;\n"
+"    padding: 2px;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:indeterminate:hover {\n"
+"    background-color:rgb(40, 105, 254);\n"
+"border-radius: 3px;\n"
+"    padding: 2px;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:indeterminate:pressed {\n"
+"    background-color:rgb(40, 105, 254);\n"
+"border-radius: 3px;\n"
+"    padding: 2px;\n"
+"}\n"
+"\n"
+"\n"
 "")
         self.checkBox_4.setObjectName("checkBox_4")
         self.verticalLayout_13.addWidget(self.checkBox_4)
@@ -1150,8 +1275,8 @@ class Ui_MainWindow(object):
         self.Btn_Apply.setObjectName("Btn_Apply")
         self.verticalLayout_23.addWidget(self.Btn_Apply)
         self.verticalLayout_8.addLayout(self.verticalLayout_23)
-        spacerItem16 = QtWidgets.QSpacerItem(180, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_8.addItem(spacerItem16)
+        spacerItem17 = QtWidgets.QSpacerItem(180, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_8.addItem(spacerItem17)
         self.verticalLayout_16.addWidget(self.frame_3)
         self.dockWidget_2.setWidget(self.dockWidgetContents_3)
         MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(2), self.dockWidget_2)
@@ -1170,8 +1295,8 @@ class Ui_MainWindow(object):
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
         self.horizontalLayout_18.addWidget(self.line)
-        spacerItem17 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_18.addItem(spacerItem17)
+        spacerItem18 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_18.addItem(spacerItem18)
         self.Btn_Temp_ResetPose = QtWidgets.QPushButton(self.dockWidgetContents_4)
         self.Btn_Temp_ResetPose.setMinimumSize(QtCore.QSize(23, 23))
         self.Btn_Temp_ResetPose.setStyleSheet("QPushButton {\n"
@@ -1282,8 +1407,8 @@ class Ui_MainWindow(object):
 "")
         self.Btn_Temp_PastXform.setObjectName("Btn_Temp_PastXform")
         self.horizontalLayout_18.addWidget(self.Btn_Temp_PastXform)
-        spacerItem18 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_18.addItem(spacerItem18)
+        spacerItem19 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_18.addItem(spacerItem19)
         self.verticalLayout_22.addLayout(self.horizontalLayout_18)
         self.dockWidget_down.setWidget(self.dockWidgetContents_4)
         MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(8), self.dockWidget_down)
@@ -1297,7 +1422,9 @@ class Ui_MainWindow(object):
         self.Btn_Menu_2.setText(_translate("MainWindow", "三"))
         self.pushButton.setText(_translate("MainWindow", "add"))
         self.pushButton_3.setText(_translate("MainWindow", "田"))
+        self.Btn_PathTip.setText(_translate("MainWindow", "首页"))
         self.Btn_Creat.setText(_translate("MainWindow", "添加"))
+        self.label_8.setText(_translate("MainWindow", "搜索"))
         item = self.tableWidget.verticalHeaderItem(0)
         item.setText(_translate("MainWindow", "New Row"))
         item = self.tableWidget.verticalHeaderItem(1)
