@@ -27,7 +27,46 @@ CellRelativePath = ""
 JSONPATH = ""
 pypath = ""
 
-#
+
+
+rightMenuStyle = """
+QMenu {
+    /* 半透明效果 */
+    background-color: rgb(80, 80, 80,);
+    border: none;
+    border-radius: 5px;
+}
+
+QMenu::item {
+    border-radius: 5px;
+    /* 这个距离很麻烦需要根据菜单的长度和图标等因素微调 */
+    padding: 8px 48px 8px 30px; /* 36px是文字距离左侧距离*/
+    background-color: transparent;
+}
+
+/* 鼠标悬停和按下效果 */
+QMenu::item:selected {
+    border-radius: 0px;
+    /* 半透明效果 */
+    background-color: rgb(52, 95, 251);
+}
+
+/* 禁用效果 */
+QMenu::item:disabled {
+    background-color: transparent;
+}
+
+/* 图标距离左侧距离 */
+QMenu::icon {
+    left: 15px;
+}
+
+/* 分割线效果 */
+QMenu::separator {
+    height: 1px;
+    background-color: rgb(60, 60, 60);
+}
+"""
 # pypath ="H:\pycharm_maya_work\Design"
 # print("windowUI的路径是" + pypath)
 def reload_module(module_name):
@@ -93,13 +132,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setWindowTitle("PoseLibrary")
         self.ui.treeWidget_2.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.ui.treeWidget_2.installEventFilter(self)
-        self.size_changed.connect(self.eventItemSort)
         self.ui.tableWidget.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.ui.tableWidget.installEventFilter(self)
         self.ui.dockWidget_down.setVisible(False)
         self.ui.dockWidget_top.setVisible(False)
         self.ui.progressBar.setVisible(False)
         self.ui.progressBar.setTextVisible(False)
+
+        #事件过滤器
+
+        # self.Btn_Project.installEventFilter(self)
         #隐藏window 抬头
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
@@ -107,6 +149,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self._timer = QtCore.QTimer(self)
         self._timer.timeout.connect(self.handle_timeout)
         self._timer.setSingleShot(True)
+        self.size_changed.connect(self.eventItemSort)
         self.workflow()
         self.creat_contion()
         self.resize(1000, 500)
@@ -124,7 +167,6 @@ class MainWindow(QtWidgets.QMainWindow):
         """
         self.ui.Btn_win_max.clicked.connect(self.restore_or_maximize_window)
         self.ui.Btn_win_close.clicked.connect(self.close)
-
         self.ui.treeWidget_2.itemClicked.connect(self.Click_Treeweiget)
         self.ui.tableWidget.itemSelectionChanged.connect(self.UpdataCradData)  #单击事件
         self.ui.tableWidget.doubleClicked.connect(self.selectPose)#双击事件
@@ -143,6 +185,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Btn_Menu.clicked.connect(self.Btn_MenuShow)
         self.ui.Btn_Menu_2.clicked.connect(self.Btn_MenuShow)
         self.ui.Btn_PathTip.clicked.connect(self.UpdataLibrary)
+        self.ui.Btn_Project.clicked.connect(self.Btn_Project_rightMenuShow)
 
     def resize_TableItem(self):
         current_value = self.ui.horizontalSlider.value()
@@ -180,12 +223,55 @@ class MainWindow(QtWidgets.QMainWindow):
                 pass
         except Exception as e:
             pass
+
+
             # print(e)
+    def open_file_dialog(self):
+        myfileDialog = QtWidgets.QFileDialog(self,'选择文件夹', './')
+        myfileDialog .resize(300, 150)  # 设置窗口大小
+        folder_path = myfileDialog.getExistingDirectory()
+        return folder_path
+    def myfileDialog(self):
+        self.ui.myfileDialog = QtWidgets.QFileDialog(self,'选择文件夹', './')
+
+        return self.ui.myfileDialog
+    def Btn_Project_rightMenuShow(self):
+        global PROJECT_PATH
+        my_documents_path = os.path.expanduser('~/Documents')
+        configfile = my_documents_path + "\poselibrary\poselibrary.txt"
+
+
+        rightMenu = QtWidgets.QMenu(self.ui.Btn_Project)
+        removeProjectAction = rightMenu.addAction(u"移除资源库")
+        openProjectAction = rightMenu.addAction(u"打开其他资源库")
+        action = rightMenu.exec_(QtGui.QCursor.pos())
+        if action == removeProjectAction:
+            # 配置文件
+            data = None
+            with open(configfile, 'w') as f:
+                json.dump(data, f)
+            PROJECT_PATH = ""
+            self.workflow()
+            self.size_changed.connect(self.eventItemSort)
+
+            #删除清空配置文件
+            pass
+        elif action == openProjectAction:
+            self.size_changed.disconnect(self.eventItemSort)
+            self.creatProject()
+            QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
+            self.size_changed.connect(self.eventItemSort)
+
+
+
+
     def TableWeiget_rightMenuShow(self):
+        global rightMenuStyle
         global PROJECT_PATH
         global JSONPATH
         try:
             rightMenu = QtWidgets.QMenu(self.ui.tableWidget)
+            self.setStyleSheet(rightMenuStyle)
             addPoseAction = rightMenu.addAction(u"添加pose")
             selectObjAction =  rightMenu.addAction(u"选择物体")
             resPoseAction = rightMenu.addAction(u"刷新pose")
@@ -378,30 +464,25 @@ class MainWindow(QtWidgets.QMainWindow):
         global pypath
         global PROJECT_NAME
         global PROJECT_PATH
-        name = self.ui.lineEdit_2.text()
-        if name ==[]:
-            print("请输入资源库名称")
-        else:
-            my_documents_path = os.path.expanduser('~/Documents')
-            file_path = file.check_and_create_file(my_documents_path, 'poselibrary', 'poselibrary.txt')
-            dialog = QtWidgets.QFileDialog(self, '选择文件夹', './')
-            dialog.resize(300, 150)  # 设置窗口大小
-            folder_path = dialog.getExistingDirectory()
 
-            os.makedirs(folder_path+"\\"+name)#创建工程文件夹
-            PROJECT_PATH = folder_path+"\\"+name
-            PROJECT_NAME = name
-            project = file.AddProject(PROJECT_PATH)
-            file.write_data_to_file(file_path,project)
-            self.stepWindowUi()
-            self.UpdataLibrary()
+        my_documents_path = os.path.expanduser('~/Documents')
+        configfile = file.check_and_create_file(my_documents_path, 'poselibrary', 'poselibrary.txt')
 
-            self.ui.dockWidget.setVisible(True)
-            self.ui.dockWidget_2.setVisible(True)
-            self.ui.UI_Library_frame.setVisible(True)
-            # self.ui.dockWidget_top.setVisible(True)
+        folder_path = self.open_file_dialog()
+        PROJECT_PATH = folder_path
+        PROJECT_NAME = os.path.basename(folder_path)
+        project = file.AddProject(PROJECT_PATH)
+        file.write_data_to_file(configfile, project)
+        self.stepWindowUi()
+        QTcommand.updataListItem(PROJECT_PATH,self.ui.treeWidget_2)
 
-            self.ui.frame_9.setVisible(False)
+        self.ui.Btn_Project.setText(PROJECT_NAME)
+
+        self.ui.dockWidget.setVisible(True)
+        self.ui.dockWidget_2.setVisible(True)
+        self.ui.UI_Library_frame.setVisible(True)
+        self.UpdataLibrary()
+        # self.ui.dockWidget_top.setVisible(True)
 
     def Btn_HomePaggeEvent(self):
         global PROJECT_PATH
@@ -703,15 +784,17 @@ class MainWindow(QtWidgets.QMainWindow):
             projectdata = json.loads(projectdata)
             PROJECT_PATH = projectdata["ProjectPath"]
             PROJECT_NAME = projectdata["ProjectName"]
+            self.size_changed.disconnect(self.eventItemSort)
         except:
             pass
         # print(type(projectdata))
 
         # print(PROJECT_PATH, PROJECT_NAME)
 
+
         if PROJECT_PATH =="":
-            self.ui.pushButton_6.setFocusPolicy(QtCore.Qt.NoFocus)
             self.ui.pushButton_5.setFocusPolicy(QtCore.Qt.NoFocus)
+
             # self.ui.lineEdit_2.setFocusPolicy(QtCore.Qt.NoFocus)
             self.startWindwoUi()
             self.show()
@@ -747,6 +830,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.UI_Library_frame.setVisible(False)
         self.ui.dockWidget_top.setVisible(False)
         self.ui.Btn_Apply2.setVisible(False)
+        self.ui.frame_9.setVisible(True)
+
+
 
 
     def getCellPath(self):
@@ -844,7 +930,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # window.ui.dockWidget_2.widget().setMinimumSize(QtCore.QSize(150, 400))
         self.ui.dockWidget_2.widget().setMaximumSize(QtCore.QSize(400, 150000))
 
-        self.ui.Lbl_Folder.setText (PROJECT_NAME)
+        self.ui.Btn_Project.setText (PROJECT_NAME)
+
         self.ui.treeWidget_2.clear()
         #print(self.ui.centralwidget.frameGeometry().width())
         # QtWidgets.QMainWindow.centralWidget()
@@ -867,7 +954,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Btn_Temp_ResetPose.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ui.pushButton_7.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ui.pushButton_5.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.ui.pushButton_6.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ui.checkBox_3.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ui.checkBox_4.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ui.Btn_Apply.setFocusPolicy(QtCore.Qt.NoFocus)
@@ -875,6 +961,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.pushButton_3.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ui.Btn_Menu_2.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ui.Btn_PathTip.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.ui.Btn_Project.setFocusPolicy(QtCore.Qt.NoFocus)
 
         self.ui.Btn_Add.setToolTip("添加文件夹")
         self.ui.pushButton.setToolTip("添加文件夹")

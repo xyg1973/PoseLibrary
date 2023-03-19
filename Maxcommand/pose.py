@@ -141,16 +141,17 @@ def pastPoseRot(posedata,selectobjs,count,progressBar):
                 k = k+1
                 obj = rt.getNodeByName(data.get('objname'))
                 if obj in selectobjs:
+                    # objpar = obj.parent
+                    # parmat3 = objpar.transform
+                    mat3 = data_to_rtMatrix3(data.get('objtransform'))#基于世界空间矩阵
+                    # localmat3 = mat3*rt.inverse(parmat3)
 
-
-                    mat3 = data_to_rtMatrix3(data.get('objtransform'))
                     row1 = mat3.row1
                     row2 = mat3.row2
                     row3 = mat3.row3
                     row4 = obj.transform.row4
                     newmat3 = rt.matrix3(row1,row2,row3,row4)
-                    # remat3 = rt.XFormMat(parmat3,newmat3)
-
+                    # remat3 = rt.XFormMat(mat3,localmat3)
                     obj.transform = newmat3
                     # obj.rotation = rt.eulerAngles(x, y, z)
                     # obj.pos = rt.point3(x, y, z)

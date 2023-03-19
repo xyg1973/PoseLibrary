@@ -975,6 +975,11 @@ QPushButton:pressed {
            <layout class="QHBoxLayout" name="horizontalLayout_6">
             <item>
              <widget class="QLabel" name="label_3">
+              <property name="font">
+               <font>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
               <property name="styleSheet">
                <string notr="true">QLabel{
     background-color:transparent;
@@ -988,7 +993,7 @@ QPushButton:pressed {
 </string>
               </property>
               <property name="text">
-               <string>创建资源库</string>
+               <string>创建\加载资源库</string>
               </property>
              </widget>
             </item>
@@ -1001,6 +1006,11 @@ QPushButton:pressed {
             </property>
             <item>
              <widget class="QLabel" name="label_4">
+              <property name="font">
+               <font>
+                <pointsize>9</pointsize>
+               </font>
+              </property>
               <property name="styleSheet">
                <string notr="true">QLabel{
     background-color:transparent;
@@ -1015,25 +1025,7 @@ QPushButton:pressed {
 </string>
               </property>
               <property name="text">
-               <string>请输入资源库库名称，并且点击下方按钮选择资源保存的路径。</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_15">
-            <item>
-             <widget class="QLineEdit" name="lineEdit_2">
-              <property name="styleSheet">
-               <string notr="true">QLineEdit{
-background-color:rgb(42, 42, 42);
-color:rgb(255, 255, 255);
-border-radius: 5px; 
-border: 1px solid rgb(25, 25, 25);
-padding: 2px;
-}
-</string>
+               <string>请选择资源库保存的路径。</string>
               </property>
              </widget>
             </item>
@@ -1053,39 +1045,6 @@ padding: 2px;
                </size>
               </property>
              </spacer>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton_6">
-              <property name="minimumSize">
-               <size>
-                <width>50</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QPushButton {
-    background-color:rgb(94, 94, 94);
-	color: rgb(255, 255, 255);
-    border-width: 0px;
-    border-radius: 3px;
-    border-color: beige;
-    padding: 2px;
-
-}
-QPushButton:hover {
-    background-color:rgb(80, 80, 80);
-}
-QPushButton:pressed {
-    background-color: rgb(70, 70, 70);
-    border-style: inset;
-}
-
-</string>
-              </property>
-              <property name="text">
-               <string>取消</string>
-              </property>
-             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="pushButton_5">
@@ -1116,7 +1075,7 @@ QPushButton:pressed {
 </string>
               </property>
               <property name="text">
-               <string>选择保存的路径</string>
+               <string>选择资源库路径</string>
               </property>
              </widget>
             </item>
@@ -1384,34 +1343,60 @@ QPushButton:pressed {
               <number>6</number>
              </property>
              <item>
-              <widget class="QLabel" name="Lbl_Folder">
-               <property name="minimumSize">
-                <size>
-                 <width>28</width>
-                 <height>28</height>
-                </size>
+              <layout class="QHBoxLayout" name="horizontalLayout_12">
+               <property name="spacing">
+                <number>0</number>
                </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QLabel{
+               <item>
+                <widget class="QPushButton" name="Btn_Project">
+                 <property name="minimumSize">
+                  <size>
+                   <width>23</width>
+                   <height>23</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">QPushButton {
     background-color:transparent;
-	color:rgb(225, 225, 225);
+	color: rgb(255, 255, 255);
     border-width: 0px;
     border-radius: 3px;
     border-color: beige;
-    padding: 0px;
-	text-align:left
+    padding: 2px;
+
 }
-</string>
-               </property>
-               <property name="text">
-                <string>文件夹</string>
-               </property>
-              </widget>
+QPushButton:hover {
+    background-color: rgb(90, 90, 90);
+}
+QPushButton:pressed {
+    background-color:  rgb(110, 110, 110);
+    border-style: inset;
+}</string>
+                 </property>
+                 <property name="text">
+                  <string>Project</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_15">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
              </item>
              <item>
               <widget class="QPushButton" name="Btn_HomePagge">

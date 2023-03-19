@@ -471,6 +471,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.label_3 = QtWidgets.QLabel(self.frame_10)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_3.setFont(font)
         self.label_3.setStyleSheet("QLabel{\n"
 "    background-color:transparent;\n"
 "    color:rgb(225, 225, 225);\n"
@@ -488,6 +491,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_13.setContentsMargins(-1, 0, -1, -1)
         self.horizontalLayout_13.setObjectName("horizontalLayout_13")
         self.label_4 = QtWidgets.QLabel(self.frame_10)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.label_4.setFont(font)
         self.label_4.setStyleSheet("QLabel{\n"
 "    background-color:transparent;\n"
 "    color:rgb(176, 176, 176);\n"
@@ -502,46 +508,10 @@ class Ui_MainWindow(object):
         self.label_4.setObjectName("label_4")
         self.horizontalLayout_13.addWidget(self.label_4)
         self.verticalLayout_7.addLayout(self.horizontalLayout_13)
-        self.horizontalLayout_15 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_15.setObjectName("horizontalLayout_15")
-        self.lineEdit_2 = QtWidgets.QLineEdit(self.frame_10)
-        self.lineEdit_2.setStyleSheet("QLineEdit{\n"
-"background-color:rgb(42, 42, 42);\n"
-"color:rgb(255, 255, 255);\n"
-"border-radius: 5px; \n"
-"border: 1px solid rgb(25, 25, 25);\n"
-"padding: 2px;\n"
-"}\n"
-"")
-        self.lineEdit_2.setObjectName("lineEdit_2")
-        self.horizontalLayout_15.addWidget(self.lineEdit_2)
-        self.verticalLayout_7.addLayout(self.horizontalLayout_15)
         self.horizontalLayout_14 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_14.setObjectName("horizontalLayout_14")
         spacerItem12 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_14.addItem(spacerItem12)
-        self.pushButton_6 = QtWidgets.QPushButton(self.frame_10)
-        self.pushButton_6.setMinimumSize(QtCore.QSize(50, 30))
-        self.pushButton_6.setStyleSheet("QPushButton {\n"
-"    background-color:rgb(94, 94, 94);\n"
-"    color: rgb(255, 255, 255);\n"
-"    border-width: 0px;\n"
-"    border-radius: 3px;\n"
-"    border-color: beige;\n"
-"    padding: 2px;\n"
-"\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color:rgb(80, 80, 80);\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgb(70, 70, 70);\n"
-"    border-style: inset;\n"
-"}\n"
-"\n"
-"")
-        self.pushButton_6.setObjectName("pushButton_6")
-        self.horizontalLayout_14.addWidget(self.pushButton_6)
         self.pushButton_5 = QtWidgets.QPushButton(self.frame_10)
         self.pushButton_5.setMinimumSize(QtCore.QSize(120, 30))
         self.pushButton_5.setStyleSheet("QPushButton {\n"
@@ -691,23 +661,35 @@ class Ui_MainWindow(object):
         self.verticalLayout_21.setContentsMargins(6, -1, -1, -1)
         self.verticalLayout_21.setSpacing(0)
         self.verticalLayout_21.setObjectName("verticalLayout_21")
-        self.Lbl_Folder = QtWidgets.QLabel(self.frame_8)
-        self.Lbl_Folder.setMinimumSize(QtCore.QSize(28, 28))
+        self.horizontalLayout_12 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_12.setSpacing(0)
+        self.horizontalLayout_12.setObjectName("horizontalLayout_12")
+        self.Btn_Project = QtWidgets.QPushButton(self.frame_8)
+        self.Btn_Project.setMinimumSize(QtCore.QSize(23, 23))
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.Lbl_Folder.setFont(font)
-        self.Lbl_Folder.setStyleSheet("QLabel{\n"
+        self.Btn_Project.setFont(font)
+        self.Btn_Project.setStyleSheet("QPushButton {\n"
 "    background-color:transparent;\n"
-"    color:rgb(225, 225, 225);\n"
+"    color: rgb(255, 255, 255);\n"
 "    border-width: 0px;\n"
 "    border-radius: 3px;\n"
 "    border-color: beige;\n"
-"    padding: 0px;\n"
-"    text-align:left\n"
+"    padding: 2px;\n"
+"\n"
 "}\n"
-"")
-        self.Lbl_Folder.setObjectName("Lbl_Folder")
-        self.verticalLayout_21.addWidget(self.Lbl_Folder)
+"QPushButton:hover {\n"
+"    background-color: rgb(90, 90, 90);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color:  rgb(110, 110, 110);\n"
+"    border-style: inset;\n"
+"}")
+        self.Btn_Project.setObjectName("Btn_Project")
+        self.horizontalLayout_12.addWidget(self.Btn_Project)
+        spacerItem15 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_12.addItem(spacerItem15)
+        self.verticalLayout_21.addLayout(self.horizontalLayout_12)
         self.Btn_HomePagge = QtWidgets.QPushButton(self.frame_8)
         self.Btn_HomePagge.setMinimumSize(QtCore.QSize(23, 26))
         self.Btn_HomePagge.setStyleSheet("QPushButton {\n"
@@ -802,8 +784,8 @@ class Ui_MainWindow(object):
         self.lineEdit_Search.setObjectName("lineEdit_Search")
         self.verticalLayout_3.addWidget(self.lineEdit_Search)
         self.verticalLayout.addLayout(self.verticalLayout_3)
-        spacerItem15 = QtWidgets.QSpacerItem(257, 4, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.verticalLayout.addItem(spacerItem15)
+        spacerItem16 = QtWidgets.QSpacerItem(257, 4, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.verticalLayout.addItem(spacerItem16)
         self.verticalLayout.setStretch(3, 1)
         self.verticalLayout_5.addWidget(self.frame)
         self.dockWidget.setWidget(self.dockWidgetContents)
@@ -823,8 +805,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_11.setSpacing(0)
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
-        spacerItem16 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem16)
+        spacerItem17 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_11.addItem(spacerItem17)
         self.Btn_win_min = QtWidgets.QPushButton(self.dockWidgetContents_2)
         self.Btn_win_min.setMinimumSize(QtCore.QSize(23, 23))
         self.Btn_win_min.setStyleSheet("QPushButton {\n"
@@ -1275,8 +1257,8 @@ class Ui_MainWindow(object):
         self.Btn_Apply.setObjectName("Btn_Apply")
         self.verticalLayout_23.addWidget(self.Btn_Apply)
         self.verticalLayout_8.addLayout(self.verticalLayout_23)
-        spacerItem17 = QtWidgets.QSpacerItem(180, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_8.addItem(spacerItem17)
+        spacerItem18 = QtWidgets.QSpacerItem(180, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_8.addItem(spacerItem18)
         self.verticalLayout_16.addWidget(self.frame_3)
         self.dockWidget_2.setWidget(self.dockWidgetContents_3)
         MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(2), self.dockWidget_2)
@@ -1295,8 +1277,8 @@ class Ui_MainWindow(object):
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
         self.horizontalLayout_18.addWidget(self.line)
-        spacerItem18 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_18.addItem(spacerItem18)
+        spacerItem19 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_18.addItem(spacerItem19)
         self.Btn_Temp_ResetPose = QtWidgets.QPushButton(self.dockWidgetContents_4)
         self.Btn_Temp_ResetPose.setMinimumSize(QtCore.QSize(23, 23))
         self.Btn_Temp_ResetPose.setStyleSheet("QPushButton {\n"
@@ -1407,8 +1389,8 @@ class Ui_MainWindow(object):
 "")
         self.Btn_Temp_PastXform.setObjectName("Btn_Temp_PastXform")
         self.horizontalLayout_18.addWidget(self.Btn_Temp_PastXform)
-        spacerItem19 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_18.addItem(spacerItem19)
+        spacerItem20 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_18.addItem(spacerItem20)
         self.verticalLayout_22.addLayout(self.horizontalLayout_18)
         self.dockWidget_down.setWidget(self.dockWidgetContents_4)
         MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(8), self.dockWidget_down)
@@ -1438,14 +1420,13 @@ class Ui_MainWindow(object):
         self.label_6.setText(_translate("MainWindow", "现在开始添加你的pose"))
         self.pushButton_7.setText(_translate("MainWindow", "添加"))
         self.Btn_Apply2.setText(_translate("MainWindow", "应用"))
-        self.label_3.setText(_translate("MainWindow", "创建资源库"))
-        self.label_4.setText(_translate("MainWindow", "请输入资源库库名称，并且点击下方按钮选择资源保存的路径。"))
-        self.pushButton_6.setText(_translate("MainWindow", "取消"))
-        self.pushButton_5.setText(_translate("MainWindow", "选择保存的路径"))
+        self.label_3.setText(_translate("MainWindow", "创建\\加载资源库"))
+        self.label_4.setText(_translate("MainWindow", "请选择资源库保存的路径。"))
+        self.pushButton_5.setText(_translate("MainWindow", "选择资源库路径"))
         self.Btn_Menu.setText(_translate("MainWindow", "三"))
         self.Btn_Add.setText(_translate("MainWindow", "Add"))
         self.Btn_Expand.setText(_translate("MainWindow", "田"))
-        self.Lbl_Folder.setText(_translate("MainWindow", "文件夹"))
+        self.Btn_Project.setText(_translate("MainWindow", "Project"))
         self.Btn_HomePagge.setText(_translate("MainWindow", "首页"))
         self.treeWidget_2.setSortingEnabled(False)
         self.treeWidget_2.headerItem().setText(0, _translate("MainWindow", "New Column"))
