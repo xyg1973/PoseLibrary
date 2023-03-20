@@ -150,9 +150,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self._timer.timeout.connect(self.handle_timeout)
         self._timer.setSingleShot(True)
         self.size_changed.connect(self.eventItemSort)
+        self.resize(1000, 500)
         self.workflow()
         self.creat_contion()
-        self.resize(1000, 500)
+
 
 
 
@@ -474,6 +475,7 @@ class MainWindow(QtWidgets.QMainWindow):
         project = file.AddProject(PROJECT_PATH)
         file.write_data_to_file(configfile, project)
         self.stepWindowUi()
+        QTcommand.pypath = pypath
         QTcommand.updataListItem(PROJECT_PATH,self.ui.treeWidget_2)
 
         self.ui.Btn_Project.setText(PROJECT_NAME)
@@ -811,9 +813,11 @@ class MainWindow(QtWidgets.QMainWindow):
             QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
             self.show()
             self.Btn_HomePaggeEvent()
-
             self.center()
             self.Btn_HomePaggeEvent()
+            self.size_changed.connect(self.eventItemSort)
+            self.Btn_HomePaggeEvent()
+
 
 
 
@@ -910,14 +914,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Btn_Apply2.setVisible(False)
         self.ui.frame_9.setVisible(False)
         self.ui.Btn_Menu_2.setVisible(False)
-        QTcommand.BtnSetIcons(self.ui.Btn_Menu, pypath+"\img//cube-iso-clay.png")
-        QTcommand.BtnSetIcons(self.ui.Btn_Menu_2, pypath + "\img//cube-iso-clay.png")
-        QTcommand.BtnSetIcons(self.ui.Btn_Add, pypath+"\img//new-folder-dynamic-color.png")
-        QTcommand.BtnSetIcons(self.ui.Btn_Expand, pypath+"\img//figma-dynamic-clay.png")
-        QTcommand.BtnSetIcons(self.ui.Btn_Creat, pypath+"\img//plus-dynamic-clay.png")
-        QTcommand.BtnSetIcons(self.ui.pushButton_4, pypath+"\img//picture-dynamic-clay.png")
-        QTcommand.BtnSetIcons(self.ui.pushButton_3, pypath+"\img//figma-dynamic-clay.png")
-        QTcommand.BtnSetIcons(self.ui.Btn_HomePagge, pypath + "\img/folder-dynamic-color.png",Text = "首页",size = 16)
+        QTcommand.BtnSetIcons(self.ui.Btn_Menu, pypath+"\img//cube-iso-clay.png",size = 30)
+        QTcommand.BtnSetIcons(self.ui.Btn_Menu_2, pypath + "\img//cube-iso-clay.png",size = 30)
+        QTcommand.BtnSetIcons(self.ui.Btn_Add, pypath+"\img//new-folder-dynamic-color.png",size = 30)
+        QTcommand.BtnSetIcons(self.ui.Btn_Expand, pypath+"\img//figma-dynamic-clay.png",size = 30)
+        QTcommand.BtnSetIcons(self.ui.Btn_Creat, pypath+"\img//plus-dynamic-clay.png",size = 30)
+        QTcommand.BtnSetIcons(self.ui.pushButton_4, pypath+"\img//picture-dynamic-clay.png",size = 30)
+        QTcommand.BtnSetIcons(self.ui.pushButton_3, pypath+"\img//figma-dynamic-clay.png",size = 30)
+        QTcommand.BtnSetIcons(self.ui.Btn_HomePagge, pypath + "\img/folder-dynamic-color.png",Text = "首页",size = 23)
 
         self.ui.pushButton_4.setIconSize(QtCore.QSize(200, 200))
         Pixmap = QtGui.QPixmap(pypath + "\img//puzzle-dynamic-clay.png")
@@ -1066,7 +1070,6 @@ def main():
 
 
     window = MainWindow(main_window)
-    print(window)
     # window = MainWindow()
     path = PROJECT_PATH+"//"+LISTITEMPATH
     window.show()
