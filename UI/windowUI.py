@@ -3,7 +3,6 @@
 import sys
 import json
 # sys.path.append("H:/pycharm_max_work/poselibray")
-from PySide2.QtGui import QIcon
 from PySide2 import QtCore
 from PySide2 import QtGui
 from PySide2 import QtWidgets
@@ -13,9 +12,14 @@ from PySide2.QtCore import QTimer
 # import pymxs
 import gc
 import os
-
-import MaxPlus
-import threading
+from PoseLibrary.UI import PoseWindow as PoseWindow
+from PoseLibrary.Tools import file as file
+from PoseLibrary.Tools import QTcommand as QTcommand
+from PoseLibrary.UI import PoseWindow as PoseWindow
+from PoseLibrary.Maxcommand import pose as pose
+from PoseLibrary.Maxcommand import cmds as cmds
+from PoseLibrary.Maxcommand import render as render
+from PoseLibrary.Maxcommand import anim as anim
 #
 #reload(PoseWindow)
 PROJECT_PATH =""
@@ -85,16 +89,26 @@ def reload_module(module_name):
         __import__(module_name)
 try:
     from PoseLibrary.Tools import file as file
-    from  PoseLibrary.Tools import QTcommand as QTcommand
+    from PoseLibrary.Tools import QTcommand as QTcommand
     from PoseLibrary.UI import PoseWindow as PoseWindow
     from PoseLibrary.Maxcommand import pose as pose
+    from PoseLibrary.Maxcommand import cmds as cmds
+    from PoseLibrary.Maxcommand import render as render
+    from PoseLibrary.Maxcommand import anim as anim
 
-    QTcommand.pypath = pypath
+
+
+    reload_module('PoseLibrary.UI.PoseWindow')
     reload_module('PoseLibrary.Tools.file')
     reload_module('PoseLibrary.Tools.QTcommand')
-    reload_module('PoseLibrary.UI.PoseWindow')
     reload_module('PoseLibrary.Maxcommand.pose')
-    reload_module('threading')
+    reload_module('PoseLibrary.Maxcommand.cmds')
+    reload_module('PoseLibrary.Maxcommand.render')
+    reload_module('PoseLibrary.Maxcommand.anim')
+    QTcommand.pypath = pypath
+    print(QTcommand.pypath)
+
+    # reload_module('threading')
 except:
     pass
 
@@ -126,7 +140,6 @@ class MainWindow(QtWidgets.QMainWindow):
         # Load widgets from "gui\uis\main_window\ui_main.py"
         # ///////////////////////////////////////////////////////////////
         self.ui = PoseWindow.Ui_MainWindow()
-
         self.ui.setupUi(self)
         self.ui.frame_11.setVisible(False)
         self.setWindowTitle("PoseLibrary")
@@ -295,7 +308,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     posedata = json.load(f)
                 # 获取设置
 
-                selectobj = pose.selectobj(posedata)
+                selectobj = cmds.selectobj(posedata)
 
             elif action == resPoseAction:
                 self.resetPose()
@@ -355,7 +368,7 @@ class MainWindow(QtWidgets.QMainWindow):
             if action == removeAction:
                 for item in self.ui.treeWidget_2.selectedItems():
                     index = self.ui.treeWidget_2.indexOfTopLevelItem(item)
-                    itempath =QTcommand.get_item_path(self.ui.treeWidget_2)
+                    itempath = QTcommand.get_item_path(self.ui.treeWidget_2)
                     itempath = PROJECT_PATH+"//"+itempath
                     file.remove_dir(itempath)
                     if index != -1:
@@ -380,7 +393,7 @@ class MainWindow(QtWidgets.QMainWindow):
                         folder_name = os.path.basename(folder_path)
 
                         #创建item
-                        item = QTcommand.add_child(self.ui.treeWidget_2,name=folder_name)
+                        item = QTcommand.add_child(self.ui.treeWidget_2, name=folder_name)
                         icon5 = QtGui.QIcon()
                         icon5.addPixmap(QtGui.QPixmap(pypath + "\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
                                         QtGui.QIcon.Off)
@@ -392,7 +405,7 @@ class MainWindow(QtWidgets.QMainWindow):
                         folder_name = os.path.basename(folder_path)
 
                         # 创建item
-                        child_item = QTcommand.add_child(self.ui.treeWidget_2,item,name=folder_name)
+                        child_item = QTcommand.add_child(self.ui.treeWidget_2, item, name=folder_name)
                         icon5 = QtGui.QIcon()
                         icon5.addPixmap(QtGui.QPixmap(pypath + "\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
                                         QtGui.QIcon.Off)
@@ -476,7 +489,7 @@ class MainWindow(QtWidgets.QMainWindow):
         file.write_data_to_file(configfile, project)
         self.stepWindowUi()
         QTcommand.pypath = pypath
-        QTcommand.updataListItem(PROJECT_PATH,self.ui.treeWidget_2)
+        QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
 
         self.ui.Btn_Project.setText(PROJECT_NAME)
 
@@ -576,7 +589,7 @@ class MainWindow(QtWidgets.QMainWindow):
             with open(filepath, 'w') as f:
                 json.dump(posedata, f)
 
-            pose.render_and_save(300, 300, pngpath)
+            render.render_and_save(300, 300, pngpath)
             self.ui.tableWidget.clear()
             newpath = self.getCellPath()
             QTcommand.updataLibraryItem(newpath, self.ui.tableWidget,
@@ -605,7 +618,7 @@ class MainWindow(QtWidgets.QMainWindow):
             with open(new_filepath, 'w') as f:
                 json.dump(posedata, f)
 
-            pose.render_and_save(300,300,new_pngpath)
+            render.render_and_save(300, 300, new_pngpath)
             filelist = file.getfile(PROJECT_PATH, ".png")
             if filelist == []:
                 self.ui.frame_2.setVisible(False)
@@ -617,7 +630,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.ui.frame_2.setVisible(True)
                 self.ui.horizontalSlider.setVisible(True)
 
-            QTcommand.updataLibraryItem(PROJECT_PATH,self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
+            QTcommand.updataLibraryItem(PROJECT_PATH, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
         else :
             #获取路径
             for item in self.ui.treeWidget_2.selectedItems():
@@ -636,7 +649,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     with open(new_filepath, 'w') as f:
                         json.dump(posedata, f)
 
-                    pose.render_and_save(300, 300, new_pngpath)
+                    render.render_and_save(300, 300, new_pngpath)
 
                     filelist = file.getfile(folder_path, ".png")
                     if filelist == []:
@@ -666,8 +679,8 @@ class MainWindow(QtWidgets.QMainWindow):
         with open(path, 'r') as f:
             posedata = json.load(f)
         #获取设置
-        selectobj = pose.ls()
-        # selectobj = pose.selectobj(posedata)
+        selectobj = cmds.ls()
+        # selectobj = cmds.selectobj(posedata)
         count = 2
 
         self.ui.progressBar.setVisible(True)
@@ -677,14 +690,14 @@ class MainWindow(QtWidgets.QMainWindow):
         # t.join()
         if self.ui.checkBox_3.isChecked():
 
-            pose.pastPose(posedata,selectobj,count,self.ui.progressBar)
+            pose.pastPose(posedata, selectobj, count, self.ui.progressBar)
         else:
             pose.pastPoseRot(posedata, selectobj, count, self.ui.progressBar)
 
-        pose.reViews()
+        render.reViews()
         self.ui.progressBar.setVisible(False)
         # print(t)
-        #pose.set_transform_keyframes(selectobj)
+        #cmds.set_transform_keyframes(selectobj)
         #应用pose
 
 
@@ -707,7 +720,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         if not self.ui.treeWidget_2.selectedItems():
-            filelist = file.getfile(PROJECT_PATH,".png")
+            filelist = file.getfile(PROJECT_PATH, ".png")
             if filelist ==[]:
                 self.ui.frame_2.setVisible(False)
                 self.ui.horizontalSlider.setVisible(False)
@@ -720,7 +733,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 QTcommand.updataLibraryItem(PROJECT_PATH, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
         else:
             LISTITEMPATH = QTcommand.get_item_path(self.ui.treeWidget_2)
-            filelist = file.getfile(PROJECT_PATH+"//"+ LISTITEMPATH, ".png")
+            filelist = file.getfile(PROJECT_PATH + "//" + LISTITEMPATH, ".png")
             if filelist == []:
                 self.ui.frame_2.setVisible(False)
                 self.ui.horizontalSlider.setVisible(False)
@@ -730,7 +743,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.ui.frame_11.setVisible(False)
                 self.ui.frame_2.setVisible(True)
                 self.ui.horizontalSlider.setVisible(True)
-                QTcommand.updataLibraryItem(PROJECT_PATH+"//"+ LISTITEMPATH, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
+                QTcommand.updataLibraryItem(PROJECT_PATH + "//" + LISTITEMPATH, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
 
         return LISTITEMPATH
 
@@ -739,7 +752,7 @@ class MainWindow(QtWidgets.QMainWindow):
         global pypath
         self.ui.Lbl_Name.setText("name: " )
         self.ui.Lbl_ObjCount.setText("None Objects")
-        QTcommand.BtnSetIcons(self.ui.pushButton_4, pypath+"\img//picture-dynamic-clay.png")
+        QTcommand.BtnSetIcons(self.ui.pushButton_4, pypath + "\img//picture-dynamic-clay.png")
         self.ui.pushButton_4.setIconSize(QtCore.QSize(200, 200))
         self.ui.Lbl_Path.setText(("None Path"))
     def UpdataCradData(self):
@@ -914,14 +927,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Btn_Apply2.setVisible(False)
         self.ui.frame_9.setVisible(False)
         self.ui.Btn_Menu_2.setVisible(False)
-        QTcommand.BtnSetIcons(self.ui.Btn_Menu, pypath+"\img//cube-iso-clay.png",size = 30)
-        QTcommand.BtnSetIcons(self.ui.Btn_Menu_2, pypath + "\img//cube-iso-clay.png",size = 30)
-        QTcommand.BtnSetIcons(self.ui.Btn_Add, pypath+"\img//new-folder-dynamic-color.png",size = 30)
-        QTcommand.BtnSetIcons(self.ui.Btn_Expand, pypath+"\img//figma-dynamic-clay.png",size = 30)
-        QTcommand.BtnSetIcons(self.ui.Btn_Creat, pypath+"\img//plus-dynamic-clay.png",size = 30)
-        QTcommand.BtnSetIcons(self.ui.pushButton_4, pypath+"\img//picture-dynamic-clay.png",size = 30)
-        QTcommand.BtnSetIcons(self.ui.pushButton_3, pypath+"\img//figma-dynamic-clay.png",size = 30)
-        QTcommand.BtnSetIcons(self.ui.Btn_HomePagge, pypath + "\img/folder-dynamic-color.png",Text = "首页",size = 23)
+        QTcommand.BtnSetIcons(self.ui.Btn_Menu, pypath + "\img//cube-iso-clay.png", size = 30)
+        QTcommand.BtnSetIcons(self.ui.Btn_Menu_2, pypath + "\img//cube-iso-clay.png", size = 30)
+        QTcommand.BtnSetIcons(self.ui.Btn_Add, pypath + "\img//new-folder-dynamic-color.png", size = 30)
+        QTcommand.BtnSetIcons(self.ui.Btn_Expand, pypath + "\img//figma-dynamic-clay.png", size = 30)
+        QTcommand.BtnSetIcons(self.ui.Btn_Creat, pypath + "\img//plus-dynamic-clay.png", size = 30)
+        QTcommand.BtnSetIcons(self.ui.pushButton_4, pypath + "\img//picture-dynamic-clay.png", size = 30)
+        QTcommand.BtnSetIcons(self.ui.pushButton_3, pypath + "\img//figma-dynamic-clay.png", size = 30)
+        QTcommand.BtnSetIcons(self.ui.Btn_HomePagge, pypath + "\img/folder-dynamic-color.png", Text ="首页", size = 23)
 
         self.ui.pushButton_4.setIconSize(QtCore.QSize(200, 200))
         Pixmap = QtGui.QPixmap(pypath + "\img//puzzle-dynamic-clay.png")
@@ -1058,7 +1071,6 @@ def main():
     global  LISTITEMPATH
     from PySide2 import shiboken2
     from pymxs import runtime as rt
-    import pymxs
     global pypath
     # rt.resetMaxFile(rt.name('noPrompt'))
     # Cast the main window HWND to a QMainWindow for docking

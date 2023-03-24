@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-import sys
 import os
 from PySide2 import QtCore, QtGui, QtWidgets
-from PoseLibrary.Tools import file
-from PoseLibrary.Maxcommand import pose
+from PoseLibrary.Tools import file as file
+from PoseLibrary.Maxcommand import pose as pose
 import json
-from PoseLibrary.UI import  windowUI
 
-JSONPATH =  windowUI.JSONPATH
+
+
+
 pypath = ""
 itemWidth =200
 
@@ -80,7 +80,12 @@ class MyWidget(QtWidgets.QWidget):
 		#双击事件
 		if tableweigetevent.type() == QtCore.QEvent.MouseButtonDblClick:
 			global JSONPATH
+			try:
+				from PoseLibrary.UI import windowUI as windowUI
 
+				JSONPATH = windowUI.JSONPATH
+			except:
+				pass
 			JSONPATH =  windowUI.JSONPATH
 			with open(JSONPATH, 'r') as f:
 				posedata = json.load(f)

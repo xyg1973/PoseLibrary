@@ -1,12 +1,10 @@
-import sys
-import os
 #sys.path.append("H:/pycharm_max_work/poselibray")
 #sys.path.remove("H:/pycharm_max_work/poselibray")
 def reloadmoudle():
     reload(main)
     reload(Card_Farme)
     reload(List_Farme)
-    reload( QTcommand)
+    reload(QTcommand)
     reload(Library_Frame)
 
 
@@ -15,17 +13,11 @@ reloadmoudle()
 #for i in syspath:
 #	print(i)
 
-from PySide2 import QtCore, QtGui, QtWidgets
-from UI import main
-from UI import Card_Farme
-from UI import List_Farme
-from UI import Library_Frame
-from Tools import file , QTcommand
+from UI.Temp import main, List_Farme, Library_Frame, Card_Farme
+from Tools import QTcommand
+from Tools import file
 from PySide2.QtCore import QTimer
 import gc
-import time
-
-
 
 DESINGNPATH ="H:\pycharm_maya_work\Design"
 
@@ -45,16 +37,16 @@ LibraryA = Library_Frame.Library_Frame(DockWidget.Library_Frame)
 DockWidget.verticalLayout_11.addWidget(LibraryA)
 LibraryA.show()
 LibraryA.tableWidget.clear()
-AllItemFrame = QTcommand.updataLibraryItem("H:\pycharm_maya_work\Design//test",LibraryA.tableWidget,LibraryA.width())
+AllItemFrame = QTcommand.updataLibraryItem("H:\pycharm_maya_work\Design//test", LibraryA.tableWidget, LibraryA.width())
 #List刷新
 
-QTcommand.itemsort(LibraryA.tableWidget,AllItemFrame)
+QTcommand.itemsort(LibraryA.tableWidget, AllItemFrame)
 
 
 ListA.treeWidget.clear()
 ListA.treeWidget_2.clear()
 ListA.treeWidget_2.setVisible(False)
-QTcommand.updataListItem(DESINGNPATH,ListA.treeWidget)
+QTcommand.updataListItem(DESINGNPATH, ListA.treeWidget)
 force_name = file.getforceName(DESINGNPATH)
 #print(force_name)
 
