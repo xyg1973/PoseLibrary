@@ -3,6 +3,7 @@ import os
 from PySide2 import QtCore, QtGui, QtWidgets
 from PoseLibrary.Tools import file as file
 from PoseLibrary.Maxcommand import pose as pose
+from PoseLibrary.Maxcommand import cmds as cmds
 import json
 
 
@@ -89,7 +90,7 @@ class MyWidget(QtWidgets.QWidget):
 			JSONPATH =  windowUI.JSONPATH
 			with open(JSONPATH, 'r') as f:
 				posedata = json.load(f)
-			pose.selectobj(posedata)
+			cmds.selectobj(posedata)
 
 
 		try:
@@ -336,7 +337,7 @@ def add_child(treeweiget,item=None,name="folder"):
 		# child.setText(0, f"Child {count + 1}")
 		child.setText(0, name)
 		# Set the child item to be editable
-		child.setFlags(child.flags() | QtCore.Qt.ItemIsEditable)
+		# child.setFlags(child.flags() | QtCore.Qt.ItemIsEditable)
 		# Add the child item to the current item
 		current.addChild(child)
 

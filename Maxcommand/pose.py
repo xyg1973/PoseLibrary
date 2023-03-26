@@ -28,7 +28,6 @@ def savePose():
                 objdata["objtransform"] = str(obj.transform)
                 posedata.append(objdata)
             else:
-                print("这不是bip")
                 # objtype = rt.classOf(obj.name
                 # print(objtype)
                 objdata = {}

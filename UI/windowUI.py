@@ -310,8 +310,18 @@ class MainWindow(QtWidgets.QMainWindow):
 
                 selectobj = cmds.selectobj(posedata)
 
+
             elif action == resPoseAction:
                 self.resetPose()
+                data = anim.saveAnim()
+                selectobj = cmds.ls()
+                # selectobj = cmds.selectobj(posedata)
+                count = 2
+                # print(data)
+                self.ui.progressBar.setVisible(True)
+                anim.pastAnim(data,selectobj,self.ui.progressBar)
+                self.ui.progressBar.setVisible(False)
+                print("完成")
 
             elif action == addPoseAction:
                 self.CreatPose()
@@ -410,6 +420,7 @@ class MainWindow(QtWidgets.QMainWindow):
                         icon5.addPixmap(QtGui.QPixmap(pypath + "\img/folder-dynamic-color.png"), QtGui.QIcon.Normal,
                                         QtGui.QIcon.Off)
                         child_item.setIcon(0, icon5)
+
             elif action == renameAction:
                 self.TreeWeiget_renameItem()
 
@@ -589,7 +600,7 @@ class MainWindow(QtWidgets.QMainWindow):
             with open(filepath, 'w') as f:
                 json.dump(posedata, f)
 
-            render.render_and_save(300, 300, pngpath)
+            render.render_png(300, 300, pngpath)
             self.ui.tableWidget.clear()
             newpath = self.getCellPath()
             QTcommand.updataLibraryItem(newpath, self.ui.tableWidget,
@@ -618,7 +629,7 @@ class MainWindow(QtWidgets.QMainWindow):
             with open(new_filepath, 'w') as f:
                 json.dump(posedata, f)
 
-            render.render_and_save(300, 300, new_pngpath)
+            render.render_png(300, 300, new_pngpath)
             filelist = file.getfile(PROJECT_PATH, ".png")
             if filelist == []:
                 self.ui.frame_2.setVisible(False)
@@ -649,7 +660,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     with open(new_filepath, 'w') as f:
                         json.dump(posedata, f)
 
-                    render.render_and_save(300, 300, new_pngpath)
+                    render.render_png(300, 300, new_pngpath)
 
                     filelist = file.getfile(folder_path, ".png")
                     if filelist == []:
