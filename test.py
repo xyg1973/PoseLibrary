@@ -1,64 +1,70 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+from pymxs import runtime as rt
+import pymxs
 
 
-"""
-Created on 2018年6月14日
-@author: Irony
-@site: https://pyqt.site , https://github.com/PyQt5
-@email: 892768447@qq.com
-@file: FadeInOut
-@description:
-"""
-
-try:
-    from PyQt5.QtCore import QPropertyAnimation
-    from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton
-except ImportError:
-    from PySide2.QtCore import QPropertyAnimation
-    from PySide2.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton
+def ls():
+    allobj = []
+    objs = rt.selection
+    for obj in objs:
+        allobj.append(obj)
+    return allobj
 
 
-class Window(QWidget):
+def get_TrackView_SelectKeys(obj):
+    allselectkeys = []
+    for i in range(obj.numsubs):
+        sub = rt.getSubAnim(b, i + 1)
+        # print(f'{sub.name} [{sub_i+1}]')
 
-    def __init__(self, *args, **kwargs):
-        super(Window, self).__init__(*args, **kwargs)
-        self.resize(400, 400)
-        layout = QVBoxLayout(self)
-        layout.addWidget(QPushButton('退出', self, clicked=self.doClose))
-
-        # 窗口透明度动画类
-        self.animation = QPropertyAnimation(self, b'windowOpacity')
-        self.animation.setDuration(1000)  # 持续时间1秒
-
-        # 执行淡入
-        self.doShow()
-
-    def doShow(self):
-        try:
-            # 尝试先取消动画完成后关闭窗口的信号
-            self.animation.finished.disconnect(self.close)
-        except:
+        if sub.controller == None:
             pass
-        self.animation.stop()
-        # 透明度范围从0逐渐增加到1
-        self.animation.setStartValue(0)
-        self.animation.setEndValue(1)
-        self.animation.start()
+            # print(i+1)
+            # print(' No controller assigned to it')
+        else:
+            # print(i+1)
+            # print("current controller: {}".format(sub.controller))
+            if sub.keys == None:
+                pass
+                # print("No keys assigned to it")
+            for secsub_i in range(sub.numsubs):
+                secsub = rt.getSubAnim(sub, secsub_i + 1)
+                # print(secsub)
+                if secsub.controller == None:
+                    pass
+                    # print('\t No controller assigned to it')
+                else:
+                    pass
+                    # print('\t current controller: {}'.format(secsub.controller))
+                if secsub.keys == None:
+                    pass
+                    # print('\t No keys assigned to it')
+                for thirdsub_i in range(secsub.numsubs):
+                    thirdsub = mxs.getSubAnim(secsub, thirdsub_i + 1)
+                    # print('\t\t{} [{}]'.format(thirdsub.name, thirdsub_i + 1))
+                    if secsub.controller == None:
+                        pass
+                        # print('\t No controller assigned to it')
+                    else:
+                        keydirt = {}
+                        keydirt["controller"] = thirdsub.controller
 
-    def doClose(self):
-        self.animation.stop()
-        self.animation.finished.connect(self.close)  # 动画完成则关闭窗口
-        # 透明度范围从1逐渐减少到0
-        self.animation.setStartValue(1)
-        self.animation.setEndValue(0)
-        self.animation.start()
+                        # print('\t\t current controller: {}'.format(thirdsub.controller))
+                        # print(rt.numSelKeys(thirdsub.controller))
+                        selkeys = []
+                        for numkeys in range(rt.numKeys(thirdsub.controller)):
+                            # print(thirdsub.controller.keys)
+                            # print(numkeys)
+                            if rt.isKeySelected(thirdsub.controller,numkeys+1):
+                                selkey = rt.getKey(thirdsub.controller,numkeys+1)
+                                selkeys.append(selkey)
+                        keydirt["selkeys"] = selkeys
+                        # print(keydirt)
+                        allselectkeys.append(keydirt)
+    return allselectkeys
 
 
-if __name__ == '__main__':
-    import sys
+obj = ls()[0]
+print(get_TrackView_SelectKeys(obj))
 
-    app = QApplication(sys.argv)
-    w = Window()
-    w.show()
-    sys.exit(app.exec_())
+
+
