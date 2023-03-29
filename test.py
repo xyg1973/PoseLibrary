@@ -1,64 +1,84 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# Name:IncrementSave
+# Hint:
+# http://umezo.hatenablog.jp/entry/20100411/1270989691
+# http://docs.autodesk.com/MB/2014/ENU/MotionBuilder-SDK-Documentation/index.html?url=files/GUID-FE8DB4BD-ED47-47CD-9439-A31A7ADE565A.htm,topicNumber=d30e8551
+# http://docs.python.jp/2/library/os.path.html
+# http://qiita.com/CORDEA/items/ee44799e5d029ce3aaac
+# http://python.civic-apps.com/file-timestamp/
+# http://docs.python.jp/2/library/datetime.html
+
+from pyfbsdk import *
+from pyfbsdk_additions import *
+
+import os
+import shutil
+import datetime
+
+lFileName = FBApplication().FBXFileName
+print
+os.path.dirname(lFileName)
 
 
-"""
-Created on 2018年6月14日
-@author: Irony
-@site: https://pyqt.site , https://github.com/PyQt5
-@email: 892768447@qq.com
-@file: FadeInOut
-@description:
-"""
-
-try:
-    from PyQt5.QtCore import QPropertyAnimation
-    from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton
-except ImportError:
-    from PySide2.QtCore import QPropertyAnimation
-    from PySide2.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton
+def FindIncFolder(path):
+    returnVal = ""
+    if not os.path.isdir(path + "\\old"):
+        os.mkdir(path + "\\old")
+    returnVal = path + "\\old"
+    return returnVal
 
 
-class Window(QWidget):
-
-    def __init__(self, *args, **kwargs):
-        super(Window, self).__init__(*args, **kwargs)
-        self.resize(400, 400)
-        layout = QVBoxLayout(self)
-        layout.addWidget(QPushButton('退出', self, clicked=self.doClose))
-
-        # 窗口透明度动画类
-        self.animation = QPropertyAnimation(self, b'windowOpacity')
-        self.animation.setDuration(1000)  # 持续时间1秒
-
-        # 执行淡入
-        self.doShow()
-
-    def doShow(self):
-        try:
-            # 尝试先取消动画完成后关闭窗口的信号
-            self.animation.finished.disconnect(self.close)
-        except:
-            pass
-        self.animation.stop()
-        # 透明度范围从0逐渐增加到1
-        self.animation.setStartValue(0)
-        self.animation.setEndValue(1)
-        self.animation.start()
-
-    def doClose(self):
-        self.animation.stop()
-        self.animation.finished.connect(self.close)  # 动画完成则关闭窗口
-        # 透明度范围从1逐渐减少到0
-        self.animation.setStartValue(1)
-        self.animation.setEndValue(0)
-        self.animation.start()
+def FindRelatedFolders(path, name):
+    returnVal = []
+    name = name.split(".fbx")[0]
+    for obj in os.listdir(path):
+        if obj == name + ".bck" or obj == name + ".fbm":
+            returnVal.append(obj)
+    return returnVal
 
 
-if __name__ == '__main__':
-    import sys
+def BackUp(fileName, incName, fromPath, toPath):
+    returnVal = True
+    errorPath = ""
+    # copy related folders
+    folderList = FindRelatedFolders(fromPath, fileName)
+    for obj in folderList:
+        newName = obj.replace(".", "_" + incName + ".")
+        if not os.path.exists(toPath + "\\" + newName):
+            shutil.copytree(fromPath + "\\" + obj, toPath + "\\" + newName)
+        else:
+            returnVal = False
+            errorPath = errorPath + "\n" + newName
+    # copy file
+    newFileName = fileName.replace(".", "_" + incName + ".")
+    if not os.path.exists(toPath + "\\" + newFileName):
+        shutil.copy(fromPath + "\\" + fileName, toPath + "\\" + newFileName)
+    else:
+        returnVal = False
+        errorPath = errorPath + "\n" + newFileName
+    if not returnVal:
+        FBMessageBox("Error",
+                     "Already exist\n" + errorPath + "\n\nCheck backup folder\nor backup by hand\n\nThere is NOT also normal SAVE",
+                     "OK")
+    return returnVal
 
-    app = QApplication(sys.argv)
-    w = Window()
-    w.show()
-    sys.exit(app.exec_())
+
+def SaveFile(lFileName):
+    filePath = os.path.dirname(lFileName)
+    fileName = os.path.basename(lFileName)
+    fileTime = datetime.datetime.fromtimestamp(os.stat(lFileName).st_mtime)
+    fileTime = fileTime.strftime("%Y-%m%d-%H%M-%S")
+    incFolderPath = FindIncFolder(filePath)
+    if BackUp(fileName, fileTime, filePath, incFolderPath):
+        FBApplication().FileSave(lFileName)
+
+
+def CheckFile():
+    lFileName = FBApplication().FBXFileName
+    if lFileName == "":
+        pass
+    else:
+        SaveFile(lFileName)
+
+
+CheckFile()
