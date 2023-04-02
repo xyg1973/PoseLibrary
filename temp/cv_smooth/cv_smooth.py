@@ -118,20 +118,44 @@ class PyMaxDockWidget(QtWidgets.QDockWidget):
                             # print('\t No controller assigned to it')
                         else:
                             keydirt = {}
-                            keydirt["controller"] = thirdsub.controller
-
-                            # print('\t\t current controller: {}'.format(thirdsub.controller))
-                            # print(rt.numSelKeys(thirdsub.controller))
                             selkeys = []
-                            for numkeys in range(rt.numKeys(thirdsub.controller)):
-                                # print(thirdsub.controller.keys)
-                                # print(numkeys)
-                                if rt.isKeySelected(thirdsub.controller, numkeys + 1):
-                                    selkey = rt.getKey(thirdsub.controller, numkeys + 1)
-                                    selkeys.append(selkey)
-                            keydirt["selkeys"] = selkeys
-                            # print(keydirt)
-                            allselectkeys.append(keydirt)
+                            if rt.getPropertyController(obj.controller, 'Horizontal') != None:  # 判断是否是质心
+                                keydirt["controller"] = secsub.controller
+                                keydirt["objtype"] = "bip001"
+                                # print(rt.numKeys(secsub.controller))
+                                # a = rt.biped.getKey(thirdsub.controller,1)
+                                # print(a)
+                                for numkeys in range(rt.numKeys(secsub.controller)):
+                                    selkey = rt.biped.getKey(secsub.controller,numkeys+1)
+                                    if selkey.selected == True:
+                                        selkeys.append(selkey)
+                                        print(selkey.type)
+                                keydirt["selkeys"] = selkeys
+                                print(secsub.controller,selkeys)
+                                # print(keydirt)
+                                allselectkeys.append(keydirt)
+
+                            elif rt.classOf(obj) == rt.Biped_Object:
+                                keydirt["controller"] = secsub.controller
+                                keydirt["objtype"] = "biped"
+                                for numkeys in range(rt.numKeys(secsub.controller)):
+                                    selkey = rt.biped.getKey(secsub.controller, numkeys + 1)
+                                    if selkey.selected == True:
+                                        selkeys.append(selkey)
+                                keydirt["selkeys"] = selkeys
+                                # print(keydirt)
+                                allselectkeys.append(keydirt)
+                            else:
+                                keydirt["controller"] = thirdsub.controller
+                                for numkeys in range(rt.numKeys(thirdsub.controller)):
+                                    # print(thirdsub.controller.keys)
+                                    # print(numkeys)
+                                    if rt.isKeySelected(thirdsub.controller, numkeys + 1):
+                                        selkey = rt.getKey(thirdsub.controller, numkeys + 1)
+                                        selkeys.append(selkey)
+                                keydirt["selkeys"] = selkeys
+                                # print(keydirt)
+                                allselectkeys.append(keydirt)
         return allselectkeys
 
     def ls(self):
@@ -149,6 +173,7 @@ class PyMaxDockWidget(QtWidgets.QDockWidget):
         for obj in objs:
             data = []
             data  = self.get_TrackView_SelectKeys(obj)
+            print(data)
             for i in range(len(data)):
                 selkeys = data[i]["selkeys"]
                 objcontroller = data[i]["controller"]

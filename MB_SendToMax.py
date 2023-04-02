@@ -76,11 +76,17 @@ def PlotAnim():
     FBSystem().CurrentTake.PlotTakeOnSelected(lOptions)  # 使上面的设置生效
 
 
-MaxRoot = FBFindModelByLabelName('Root')
-a = get_children(MaxRoot)
-PlotAnim()
-my_documents_path = os.path.expanduser('~/Documents')
-exportPath = my_documents_path+"//SendTemp"
-ExportSelect(exportPath)
-print(a)
-print(currentTake.Name)
+def main():
+    MaxRoot = FBFindModelByLabelName('Root')
+    a = get_children(MaxRoot)
+    PlotAnim()
+    my_documents_path = os.path.expanduser('~/Documents')
+    exportPath = my_documents_path+"/SN AnimTool/SendTemp"
+    ExportSelect(exportPath)
+
+
+main()
+# FBApplication().OneClickAddToCurrentScene()
+# app.OneClickSendAsNewScene(FBOneClickApplication.kFBOneClick3dsMax)
+# print(a)
+# print(currentTake.Name)
