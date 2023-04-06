@@ -287,6 +287,7 @@ class MainWindow(QtWidgets.QMainWindow):
             rightMenu = QtWidgets.QMenu(self.ui.tableWidget)
             self.setStyleSheet(rightMenuStyle)
             addPoseAction = rightMenu.addAction(u"添加pose")
+            addAnimAction = rightMenu.addAction(u"添加Anim")
             selectObjAction =  rightMenu.addAction(u"选择物体")
             resPoseAction = rightMenu.addAction(u"刷新pose")
 
@@ -921,9 +922,9 @@ class MainWindow(QtWidgets.QMainWindow):
                                 "border-radius: 3px;"
                                 "}")
 
-        self.ui.treeWidget_2.setStyleSheet("QTreeView::branch {background: transparent;}")
-        self.ui.treeWidget_2.setStyleSheet("QTreeView::branch:!adjoins-item {border-image: url(vline.png) 0;}")
-        self.ui.treeWidget_2.setStyleSheet("QTreeView::branch:adjoins-item {border-image: url(branch-more.png) 0;}")
+        # self.ui.treeWidget_2.setStyleSheet("QTreeView::branch {background: transparent;}")
+        # self.ui.treeWidget_2.setStyleSheet("QTreeView::branch:!adjoins-item {border-image: url(vline.png) 0;}")
+        # self.ui.treeWidget_2.setStyleSheet("QTreeView::branch:adjoins-item {border-image: url(branch-more.png) 0;}")
         self.docktitle = QtWidgets.QWidget()
         self.docktitle_2 = QtWidgets.QWidget()
         self.docktitle_top = QtWidgets.QWidget()
@@ -944,6 +945,7 @@ class MainWindow(QtWidgets.QMainWindow):
         QTcommand.BtnSetIcons(self.ui.Btn_Add, pypath + "\img//new-folder-dynamic-color.png", size = 30)
         QTcommand.BtnSetIcons(self.ui.Btn_Expand, pypath + "\img//figma-dynamic-clay.png", size = 30)
         QTcommand.BtnSetIcons(self.ui.Btn_Creat, pypath + "\img//plus-dynamic-clay.png", size = 30)
+        QTcommand.BtnSetIcons(self.ui.Btn_Creat_Anim, pypath + "\img//plus-dynamic-clay.png", size=30)
         QTcommand.BtnSetIcons(self.ui.pushButton_4, pypath + "\img//picture-dynamic-clay.png", size = 30)
         QTcommand.BtnSetIcons(self.ui.pushButton_3, pypath + "\img//figma-dynamic-clay.png", size = 30)
         QTcommand.BtnSetIcons(self.ui.Btn_HomePagge, pypath + "\img/folder-dynamic-color.png", Text ="首页", size = 23)
@@ -954,7 +956,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.label_5.setPixmap(Pixmap)
 
 
-        self.ui.dockWidget.widget().setMinimumSize(QtCore.QSize(120, 150))
+        self.ui.dockWidget.widget().setMinimumSize(QtCore.QSize(200, 150))
         self.ui.dockWidget.widget().setMaximumSize(QtCore.QSize(200, 150000))
         # window.ui.dockWidget_2.widget().setMinimumSize(QtCore.QSize(150, 400))
         self.ui.dockWidget_2.widget().setMaximumSize(QtCore.QSize(400, 150000))
@@ -991,6 +993,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Btn_Menu_2.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ui.Btn_PathTip.setFocusPolicy(QtCore.Qt.NoFocus)
         self.ui.Btn_Project.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.ui.Btn_Creat_Anim.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.ui.CBox_Sort.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.ui.CBox_Type.setFocusPolicy(QtCore.Qt.NoFocus)
 
         self.ui.Btn_Add.setToolTip("添加文件夹")
         self.ui.pushButton.setToolTip("添加文件夹")

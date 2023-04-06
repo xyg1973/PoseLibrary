@@ -104,7 +104,6 @@ class MyWidget(QtWidgets.QWidget):
 			item = self.table_widget.item(self.row,self.column )
 			self.table_widget.setItemSelected(item,True )
 
-
 			return True
 		#双击事件
 		if tableweigetevent.type() == QtCore.QEvent.MouseButtonDblClick:
