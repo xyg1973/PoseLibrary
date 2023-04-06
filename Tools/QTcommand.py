@@ -26,19 +26,20 @@ class MyWidget(QtWidgets.QWidget):
 		self.button = QtWidgets.QPushButton()
 		self.button .setFocusPolicy(QtCore.Qt.NoFocus)
 		self.button.setStyleSheet("QPushButton {\n"
-										"    background-color:argb(10, 10, 10,40);\n"
+										"    background-color:rgb(53, 53, 53);\n"
 										"    color: rgb(225, 225, 225);\n"
 										"    border-width: 0px;\n"
 										"    border-radius: 3px;\n"
-										"    border-color: beige;\n"
+								  		
+										"    border-color: rgb(225, 225, 225);\n"
 										"    padding: 2px;\n"
 										"\n"
 										"}\n"
 										"QPushButton:hover {\n"
-										"    background-color:argb(10, 10, 10,40);\n"
+										"    background-color:rgb(68, 68, 68);\n"
 										"}\n"
 										"QPushButton:pressed {\n"
-										"    background-color: argb(10, 10, 10,40);\n"
+										"    background-color: rgb(38, 38, 38);\n"
 										"    border-style: inset;\n"
 										"}\n"
 										"")
@@ -46,6 +47,28 @@ class MyWidget(QtWidgets.QWidget):
 		# pixmap.scaled(40, 40)
 		# self.label.setPixmap(pixmap)
 		# self.label.resize(QtCore.QSize(40,40))
+		self.button_type = QtWidgets.QPushButton()
+		self.button_type.setFocusPolicy(QtCore.Qt.NoFocus)
+		self.button_type.setMaximumHeight(3)
+		self.button_type.setEnabled(False)
+		#rgb(225, 70, 70)
+		self.button_type.setStyleSheet("QPushButton {\n"
+								  "    background-color:rgb(140, 140, 140);\n"
+								  "    color: rgb(225, 225, 225);\n"
+								  "    border-width: 0px;\n"
+								  "    border-radius: 3px;\n"
+								  "    border-color: beige;\n"
+								  "    padding: 2px;\n"
+								  "\n"
+								  "}\n"
+								  "QPushButton:hover {\n"
+								  "    background-color:rgb(225, 225, 225);\n"
+								  "}\n"
+								  "QPushButton:pressed {\n"
+								  "    background-color: rgb(225, 225, 225);\n"
+								  "    border-style: inset;\n"
+								  "}\n"
+								  "")
 		self.lineEdit = QtWidgets.QLineEdit()
 		self.lineEdit.setStyleSheet("QLineEdit{\n"
 								"    background-color:transparent;\n"
@@ -60,12 +83,17 @@ class MyWidget(QtWidgets.QWidget):
 								"")
 
 		# 添加到布局中
+
 		self.layout.addWidget(self.button)
+		self.layout.addWidget(self.button_type)
 		self.layout.addWidget(self.lineEdit)
 
+		self.layout.setSpacing(0)
+		#self.layout.setContentsMargins(0, 0, 0, 0)
 		#安装事件过滤器
 		self.installEventFilter(self)
 		self.button.installEventFilter(self)
+		self.button_type.installEventFilter(self)
 		# self.lineEdit.installEventFilter(self)
 
 	# 信号事件选中item中部件会同时选中item

@@ -319,6 +319,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 count = 2
                 # print(data)
                 self.ui.progressBar.setVisible(True)
+
                 anim.pastAnim(data,selectobj,self.ui.progressBar)
                 self.ui.progressBar.setVisible(False)
                 print("完成")

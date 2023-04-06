@@ -68,6 +68,7 @@ def pastPoseTh(posedata,selectobjs,count,progressBar):
     max = len(posedata)*count
     print(max)
     k = 1
+    rt.disableSceneRedraw()
     for i in range(count):
         for data in posedata:
             progressBar.setValue(float(k)/float(max)*100)
@@ -83,6 +84,8 @@ def pastPoseTh(posedata,selectobjs,count,progressBar):
                         # obj.rotation = rt.eulerAngles(x, y, z)
                         # obj.pos = rt.point3(x, y, z)
                         # obj.scale = rt.point3(x, y, z)
+    rt.enableSceneRedraw()
+    rt.redrawViews()
     return
 def pastPose(posedata,selectobjs,count,progressBar):
     """
@@ -95,6 +98,7 @@ def pastPose(posedata,selectobjs,count,progressBar):
     posedata = posedata
     max = len(posedata)*count
     k = 1
+    rt.disableSceneRedraw()
     with pymxs.undo(True):
         for i in range(count):
             for data in posedata:
@@ -109,6 +113,8 @@ def pastPose(posedata,selectobjs,count,progressBar):
                     # obj.rotation = rt.eulerAngles(x, y, z)
                     # obj.pos = rt.point3(x, y, z)
                     # obj.scale = rt.point3(x, y, z)
+    rt.enableSceneRedraw()
+    rt.redrawViews()
     return
 
 def pastPoseRot(posedata,selectobjs,count,progressBar):
@@ -122,6 +128,8 @@ def pastPoseRot(posedata,selectobjs,count,progressBar):
     posedata = posedata
     max = len(posedata)*count
     k = 1
+    rt.disableSceneRedraw()
+
     with pymxs.undo(True):
         for i in range(count):
             for data in posedata:
@@ -148,6 +156,8 @@ def pastPoseRot(posedata,selectobjs,count,progressBar):
                     # obj.rotation = rt.eulerAngles(x, y, z)
                     # obj.pos = rt.point3(x, y, z)
                     # obj.scale = rt.point3(x, y, z)
+    rt.enableSceneRedraw()
+    rt.redrawViews()
     return
 def getOffsetMatrix(Pmat,Cmat):
 	Pmat = Pmat
