@@ -19,9 +19,64 @@ tooltip:"更新场景"
     basePath= "C:/Users/"
     userName=sysInfo.username
     TempFilePath = basePath+userName+"/"+"Documents/SN AnimTool/SendTemp_Mb.fbx"
+
     fbximportA()
     try (importfile TempFilePath #noPrompt using:FBXIMP) catch()
+
     print "更新场景"
+)
+
+macroScript fix_bip_porp
+category:"SN_AnimTool"
+tooltip:"修正porp"
+(
+    bip_porp1  = $'port1_temp'
+   -- bip_porp2  = $'port2_temp'
+    bip_porp1.parent =  $Bip001
+    --bip_porp2.parent =  $Bip001
+
+    point_porp1 =  $'Bip001 Prop1'
+    --point_porp2 =  $'Bip001 Prop2'
+
+    starttime = animationRange.start
+    endtime = animationRange.end
+    set animate on
+    with animate on
+    sliderTime = starttime
+    for t = starttime to endtime do (at time t
+        bip_porp1.transform = point_porp1.transform
+       -- bip_porp2.transform = point_porp2.transform
+        sliderTime += 1
+        )
+
+
+    delete point_porp1
+   -- delete point_porp2
+
+    bip_porp1.name = "Bip001 Prop1"
+   -- bip_porp2.name = "Bip001 Prop2"
+)
+
+macroScript revise_bip_porp
+category:"SN_AnimTool"
+tooltip:"修改porp类型"
+(
+    bip_porp1 =  $'Bip001 Prop1'
+    --bip_porp2 =  $'Bip001 Prop2'
+    bip_porp1.name = "port1_temp"
+    --bip_porp2.name = "port2_temp"
+
+
+    point_porp1 = Point pos:[0,0,0] isSelected:off
+    point_porp1.name = "Bip001 Prop1"
+    point_porp1.parent = $Bip001
+
+    --point_porp2 = Point pos:[0,0,0] isSelected:off
+    --point_porp2.name = "Bip001 Prop2"
+   -- point_porp2.parent = $Bip001
+
+    bip_porp1.parent = point_porp1
+   -- bip_porp2.parent = point_porp2
 )
 
 macroScript Send_Select_To_MB
@@ -123,6 +178,14 @@ SN_AnimTool_Menu.addItem UpdateSceneAction (SN_AnimTool_Menu.numItems()+1)
 --"创建一个发送到MB的 ActionItem MacroScript 到 SN_AnimTool"
 Send_Select_TO_MB = menuMan.createActionItem "Send_Select_To_MB" "SN_AnimTool"
 SN_AnimTool_Menu.addItem Send_Select_TO_MB (SN_AnimTool_Menu.numItems()+1)
+
+--"创建更新场景前修复武器骨骼类型 ActionItem MacroScript 到 SN_AnimTool"
+revise_bip_porp = menuMan.createActionItem "revise_bip_porp" "SN_AnimTool"
+SN_AnimTool_Menu.addItem revise_bip_porp (SN_AnimTool_Menu.numItems()+1)
+
+--"创建更新场景后还原武器骨骼动画 ActionItem MacroScript 到 SN_AnimTool"
+fix_bip_porp = menuMan.createActionItem "fix_bip_porp" "SN_AnimTool"
+SN_AnimTool_Menu.addItem fix_bip_porp (SN_AnimTool_Menu.numItems()+1)
 
 --"创建一个Pose库的 ActionItem MacroScript 到 SN_AnimTool-Anim"
 PoseLibraryAction = menuMan.createActionItem "PoseLibrary" "SN_AnimTool"
