@@ -41,5 +41,3 @@ def pastAnim(animdata,selectobjs,progressBar):
             k += 1
     rt.enableSceneRedraw()
     rt.redrawViews()
-    a = rt.isSceneRedrawDisabled()
-    print (a)

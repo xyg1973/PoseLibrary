@@ -1,9 +1,17 @@
 # -*- coding: utf-8 -*-
+"""
+SN_AnimTool version : V0.1.1
+update time : 2023/04/07
+"""
+
+
+
 from pyfbsdk import *
 import math
 import os
 import sys
 from MobuCore.MobuCoreTools.AdjustmentBlend import AdjustmentBlend as MobuTool_AdjustmentBlend
+
 
 scene = FBSystem().Scene
 currentTake = FBSystem().CurrentTake
@@ -13,6 +21,20 @@ endTime = FBSystem().CurrentTake.LocalTimeSpan.GetStop().GetFrame()
 
 
 
+def reload_module(module_name):
+    # 检查模块是否已经导入
+    if module_name in sys.modules:
+        # 如果已经导入，则重新加载
+        try:
+            # Python 2
+            reload(sys.modules[module_name])
+        except NameError:
+            # Python 3
+            import importlib
+            importlib.reload(sys.modules[module_name])
+    else:
+        # 如果没有导入，则正常导入
+        __import__(module_name)
 
 def ls():
     selectedModels = FBModelList()
@@ -348,7 +370,21 @@ def AdjustmentBlend():
 def menuTestEvent():
     print("test")
 
+def event_SpringMagic():
+    try:
+        reload_module(MobuCore.MobuCoreTools.SpringMagic.SpringMagic_in_MoBu)
+    except:
+        pass
+    from MobuCore.MobuCoreTools.SpringMagic import SpringMagic_in_MoBu as SpringMagic
+    SpringMagic.CreateTool()
 
+def event_StopFootSliding():
+    try:
+        reload_module(MobuCore.MobuCoreTools.SpringMagic.StopFootSliding_MB2018)
+    except:
+        pass
+    from MobuCore.MobuCoreTools.StopFootSliding import StopFootSliding_MB2018 as StopFootSliding
+    StopFootSliding.CreateTool()
 
 
 
@@ -359,10 +395,12 @@ def OnMenuClick(eventName):
         menuTestEvent()
     elif eventName =="Update_Sence":
         Update_Sence()
-        print("更新场景")
     elif eventName == "Send_Select_to_max":
         SN_Send_Select_to_Max()
-        print("发送到max")
+    elif eventName == "SpringMagic":
+        event_SpringMagic()
+    elif eventName == "StopFootSliding":
+        event_StopFootSliding()
     else:
         FBMessageBox("Error...", "Menu Error: This option hasn't been set up yet. Please contact your friendly neighbourhood Technical Animator", "OK")
 
@@ -384,6 +422,8 @@ def LoadMenu():
     menuManager.InsertLast(mainMenuName, "Anim")
     menuManager.InsertLast(mainMenuName + "/Rig", "Test")
     menuManager.InsertLast(mainMenuName + "/Anim", "Adjustment Blend")
+    menuManager.InsertLast(mainMenuName + "/Anim", "SpringMagic")
+    menuManager.InsertLast(mainMenuName + "/Anim", "StopFootSliding")
     menuManager.InsertLast(mainMenuName, "Update_Sence")
     menuManager.InsertLast(mainMenuName, "Send_Select_to_max")
 
