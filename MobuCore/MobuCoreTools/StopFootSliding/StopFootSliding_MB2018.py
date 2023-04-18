@@ -647,5 +647,5 @@ def CreateTool():
     fb.ShowTool(t)
     return t
 
-if __name__ == "__main__":
-    CreateTool()
+# if __name__ == "__main__":
+#     CreateTool()

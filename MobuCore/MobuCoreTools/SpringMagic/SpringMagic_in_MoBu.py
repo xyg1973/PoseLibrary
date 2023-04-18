@@ -1982,8 +1982,8 @@ def CreateWarning():
     ShowTool(tt)
 
 
-if __name__ == "__main__":
-    CreateTool()
-    # checkUpdate()
+# if __name__ == "__main__":
+#     CreateTool()
+#     # checkUpdate()
 
 

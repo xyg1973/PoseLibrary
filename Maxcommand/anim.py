@@ -41,3 +41,10 @@ def pastAnim(animdata,selectobjs,progressBar):
             k += 1
     rt.enableSceneRedraw()
     rt.redrawViews()
+
+
+def getselectobjcount(animdata):
+    posedata = animdata[1]
+    objs = [rt.getNodeByName(data.get('objname')) for data in posedata]
+    selectobjcount = len(objs)
+    return selectobjcount

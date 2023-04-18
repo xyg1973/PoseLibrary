@@ -10,8 +10,10 @@ from pyfbsdk import *
 import math
 import os
 import sys
+import pyfbsdk_additions
 from MobuCore.MobuCoreTools.AdjustmentBlend import AdjustmentBlend as MobuTool_AdjustmentBlend
-
+from MobuCore.MobuCoreTools.StopFootSliding import StopFootSliding_MB2018 as StopFootSliding
+from MobuCore.MobuCoreTools.SpringMagic import SpringMagic_in_MoBu as SpringMagic
 
 scene = FBSystem().Scene
 currentTake = FBSystem().CurrentTake
@@ -370,22 +372,6 @@ def AdjustmentBlend():
 def menuTestEvent():
     print("test")
 
-def event_SpringMagic():
-    try:
-        reload_module(MobuCore.MobuCoreTools.SpringMagic.SpringMagic_in_MoBu)
-    except:
-        pass
-    from MobuCore.MobuCoreTools.SpringMagic import SpringMagic_in_MoBu as SpringMagic
-    SpringMagic.CreateTool()
-
-def event_StopFootSliding():
-    try:
-        reload_module(MobuCore.MobuCoreTools.SpringMagic.StopFootSliding_MB2018)
-    except:
-        pass
-    from MobuCore.MobuCoreTools.StopFootSliding import StopFootSliding_MB2018 as StopFootSliding
-    StopFootSliding.CreateTool()
-
 
 
 def OnMenuClick(eventName):
@@ -398,9 +384,29 @@ def OnMenuClick(eventName):
     elif eventName == "Send_Select_to_max":
         SN_Send_Select_to_Max()
     elif eventName == "SpringMagic":
-        event_SpringMagic()
+        try:
+            # pyfbsdk_additions.FBDestroyToolByName("Spring Magic in MB         Yanbin Bai")
+            ShowToolByName("Spring Magic in MB         Yanbin Bai")
+            # from MobuCore.MobuCoreTools.SpringMagic import SpringMagic_in_MoBu as SpringMagic
+            # pyfbsdk_additions.FBAddToolListener(SpringMagic.CreateTool())
+            # SpringMagic.CreateTool()
+        except:
+            SpringMagic.CreateTool()
+            # print("except")
+
     elif eventName == "StopFootSliding":
-        event_StopFootSliding()
+        try:
+            ShowToolByName("Stop Foot Sliding v1.0")
+            # pyfbsdk_additions.FBDestroyToolByName("Stop Foot Sliding v1.0")
+            # from MobuCore.MobuCoreTools.StopFootSliding import StopFootSliding_MB2018 as StopFootSliding
+            # # pyfbsdk_additions.FBAddToolListener(StopFootSliding.CreateTool())
+            # StopFootSliding.CreateTool()
+        except:
+            # pass
+            # from MobuCore.MobuCoreTools.StopFootSliding import StopFootSliding_MB2018 as StopFootSliding
+            # pyfbsdk_additions.FBAddToolListener(StopFootSliding.CreateTool())
+            StopFootSliding.CreateTool()
+
     else:
         FBMessageBox("Error...", "Menu Error: This option hasn't been set up yet. Please contact your friendly neighbourhood Technical Animator", "OK")
 

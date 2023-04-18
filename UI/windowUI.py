@@ -167,9 +167,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.workflow()
         self.creat_contion()
 
-
-
-
         # SHOW MAIN WINDOW
         # ///////////////////////////////////////////////////////////////
 
@@ -200,6 +197,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Btn_Menu_2.clicked.connect(self.Btn_MenuShow)
         self.ui.Btn_PathTip.clicked.connect(self.UpdataLibrary)
         self.ui.Btn_Project.clicked.connect(self.Btn_Project_rightMenuShow)
+        self.ui.Btn_Creat_Anim.clicked.connect(self.CreatAnim)
 
     def resize_TableItem(self):
         current_value = self.ui.horizontalSlider.value()
@@ -683,6 +681,61 @@ class MainWindow(QtWidgets.QMainWindow):
 
         return posedata
 
+    def CreatAnim(self):
+        global PROJECT_PATH
+        global LISTITEMPATH
+        def creatanim(filepath,pngpath):
+
+            animedata = anim.saveAnim()
+            with open(filepath, 'w') as f:
+                json.dump(animedata, f)
+            render.render_png(300, 300, pngpath)
+            return animedata
+
+        def uiVisble():
+            filelist = file.getfile(PROJECT_PATH, ".png")
+            if filelist == []:
+                self.ui.frame_2.setVisible(False)
+                self.ui.horizontalSlider.setVisible(False)
+                self.ui.frame_11.setVisible(True)
+
+            else:
+                self.ui.frame_11.setVisible(False)
+                self.ui.frame_2.setVisible(True)
+                self.ui.horizontalSlider.setVisible(True)
+
+
+        name = "Anim"
+        jsonname = name + ".json"
+
+        if not self.ui.treeWidget_2.selectedItems():
+
+            filepath = PROJECT_PATH + "\\" + jsonname
+            pngpath = PROJECT_PATH + "\\" + name + ".png"
+            new_filepath = file.create_file(filepath)
+            new_pngpath = file.create_file(pngpath)
+            animdata = creatanim(new_filepath,new_pngpath)
+            uiVisble()
+            QTcommand.updataLibraryItem(PROJECT_PATH, self.ui.tableWidget,
+                                        self.ui.centralwidget.frameGeometry().width())
+
+        else:
+            for item in self.ui.treeWidget_2.selectedItems():
+                index = self.ui.treeWidget_2.indexOfTopLevelItem(item)
+                itempath = QTcommand.get_item_name(item)
+
+                folder_path = PROJECT_PATH + "//" + itempath
+                filepath = folder_path + "\\" + jsonname
+                pngpath = folder_path + "\\" + name + ".png"
+                new_filepath = file.create_file(filepath)
+                new_pngpath = file.create_file(pngpath)
+                animdata = creatanim(new_filepath, new_pngpath)
+                QTcommand.updataLibraryItem(folder_path, self.ui.tableWidget,
+                                            self.ui.centralwidget.frameGeometry().width())
+        return animdata
+
+
+
     def ApplyPose(self):
         global progressBarValue
         global JSONPATH
@@ -788,12 +841,24 @@ class MainWindow(QtWidgets.QMainWindow):
         try:
             with open(JSONPATH, 'r') as f:
                 posedata = json.load(f)
-            count = pose.getselectobjcount(posedata)
-            QTcommand.BtnSetIcons(self.ui.pushButton_4, SELECTITEMPATH)
-            self.ui.pushButton_4.setIconSize(QtCore.QSize(200, 200))
-            self.ui.Lbl_Name.setText("name: "+ name)
-            self.ui.Lbl_ObjCount.setText("{} Objects".format(count))
-            self.ui.Lbl_Path.setText(CellRelativePath)
+            #判断类型：
+            if posedata[0]["starttime"]:
+                print("flase")
+                count = pose.getselectobjcount(posedata)
+                QTcommand.BtnSetIcons(self.ui.pushButton_4, SELECTITEMPATH)
+                self.ui.pushButton_4.setIconSize(QtCore.QSize(200, 200))
+                self.ui.Lbl_Name.setText("name: " + name)
+                self.ui.Lbl_ObjCount.setText("{} Objects".format(count))
+                self.ui.Lbl_Path.setText(CellRelativePath)
+            else:
+                print("flase")
+                posedata = posedata[1]
+                count = pose.getselectobjcount(posedata)
+                QTcommand.BtnSetIcons(self.ui.pushButton_4, SELECTITEMPATH)
+                self.ui.pushButton_4.setIconSize(QtCore.QSize(200, 200))
+                self.ui.Lbl_Name.setText("name: " + name)
+                self.ui.Lbl_ObjCount.setText("{} Objects".format(count))
+                self.ui.Lbl_Path.setText(CellRelativePath)
         except:
             pass
 
