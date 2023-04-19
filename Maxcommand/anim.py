@@ -20,10 +20,9 @@ def saveAnim():
     return animdata
 
 
-def pastAnim(animdata,selectobjs,progressBar):
+def pastAnim(animdata,selectobjs,progressBar,OffsetTime=0):
     sencetimedata = animdata[0]
     max = len(animdata)-1
-    print(sencetimedata)
     k = 1
     rt.disableSceneRedraw()
     with pymxs.undo(True):
@@ -36,7 +35,7 @@ def pastAnim(animdata,selectobjs,progressBar):
                     obj = rt.getNodeByName(data.get('objname'))
                     if obj in selectobjs:
                         mat3 = cmds.data_to_rtMatrix3(data.get('objtransform'))
-                        with pymxs.attime(i):
+                        with pymxs.attime(i+OffsetTime):
                             obj.transform = mat3
             k += 1
     rt.enableSceneRedraw()

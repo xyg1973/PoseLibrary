@@ -117,7 +117,15 @@ class MyWidget(QtWidgets.QWidget):
 			JSONPATH =  windowUI.JSONPATH
 			with open(JSONPATH, 'r') as f:
 				posedata = json.load(f)
-			cmds.selectobj(posedata)
+			try:
+				starttime = posedata[0].get("starttime")
+				if starttime==None :
+					cmds.selectobj(posedata)
+				else:
+					cmds.selectobj_anim(posedata)
+			except:
+				pass
+
 
 
 		try:
@@ -200,13 +208,6 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 	for index in selected_indexes:
 		selectrow= index.row() + 1
 		selectcolumn = index.column() + 1
-
-	#行数*列数+列数
-		# selectindex =selectrow*(selectcolumn+1)+selectcolumn+1
-		# print(selectrow)
-		# print(selectcolumn)
-
-
 	TableWidget.clear()
 	TableWidgetWidth = TableWidgetWidth
 	# print(TableWidgetWidth)
@@ -222,49 +223,14 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 	TableWidget.setRowCount(rowCount)		#设置列数
 	TableWidget.setColumnCount(columnCount) 	#设置行数
 
-	itemWidthA = (TableWidgetWidth-20)/(columnCount)		#重新计算itemWidth大小
+	itemWidthA = (TableWidgetWidth-40)/(columnCount)		#重新计算itemWidth大小
 	# print(itemWidthA)
 
 	for i in range(len(pngfile)):
 		row = i // columnCount
 		column = i % columnCount
 
-# 		FrameA.setStyleSheet("QFrame {background-color:transparent;")
-# 		FrameALayout = QtWidgets.QVBoxLayout(FrameA)
-# 		BtnA = QtWidgets.QPushButton(FrameA)
-# 		icon_img = QtGui.QIcon()
-# 		icon_img.addPixmap(QtGui.QPixmap(pngfile[i]), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-# 		BtnA.setIcon(icon_img)
-# 		BtnA.setIconSize(QtCore.QSize(60, 60))
-# 		#BtnA.setEnabled(False)
-# 		BtnA.setStyleSheet("QpushButton {background-color:transparent;")
-# 		LineEditA = QtWidgets.QLineEdit(FrameA)
-# 		LineEditA.setStyleSheet("QLineEdit{\n"
-# "    background-color:transparent;\n"
-# "    color:rgb(176, 176, 176);\n"
-# "    border-style: outset;\n"
-# "    border-width: 0px;\n"
-# "    border-radius: 3px;\n"
-# "    border-color: beige;\n"
-# "    padding: 2px;\n"
-# "    text-align:left\n"
-# "}\n"
-# "")
-# 		LineEditText = file.getfileName(pngfile[i])
-# 		LineEditA.setText(LineEditText)
-# 		LineEditA.setAlignment(QtCore.Qt.AlignCenter)
-# 		FrameALayout.addWidget(BtnA)
-# 		FrameALayout.addWidget(LineEditA)
-		# TableWidget.setCellWidget(row, column, FrameA)
-
 		myWidget = MyWidget(row,column ,TableWidget ,pngfile[i] )
-		#myWidget.resize(QtCore.QSize(90,itemWidth))
-
-
-		# myWidget.label.setPixmap(pixmap)
-		# myWidget.label.resize(QtCore.QSize(30, 30))
-
-
 		icon_img = QtGui.QIcon()
 		icon_img.addPixmap(QtGui.QPixmap(pngfile[i]), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 		myWidget.button.setIcon(icon_img)
@@ -283,6 +249,51 @@ def updataLibraryItem(path,TableWidget,TableWidgetWidth=200):
 		myWidget.lineEdit.setReadOnly(False)
 		# myWidget.lineEdit.setFocusPolicy(QtCore.Qt.NoFocus)
 		myWidget.lineEdit.setEnabled(False)
+		#判断数据类型：
+		try:
+			with open(jsonfile[i], 'r') as f:
+				posedata = json.load(f)
+			starttime = posedata[0].get("starttime")
+			if starttime==None :
+				myWidget.button_type.setStyleSheet("QPushButton {\n"
+								  "    background-color:rgb(140, 140, 140);\n"
+								  "    color: rgb(225, 225, 225);\n"
+								  "    border-width: 0px;\n"
+								  "    border-radius: 3px;\n"
+								  "    border-color: beige;\n"
+								  "    padding: 2px;\n"
+								  "\n"
+								  "}\n"
+								  "QPushButton:hover {\n"
+								  "    background-color:rgb(225, 225, 225);\n"
+								  "}\n"
+								  "QPushButton:pressed {\n"
+								  "    background-color: rgb(225, 225, 225);\n"
+								  "    border-style: inset;\n"
+								  "}\n"
+								  "")
+			else:
+				myWidget.button_type.setStyleSheet("QPushButton {\n"
+							  "    background-color:rgb(225, 140, 140);\n"
+							  "    color: rgb(225, 225, 225);\n"
+							  "    border-width: 0px;\n"
+							  "    border-radius: 3px;\n"
+							  "    border-color: beige;\n"
+							  "    padding: 2px;\n"
+							  "\n"
+							  "}\n"
+							  "QPushButton:hover {\n"
+							  "    background-color:rgb(225, 225, 225);\n"
+							  "}\n"
+							  "QPushButton:pressed {\n"
+							  "    background-color: rgb(225, 225, 225);\n"
+							  "    border-style: inset;\n"
+							  "}\n"
+							  "")
+		except:
+			pass
+
+
 
 	for row in range(TableWidget.rowCount()):
 		for column in range(TableWidget.columnCount()):

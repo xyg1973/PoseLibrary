@@ -12,14 +12,30 @@ def ls():
 
 
 def selectobj(posedata):
+
     with pymxs.undo(True):
+        rt.clearSelection()
         objs = [rt.getNodeByName(data.get('objname')) for data in posedata]
         selectobjs = [obj for obj in objs if obj in rt.objects] #获取场景所有物体
         rt.select(selectobjs)
     rt.redrawViews()
     return selectobjs
 
+def selectobj_anim(animdata):
 
+    with pymxs.undo(True):
+        rt.clearSelection()
+        objs = []
+        selectobjs=[]
+        for data in animdata[1]:
+            obj = rt.getNodeByName(data.get('objname'))
+            objs.append(obj)
+        for objA in objs:
+            if objA in rt.objects:
+                selectobjs.append(objA)
+        rt.select(selectobjs)
+    rt.redrawViews()
+    return selectobjs
 def set_transform_keyframes(objects, frame=rt.sliderTime.frame):
     for obj in objects:
         for prop in ['pos', 'rotation', 'scale']:

@@ -6,10 +6,12 @@ import json
 from PySide2 import QtCore
 from PySide2 import QtGui
 from PySide2 import QtWidgets
-# from PySide2 import shiboken2
+from PySide2 import shiboken2
+from pymxs import runtime as rt
+
 from PySide2.QtCore import QTimer
-# from pymxs import runtime as rt
-# import pymxs
+
+import pymxs
 import gc
 import os
 from PoseLibrary.UI import PoseWindow as PoseWindow
@@ -111,11 +113,23 @@ try:
     # reload_module('threading')
 except:
     pass
+class AboutDialog(QtWidgets.QDialog):
+    def __init__(self,parent=None):
+        super(AboutDialog,self).__init__(parent)
+        layout = QtWidgets.QVBoxLayout()
+        self.label = QtWidgets.QLabel()
+        self.labelB = QtWidgets.QLabel()
+
+        self.label.setText("这一个3dsmax的动画和pose库插件")
+        self.labelB.setText("          -------by:chichungwu")
+        layout.addWidget(self.label)
+        layout.addWidget(self.labelB)
+        self.setLayout(layout)
 
 
 class RenameDialog(QtWidgets.QDialog):
-    def __init__(self):
-        super().__init__()
+    def __init__(self,parent=None):
+        super(RenameDialog,self).__init__(parent)
         layout = QtWidgets.QVBoxLayout()
         self.lineedit = QtWidgets.QLineEdit()
         layout.addWidget(self.lineedit)
@@ -183,8 +197,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.tableWidget.doubleClicked.connect(self.selectPose)#双击事件
         self.ui.Btn_HomePagge.clicked.connect(self.Btn_HomePaggeEvent)
         self.ui.Btn_Creat.clicked.connect(self.CreatPose)
-        self.ui.Btn_Apply.clicked.connect(self.ApplyPose)
-        self.ui.Btn_Apply2.clicked.connect(self.ApplyPose)
+        self.ui.Btn_Apply.clicked.connect(self.Apply)
+        self.ui.Btn_Apply2.clicked.connect(self.Apply)
         self.ui.pushButton_5.clicked.connect(self.creatProject)
         self.ui.Btn_Add.clicked.connect(self.AddFolder)
         self.ui.Btn_Expand.clicked.connect(self.Expandmin)
@@ -213,8 +227,10 @@ class MainWindow(QtWidgets.QMainWindow):
         global PROJECT_PATH
         try:
             clikeMenu = QtWidgets.QMenu(self.ui.Btn_Menu)
-            LibraryACtion = clikeMenu.addAction(u"资源库")
-            FileACtion = clikeMenu.addAction(u"文件")
+            assetMenu = clikeMenu.addMenu(u"资源库")
+            fileMenu = clikeMenu.addMenu(u"文件")
+            LibraryACtion = assetMenu.addAction(u"本地打开资源库目录")
+            FileACtion = fileMenu.addAction(u"新建文件夹")
             HelpACtion = clikeMenu.addAction(u"帮助")
             SettingACtion = clikeMenu.addAction(u"偏好设置")
             UpdateACtion = clikeMenu.addAction(u"检查更新")
@@ -222,23 +238,39 @@ class MainWindow(QtWidgets.QMainWindow):
             ExitACtion = clikeMenu.addAction(u"退出")
             action = clikeMenu.exec_(QtGui.QCursor.pos())
             if action == LibraryACtion:
+                global PROJECT_PATH
+
+                os.startfile(PROJECT_PATH)
                 pass
             elif action == FileACtion:
-                pass
+                self.AddFolder()
             elif action == HelpACtion:
-                pass
+                Aboutdialog = AboutDialog(self)
+                Aboutdialog.label.setText("功能未开发！")
+                Aboutdialog.labelB.setText("      --------敬请期待")
+                Aboutdialog.show()
             elif action == SettingACtion:
-                pass
+                Aboutdialog = AboutDialog(self)
+                Aboutdialog.label.setText("功能未开发！")
+                Aboutdialog.labelB.setText("      --------敬请期待")
+                Aboutdialog.show()
             elif action == UpdateACtion:
-                pass
+                Aboutdialog = AboutDialog(self)
+                Aboutdialog.label.setText("功能未开发！")
+                Aboutdialog.labelB.setText("      --------敬请期待")
+                Aboutdialog.show()
+            elif action == AboutACtion:
+                Aboutdialog = AboutDialog(self)
+                Aboutdialog.show()
             elif action == ExitACtion:
-                pass
+                self.close()
         except Exception as e:
             pass
 
 
             # print(e)
     def open_file_dialog(self):
+        QtWidgets.QFileDialog
         myfileDialog = QtWidgets.QFileDialog(self,'选择文件夹', './')
         myfileDialog .resize(300, 150)  # 设置窗口大小
         folder_path = myfileDialog.getExistingDirectory()
@@ -277,6 +309,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 
+
     def TableWeiget_rightMenuShow(self):
         global rightMenuStyle
         global PROJECT_PATH
@@ -286,8 +319,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.setStyleSheet(rightMenuStyle)
             addPoseAction = rightMenu.addAction(u"添加pose")
             addAnimAction = rightMenu.addAction(u"添加Anim")
-            selectObjAction =  rightMenu.addAction(u"选择物体")
-            resPoseAction = rightMenu.addAction(u"刷新pose")
+            resDataAction = rightMenu.addAction(u"更新数据")
 
             renameAction =  rightMenu.addAction(u"重命名")
             removeAction = rightMenu.addAction(u"删除")
@@ -299,32 +331,14 @@ class MainWindow(QtWidgets.QMainWindow):
                 os.remove(path + ".json")
                 self.UpdataLibrary()
 
-            elif action == selectObjAction:
-
-                path = JSONPATH
-                # 读取数据
-                with open(path, 'r') as f:
-                    posedata = json.load(f)
-                # 获取设置
-
-                selectobj = cmds.selectobj(posedata)
-
-
-            elif action == resPoseAction:
-                self.resetPose()
-                data = anim.saveAnim()
-                selectobj = cmds.ls()
-                # selectobj = cmds.selectobj(posedata)
-                count = 2
-                # print(data)
-                self.ui.progressBar.setVisible(True)
-
-                anim.pastAnim(data,selectobj,self.ui.progressBar)
-                self.ui.progressBar.setVisible(False)
-                print("完成")
+            elif action == resDataAction:
+                self.resetData()
 
             elif action == addPoseAction:
                 self.CreatPose()
+            elif action == addAnimAction:
+                self.CreatAnim()
+
             elif action == renameAction:
 
                 self.TableWeiget_reanameItem()
@@ -586,31 +600,53 @@ class MainWindow(QtWidgets.QMainWindow):
             editor.lineEdit.lineEdits[0]()
 
 
-    def resetPose(self):
+    def resetData(self):
         global PROJECT_PATH
         global LISTITEMPATH
         if not self.ui.tableWidget.currentIndex():
             print(test)
             pass
         else:
-            path = self.getCellPath()
-            filepath =path+".json"
-            pngpath = path+".png"
-            posedata = pose.savePose()
-            with open(filepath, 'w') as f:
-                json.dump(posedata, f)
+            selectobj = cmds.ls()
+            if len(selectobj) > 0:
+                path = self.getCellPath()
+                filepath = path + ".json"
+                pngpath = path + ".png"
 
-            render.render_png(300, 300, pngpath)
-            self.ui.tableWidget.clear()
-            newpath = self.getCellPath()
-            QTcommand.updataLibraryItem(newpath, self.ui.tableWidget,
-                                        self.ui.centralwidget.frameGeometry().width())
+                datatype = self.ui.label_7.text()
+                if datatype=="Pose":
+                    posedata = pose.savePose()
+                    with open(filepath, 'w') as f:
+                        json.dump(posedata, f)
+
+                    render.render_png(300, 300, pngpath)
+                    self.ui.tableWidget.clear()
+                    newpath = self.getCellPath()
+                    self.UpdataLibrary()
+                elif datatype == "Anim":
+                    animdata = anim.saveAnim()
+                    with open(filepath, 'w') as f:
+                        json.dump(animdata, f)
+                    render.render_png(300, 300, pngpath)
+                    newpath = self.getCellPath()
+                    self.UpdataLibrary()
+
+                else:
+                    pass
+
 
     def CreatPose(self):
+        selectobj = cmds.ls()
+        if len(selectobj)>0:
+            self.CreatPose_do()
+
+
+    def CreatPose_do(self):
         global PROJECT_PATH
         global LISTITEMPATH
         # pose.make_cylinder()
         # name = self.UI_addpose_inputDialog()
+
         name = "pose"
         jsonname = name + ".json"
         # print(pypath+"\img//picture-dynamic-clay.png")
@@ -682,6 +718,11 @@ class MainWindow(QtWidgets.QMainWindow):
         return posedata
 
     def CreatAnim(self):
+        selectobj = cmds.ls()
+        if len(selectobj) > 0:
+            self.CreatAnim_do()
+
+    def CreatAnim_do(self):
         global PROJECT_PATH
         global LISTITEMPATH
         def creatanim(filepath,pngpath):
@@ -734,11 +775,44 @@ class MainWindow(QtWidgets.QMainWindow):
                                             self.ui.centralwidget.frameGeometry().width())
         return animdata
 
+    def Apply(self):
+        try:
+            datatype = self.ui.label_7.text()
+            if datatype=="Pose":
+                self.ApplyPose()
+            elif datatype == "Anim":
+                self.ApplyAnim()
+            else:
+                pass
+        except:
+            pass
 
+    def ApplyAnim(self):
+        global progressBarValue
+        global JSONPATH
+
+        # 定位json路径
+        path = JSONPATH
+        with open(path, 'r') as f:
+            animdata = json.load(f)
+        #获取设置
+        selectobj = cmds.ls()
+
+        self.ui.progressBar.setVisible(True)
+        if self.ui.checkBox_4.isChecked():
+            offset = rt.currentTime.frame
+            anim.pastAnim(animdata, selectobj, self.ui.progressBar,OffsetTime = int(offset))
+        else:
+            print("yess")
+            anim.pastAnim(animdata, selectobj, self.ui.progressBar)
+
+        render.reViews()
+        self.ui.progressBar.setVisible(False)
 
     def ApplyPose(self):
         global progressBarValue
         global JSONPATH
+
         # 定位json路径
         path = JSONPATH
         # 读取数据
@@ -1070,11 +1144,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.Btn_Expand.setToolTip("隐藏-左栏\右栏")
         self.ui.pushButton_3.setToolTip("显示-左栏\右栏")
         self.ui.Btn_Creat.setToolTip("添加Pose")
+        self.ui.Btn_Creat_Anim.setToolTip("添加Anim")
         self.ui.Btn_Apply.setToolTip("应用Pose")
         self.ui.Btn_Apply2.setToolTip("应用Pose")
-        self.ui.checkBox_3.setToolTip("")
-        self.ui.checkBox_4.setToolTip("")
+        self.ui.checkBox_3.setToolTip("Pose类型有效")
+        self.ui.checkBox_4.setToolTip("Anim类型有效")
 
+        self.ui.checkBox_3.setChecked(True)
 
         # print("设置UI样式")
 
@@ -1154,8 +1230,6 @@ class MainWindow(QtWidgets.QMainWindow):
 def main():
     global  PROJECT_PATH
     global  LISTITEMPATH
-    from PySide2 import shiboken2
-    from pymxs import runtime as rt
     global pypath
     # rt.resetMaxFile(rt.name('noPrompt'))
     # Cast the main window HWND to a QMainWindow for docking
