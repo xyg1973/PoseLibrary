@@ -842,16 +842,18 @@ class MainWindow(QtWidgets.QMainWindow):
             with open(JSONPATH, 'r') as f:
                 posedata = json.load(f)
             #判断类型：
-            if posedata[0]["starttime"]:
-                print("flase")
+            try:
+                #pose类型
                 count = pose.getselectobjcount(posedata)
+
                 QTcommand.BtnSetIcons(self.ui.pushButton_4, SELECTITEMPATH)
                 self.ui.pushButton_4.setIconSize(QtCore.QSize(200, 200))
                 self.ui.Lbl_Name.setText("name: " + name)
                 self.ui.Lbl_ObjCount.setText("{} Objects".format(count))
                 self.ui.Lbl_Path.setText(CellRelativePath)
-            else:
-                print("flase")
+                self.ui.label_7.setText("Pose")
+            except:
+                #anim类型
                 posedata = posedata[1]
                 count = pose.getselectobjcount(posedata)
                 QTcommand.BtnSetIcons(self.ui.pushButton_4, SELECTITEMPATH)
@@ -859,6 +861,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.ui.Lbl_Name.setText("name: " + name)
                 self.ui.Lbl_ObjCount.setText("{} Objects".format(count))
                 self.ui.Lbl_Path.setText(CellRelativePath)
+                self.ui.label_7.setText("Anim")
         except:
             pass
 
