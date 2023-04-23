@@ -158,9 +158,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.frame_11.setVisible(False)
         self.setWindowTitle("PoseLibrary")
         self.ui.treeWidget_2.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-        self.ui.treeWidget_2.installEventFilter(self)
+        self.ui.treeWidget_2.installEventFilter(self.ui.treeWidget_2)
         self.ui.tableWidget.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-        self.ui.tableWidget.installEventFilter(self)
+        self.ui.tableWidget.installEventFilter(self.ui.tableWidget)
         self.ui.dockWidget_down.setVisible(False)
         self.ui.dockWidget_top.setVisible(False)
         self.ui.progressBar.setVisible(False)
@@ -287,9 +287,14 @@ class MainWindow(QtWidgets.QMainWindow):
 
         rightMenu = QtWidgets.QMenu(self.ui.Btn_Project)
         removeProjectAction = rightMenu.addAction(u"移除资源库")
+        openProjectFolderAction = rightMenu.addAction(u"在文件管理器打开")
         openProjectAction = rightMenu.addAction(u"打开其他资源库")
         action = rightMenu.exec_(QtGui.QCursor.pos())
         if action == removeProjectAction:
+            try:
+                self.size_changed.disconnect(self.eventItemSort)
+            except:
+                pass
             # 配置文件
             data = None
             with open(configfile, 'w') as f:
@@ -300,11 +305,26 @@ class MainWindow(QtWidgets.QMainWindow):
 
             #删除清空配置文件
             pass
+        elif action == openProjectFolderAction:
+            global PROJECT_PATH
+
+            os.startfile(PROJECT_PATH)
+
         elif action == openProjectAction:
-            self.size_changed.disconnect(self.eventItemSort)
-            self.creatProject()
-            QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
-            self.size_changed.connect(self.eventItemSort)
+            current_PROJECT_PATH = PROJECT_PATH
+            try:
+
+                self.size_changed.disconnect(self.eventItemSort)
+            except:
+                pass
+
+            if self.creatProject() ==False:
+                PROJECT_PATH = current_PROJECT_PATH
+                QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
+                self.size_changed.connect(self.eventItemSort)
+            else:
+                QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
+                self.size_changed.connect(self.eventItemSort)
 
 
 
@@ -511,18 +531,22 @@ class MainWindow(QtWidgets.QMainWindow):
         PROJECT_PATH = folder_path
         PROJECT_NAME = os.path.basename(folder_path)
         project = file.AddProject(PROJECT_PATH)
-        file.write_data_to_file(configfile, project)
-        self.stepWindowUi()
-        QTcommand.pypath = pypath
-        QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
+        if folder_path == "":
+            pass
+            return False
+        else:
+            file.write_data_to_file(configfile, project)
+            self.stepWindowUi()
+            QTcommand.pypath = pypath
+            QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
 
-        self.ui.Btn_Project.setText(PROJECT_NAME)
+            self.ui.Btn_Project.setText(PROJECT_NAME)
 
-        self.ui.dockWidget.setVisible(True)
-        self.ui.dockWidget_2.setVisible(True)
-        self.ui.UI_Library_frame.setVisible(True)
-        self.UpdataLibrary()
-        # self.ui.dockWidget_top.setVisible(True)
+            self.ui.dockWidget.setVisible(True)
+            self.ui.dockWidget_2.setVisible(True)
+            self.ui.UI_Library_frame.setVisible(True)
+            self.UpdataLibrary()
+            # self.ui.dockWidget_top.setVisible(True)
 
     def Btn_HomePaggeEvent(self):
         global PROJECT_PATH
@@ -710,12 +734,13 @@ class MainWindow(QtWidgets.QMainWindow):
                         self.ui.horizontalSlider.setVisible(True)
 
                     QTcommand.updataLibraryItem(folder_path, self.ui.tableWidget, self.ui.centralwidget.frameGeometry().width())
+                    return posedata
                 except:
                     pass
 
 
 
-        return posedata
+
 
     def CreatAnim(self):
         selectobj = cmds.ls()
@@ -963,6 +988,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         if PROJECT_PATH =="":
+            try:
+                self.size_changed.disconnect(self.eventItemSort)
+            except:
+                pass
             self.ui.pushButton_5.setFocusPolicy(QtCore.Qt.NoFocus)
 
             # self.ui.lineEdit_2.setFocusPolicy(QtCore.Qt.NoFocus)
@@ -1205,7 +1234,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def itemsort(self):
         # time.sleep(0.25)
-        self.UpdataLibrary()
+        try:
+            if self.ui.tableWidget.isVisible():
+                self.UpdataLibrary()
+        except:
+            pass
 
 
     def eventItemSort(self,w, h):
@@ -1214,16 +1247,19 @@ class MainWindow(QtWidgets.QMainWindow):
 
         gc.collect()  # python内置清除内存函数
     def eventFilter(self, watched, event):
-        if watched == self.ui.tableWidget and event.type() == QtCore.QEvent.Wheel:
-            if event.modifiers() == QtCore.Qt.ControlModifier:
-                # 在这里执行你想要绑定的操作
-                self.ui.horizontalSlider.wheelEvent(event)
-                return True
-        # if watched == self.ui.tableWidget and event.type() == QtCore.QEvent.KeyPress:
-        #     if event.key() == QtCore.Qt.Key_F2:
-                # print("重命名")
+        try:
+            if watched == self.ui.tableWidget and event.type() == QtCore.QEvent.Wheel:
+                if event.modifiers() == QtCore.Qt.ControlModifier:
+                    # 在这里执行你想要绑定的操作
+                    self.ui.horizontalSlider.wheelEvent(event)
+                    return True
+            # if watched == self.ui.tableWidget and event.type() == QtCore.QEvent.KeyPress:
+            #     if event.key() == QtCore.Qt.Key_F2:
+                    # print("重命名")
 
-        return super(MainWindow, self).eventFilter(watched, event)
+            return super(MainWindow, self).eventFilter(watched, event)
+        except:
+            pass
     # def evenrfilter(self,eventlist):
     #     for event in eventlist:
     #         self.ui.Btn_Creat.installEventFilter(event)

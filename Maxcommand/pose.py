@@ -13,12 +13,26 @@ def savePose():
     posedata = []
     if objs:
         for obj in objs :
+            currenttime = rt.currentTime.frame
             if rt.getPropertyController(obj.controller, 'Horizontal') != None:  #判断是否是质心
                 objdata = {}
+
                 objdata["obj"] = str(obj)
                 objdata["objtype"] = str(rt.classOf(obj))
                 objdata["objname"] = obj.name
                 objdata["objtransform"] = str(obj.transform)
+                if obj.parent:
+                    objdata["ojb_parent_transform"] = str(obj.parent.transform)
+                    objdata["obj_offset_transform"] = str(getOffsetMatrix(obj.parent.transform, obj.transform))
+                else:
+                    objdata["objparent"] = None
+                objkeys = rt.getPropertyController(obj.controller, 'Horizontal').keys
+                for key in objkeys:
+                    if key.time.frame == currenttime:
+                        objdata["iskeyframe"] = True
+                        break
+                    else:
+                        objdata["iskeyframe"] = False
                 posedata.append(objdata)
             elif rt.classOf(obj) == rt.Biped_Object:    #判断是否是biped类
                 objdata = {}
@@ -32,6 +46,15 @@ def savePose():
                     objdata["obj_offset_transform"] = str(getOffsetMatrix(obj.parent.transform, obj.transform))
                 else:
                     objdata["objparent"] = None
+
+                #判断是否是关键帧
+                objkeys = obj.controller.keys
+                for key in objkeys:
+                    if key.time.frame == currenttime:
+                        objdata["iskeyframe"] = True
+                        break
+                    else:
+                        objdata["iskeyframe"] = False
                 posedata.append(objdata)
             else:
                 # objtype = rt.classOf(obj.name
@@ -41,9 +64,19 @@ def savePose():
                 objdata["objtype"] = str(rt.classOf(obj))
                 objdata["objname"] = obj.name
                 objdata["objtransform"] = str(obj.transform)
-                objdata["objposition"] = str(obj.position)
-                objdata["objrotation"] = str(obj.rotation)
-                objdata["objscale"] = str(obj.scale)
+                try:
+                    objdata["objposition"] = str(obj.position)
+                except:
+                    objdata["objposition"] = None
+                try:
+
+                    objdata["objrotation"] = str(obj.rotation)
+                except:
+                    objdata["objrotation"] = None
+                try:
+                    objdata["objscale"] = str(obj.scale)
+                except:
+                    objdata["objscale"] = None
                 if obj.parent:
                     objdata["objparent"] =str(obj.parent)
                     objdata["ojb_parent_transform"] = str(obj.parent.transform)
@@ -51,7 +84,36 @@ def savePose():
                 else:
                     objdata["objparent"] = None
 
+                # 判断是否是关键帧
+                linkController = rt.getPropertyController(obj.controller, 'Link Params')
+                if linkController==None:
+                    posController = rt.getPropertyController(obj.controller, 'Position')
+                    rotController = rt.getPropertyController(obj.controller, 'Rotation')
+                    scaController = rt.getPropertyController(obj.controller, 'Scale')
+                    if posController!=None:
+                        objkeys = posController.keys
+                        for key in objkeys:
+
+                            if key.time.frame == currenttime:
+                                objdata["iskeyframe"] = True
+                                break
+                    if rotController!=None:
+                        objkeys = rotController.keys
+                        for key in objkeys:
+                            if key.time.frame == currenttime:
+                                objdata["iskeyframe"] = True
+                                break
+                    if scaController!=None:
+                        for key in objkeys:
+                            if key.time.frame == currenttime:
+                                objdata["iskeyframe"] = True
+                                break
+                    else:
+                        objdata["iskeyframe"] = False
+                else:
+                    objdata["iskeyframe"] = False
                 posedata.append(objdata)
+    print(posedata)
     return posedata
 
 
@@ -137,6 +199,7 @@ def pastPoseRot(posedata,selectobjs,count,progressBar):
                 k = k+1
                 obj = rt.getNodeByName(data.get('objname'))
                 if obj in selectobjs:
+
                     # objpar = obj.parent
                     # parmat3 = objpar.transform
                     mat3 = cmds.data_to_rtMatrix3(data.get('objtransform'))#基于世界空间矩阵
@@ -150,6 +213,7 @@ def pastPoseRot(posedata,selectobjs,count,progressBar):
                         # # remat3 = rt.XFormMat(mat3,localmat3)
                         obj.transform = newmat3
                     else:
+
                         offsetmat  = cmds.data_to_rtMatrix3(data.get("obj_offset_transform"))
                         newmat3 = offsetmat*obj.parent.transform
                         obj.transform = newmat3
@@ -177,5 +241,6 @@ def getselectobjcount(posedata):
     return selectobjcount
 
 
-
+def is_or_notis_keyframe():
+    pass
 #设置关键帧
