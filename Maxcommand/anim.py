@@ -20,7 +20,7 @@ def saveAnim():
     return animdata
 
 
-def pastAnim(animdata,selectobjs,progressBar,OffsetTime=0):
+def pastAnim(animdata,selectobjs,progressBar,OffsetTime=0,isPastKeyFrame=True):
     sencetimedata = animdata[0]
     max = len(animdata)-1
     k = 1
@@ -34,9 +34,16 @@ def pastAnim(animdata,selectobjs,progressBar,OffsetTime=0):
                 for data in posedata:
                     obj = rt.getNodeByName(data.get('objname'))
                     if obj in selectobjs:
-                        mat3 = cmds.data_to_rtMatrix3(data.get('objtransform'))
-                        with pymxs.attime(i+OffsetTime):
-                            obj.transform = mat3
+                        if isPastKeyFrame==True:
+                            obj_iskeyframe = data.get('iskeyframe')
+                            if obj_iskeyframe == True:
+                                mat3 = cmds.data_to_rtMatrix3(data.get('objtransform'))
+                                with pymxs.attime(i + OffsetTime):
+                                    obj.transform = mat3
+                        else:
+                            mat3 = cmds.data_to_rtMatrix3(data.get('objtransform'))
+                            with pymxs.attime(i+OffsetTime):
+                                obj.transform = mat3
             k += 1
     rt.enableSceneRedraw()
     rt.redrawViews()
