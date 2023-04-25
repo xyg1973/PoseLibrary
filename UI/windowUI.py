@@ -759,7 +759,12 @@ class MainWindow(QtWidgets.QMainWindow):
             return animedata
 
         def uiVisble():
+            filelist_A = file.getfile(PROJECT_PATH, ".jpg")
             filelist = file.getfile(PROJECT_PATH, ".png")
+            if filelist_A:
+                for jpgitem in filelist_A:
+                    filelist.append(jpgitem)
+
             if filelist == []:
                 self.ui.frame_2.setVisible(False)
                 self.ui.horizontalSlider.setVisible(False)
@@ -777,7 +782,7 @@ class MainWindow(QtWidgets.QMainWindow):
         if not self.ui.treeWidget_2.selectedItems():
 
             filepath = PROJECT_PATH + "\\" + jsonname
-            pngpath = PROJECT_PATH + "\\" + name + ".png"
+            pngpath = PROJECT_PATH + "\\" + name + ".jpg"
             new_filepath = file.create_file(filepath)
             new_pngpath = file.create_file(pngpath)
             animdata = creatanim(new_filepath,new_pngpath)
@@ -792,7 +797,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
                 folder_path = PROJECT_PATH + "//" + itempath
                 filepath = folder_path + "\\" + jsonname
-                pngpath = folder_path + "\\" + name + ".png"
+                pngpath = folder_path + "\\" + name + ".jpg"
                 new_filepath = file.create_file(filepath)
                 new_pngpath = file.create_file(pngpath)
                 animdata = creatanim(new_filepath, new_pngpath)
@@ -1015,10 +1020,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.size_changed.connect(self.eventItemSort)
             self.Btn_HomePaggeEvent()
 
-
-
-
-
             # QTcommand.pypath = pypath
             # QTcommand.updataListItem(PROJECT_PATH, self.ui.treeWidget_2)
             # self.ui.treeWidget_2.clearSelection()
@@ -1032,8 +1033,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.dockWidget_top.setVisible(False)
         self.ui.Btn_Apply2.setVisible(False)
         self.ui.frame_9.setVisible(True)
-
-
 
 
     def getCellPath(self):
@@ -1200,10 +1199,10 @@ class MainWindow(QtWidgets.QMainWindow):
         if not self._timer.isActive():
             self.size_changed.emit(event.size().width(), event.size().height())
             self._blocked = True
-            self._timer.start(10) # 屏蔽信号的时间，单位毫秒
+            self._timer.start(5) # 屏蔽信号的时间，单位毫秒
         elif not self._blocked:
             self._timer.stop()
-            self._timer.start(10)
+            self._timer.start(5)
             self._blocked = True
         super(MainWindow, self).resizeEvent(event)
 
