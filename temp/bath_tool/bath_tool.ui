@@ -625,6 +625,41 @@ QPushButton:pressed {
                    </layout>
                   </widget>
                  </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_17">
+                   <property name="leftMargin">
+                    <number>9</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>6</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>9</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>6</number>
+                   </property>
+                   <item>
+                    <widget class="QProgressBar" name="progressBar">
+                     <property name="inputMethodHints">
+                      <set>Qt::ImhNone</set>
+                     </property>
+                     <property name="value">
+                      <number>24</number>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                     <property name="textVisible">
+                      <bool>true</bool>
+                     </property>
+                     <property name="format">
+                      <string>%p%</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
                 </layout>
                </widget>
               </item>
@@ -947,13 +982,6 @@ QPushButton:pressed {
             </widget>
            </widget>
           </item>
-          <item>
-           <widget class="QProgressBar" name="progressBar">
-            <property name="value">
-             <number>24</number>
-            </property>
-           </widget>
-          </item>
          </layout>
         </item>
        </layout>
@@ -1102,7 +1130,7 @@ QPushButton:pressed {
      <x>0</x>
      <y>0</y>
      <width>1066</width>
-     <height>18</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -1112,8 +1140,10 @@ QPushButton:pressed {
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
-     <string>显示日志窗口</string>
+     <string>窗口</string>
     </property>
+    <addaction name="actionshow"/>
+    <addaction name="actionhide"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
@@ -1131,6 +1161,16 @@ QPushButton:pressed {
    <addaction name="menu_4"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionshow">
+   <property name="text">
+    <string>显示日志窗口</string>
+   </property>
+  </action>
+  <action name="actionhide">
+   <property name="text">
+    <string>隐藏日志窗口</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

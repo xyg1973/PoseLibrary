@@ -105,12 +105,21 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.BtnA_svae_path.clicked.connect(self.clicked_BtnA_svae_path)
         self.ui.BtnA_RefreshList.clicked.connect(self.UpdataListA)
         self.ui.BtnA_Apply.clicked.connect(self.ApplyA)
+        self.ui.actionshow.triggered.connect(self.actionshow_triggered)
+        self.ui.actionhide.triggered.connect(self.actionhide_triggered)
+        self.ui.LEdit_max_path.textEdited.connect(self.UpdataListA)
         # self.ui.LEdit_max_path.u
         self.ui.treeWidgetA.setColumnWidth(0,30)
         self.ui.treeWidgetA.setColumnWidth(1, 200)
         self.ui.treeWidgetA.setColumnWidth(2, 600)
         self.ui.treeWidgetA.clear()
         pass
+
+    def actionshow_triggered(self):
+        self.ui.dockWidget_2.setVisible(True)
+
+    def actionhide_triggered(self):
+        self.ui.dockWidget_2.setVisible(False)
 
     def showlogUI(self):
         self.ui.dockWidget_2.setVisible(True)
@@ -164,9 +173,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.LEdit_svae_path.setText(folder_path)
 
     def UpdataListA(self):
-        self.ui.treeWidgetA.clear()
-        folder_path = self.ui.LEdit_max_path.text()
-        self.UpdataListA_do(self.ui.treeWidgetA,folder_path)
+        try:
+
+            self.ui.treeWidgetA.clear()
+            folder_path = self.ui.LEdit_max_path.text()
+            self.UpdataListA_do(self.ui.treeWidgetA,folder_path)
+        except:
+            pass
+
     def UpdataListA_do(self,treeWidget,folder_path):
         treeWidget.clear()
         filelist = getfile(folder_path,".max")
@@ -185,20 +199,27 @@ class MainWindow(QtWidgets.QMainWindow):
     def ApplyA(self):
 
         selectitems =self.ui.treeWidgetA.selectedItems()
+        self.ui.progressBar.setVisible(True)
+        max = len(selectitems)
+        k=0
+        self.ui.progressBar.setValue(float(k) / float(max) * 100)
         for item in selectitems:
+            self.ui.progressBar.setValue(float(k) / float(max) * 100)
             path = item.text(2)
 
             # print(item.text(2))
             try:
                 rt.loadMaxFile(path,quiet=True)
-                savepath = "C:/Users/chichungwu/Documents/SN AnimTool/"+item.text(1)+".bip"
+                savepath = "F:\\Myself\\cache\\fas/"+item.text(1)+".bip"
                 objA = rt.getNodeByName('Bip001')
                 rt.biped.saveBipFile(objA.controller, savepath)
 
                 print(savepath)
             except:
                 print("读取文件错误")
-
+            k+=1
+            self.ui.progressBar.setValue(float(k) / float(max) * 100)
+        self.ui.progressBar.setVisible(False)
         print("处理完成")
 
 def main():
