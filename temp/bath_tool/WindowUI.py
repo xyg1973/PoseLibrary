@@ -210,7 +210,8 @@ class MainWindow(QtWidgets.QMainWindow):
             # print(item.text(2))
             try:
                 rt.loadMaxFile(path,quiet=True)
-                savepath = "F:\\Myself\\cache\\fas/"+item.text(1)+".bip"
+                user_documents_path = os.path.expanduser('~/Documents')
+                savepath = user_documents_path+"/Downloads/"+item.text(1)+".bip"
                 objA = rt.getNodeByName('Bip001')
                 rt.biped.saveBipFile(objA.controller, savepath)
 
