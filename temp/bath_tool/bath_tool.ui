@@ -110,6 +110,19 @@ background: rgb(255, 0, 0);
          <number>6</number>
         </property>
         <item>
+         <widget class="QPushButton" name="Btn_logo_Top">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>60</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
          <layout class="QVBoxLayout" name="verticalLayout_9">
           <item>
            <widget class="QTabWidget" name="tabWidget">
@@ -570,6 +583,34 @@ QTreeView::branch:!adjoins-item {border-image: url(vline.png) 0;}</string>
                        <number>6</number>
                       </property>
                       <item>
+                       <layout class="QVBoxLayout" name="verticalLayout_19">
+                        <property name="spacing">
+                         <number>0</number>
+                        </property>
+                        <item>
+                         <widget class="QLabel" name="label_2">
+                          <property name="text">
+                           <string>内部版本请勿外泄</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="label_4">
+                          <property name="text">
+                           <string>光子工作室-SN项目组-美术部</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="label_3">
+                          <property name="text">
+                           <string>@2023</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                      <item>
                        <spacer name="horizontalSpacer_3">
                         <property name="orientation">
                          <enum>Qt::Horizontal</enum>
@@ -1026,19 +1067,55 @@ QPushButton:pressed {
         <number>6</number>
        </property>
        <item>
-        <widget class="QLabel" name="label">
-         <property name="font">
-          <font>
-           <pointsize>15</pointsize>
-           <weight>75</weight>
-           <italic>false</italic>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>输出日志</string>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_18">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="font">
+            <font>
+             <pointsize>15</pointsize>
+             <weight>75</weight>
+             <italic>false</italic>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>输出日志</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>X</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -1130,13 +1207,15 @@ QPushButton:pressed {
      <x>0</x>
      <y>0</y>
      <width>1066</width>
-     <height>22</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
     <property name="title">
      <string>文件</string>
     </property>
+    <addaction name="actionsetting"/>
+    <addaction name="actionexport"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
@@ -1149,6 +1228,7 @@ QPushButton:pressed {
     <property name="title">
      <string>帮助</string>
     </property>
+    <addaction name="actiondoc"/>
    </widget>
    <widget class="QMenu" name="menu_4">
     <property name="title">
@@ -1169,6 +1249,21 @@ QPushButton:pressed {
   <action name="actionhide">
    <property name="text">
     <string>隐藏日志窗口</string>
+   </property>
+  </action>
+  <action name="actiondoc">
+   <property name="text">
+    <string>帮助文档</string>
+   </property>
+  </action>
+  <action name="actionsetting">
+   <property name="text">
+    <string>设置</string>
+   </property>
+  </action>
+  <action name="actionexport">
+   <property name="text">
+    <string>输出目录</string>
    </property>
   </action>
  </widget>
