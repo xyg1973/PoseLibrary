@@ -71,9 +71,6 @@ def getfileName(path):
 
 class MainWindow(QtWidgets.QMainWindow):
 
-    size_changed = QtCore.Signal(int, int)
-    m_flag = False
-    eventlist = []
     def __init__(self,parent=None):
         super(MainWindow, self).__init__(parent)
         # SETUP MAIN WINDOw
@@ -82,13 +79,20 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui = bath_tool.Ui_mainWindow()
         self.ui.setupUi(self)
         self.setWindowTitle("SN_Anim_Batch_Tool")
+        #隐藏标题栏
+        # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
 
         self.docktitle = QtWidgets.QWidget()
         self.docktitle_2 = QtWidgets.QWidget()
+        self.docktitle_3 = QtWidgets.QWidget()
         self.ui.dockWidget.setTitleBarWidget(self.docktitle)
         self.ui.dockWidget_2.setTitleBarWidget(self.docktitle_2)
+        self.ui.dockWidget_3.setTitleBarWidget(self.docktitle_3)
+
         # self.ui.dockWidget_2.setMinimumSize(QtCore.QSize(480, 660))
         self.ui.dockWidget_2.setVisible(False)
+        self.ui.dockWidget_3.setVisible(False)
         self.ui.progressBar.setVisible(False)
 
         self.setStyleSheet("QMainWindow#MainWindow\n"
@@ -112,17 +116,20 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.treeWidgetA.setColumnWidth(0,30)
         self.ui.treeWidgetA.setColumnWidth(1, 200)
         self.ui.treeWidgetA.setColumnWidth(2, 600)
-        self.ui.treeWidgetA.clear()
+        # self.ui.treeWidgetA.clear()
         pass
 
     def actionshow_triggered(self):
         self.ui.dockWidget_2.setVisible(True)
+        self.ui.dockWidget_3.setVisible(True)
 
     def actionhide_triggered(self):
         self.ui.dockWidget_2.setVisible(False)
+        self.ui.dockWidget_3.setVisible(False)
 
     def showlogUI(self):
         self.ui.dockWidget_2.setVisible(True)
+        self.ui.dockWidget_3.setVisible(True)
 
     def dialog_getMaxFilePath(self):
 
