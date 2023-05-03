@@ -23,6 +23,8 @@ def reload_module(module_name):
             importlib.reload(sys.modules[module_name])
     else:
         # 如果没有导入，则正常导入
+        print(module_name)
+        print("重新加载失败")
         __import__(module_name)
 try:
     from PoseLibrary.temp.bath_tool import bath_tool as bath_tool
@@ -57,6 +59,14 @@ def getfile(path,filetype):
             pass
     return filelist
 
+
+def BtnSetIcons(PushButton,iconsPath,Text = ""):
+	icon_img = QtGui.QIcon()
+	icon_img.addPixmap(QtGui.QPixmap(iconsPath), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+	PushButton.setIcon(icon_img)
+	# PushButton.setIconSize(QtCore.QSize(size, size))
+	PushButton.setText(Text)
+
 def getfileName(path):
     """
 
@@ -79,9 +89,53 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui = bath_tool.Ui_mainWindow()
         self.ui.setupUi(self)
         self.setWindowTitle("SN_Anim_Batch_Tool")
-        #隐藏标题栏
+        self.stepWindowUi()
+        self.creat_contion()
+    def creat_contion(self):
+        # self.ui.menu_2.clicked.connect(self.showlogUI)
+        # self.ui.menu_2.actions(self.showlogUI)
+        self.ui.Menu_Right.itemClicked.connect(self.cliked_Menu_Right)
+        self.ui.Btn_setting.clicked.connect(self.cliked_Btn_setting)
+        self.ui.BtnA_newSkin.clicked.connect(self.clicked_BtnA_newSkin)
+        self.ui.BtnA_max_path.clicked.connect(self.clicked_BtnA_max_path)
+        self.ui.BtnA_svae_path.clicked.connect(self.clicked_BtnA_svae_path)
+        self.ui.BtnA_RefreshList.clicked.connect(self.UpdataListA)
+
+        self.ui.BtnA_Apply.clicked.connect(self.ApplyA)
+        # self.ui.actionshow.triggered.connect(self.actionshow_triggered)
+        # self.ui.actionhide.triggered.connect(self.actionhide_triggered)
+        self.ui.LEditA_max_path.textEdited.connect(self.UpdataListA)
+
+        # self.ui.LEdit_max_path.u
+        self.ui.treeWidgetA.setColumnWidth(0,30)
+        self.ui.treeWidgetA.setColumnWidth(1, 200)
+        self.ui.treeWidgetA.setColumnWidth(2, 600)
+        # self.ui.treeWidgetA.clear()
+
+        #-------------------------------------------------------------------------------------------------------
+        self.ui.BtnB_svae_path.clicked.connect(self.clicked_BtnB_svae_path)
+        self.ui.BtnB_max_path.clicked.connect(self.clicked_BtnB_max_path)
+        self.ui.BtnB_RefreshList.clicked.connect(self.UpdataListB)
+        self.ui.LEditB_max_path.textEdited.connect(self.UpdataListB)
+        self.ui.LEditB_max_path.textEdited.connect(self.UpdataListB)
+        self.ui.BtnB_RefreshList.clicked.connect(self.UpdataListB)
+        pass
+
+    def stepWindowUi(self):
+        # 隐藏标题栏
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        item = self.ui.Menu_Right.topLevelItem(0)
+        self.ui.Menu_Right.setCurrentItem(item)
+        self.cliked_Menu_Right()
+
+        #设置icon
+        iconpath_folder = "C:\Program Files\Autodesk\\3ds Max 2020\python\PoseLibrary\\temp\\bath_tool\ui\\folder-dynamic-color.png"
+        BtnSetIcons(self.ui.BtnA_svae_path,iconpath_folder)
+        BtnSetIcons(self.ui.BtnA_max_path, iconpath_folder)
+        BtnSetIcons(self.ui.BtnB_svae_path, iconpath_folder)
+        BtnSetIcons(self.ui.BtnB_max_path, iconpath_folder)
+
 
         self.docktitle = QtWidgets.QWidget()
         self.docktitle_2 = QtWidgets.QWidget()
@@ -96,32 +150,31 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.progressBar.setVisible(False)
 
         self.setStyleSheet("QMainWindow#MainWindow\n"
-"{\n"
-"background-color:rgb(200, 200, 200);\n"
-"}    \n"
-"")
-        self.creat_contion()
-    def creat_contion(self):
-        # self.ui.menu_2.clicked.connect(self.showlogUI)
-        # self.ui.menu_2.actions(self.showlogUI)
-        self.ui.BtnA_newSkin.clicked.connect(self.clicked_BtnA_newSkin)
-        self.ui.BtnA_max_path.clicked.connect(self.clicked_BtnA_max_path)
-        self.ui.BtnA_svae_path.clicked.connect(self.clicked_BtnA_svae_path)
-        self.ui.BtnA_RefreshList.clicked.connect(self.UpdataListA)
-        self.ui.BtnA_Apply.clicked.connect(self.ApplyA)
-        self.ui.actionshow.triggered.connect(self.actionshow_triggered)
-        self.ui.actionhide.triggered.connect(self.actionhide_triggered)
-        self.ui.LEdit_max_path.textEdited.connect(self.UpdataListA)
-        # self.ui.LEdit_max_path.u
+                           "{\n"
+                           "background-color:rgb(200, 200, 200);\n"
+                           "}    \n"
+                           "")
+
+        self.ui.treeWidgetA.clear()
+        self.ui.treeWidgetB.clear()
+
         self.ui.treeWidgetA.setColumnWidth(0,30)
         self.ui.treeWidgetA.setColumnWidth(1, 200)
         self.ui.treeWidgetA.setColumnWidth(2, 600)
-        # self.ui.treeWidgetA.clear()
-        pass
+
+        self.ui.treeWidgetB.setColumnWidth(0,30)
+        self.ui.treeWidgetB.setColumnWidth(1, 200)
+        self.ui.treeWidgetB.setColumnWidth(2, 600)
+
+        self.ui.groupBox_14.setVisible(False)
+
+        self.ui.frame_message.setVisible(False)
+
 
     def actionshow_triggered(self):
         self.ui.dockWidget_2.setVisible(True)
         self.ui.dockWidget_3.setVisible(True)
+
 
     def actionhide_triggered(self):
         self.ui.dockWidget_2.setVisible(False)
@@ -164,31 +217,75 @@ class MainWindow(QtWidgets.QMainWindow):
     def clicked_BtnA_newSkin(self):
         folder_path = self.dialog_getMaxFilePath()
         print(folder_path)
-        self.ui.LEdit_newSkin.setText(folder_path)
+        self.ui.LEditA_newSkin.setText(folder_path)
 
     def clicked_BtnA_max_path(self):
         folder_path = self.dialog_getMaxFileDir()
         if folder_path!="":
             print(folder_path)
-            self.ui.LEdit_max_path.setText(folder_path)
+            self.ui.LEditA_max_path.setText(folder_path)
             self.UpdataListA()
         else:
             print("文件为空")
     def clicked_BtnA_svae_path(self):
         folder_path = self.dialog_getMaxFileSaveDir()
         print(folder_path)
-        self.ui.LEdit_svae_path.setText(folder_path)
+        self.ui.LEditA_svae_path.setText(folder_path)
+
+    def clicked_BtnB_max_path(self):
+        folder_path = self.dialog_getMaxFileDir()
+        if folder_path != "":
+            print(folder_path)
+            self.ui.LEditB_max_path.setText((folder_path))
+            self.UpdataListB()
+        else:
+            print("文件为空")
+    def clicked_BtnB_svae_path(self):
+        folder_path = self.dialog_getMaxFileSaveDir()
+        self.ui.LEditB_svae_path.setText(folder_path)
+
+
+    def cliked_Menu_Right(self):
+        item = self.ui.Menu_Right.selectedItems()
+        itemtext = item[0].text(0)
+        row = self.ui.Menu_Right.indexOfTopLevelItem(item[0])
+        if row ==0:
+            self.ui.frame_anim.setVisible(True)
+            self.ui.frame_rig.setVisible(False)
+        elif row ==1:
+            self.ui.frame_anim.setVisible(False)
+            self.ui.frame_rig.setVisible(True)
+        else:
+            pass
+
+    def cliked_Btn_setting(self):
+        rightMenu = QtWidgets.QMenu(self.ui.Btn_setting)
+
+        fileAction = rightMenu.addAction(u"文件")
+        settingAction = rightMenu.addAction(u"设置")
+        aboutAction = rightMenu.addAction(u"关于")
+        action = rightMenu.exec_(QtGui.QCursor.pos())
+        if action == fileAction:
+            print("文件")
+            pass
 
     def UpdataListA(self):
         try:
 
             self.ui.treeWidgetA.clear()
-            folder_path = self.ui.LEdit_max_path.text()
-            self.UpdataListA_do(self.ui.treeWidgetA,folder_path)
+            folder_path = self.ui.LEditA_max_path.text()
+            self.UpdataList_do(self.ui.treeWidgetA,folder_path)
+        except:
+            pass
+    def UpdataListB(self):
+        try:
+            self.ui.treeWidgetB.clear()
+            folder_path = self.ui.LEditB_max_path.text()
+            self.UpdataList_do(self.ui.treeWidgetB,folder_path)
         except:
             pass
 
-    def UpdataListA_do(self,treeWidget,folder_path):
+    def UpdataList_do(self,treeWidget,folder_path):
         treeWidget.clear()
         filelist = getfile(folder_path,".max")
         count = 1
@@ -203,6 +300,9 @@ class MainWindow(QtWidgets.QMainWindow):
             item.setText(3, str(filetime))
             treeWidget.addTopLevelItem(item)
             count +=1
+
+
+
     def ApplyA(self):
 
         selectitems =self.ui.treeWidgetA.selectedItems()
@@ -218,7 +318,7 @@ class MainWindow(QtWidgets.QMainWindow):
             try:
                 rt.loadMaxFile(path,quiet=True)
                 user_documents_path = os.path.expanduser('~/Documents')
-                savepath = user_documents_path+"/Downloads/"+item.text(1)+".bip"
+                savepath = user_documents_path+"/SN AnimTool/batch/"+item.text(1)+".bip"
                 objA = rt.getNodeByName('Bip001')
                 rt.biped.saveBipFile(objA.controller, savepath)
 
