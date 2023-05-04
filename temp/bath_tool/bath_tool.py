@@ -14,7 +14,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_mainWindow(object):
     def setupUi(self, mainWindow):
         mainWindow.setObjectName("mainWindow")
-        mainWindow.resize(1048, 814)
+        mainWindow.resize(1040, 725)
         mainWindow.setStyleSheet("QMainWindow#MainWindow\n"
 "{\n"
 "background-color:rgb(200, 200, 200);\n"
@@ -1119,35 +1119,35 @@ class Ui_mainWindow(object):
         self.horizontalLayout_21.setContentsMargins(6, 0, 0, 0)
         self.horizontalLayout_21.setSpacing(16)
         self.horizontalLayout_21.setObjectName("horizontalLayout_21")
-        self.frame_2 = QtWidgets.QFrame(self.frame_message)
-        self.frame_2.setStyleSheet("QFrame#frame_2{\n"
+        self.frame_message_success = QtWidgets.QFrame(self.frame_message)
+        self.frame_message_success.setStyleSheet("QFrame#frame_message_success{\n"
 "    background-color: rgba(80, 200, 80,100);\n"
 "    border-radius:10px;\n"
 "}\n"
 "")
-        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_2.setObjectName("frame_2")
-        self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.frame_2)
+        self.frame_message_success.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_message_success.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_message_success.setObjectName("frame_message_success")
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.frame_message_success)
         self.horizontalLayout_5.setContentsMargins(16, 0, -1, 0)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        self.label_6 = QtWidgets.QLabel(self.frame_2)
-        self.label_6.setObjectName("label_6")
-        self.horizontalLayout_5.addWidget(self.label_6)
-        self.line_7 = QtWidgets.QFrame(self.frame_2)
-        self.line_7.setStyleSheet("Line {\n"
+        self.label_message_success = QtWidgets.QLabel(self.frame_message_success)
+        self.label_message_success.setObjectName("label_message_success")
+        self.horizontalLayout_5.addWidget(self.label_message_success)
+        self.line_message_success = QtWidgets.QFrame(self.frame_message_success)
+        self.line_message_success.setStyleSheet("Line {\n"
 "\n"
 "    color::rgba(255, 255, 255, 100);\n"
 "\n"
 "\n"
 "\n"
 "}")
-        self.line_7.setFrameShape(QtWidgets.QFrame.VLine)
-        self.line_7.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line_7.setObjectName("line_7")
-        self.horizontalLayout_5.addWidget(self.line_7)
-        self.toolButton = QtWidgets.QToolButton(self.frame_2)
-        self.toolButton.setStyleSheet("QToolButton {\n"
+        self.line_message_success.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_message_success.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_message_success.setObjectName("line_message_success")
+        self.horizontalLayout_5.addWidget(self.line_message_success)
+        self.Btn_message_success_close = QtWidgets.QToolButton(self.frame_message_success)
+        self.Btn_message_success_close.setStyleSheet("QToolButton {\n"
 "    background-color:rgba(255, 255, 255, 0);\n"
 "    color: rgb(255, 255, 255);\n"
 "\n"
@@ -1161,26 +1161,26 @@ class Ui_mainWindow(object):
 "    background-color:rgba(255, 255, 255, 0);\n"
 "\n"
 "}")
-        self.toolButton.setObjectName("toolButton")
-        self.horizontalLayout_5.addWidget(self.toolButton)
-        self.horizontalLayout_21.addWidget(self.frame_2)
-        self.frame_22 = QtWidgets.QFrame(self.frame_message)
-        self.frame_22.setStyleSheet("QFrame#frame_22{\n"
+        self.Btn_message_success_close.setObjectName("Btn_message_success_close")
+        self.horizontalLayout_5.addWidget(self.Btn_message_success_close)
+        self.horizontalLayout_21.addWidget(self.frame_message_success)
+        self.frame_message_error = QtWidgets.QFrame(self.frame_message)
+        self.frame_message_error.setStyleSheet("QFrame#frame_message_error{\n"
 "    background-color: rgba(200, 80, 80,100);\n"
 "    border-radius:10px;\n"
 "}\n"
 "")
-        self.frame_22.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_22.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_22.setObjectName("frame_22")
-        self.horizontalLayout_7 = QtWidgets.QHBoxLayout(self.frame_22)
+        self.frame_message_error.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_message_error.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_message_error.setObjectName("frame_message_error")
+        self.horizontalLayout_7 = QtWidgets.QHBoxLayout(self.frame_message_error)
         self.horizontalLayout_7.setContentsMargins(16, 0, -1, 0)
         self.horizontalLayout_7.setObjectName("horizontalLayout_7")
-        self.label_8 = QtWidgets.QLabel(self.frame_22)
-        self.label_8.setObjectName("label_8")
-        self.horizontalLayout_7.addWidget(self.label_8)
-        self.toolButton_3 = QtWidgets.QToolButton(self.frame_22)
-        self.toolButton_3.setStyleSheet("QToolButton {\n"
+        self.label_message_error = QtWidgets.QLabel(self.frame_message_error)
+        self.label_message_error.setObjectName("label_message_error")
+        self.horizontalLayout_7.addWidget(self.label_message_error)
+        self.Btn_message_error_log = QtWidgets.QToolButton(self.frame_message_error)
+        self.Btn_message_error_log.setStyleSheet("QToolButton {\n"
 "    background-color:rgba(40, 105, 254,100);\n"
 "    color: rgb(255, 255, 255);\n"
 "    border-radius: 6px;\n"
@@ -1197,22 +1197,22 @@ class Ui_mainWindow(object):
 "    border-style: inset;\n"
 "}\n"
 "")
-        self.toolButton_3.setObjectName("toolButton_3")
-        self.horizontalLayout_7.addWidget(self.toolButton_3)
-        self.line_8 = QtWidgets.QFrame(self.frame_22)
-        self.line_8.setStyleSheet("Line {\n"
+        self.Btn_message_error_log.setObjectName("Btn_message_error_log")
+        self.horizontalLayout_7.addWidget(self.Btn_message_error_log)
+        self.line_message_error = QtWidgets.QFrame(self.frame_message_error)
+        self.line_message_error.setStyleSheet("Line {\n"
 "\n"
 "    color::rgba(255, 255, 255, 100);\n"
 "\n"
 "\n"
 "\n"
 "}")
-        self.line_8.setFrameShape(QtWidgets.QFrame.VLine)
-        self.line_8.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line_8.setObjectName("line_8")
-        self.horizontalLayout_7.addWidget(self.line_8)
-        self.toolButton_2 = QtWidgets.QToolButton(self.frame_22)
-        self.toolButton_2.setStyleSheet("QToolButton {\n"
+        self.line_message_error.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_message_error.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_message_error.setObjectName("line_message_error")
+        self.horizontalLayout_7.addWidget(self.line_message_error)
+        self.Btn_message_error_close = QtWidgets.QToolButton(self.frame_message_error)
+        self.Btn_message_error_close.setStyleSheet("QToolButton {\n"
 "    background-color:rgba(255, 255, 255, 0);\n"
 "    color: rgb(255, 255, 255);\n"
 "\n"
@@ -1226,12 +1226,50 @@ class Ui_mainWindow(object):
 "    background-color:rgba(255, 255, 255, 0);\n"
 "\n"
 "}")
-        self.toolButton_2.setObjectName("toolButton_2")
-        self.horizontalLayout_7.addWidget(self.toolButton_2)
-        self.horizontalLayout_21.addWidget(self.frame_22)
-        spacerItem11 = QtWidgets.QSpacerItem(56, 18, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_21.addItem(spacerItem11)
+        self.Btn_message_error_close.setObjectName("Btn_message_error_close")
+        self.horizontalLayout_7.addWidget(self.Btn_message_error_close)
+        self.horizontalLayout_21.addWidget(self.frame_message_error)
+        self.frame_message_tip = QtWidgets.QFrame(self.frame_message)
+        self.frame_message_tip.setStyleSheet("QFrame#frame_message_tip{\n"
+"    background-color: rgba(220, 220, 80,100);\n"
+"    border-radius:10px;\n"
+"}\n"
+"")
+        self.frame_message_tip.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_message_tip.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_message_tip.setObjectName("frame_message_tip")
+        self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.frame_message_tip)
+        self.horizontalLayout_8.setContentsMargins(12, 0, 0, 0)
+        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
+        self.label_message_tip = QtWidgets.QLabel(self.frame_message_tip)
+        self.label_message_tip.setObjectName("label_message_tip")
+        self.horizontalLayout_8.addWidget(self.label_message_tip)
+        self.line_message_tip = QtWidgets.QFrame(self.frame_message_tip)
+        self.line_message_tip.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_message_tip.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_message_tip.setObjectName("line_message_tip")
+        self.horizontalLayout_8.addWidget(self.line_message_tip)
+        self.Btn_message_tip_close = QtWidgets.QToolButton(self.frame_message_tip)
+        self.Btn_message_tip_close.setStyleSheet("QToolButton {\n"
+"    background-color:rgba(255, 255, 255, 0);\n"
+"    color: rgb(255, 255, 255);\n"
+"\n"
+"\n"
+"\n"
+"}\n"
+"QToolButton:hover {\n"
+"    background-color:rgba(255, 255, 255, 0);\n"
+"}\n"
+"QToolButton:pressed {\n"
+"    background-color:rgba(255, 255, 255, 0);\n"
+"\n"
+"}")
+        self.Btn_message_tip_close.setObjectName("Btn_message_tip_close")
+        self.horizontalLayout_8.addWidget(self.Btn_message_tip_close)
+        self.horizontalLayout_21.addWidget(self.frame_message_tip)
         self.horizontalLayout_6.addLayout(self.horizontalLayout_21)
+        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_6.addItem(spacerItem11)
         self.verticalLayout_16.addWidget(self.frame_message)
         self.horizontalLayout_11 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_11.setContentsMargins(9, 6, 0, 6)
@@ -1316,14 +1354,14 @@ class Ui_mainWindow(object):
         self.tab_2.setObjectName("tab_2")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.tab_2)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
-        spacerItem13 = QtWidgets.QSpacerItem(20, 696, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem13 = QtWidgets.QSpacerItem(20, 657, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_4.addItem(spacerItem13)
         self.tabWidget_Rig.addTab(self.tab_2, "")
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.tab_4)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
-        spacerItem14 = QtWidgets.QSpacerItem(20, 696, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem14 = QtWidgets.QSpacerItem(20, 657, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_5.addItem(spacerItem14)
         self.tabWidget_Rig.addTab(self.tab_4, "")
         self.verticalLayout_6.addWidget(self.tabWidget_Rig)
@@ -1630,11 +1668,13 @@ class Ui_mainWindow(object):
         self.checkBox_5.setText(_translate("mainWindow", "只替换bip动画"))
         self.progressBar.setFormat(_translate("mainWindow", "%p%"))
         self.tabWidget_Anim.setTabText(self.tabWidget_Anim.indexOf(self.tab_3), _translate("mainWindow", "批量替换模型"))
-        self.label_6.setText(_translate("mainWindow", "处理成功！"))
-        self.toolButton.setText(_translate("mainWindow", "X"))
-        self.label_8.setText(_translate("mainWindow", "出错了 淦"))
-        self.toolButton_3.setText(_translate("mainWindow", "查看出错日志"))
-        self.toolButton_2.setText(_translate("mainWindow", "X"))
+        self.label_message_success.setText(_translate("mainWindow", "处理成功！"))
+        self.Btn_message_success_close.setText(_translate("mainWindow", "X"))
+        self.label_message_error.setText(_translate("mainWindow", "出错了 淦"))
+        self.Btn_message_error_log.setText(_translate("mainWindow", "查看出错日志"))
+        self.Btn_message_error_close.setText(_translate("mainWindow", "X"))
+        self.label_message_tip.setText(_translate("mainWindow", "请检查"))
+        self.Btn_message_tip_close.setText(_translate("mainWindow", "X"))
         self.label_2.setText(_translate("mainWindow", "内部版本请勿外泄"))
         self.label_4.setText(_translate("mainWindow", "光子工作室-SN项目-美术组"))
         self.label_3.setText(_translate("mainWindow", "@2023"))

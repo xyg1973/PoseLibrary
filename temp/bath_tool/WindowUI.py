@@ -91,20 +91,32 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setWindowTitle("SN_Anim_Batch_Tool")
         self.stepWindowUi()
         self.creat_contion()
+
     def creat_contion(self):
         # self.ui.menu_2.clicked.connect(self.showlogUI)
         # self.ui.menu_2.actions(self.showlogUI)
-        self.ui.Menu_Right.itemClicked.connect(self.cliked_Menu_Right)
-        self.ui.Btn_setting.clicked.connect(self.cliked_Btn_setting)
+        self.ui.Menu_Right.itemClicked.connect(self.clicked_Menu_Right)
+        self.ui.Btn_setting.clicked.connect(self.clicked_Btn_setting)
+
+        self.ui.Btn_message_tip_close.clicked.connect(self.closeMessage)
+        self.ui.Btn_message_error_close.clicked.connect(self.closeMessage)
+        self.ui.Btn_message_success_close.clicked.connect(self.closeMessage)
+
+
+        #动画-批量替换模型页按钮事件
         self.ui.BtnA_newSkin.clicked.connect(self.clicked_BtnA_newSkin)
         self.ui.BtnA_max_path.clicked.connect(self.clicked_BtnA_max_path)
         self.ui.BtnA_svae_path.clicked.connect(self.clicked_BtnA_svae_path)
+        self.ui.LEditA_max_path.textEdited.connect(self.UpdataListA)
+
         self.ui.BtnA_RefreshList.clicked.connect(self.UpdataListA)
+        self.ui.BtnA_List_select_all.clicked.connect(self.clicked_BtnA_List_select_all)
+        self.ui.BtnA_List_select_reverse.clicked.connect(self.clicked_BtnA_List_select_reverse)
 
         self.ui.BtnA_Apply.clicked.connect(self.ApplyA)
         # self.ui.actionshow.triggered.connect(self.actionshow_triggered)
         # self.ui.actionhide.triggered.connect(self.actionhide_triggered)
-        self.ui.LEditA_max_path.textEdited.connect(self.UpdataListA)
+
 
         # self.ui.LEdit_max_path.u
         self.ui.treeWidgetA.setColumnWidth(0,30)
@@ -127,7 +139,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         item = self.ui.Menu_Right.topLevelItem(0)
         self.ui.Menu_Right.setCurrentItem(item)
-        self.cliked_Menu_Right()
+        self.clicked_Menu_Right()
 
         #设置icon
         iconpath_folder = "C:\Program Files\Autodesk\\3ds Max 2020\python\PoseLibrary\\temp\\bath_tool\ui\\folder-dynamic-color.png"
@@ -171,18 +183,20 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.frame_message.setVisible(False)
 
 
-    def actionshow_triggered(self):
+    def actionshow_log(self):
         self.ui.dockWidget_2.setVisible(True)
         self.ui.dockWidget_3.setVisible(True)
 
 
-    def actionhide_triggered(self):
+    def actionhide_log(self):
         self.ui.dockWidget_2.setVisible(False)
         self.ui.dockWidget_3.setVisible(False)
 
-    def showlogUI(self):
-        self.ui.dockWidget_2.setVisible(True)
-        self.ui.dockWidget_3.setVisible(True)
+    # def showlogUI(self):
+    #     self.ui.dockWidget_2.setVisible(True)
+    #     self.ui.dockWidget_3.setVisible(True)
+    def closeMessage(self):
+        self.ui.frame_message.setVisible(False)
 
     def dialog_getMaxFilePath(self):
 
@@ -244,8 +258,23 @@ class MainWindow(QtWidgets.QMainWindow):
         folder_path = self.dialog_getMaxFileSaveDir()
         self.ui.LEditB_svae_path.setText(folder_path)
 
+    def clicked_BtnA_List_select_all(self):
 
-    def cliked_Menu_Right(self):
+        self.ui.treeWidgetA.selectAll()
+
+
+    def clicked_BtnA_List_select_reverse(self):
+        selectitem = self.ui.treeWidgetA.selectedItems()
+        tree_widget = self.ui.treeWidgetA
+        for i in range(tree_widget.topLevelItemCount()):
+            item = tree_widget.topLevelItem(i)
+            if self.ui.treeWidgetA.isItemSelected(item):
+                item.setSelected(False)
+            else:
+                item.setSelected(True)
+
+
+    def clicked_Menu_Right(self):
         item = self.ui.Menu_Right.selectedItems()
         itemtext = item[0].text(0)
         row = self.ui.Menu_Right.indexOfTopLevelItem(item[0])
@@ -258,16 +287,19 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             pass
 
-    def cliked_Btn_setting(self):
+    def clicked_Btn_setting(self):
         rightMenu = QtWidgets.QMenu(self.ui.Btn_setting)
 
         fileAction = rightMenu.addAction(u"文件")
         settingAction = rightMenu.addAction(u"设置")
+        hidelogAction = rightMenu.addAction(u"显示处理日志")
         aboutAction = rightMenu.addAction(u"关于")
         action = rightMenu.exec_(QtGui.QCursor.pos())
         if action == fileAction:
             print("文件")
             pass
+        elif action == hidelogAction:
+            self.actionshow_log()
 
     def UpdataListA(self):
         try:
@@ -300,35 +332,106 @@ class MainWindow(QtWidgets.QMainWindow):
             item.setText(3, str(filetime))
             treeWidget.addTopLevelItem(item)
             count +=1
+    def Apply_message(self,num=0,text="请检查"):
+        """
+        num =0;成功
+        num= 1; 错误窗口
+        num = 2 ; 提示窗口
 
+        """
+        num = num
+        messagetext = text
+        self.ui.frame_message.setVisible(True)
+        if num ==0 :
+            self.ui.frame_message_tip.setVisible(False)
+            self.ui.frame_message_error.setVisible(False)
+            self.ui.frame_message_success.setVisible(True)
+        elif num == 1:
+            self.ui.frame_message_tip.setVisible(False)
+            self.ui.frame_message_error.setVisible(True)
+            self.ui.frame_message_success.setVisible(False)
+        elif num == 2:
+            self.ui.frame_message_tip.setVisible(True)
+            self.ui.label_message_tip.setText(messagetext)
+            self.ui.frame_message_error.setVisible(False)
+            self.ui.frame_message_success.setVisible(False)
+
+
+
+
+
+    def ApplyB(self):
+        pass
+
+
+    def ApplyA_check(self):
+        newskinpath = self.ui.LEditA_newSkin.text()
+        savepath = self.ui.LEditA_svae_path.text()
+        maxfilepath = self.ui.LEditA_max_path.text()
+
+        if os.path.exists(newskinpath):     #判断skin文件是否存在
+            if os.path.exists(savepath):        #判断保存路径是否存在
+                selectitems = self.ui.treeWidgetA.selectedItems()
+                if len(selectitems) > 0:
+                    self.ui.frame_message.setVisible(False)
+                    return True
+                else:
+                    self.Apply_message(num=2, text="请选中要执行的文件")
+                    # print("请选中要执行的文件")
+            else:
+                self.Apply_message(num=2, text="请检查保存路径是否存在")
+                # print("检查保存路径是否存在")
+        else:
+            self.Apply_message(num=2,text="请检查skin文件是否存在")
 
 
     def ApplyA(self):
+        newskinpath = self.ui.LEditA_newSkin.text()
+        savepath = self.ui.LEditA_svae_path.text()
+        maxfilepath = self.ui.LEditA_max_path.text()
 
-        selectitems =self.ui.treeWidgetA.selectedItems()
-        self.ui.progressBar.setVisible(True)
-        max = len(selectitems)
-        k=0
-        self.ui.progressBar.setValue(float(k) / float(max) * 100)
-        for item in selectitems:
-            self.ui.progressBar.setValue(float(k) / float(max) * 100)
-            path = item.text(2)
-
-            # print(item.text(2))
+        #判断skin文件是否存在
+        checkfile = self.ApplyA_check()
+        if checkfile==True :
+            #应用按钮屏蔽
+            self.ui.BtnA_Apply.setEnabled(False)
+            datapath = savepath + "/anim_data"
             try:
-                rt.loadMaxFile(path,quiet=True)
-                user_documents_path = os.path.expanduser('~/Documents')
-                savepath = user_documents_path+"/SN AnimTool/batch/"+item.text(1)+".bip"
-                objA = rt.getNodeByName('Bip001')
-                rt.biped.saveBipFile(objA.controller, savepath)
-
-                print(savepath)
+                os.mkdir(datapath)
             except:
-                print("读取文件错误")
-            k+=1
+                pass
+                print("文件夹已经存在")
+            selectitems =self.ui.treeWidgetA.selectedItems()
+            self.ui.progressBar.setVisible(True)
+            max = len(selectitems)
+            k=0
             self.ui.progressBar.setValue(float(k) / float(max) * 100)
-        self.ui.progressBar.setVisible(False)
-        print("处理完成")
+            for item in selectitems:
+                self.ui.progressBar.setValue(float(k) / float(max) * 100)
+                path = item.text(2)
+
+                # print(item.text(2))
+                try:
+                    rt.loadMaxFile(path,quiet=True)
+                    # user_documents_path = os.path.expanduser('~/Documents')
+                    bippath = datapath +"/"+item.text(1)+".bip"
+                    objA = rt.getNodeByName('Bip001')
+                    rt.biped.saveBipFile(objA.controller, bippath)
+
+                    rt.loadMaxFile(newskinpath,quiet=True)
+                    objA = rt.getNodeByName('Bip001')
+                    rt.biped.loadBipFile(objA.controller,bippath)
+                    savefliepath = savepath+"/"+item.text(1)+".max"
+                    rt.saveMaxFile(savefliepath)
+                    print(savefliepath)
+                except:
+                    print("读取文件错误")
+                k+=1
+                self.ui.progressBar.setValue(float(k) / float(max) * 100)
+            self.ui.progressBar.setVisible(False)
+            self.ui.BtnA_Apply.setEnabled(True)
+            print("处理完成")
+
 
 def main():
 

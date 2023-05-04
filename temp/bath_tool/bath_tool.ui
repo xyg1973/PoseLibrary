@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1075</width>
-    <height>775</height>
+    <width>1040</width>
+    <height>725</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -2196,9 +2196,9 @@ background-color: rgb(60, 200, 0);
                     <number>0</number>
                    </property>
                    <item>
-                    <widget class="QFrame" name="frame_2">
+                    <widget class="QFrame" name="frame_message_success">
                      <property name="styleSheet">
-                      <string notr="true">QFrame#frame_2{
+                      <string notr="true">QFrame#frame_message_success{
 	background-color: rgba(80, 200, 80,100);
 	border-radius:10px;
 }
@@ -2221,14 +2221,14 @@ background-color: rgb(60, 200, 0);
                        <number>0</number>
                       </property>
                       <item>
-                       <widget class="QLabel" name="label_6">
+                       <widget class="QLabel" name="label_message_success">
                         <property name="text">
                          <string>处理成功！</string>
                         </property>
                        </widget>
                       </item>
                       <item>
-                       <widget class="Line" name="line_7">
+                       <widget class="Line" name="line_message_success">
                         <property name="styleSheet">
                          <string notr="true">Line {
 
@@ -2244,7 +2244,7 @@ background-color: rgb(60, 200, 0);
                        </widget>
                       </item>
                       <item>
-                       <widget class="QToolButton" name="toolButton">
+                       <widget class="QToolButton" name="Btn_message_success_close">
                         <property name="styleSheet">
                          <string notr="true">QToolButton {
     background-color:rgba(255, 255, 255, 0);
@@ -2270,9 +2270,9 @@ QToolButton:pressed {
                     </widget>
                    </item>
                    <item>
-                    <widget class="QFrame" name="frame_22">
+                    <widget class="QFrame" name="frame_message_error">
                      <property name="styleSheet">
-                      <string notr="true">QFrame#frame_22{
+                      <string notr="true">QFrame#frame_message_error{
 	background-color: rgba(200, 80, 80,100);
 	border-radius:10px;
 }
@@ -2295,14 +2295,14 @@ QToolButton:pressed {
                        <number>0</number>
                       </property>
                       <item>
-                       <widget class="QLabel" name="label_8">
+                       <widget class="QLabel" name="label_message_error">
                         <property name="text">
                          <string>出错了 淦</string>
                         </property>
                        </widget>
                       </item>
                       <item>
-                       <widget class="QToolButton" name="toolButton_3">
+                       <widget class="QToolButton" name="Btn_message_error_log">
                         <property name="styleSheet">
                          <string notr="true">QToolButton {
     background-color:rgba(40, 105, 254,100);
@@ -2328,7 +2328,7 @@ border-radius: 6px;
                        </widget>
                       </item>
                       <item>
-                       <widget class="Line" name="line_8">
+                       <widget class="Line" name="line_message_error">
                         <property name="styleSheet">
                          <string notr="true">Line {
 
@@ -2344,7 +2344,7 @@ border-radius: 6px;
                        </widget>
                       </item>
                       <item>
-                       <widget class="QToolButton" name="toolButton_2">
+                       <widget class="QToolButton" name="Btn_message_error_close">
                         <property name="styleSheet">
                          <string notr="true">QToolButton {
     background-color:rgba(255, 255, 255, 0);
@@ -2370,19 +2370,87 @@ QToolButton:pressed {
                     </widget>
                    </item>
                    <item>
-                    <spacer name="horizontalSpacer_2">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
+                    <widget class="QFrame" name="frame_message_tip">
+                     <property name="styleSheet">
+                      <string notr="true">QFrame#frame_message_tip{
+	background-color: rgba(220, 220, 80,100);
+	border-radius:10px;
+}
+</string>
                      </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>56</width>
-                       <height>18</height>
-                      </size>
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
                      </property>
-                    </spacer>
+                     <property name="frameShadow">
+                      <enum>QFrame::Raised</enum>
+                     </property>
+                     <layout class="QHBoxLayout" name="horizontalLayout_8">
+                      <property name="leftMargin">
+                       <number>12</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="label_message_tip">
+                        <property name="text">
+                         <string>请检查</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="Line" name="line_message_tip">
+                        <property name="orientation">
+                         <enum>Qt::Vertical</enum>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QToolButton" name="Btn_message_tip_close">
+                        <property name="styleSheet">
+                         <string notr="true">QToolButton {
+    background-color:rgba(255, 255, 255, 0);
+	color: rgb(255, 255, 255);
+
+
+
+}
+QToolButton:hover {
+    background-color:rgba(255, 255, 255, 0);
+}
+QToolButton:pressed {
+    background-color:rgba(255, 255, 255, 0);
+
+}</string>
+                        </property>
+                        <property name="text">
+                         <string>X</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
                    </item>
                   </layout>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_2">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
                  </item>
                 </layout>
                </widget>
