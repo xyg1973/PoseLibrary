@@ -2090,56 +2090,6 @@ background: rgb(255, 0, 0);
                       </layout>
                      </widget>
                     </item>
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_17">
-                      <property name="leftMargin">
-                       <number>9</number>
-                      </property>
-                      <property name="topMargin">
-                       <number>6</number>
-                      </property>
-                      <property name="rightMargin">
-                       <number>9</number>
-                      </property>
-                      <property name="bottomMargin">
-                       <number>6</number>
-                      </property>
-                      <item>
-                       <widget class="QProgressBar" name="progressBar">
-                        <property name="styleSheet">
-                         <string notr="true">QProgressBar
-{
-background-color: rgb(120, 120, 120);
-color:rgb(255, 255, 255);
-min-height: 15px;
-max-height: 15px;
-border-radius: 6px;
-}    
-QProgressBar::chunk {
-background-color: rgb(60, 200, 0);
-    border-radius: 6px;
-
-}</string>
-                        </property>
-                        <property name="inputMethodHints">
-                         <set>Qt::ImhNone</set>
-                        </property>
-                        <property name="value">
-                         <number>24</number>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignCenter</set>
-                        </property>
-                        <property name="textVisible">
-                         <bool>true</bool>
-                        </property>
-                        <property name="format">
-                         <string>%p%</string>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
                    </layout>
                   </widget>
                  </item>
@@ -2161,6 +2111,56 @@ background-color: rgb(60, 200, 0);
               <enum>QFrame::Raised</enum>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_17">
+                <property name="leftMargin">
+                 <number>9</number>
+                </property>
+                <property name="topMargin">
+                 <number>6</number>
+                </property>
+                <property name="rightMargin">
+                 <number>9</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>6</number>
+                </property>
+                <item>
+                 <widget class="QProgressBar" name="progressBar">
+                  <property name="styleSheet">
+                   <string notr="true">QProgressBar
+{
+background-color: rgb(120, 120, 120);
+color:rgb(255, 255, 255);
+min-height: 15px;
+max-height: 15px;
+border-radius: 6px;
+}    
+QProgressBar::chunk {
+background-color: rgb(60, 200, 0);
+    border-radius: 6px;
+
+}</string>
+                  </property>
+                  <property name="inputMethodHints">
+                   <set>Qt::ImhNone</set>
+                  </property>
+                  <property name="value">
+                   <number>24</number>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="textVisible">
+                   <bool>true</bool>
+                  </property>
+                  <property name="format">
+                   <string>%p%</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
               <item>
                <widget class="QFrame" name="frame_message">
                 <property name="frameShape">

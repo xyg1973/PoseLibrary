@@ -475,11 +475,29 @@ class MainWindow(QtWidgets.QMainWindow):
         # 判断skin文件是否存在
         checkfile = self.ApplyB_check()
         if checkfile == True:
-            print ("开始执行导出FBX")
-
             self.ui.BtnA_Apply.setEnabled(True)
+            self.ui.frame_message.setVisible(False)
+            self.ui.progressBar.setVisible(True)
+            selectitems = self.ui.treeWidgetB.selectedItems()
+
+            max = len(selectitems)
+            k = 0
+            self.ui.progressBar.setValue(float(k) / float(max) * 100)
+            for item in selectitems:
+                self.ui.progressBar.setValue(float(k) / float(max) * 100)
+                print ("开始执行导出FBX")
+
+                path = item.text(2)
+                print(path)
+                rt.loadMaxFile(path, quiet=True)
+
+                k += 1
+                self.ui.progressBar.setValue(float(k) / float(max) * 100)
+
+            self.ui.progressBar.setVisible(False)
+            self.ui.BtnA_Apply.setEnabled(True)
+            self.ui.frame_message.setVisible(True)
             self.Apply_message(num=0)
-            pass
 
 
     def ApplyA_check(self):
@@ -585,7 +603,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.ui.progressBar.setValue(float(k) / float(max) * 100)
             self.ui.progressBar.setVisible(False)
             self.ui.BtnA_Apply.setEnabled(True)
-            print("处理完成")
+            self.Apply_message(num=0)
 
 
 def main():
