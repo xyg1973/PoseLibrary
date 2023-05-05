@@ -328,10 +328,10 @@ class Ui_mainWindow(object):
         self.BtnB_max_path.setFocusPolicy(QtCore.Qt.NoFocus)
         self.BtnB_max_path.setObjectName("BtnB_max_path")
         self.horizontalLayout.addWidget(self.BtnB_max_path)
-        self.BtnB_max_path_Pick = QtWidgets.QToolButton(self.groupBox)
-        self.BtnB_max_path_Pick.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.BtnB_max_path_Pick.setObjectName("BtnB_max_path_Pick")
-        self.horizontalLayout.addWidget(self.BtnB_max_path_Pick)
+        self.BtnB_max_path_open = QtWidgets.QToolButton(self.groupBox)
+        self.BtnB_max_path_open.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.BtnB_max_path_open.setObjectName("BtnB_max_path_open")
+        self.horizontalLayout.addWidget(self.BtnB_max_path_open)
         self.verticalLayout_29.addWidget(self.groupBox)
         self.groupBox_2 = QtWidgets.QGroupBox(self.frame_14)
         self.groupBox_2.setObjectName("groupBox_2")
@@ -379,6 +379,9 @@ class Ui_mainWindow(object):
         self.LEditB_svae_path.setText("")
         self.LEditB_svae_path.setObjectName("LEditB_svae_path")
         self.horizontalLayout_3.addWidget(self.LEditB_svae_path)
+        self.BtnB_svae_path_auto = QtWidgets.QToolButton(self.groupBox_2)
+        self.BtnB_svae_path_auto.setObjectName("BtnB_svae_path_auto")
+        self.horizontalLayout_3.addWidget(self.BtnB_svae_path_auto)
         self.BtnB_svae_path = QtWidgets.QToolButton(self.groupBox_2)
         self.BtnB_svae_path.setFocusPolicy(QtCore.Qt.NoFocus)
         self.BtnB_svae_path.setObjectName("BtnB_svae_path")
@@ -719,43 +722,17 @@ class Ui_mainWindow(object):
         self.horizontalLayout_12.setObjectName("horizontalLayout_12")
         self.LEditA_newSkin = QtWidgets.QLineEdit(self.groupBox_6)
         self.LEditA_newSkin.setEnabled(True)
+        self.LEditA_newSkin.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.LEditA_newSkin.setFocusPolicy(QtCore.Qt.NoFocus)
         self.LEditA_newSkin.setStyleSheet("QLineEdit{\n"
-"background-color:rgb(90, 90, 90);\n"
+"background-color:rgb(80, 80, 80);\n"
 "color:rgb(255, 255, 255);\n"
 "border-radius: 5px; \n"
-"border: 1px solid rgb(40, 40, 40);\n"
+"border: 1px solid rgb(60, 60, 60);\n"
 "padding: 2px;\n"
 "}\n"
 "\n"
-"QLineEdit:hover {\n"
-"background-color:rgb(100, 100, 100);\n"
-"color:rgb(255, 255, 255);\n"
-"border-radius: 5px; \n"
-"border: 1px solid rgb(150, 150, 150);\n"
-"padding: 2px;\n"
-"}\n"
-"QLineEdit:pressed {\n"
-"background-color:rgb(110, 110, 110);\n"
-"color:rgb(255, 255, 255);\n"
-"border-radius: 5px; \n"
-"border: 1px solid rgb(70, 70, 70);\n"
-"padding: 2px;\n"
-"}\n"
-"\n"
-"QLineEdit:nameEdit {\n"
-"background-color:rgb(225, 225, 225);\n"
-"color:rgb(255, 255, 255);\n"
-"border-radius: 5px; \n"
-"border: 1px solid rgb(70, 70, 70);\n"
-"padding: 2px;\n"
-"}\n"
-"QLineEdit:read-only{\n"
-"background-color:rgb(225, 225, 225);\n"
-"color:rgb(255, 255, 255);\n"
-"border-radius: 5px; \n"
-"border: 1px solid rgb(70, 70, 70);\n"
-"padding: 2px;\n"
-"}")
+"")
         self.LEditA_newSkin.setText("")
         self.LEditA_newSkin.setObjectName("LEditA_newSkin")
         self.horizontalLayout_12.addWidget(self.LEditA_newSkin)
@@ -848,6 +825,13 @@ class Ui_mainWindow(object):
 "}")
         self.LEditA_svae_path.setObjectName("LEditA_svae_path")
         self.horizontalLayout_14.addWidget(self.LEditA_svae_path)
+        self.BtnA_svae_path_auto = QtWidgets.QToolButton(self.groupBox_8)
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setWeight(75)
+        self.BtnA_svae_path_auto.setFont(font)
+        self.BtnA_svae_path_auto.setObjectName("BtnA_svae_path_auto")
+        self.horizontalLayout_14.addWidget(self.BtnA_svae_path_auto)
         self.BtnA_svae_path = QtWidgets.QToolButton(self.groupBox_8)
         self.BtnA_svae_path.setObjectName("BtnA_svae_path")
         self.horizontalLayout_14.addWidget(self.BtnA_svae_path)
@@ -1061,14 +1045,14 @@ class Ui_mainWindow(object):
         self.horizontalLayout_20.setObjectName("horizontalLayout_20")
         spacerItem9 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_20.addItem(spacerItem9)
-        self.checkBox_2 = QtWidgets.QCheckBox(self.groupBox_9)
-        self.checkBox_2.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.checkBox_2.setObjectName("checkBox_2")
-        self.horizontalLayout_20.addWidget(self.checkBox_2)
-        self.checkBox_5 = QtWidgets.QCheckBox(self.groupBox_9)
-        self.checkBox_5.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.checkBox_5.setObjectName("checkBox_5")
-        self.horizontalLayout_20.addWidget(self.checkBox_5)
+        self.CBoxA_iskeyframe = QtWidgets.QCheckBox(self.groupBox_9)
+        self.CBoxA_iskeyframe.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.CBoxA_iskeyframe.setObjectName("CBoxA_iskeyframe")
+        self.horizontalLayout_20.addWidget(self.CBoxA_iskeyframe)
+        self.CBoxA_bip_only = QtWidgets.QCheckBox(self.groupBox_9)
+        self.CBoxA_bip_only.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.CBoxA_bip_only.setObjectName("CBoxA_bip_only")
+        self.horizontalLayout_20.addWidget(self.CBoxA_bip_only)
         spacerItem10 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_20.addItem(spacerItem10)
         self.horizontalLayout_19.addWidget(self.groupBox_9)
@@ -1577,7 +1561,7 @@ class Ui_mainWindow(object):
         self.actionabout.setObjectName("actionabout")
 
         self.retranslateUi(mainWindow)
-        self.tabWidget_Anim.setCurrentIndex(1)
+        self.tabWidget_Anim.setCurrentIndex(0)
         self.tabWidget_Rig.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(mainWindow)
 
@@ -1593,8 +1577,10 @@ class Ui_mainWindow(object):
         self.Btn_setting.setText(_translate("mainWindow", "⊛"))
         self.groupBox.setTitle(_translate("mainWindow", "max文件路径"))
         self.BtnB_max_path.setText(_translate("mainWindow", "..."))
-        self.BtnB_max_path_Pick.setText(_translate("mainWindow", "↙"))
+        self.BtnB_max_path_open.setText(_translate("mainWindow", "↗"))
         self.groupBox_2.setTitle(_translate("mainWindow", "输出路径"))
+        self.BtnB_svae_path_auto.setToolTip(_translate("mainWindow", "自动填写路径"))
+        self.BtnB_svae_path_auto.setText(_translate("mainWindow", "↓"))
         self.BtnB_svae_path.setText(_translate("mainWindow", "..."))
         self.BtnB_svae_path_open.setText(_translate("mainWindow", "↗"))
         self.CBoxB_List_subfolder.setText(_translate("mainWindow", "列出子文件夹"))
@@ -1639,6 +1625,8 @@ class Ui_mainWindow(object):
         self.BtnA_max_path_open.setToolTip(_translate("mainWindow", "在资源管理器打开"))
         self.BtnA_max_path_open.setText(_translate("mainWindow", "↗"))
         self.groupBox_8.setTitle(_translate("mainWindow", "保存路径"))
+        self.BtnA_svae_path_auto.setToolTip(_translate("mainWindow", "自动填写路径"))
+        self.BtnA_svae_path_auto.setText(_translate("mainWindow", "↓"))
         self.BtnA_svae_path.setToolTip(_translate("mainWindow", "指定路径"))
         self.BtnA_svae_path.setText(_translate("mainWindow", "..."))
         self.BtnA_svae_path_open.setToolTip(_translate("mainWindow", "在资源管理器打开"))
@@ -1664,8 +1652,8 @@ class Ui_mainWindow(object):
         self.treeWidgetA.topLevelItem(3).setText(0, _translate("mainWindow", "7"))
         self.treeWidgetA.setSortingEnabled(__sortingEnabled)
         self.groupBox_9.setTitle(_translate("mainWindow", "输出设置"))
-        self.checkBox_2.setText(_translate("mainWindow", "bone关键帧"))
-        self.checkBox_5.setText(_translate("mainWindow", "只替换bip动画"))
+        self.CBoxA_iskeyframe.setText(_translate("mainWindow", "bone关键帧"))
+        self.CBoxA_bip_only.setText(_translate("mainWindow", "只替换bip动画"))
         self.progressBar.setFormat(_translate("mainWindow", "%p%"))
         self.tabWidget_Anim.setTabText(self.tabWidget_Anim.indexOf(self.tab_3), _translate("mainWindow", "批量替换模型"))
         self.label_message_success.setText(_translate("mainWindow", "处理成功！"))

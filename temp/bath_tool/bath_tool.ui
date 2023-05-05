@@ -410,7 +410,7 @@ background: rgb(255, 0, 0);
                 <enum>Qt::NoFocus</enum>
                </property>
                <property name="currentIndex">
-                <number>1</number>
+                <number>0</number>
                </property>
                <property name="usesScrollButtons">
                 <bool>false</bool>
@@ -557,12 +557,12 @@ padding: 2px;
                            </widget>
                           </item>
                           <item>
-                           <widget class="QToolButton" name="BtnB_max_path_Pick">
+                           <widget class="QToolButton" name="BtnB_max_path_open">
                             <property name="focusPolicy">
                              <enum>Qt::NoFocus</enum>
                             </property>
                             <property name="text">
-                             <string>↙</string>
+                             <string>↗</string>
                             </property>
                            </widget>
                           </item>
@@ -621,6 +621,16 @@ padding: 2px;
                             </property>
                             <property name="text">
                              <string/>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QToolButton" name="BtnB_svae_path_auto">
+                            <property name="toolTip">
+                             <string>自动填写路径</string>
+                            </property>
+                            <property name="text">
+                             <string>↓</string>
                             </property>
                            </widget>
                           </item>
@@ -1418,44 +1428,22 @@ background: rgb(255, 0, 0);
                             <property name="enabled">
                              <bool>true</bool>
                             </property>
+                            <property name="cursor">
+                             <cursorShape>ArrowCursor</cursorShape>
+                            </property>
+                            <property name="focusPolicy">
+                             <enum>Qt::NoFocus</enum>
+                            </property>
                             <property name="styleSheet">
                              <string notr="true">QLineEdit{
-background-color:rgb(90, 90, 90);
+background-color:rgb(80, 80, 80);
 color:rgb(255, 255, 255);
 border-radius: 5px; 
-border: 1px solid rgb(40, 40, 40);
+border: 1px solid rgb(60, 60, 60);
 padding: 2px;
 }
 
-QLineEdit:hover {
-background-color:rgb(100, 100, 100);
-color:rgb(255, 255, 255);
-border-radius: 5px; 
-border: 1px solid rgb(150, 150, 150);
-padding: 2px;
-}
-QLineEdit:pressed {
-background-color:rgb(110, 110, 110);
-color:rgb(255, 255, 255);
-border-radius: 5px; 
-border: 1px solid rgb(70, 70, 70);
-padding: 2px;
-}
-
-QLineEdit:nameEdit {
-background-color:rgb(225, 225, 225);
-color:rgb(255, 255, 255);
-border-radius: 5px; 
-border: 1px solid rgb(70, 70, 70);
-padding: 2px;
-}
-QLineEdit:read-only{
-background-color:rgb(225, 225, 225);
-color:rgb(255, 255, 255);
-border-radius: 5px; 
-border: 1px solid rgb(70, 70, 70);
-padding: 2px;
-}</string>
+</string>
                             </property>
                             <property name="text">
                              <string/>
@@ -1606,6 +1594,22 @@ border-radius: 5px;
 border: 1px solid rgb(70, 70, 70);
 padding: 2px;
 }</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QToolButton" name="BtnA_svae_path_auto">
+                            <property name="font">
+                             <font>
+                              <weight>75</weight>
+                              <bold>true</bold>
+                             </font>
+                            </property>
+                            <property name="toolTip">
+                             <string>自动填写路径</string>
+                            </property>
+                            <property name="text">
+                             <string>↓</string>
                             </property>
                            </widget>
                           </item>
@@ -2048,7 +2052,7 @@ background: rgb(255, 0, 0);
                            </spacer>
                           </item>
                           <item>
-                           <widget class="QCheckBox" name="checkBox_2">
+                           <widget class="QCheckBox" name="CBoxA_iskeyframe">
                             <property name="focusPolicy">
                              <enum>Qt::NoFocus</enum>
                             </property>
@@ -2058,7 +2062,7 @@ background: rgb(255, 0, 0);
                            </widget>
                           </item>
                           <item>
-                           <widget class="QCheckBox" name="checkBox_5">
+                           <widget class="QCheckBox" name="CBoxA_bip_only">
                             <property name="focusPolicy">
                              <enum>Qt::NoFocus</enum>
                             </property>

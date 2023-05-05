@@ -10,6 +10,8 @@ from pymxs import runtime as rt
 import pymxs
 import os
 import time
+
+
 def reload_module(module_name):
     # 检查模块是否已经导入
     if module_name in sys.modules:
@@ -79,6 +81,30 @@ def getfileName(path):
     filename = filename[0:count]
     return filename
 
+
+def mxs_get_all_children(parent, node_type=None):
+    """Handy function to get all the children of a given node
+
+    Args:
+        parent (3dsmax Node1): node to get all children of
+        node_type (None, runtime.class): give class to check for
+                                         e.g. rt.FFDBox/rt.GeometryClass etc.
+
+    Returns:
+        list: list of all children of the parent node
+    """
+    def list_children(node):
+        children = []
+        for c in node.Children:
+            children.append(c)
+            children = children + list_children(c)
+        return children
+    child_list = list_children(parent)
+
+    return ([x for x in child_list if rt.superClassOf(x) == node_type]
+            if node_type else child_list)
+
+
 class MainWindow(QtWidgets.QMainWindow):
 
     def __init__(self,parent=None):
@@ -91,7 +117,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setWindowTitle("SN_Anim_Batch_Tool")
         self.stepWindowUi()
         self.creat_contion()
+        self.test_model()
 
+    def test_model(self):
+        self.ui.LEditA_svae_path.setText("")
+        self.ui.LEditA_max_path.setText("H:\\work\\SNGame\\2023\\202304\\loco\\MAX\\算飘带的动画\\成男持械_算飘带文件")
+        self.ui.LEditA_newSkin.setText("H:\\work\\SNGame\\ArtHub\\Skin_文件\\主角\\吴六鼎\\M_3009_skin.max")
+        self.UpdataListA()
     def creat_contion(self):
         # self.ui.menu_2.clicked.connect(self.showlogUI)
         # self.ui.menu_2.actions(self.showlogUI)
@@ -106,27 +138,24 @@ class MainWindow(QtWidgets.QMainWindow):
         #动画-批量替换模型页按钮事件
         self.ui.BtnA_newSkin.clicked.connect(self.clicked_BtnA_newSkin)
         self.ui.BtnA_max_path.clicked.connect(self.clicked_BtnA_max_path)
+        self.ui.BtnA_max_path_open.clicked.connect(self.clicked_BtnA_max_path_open)
         self.ui.BtnA_svae_path.clicked.connect(self.clicked_BtnA_svae_path)
+        self.ui.BtnA_svae_path_auto.clicked.connect(self.clicked_BtnA_svae_path_auto)
+        self.ui.BtnA_svae_path_open.clicked.connect(self.clicked_BtnA_svae_path_open)
+        self.ui.BtnA_max_path_Pick.clicked.connect(self.clicked_BtnA_max_path_Pick)
         self.ui.LEditA_max_path.textEdited.connect(self.UpdataListA)
-
         self.ui.BtnA_RefreshList.clicked.connect(self.UpdataListA)
         self.ui.BtnA_List_select_all.clicked.connect(self.clicked_BtnA_List_select_all)
         self.ui.BtnA_List_select_reverse.clicked.connect(self.clicked_BtnA_List_select_reverse)
-
-        self.ui.BtnA_Apply.clicked.connect(self.ApplyA)
-        # self.ui.actionshow.triggered.connect(self.actionshow_triggered)
-        # self.ui.actionhide.triggered.connect(self.actionhide_triggered)
+        self.ui.BtnA_Apply.clicked.connect(self.Apply)
 
 
-        # self.ui.LEdit_max_path.u
-        self.ui.treeWidgetA.setColumnWidth(0,30)
-        self.ui.treeWidgetA.setColumnWidth(1, 200)
-        self.ui.treeWidgetA.setColumnWidth(2, 600)
-        # self.ui.treeWidgetA.clear()
-
-        #-------------------------------------------------------------------------------------------------------
+        #动画-批量导出FBX页按钮事件
         self.ui.BtnB_svae_path.clicked.connect(self.clicked_BtnB_svae_path)
+        self.ui.BtnB_svae_path_open.clicked.connect(self.clicked_BtnB_svae_path_open)
+        self.ui.BtnB_svae_path_auto.clicked.connect(self.clicked_BtnB_svae_path_auto)
         self.ui.BtnB_max_path.clicked.connect(self.clicked_BtnB_max_path)
+        self.ui.BtnB_max_path_open.clicked.connect(self.clicked_BtnB_max_path_open)
         self.ui.BtnB_RefreshList.clicked.connect(self.UpdataListB)
         self.ui.LEditB_max_path.textEdited.connect(self.UpdataListB)
         self.ui.LEditB_max_path.textEdited.connect(self.UpdataListB)
@@ -145,8 +174,10 @@ class MainWindow(QtWidgets.QMainWindow):
         iconpath_folder = "C:\Program Files\Autodesk\\3ds Max 2020\python\PoseLibrary\\temp\\bath_tool\ui\\folder-dynamic-color.png"
         BtnSetIcons(self.ui.BtnA_svae_path,iconpath_folder)
         BtnSetIcons(self.ui.BtnA_max_path, iconpath_folder)
+        BtnSetIcons(self.ui.BtnA_newSkin, iconpath_folder)
         BtnSetIcons(self.ui.BtnB_svae_path, iconpath_folder)
         BtnSetIcons(self.ui.BtnB_max_path, iconpath_folder)
+
 
 
         self.docktitle = QtWidgets.QWidget()
@@ -241,22 +272,35 @@ class MainWindow(QtWidgets.QMainWindow):
             self.UpdataListA()
         else:
             print("文件为空")
+
+    def clicked_BtnA_max_path_open(self):
+        maxpath = self.ui.LEditA_max_path.text()
+        try:
+            os.startfile(maxpath)
+        except:
+            pass
+
     def clicked_BtnA_svae_path(self):
         folder_path = self.dialog_getMaxFileSaveDir()
         print(folder_path)
         self.ui.LEditA_svae_path.setText(folder_path)
 
-    def clicked_BtnB_max_path(self):
-        folder_path = self.dialog_getMaxFileDir()
-        if folder_path != "":
-            print(folder_path)
-            self.ui.LEditB_max_path.setText((folder_path))
-            self.UpdataListB()
-        else:
-            print("文件为空")
-    def clicked_BtnB_svae_path(self):
-        folder_path = self.dialog_getMaxFileSaveDir()
-        self.ui.LEditB_svae_path.setText(folder_path)
+    def clicked_BtnA_svae_path_auto(self):
+        max_folder_path = self.ui.LEditA_max_path.text()
+        folder_path = max_folder_path+"/NewFile"
+        self.ui.LEditA_svae_path.setText(folder_path)
+    def clicked_BtnA_svae_path_open(self):
+        #判断文件夹是否存在
+        svae_path = self.ui.LEditA_svae_path.text()
+        try:
+            os.startfile(svae_path)
+        except:
+            pass
+
+    def clicked_BtnA_max_path_Pick(self):
+        skinpath = rt.maxFilePath+rt.maxFileName
+        self.ui.LEditA_newSkin.setText(skinpath)
+
 
     def clicked_BtnA_List_select_all(self):
 
@@ -272,6 +316,40 @@ class MainWindow(QtWidgets.QMainWindow):
                 item.setSelected(False)
             else:
                 item.setSelected(True)
+
+
+    def clicked_BtnB_max_path(self):
+        folder_path = self.dialog_getMaxFileDir()
+        if folder_path != "":
+            print(folder_path)
+            self.ui.LEditB_max_path.setText((folder_path))
+            self.UpdataListB()
+        else:
+            print("文件为空")
+    def clicked_BtnB_max_path_open(self):
+
+        maxpath = self.ui.LEditB_max_path.text()
+        try:
+            os.startfile(maxpath)
+        except:
+            pass
+
+
+    def clicked_BtnB_svae_path(self):
+        folder_path = self.dialog_getMaxFileSaveDir()
+        self.ui.LEditB_svae_path.setText(folder_path)
+
+    def clicked_BtnB_svae_path_open(self):
+        svaepath = self.ui.LEditB_svae_path.text()
+        try:
+            os.startfile(svaepath)
+        except:
+            pass
+
+    def clicked_BtnB_svae_path_auto(self):
+        max_folder_path = self.ui.LEditB_max_path.text()
+        folder_path = max_folder_path + "/FBX"
+        self.ui.LEditB_svae_path.setText(folder_path)
 
 
     def clicked_Menu_Right(self):
@@ -332,6 +410,19 @@ class MainWindow(QtWidgets.QMainWindow):
             item.setText(3, str(filetime))
             treeWidget.addTopLevelItem(item)
             count +=1
+
+    def Apply(self):
+        #判断活动页面
+        currentIndex = self.ui.tabWidget_Anim.currentIndex()
+        if currentIndex==0:
+            self.ApplyB()
+        elif currentIndex==1:
+            self.ApplyA()
+
+
+
+
+
     def Apply_message(self,num=0,text="请检查"):
         """
         num =0;成功
@@ -358,10 +449,37 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 
+    def ApplyB_check(self):
+        savepath = self.ui.LEditB_svae_path.text()
+        maxfilepath = self.ui.LEditB_max_path.text()
 
+        selectitems = self.ui.treeWidgetB.selectedItems()
+        if len(selectitems)>0:
+            try:
+                os.mkdir(savepath)
+            except:
+                pass
+            if os.path.exists(savepath):
+                self.ui.BtnA_Apply.setEnabled(False)
+                return True
+            else:
+                self.Apply_message(num=2, text="请检查保存路径是否存在")
+        else:
+            self.Apply_message(num=2, text="请选中要执行的文件")
 
     def ApplyB(self):
-        pass
+
+        savepath = self.ui.LEditB_svae_path.text()
+        maxfilepath = self.ui.LEditB_max_path.text()
+
+        # 判断skin文件是否存在
+        checkfile = self.ApplyB_check()
+        if checkfile == True:
+            print ("开始执行导出FBX")
+
+            self.ui.BtnA_Apply.setEnabled(True)
+            self.Apply_message(num=0)
+            pass
 
 
     def ApplyA_check(self):
@@ -370,17 +488,22 @@ class MainWindow(QtWidgets.QMainWindow):
         maxfilepath = self.ui.LEditA_max_path.text()
 
         if os.path.exists(newskinpath):     #判断skin文件是否存在
-            if os.path.exists(savepath):        #判断保存路径是否存在
-                selectitems = self.ui.treeWidgetA.selectedItems()
-                if len(selectitems) > 0:
+            selectitems = self.ui.treeWidgetA.selectedItems()
+            if len(selectitems) > 0:
+                if os.path.exists(savepath):  # 判断保存路径是否存在
                     self.ui.frame_message.setVisible(False)
                     return True
                 else:
-                    self.Apply_message(num=2, text="请选中要执行的文件")
-                    # print("请选中要执行的文件")
+                    try:
+                        os.mkdir(savepath)
+                        self.ui.frame_message.setVisible(False)
+                        return True
+                    except:
+                        self.Apply_message(num=2, text="请检查保存路径是否存在")
+                        # print("检查保存路径是否存在")
             else:
-                self.Apply_message(num=2, text="请检查保存路径是否存在")
-                # print("检查保存路径是否存在")
+                self.Apply_message(num=2, text="请选中要执行的文件")
+
         else:
             self.Apply_message(num=2,text="请检查skin文件是否存在")
 
@@ -409,23 +532,55 @@ class MainWindow(QtWidgets.QMainWindow):
             for item in selectitems:
                 self.ui.progressBar.setValue(float(k) / float(max) * 100)
                 path = item.text(2)
-
                 # print(item.text(2))
-                try:
-                    rt.loadMaxFile(path,quiet=True)
-                    # user_documents_path = os.path.expanduser('~/Documents')
-                    bippath = datapath +"/"+item.text(1)+".bip"
-                    objA = rt.getNodeByName('Bip001')
-                    rt.biped.saveBipFile(objA.controller, bippath)
+            # try:
+                rt.loadMaxFile(path,quiet=True)
+                rt.frameRate = 60   #设置帧速率
+                timeRange_start = rt.animationRange.start.frame
+                timeRange_end = rt.animationRange.end.frame
+                rt.redrawViews()
+                if self.ui.CBoxA_bip_only.isChecked()==False:
+                    #保存xaf文件
+                    rootobj = rt.getNodeByName('root')
+                    allchildren = mxs_get_all_children(rootobj)
+                    allchildren.append(rootobj)
+                    xafobjs = allchildren
+                    xafpath  = datapath +"/"+item.text(1)+".xaf"
+                    if self.ui.CBoxA_iskeyframe.isChecked()==True:
+                        print("关键帧yes")
+                        rt.loadsaveanimation.saveanimation(xafpath,xafobjs,"","",keyableTracks=True)  #keyableTracks关键帧模式
+                    else:
+                        print("关键帧no")
+                        rt.loadsaveanimation.saveanimation(xafpath, xafobjs, "", "", animatedTracks=True,keyableTracks=False,segKeyPerFrame=False)  # keyableTracks关键帧模式
 
-                    rt.loadMaxFile(newskinpath,quiet=True)
-                    objA = rt.getNodeByName('Bip001')
-                    rt.biped.loadBipFile(objA.controller,bippath)
-                    savefliepath = savepath+"/"+item.text(1)+".max"
-                    rt.saveMaxFile(savefliepath)
-                    print(savefliepath)
-                except:
-                    print("读取文件错误")
+
+                #保存bip动画
+                bippath = datapath + "/" + item.text(1) + ".bip"  # 保存bip动画文件
+                objA = rt.getNodeByName('Bip001')
+                rt.biped.saveBipFile(objA.controller, bippath)
+
+
+                #加载新的skin文件
+                rt.loadMaxFile(newskinpath,quiet=True)
+                rt.frameRate = 60
+                rt.redrawViews()
+                objA = rt.getNodeByName('Bip001')
+                rt.biped.loadBipFile(objA.controller,bippath)
+                rt.animationRange = rt.interval(timeRange_start,timeRange_end)      #设置时间滑块范围
+
+                #加载xaf动画
+                if self.ui.CBoxA_bip_only.isChecked() == False:
+                    rootobj = rt.getNodeByName('root')
+                    allchildren = mxs_get_all_children(rootobj)
+                    allchildren.append(rootobj)
+                    xafobjs = allchildren
+                    rt.LoadSaveAnimation.loadAnimation(xafpath,xafobjs)
+
+                savefliepath = savepath+"/"+item.text(1)+".max"
+                rt.saveMaxFile(savefliepath)
+                print(savefliepath)
+                # except:
+                #     print("读取文件错误")
                 k+=1
                 self.ui.progressBar.setValue(float(k) / float(max) * 100)
             self.ui.progressBar.setVisible(False)
