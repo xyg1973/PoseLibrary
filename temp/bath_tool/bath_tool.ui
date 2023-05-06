@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1040</width>
+    <width>1039</width>
     <height>725</height>
    </rect>
   </property>
@@ -1069,7 +1069,7 @@ background: rgb(255, 0, 0);
                               </spacer>
                              </item>
                              <item>
-                              <widget class="QRadioButton" name="radioButton">
+                              <widget class="QRadioButton" name="radioBtnB_fbx_sn">
                                <property name="focusPolicy">
                                 <enum>Qt::NoFocus</enum>
                                </property>
@@ -1082,7 +1082,7 @@ background: rgb(255, 0, 0);
                               </widget>
                              </item>
                              <item>
-                              <widget class="QRadioButton" name="radioButton_2">
+                              <widget class="QRadioButton" name="radioBtnB_fbx_custom">
                                <property name="focusPolicy">
                                 <enum>Qt::NoFocus</enum>
                                </property>
@@ -1129,7 +1129,7 @@ background: rgb(255, 0, 0);
                                 </spacer>
                                </item>
                                <item>
-                                <widget class="QCheckBox" name="checkBox">
+                                <widget class="QCheckBox" name="CBoxB_fbx_sn_export_ani_set">
                                  <property name="enabled">
                                   <bool>true</bool>
                                  </property>
@@ -1145,7 +1145,7 @@ background: rgb(255, 0, 0);
                                 </widget>
                                </item>
                                <item>
-                                <widget class="QCheckBox" name="checkBox_8">
+                                <widget class="QCheckBox" name="CBoxB_fbx_sn_root_zero">
                                  <property name="focusPolicy">
                                   <enum>Qt::NoFocus</enum>
                                  </property>
@@ -1190,7 +1190,7 @@ background: rgb(255, 0, 0);
                                 <item>
                                  <layout class="QVBoxLayout" name="verticalLayout_33">
                                   <item>
-                                   <widget class="QRadioButton" name="radioButton_4">
+                                   <widget class="QRadioButton" name="radioBtnB_fbx_custom_set">
                                     <property name="focusPolicy">
                                      <enum>Qt::NoFocus</enum>
                                     </property>
@@ -1203,7 +1203,7 @@ background: rgb(255, 0, 0);
                                    </widget>
                                   </item>
                                   <item>
-                                   <widget class="QRadioButton" name="radioButton_3">
+                                   <widget class="QRadioButton" name="radioBtnB_fbx_custom_objs">
                                     <property name="focusPolicy">
                                      <enum>Qt::NoFocus</enum>
                                     </property>
@@ -1217,21 +1217,93 @@ background: rgb(255, 0, 0);
                                 <item>
                                  <layout class="QVBoxLayout" name="verticalLayout_37">
                                   <item>
-                                   <widget class="QLineEdit" name="lineEdit_6">
+                                   <widget class="QLineEdit" name="LEditB_fbx_custom_set">
                                     <property name="focusPolicy">
-                                     <enum>Qt::NoFocus</enum>
+                                     <enum>Qt::StrongFocus</enum>
+                                    </property>
+                                    <property name="styleSheet">
+                                     <string notr="true">QLineEdit{
+background-color:rgb(90, 90, 90);
+color:rgb(255, 255, 255);
+border-radius: 5px; 
+border: 1px solid rgb(40, 40, 40);
+padding: 2px;
+}
+
+QLineEdit:hover {
+background-color:rgb(100, 100, 100);
+color:rgb(255, 255, 255);
+border-radius: 5px; 
+border: 1px solid rgb(150, 150, 150);
+padding: 2px;
+}
+QLineEdit:pressed {
+background-color:rgb(110, 110, 110);
+color:rgb(255, 255, 255);
+border-radius: 5px; 
+border: 1px solid rgb(70, 70, 70);
+padding: 2px;
+}
+
+QLineEdit:nameEdit {
+background-color:rgb(225, 225, 225);
+color:rgb(255, 255, 255);
+border-radius: 5px; 
+border: 1px solid rgb(70, 70, 70);
+padding: 2px;
+}
+QLineEdit:read-only{
+background-color:rgb(225, 225, 225);
+color:rgb(255, 255, 255);
+border-radius: 5px; 
+border: 1px solid rgb(70, 70, 70);
+padding: 2px;
+}
+</string>
                                     </property>
                                    </widget>
                                   </item>
                                   <item>
-                                   <widget class="QPushButton" name="pushButton_5">
-                                    <property name="focusPolicy">
-                                     <enum>Qt::NoFocus</enum>
+                                   <layout class="QHBoxLayout" name="horizontalLayout_9">
+                                    <property name="spacing">
+                                     <number>15</number>
                                     </property>
-                                    <property name="text">
-                                     <string>指定当前选择物体</string>
-                                    </property>
-                                   </widget>
+                                    <item>
+                                     <widget class="QLabel" name="labelB_fbx_custom_objs_count">
+                                      <property name="text">
+                                       <string/>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QLineEdit" name="labelB_fbx_custom_objs">
+                                      <property name="enabled">
+                                       <bool>false</bool>
+                                      </property>
+                                      <property name="styleSheet">
+                                       <string notr="true">QLineEdit{
+background-color:rgb(80, 80, 80);
+color:rgb(255, 255, 255);
+border-radius: 5px; 
+border: 1px solid rgb(60, 60, 60);
+padding: 2px;
+}
+
+</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QPushButton" name="BtnB_fbx_custom_objs_pick">
+                                      <property name="focusPolicy">
+                                       <enum>Qt::NoFocus</enum>
+                                      </property>
+                                      <property name="text">
+                                       <string>指定当前选择物体</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                   </layout>
                                   </item>
                                  </layout>
                                 </item>
@@ -1266,7 +1338,7 @@ background: rgb(255, 0, 0);
                                 </spacer>
                                </item>
                                <item>
-                                <widget class="QCheckBox" name="checkBox_4">
+                                <widget class="QCheckBox" name="CBoxB_fbx_custom_backanimation">
                                  <property name="focusPolicy">
                                   <enum>Qt::NoFocus</enum>
                                  </property>
@@ -1279,7 +1351,7 @@ background: rgb(255, 0, 0);
                                 </widget>
                                </item>
                                <item>
-                                <widget class="QCheckBox" name="checkBox_3">
+                                <widget class="QCheckBox" name="CBoxB_fbx_custom_BakeResampleAnimation">
                                  <property name="focusPolicy">
                                   <enum>Qt::NoFocus</enum>
                                  </property>
@@ -1292,7 +1364,7 @@ background: rgb(255, 0, 0);
                                 </widget>
                                </item>
                                <item>
-                                <widget class="QCheckBox" name="checkBox_6">
+                                <widget class="QCheckBox" name="CBoxB_fbx_custom_cvfix">
                                  <property name="focusPolicy">
                                   <enum>Qt::NoFocus</enum>
                                  </property>

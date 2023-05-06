@@ -14,7 +14,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_mainWindow(object):
     def setupUi(self, mainWindow):
         mainWindow.setObjectName("mainWindow")
-        mainWindow.resize(1040, 725)
+        mainWindow.resize(1039, 725)
         mainWindow.setStyleSheet("QMainWindow#MainWindow\n"
 "{\n"
 "background-color:rgb(200, 200, 200);\n"
@@ -590,15 +590,15 @@ class Ui_mainWindow(object):
         self.horizontalLayout_33.setObjectName("horizontalLayout_33")
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_33.addItem(spacerItem2)
-        self.radioButton = QtWidgets.QRadioButton(self.frame_21)
-        self.radioButton.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.radioButton.setChecked(True)
-        self.radioButton.setObjectName("radioButton")
-        self.horizontalLayout_33.addWidget(self.radioButton)
-        self.radioButton_2 = QtWidgets.QRadioButton(self.frame_21)
-        self.radioButton_2.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.radioButton_2.setObjectName("radioButton_2")
-        self.horizontalLayout_33.addWidget(self.radioButton_2)
+        self.radioBtnB_fbx_sn = QtWidgets.QRadioButton(self.frame_21)
+        self.radioBtnB_fbx_sn.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.radioBtnB_fbx_sn.setChecked(True)
+        self.radioBtnB_fbx_sn.setObjectName("radioBtnB_fbx_sn")
+        self.horizontalLayout_33.addWidget(self.radioBtnB_fbx_sn)
+        self.radioBtnB_fbx_custom = QtWidgets.QRadioButton(self.frame_21)
+        self.radioBtnB_fbx_custom.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.radioBtnB_fbx_custom.setObjectName("radioBtnB_fbx_custom")
+        self.horizontalLayout_33.addWidget(self.radioBtnB_fbx_custom)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_33.addItem(spacerItem3)
         self.verticalLayout_28.addWidget(self.frame_21)
@@ -611,17 +611,17 @@ class Ui_mainWindow(object):
         self.horizontalLayout_35.setObjectName("horizontalLayout_35")
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_35.addItem(spacerItem4)
-        self.checkBox = QtWidgets.QCheckBox(self.groupBox_13)
-        self.checkBox.setEnabled(True)
-        self.checkBox.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.checkBox.setChecked(True)
-        self.checkBox.setObjectName("checkBox")
-        self.horizontalLayout_35.addWidget(self.checkBox)
-        self.checkBox_8 = QtWidgets.QCheckBox(self.groupBox_13)
-        self.checkBox_8.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.checkBox_8.setChecked(True)
-        self.checkBox_8.setObjectName("checkBox_8")
-        self.horizontalLayout_35.addWidget(self.checkBox_8)
+        self.CBoxB_fbx_sn_export_ani_set = QtWidgets.QCheckBox(self.groupBox_13)
+        self.CBoxB_fbx_sn_export_ani_set.setEnabled(True)
+        self.CBoxB_fbx_sn_export_ani_set.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.CBoxB_fbx_sn_export_ani_set.setChecked(True)
+        self.CBoxB_fbx_sn_export_ani_set.setObjectName("CBoxB_fbx_sn_export_ani_set")
+        self.horizontalLayout_35.addWidget(self.CBoxB_fbx_sn_export_ani_set)
+        self.CBoxB_fbx_sn_root_zero = QtWidgets.QCheckBox(self.groupBox_13)
+        self.CBoxB_fbx_sn_root_zero.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.CBoxB_fbx_sn_root_zero.setChecked(True)
+        self.CBoxB_fbx_sn_root_zero.setObjectName("CBoxB_fbx_sn_root_zero")
+        self.horizontalLayout_35.addWidget(self.CBoxB_fbx_sn_root_zero)
         spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_35.addItem(spacerItem5)
         self.verticalLayout_38.addLayout(self.horizontalLayout_35)
@@ -637,26 +637,85 @@ class Ui_mainWindow(object):
         self.horizontalLayout_34.setObjectName("horizontalLayout_34")
         self.verticalLayout_33 = QtWidgets.QVBoxLayout()
         self.verticalLayout_33.setObjectName("verticalLayout_33")
-        self.radioButton_4 = QtWidgets.QRadioButton(self.groupBox_15)
-        self.radioButton_4.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.radioButton_4.setChecked(True)
-        self.radioButton_4.setObjectName("radioButton_4")
-        self.verticalLayout_33.addWidget(self.radioButton_4)
-        self.radioButton_3 = QtWidgets.QRadioButton(self.groupBox_15)
-        self.radioButton_3.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.radioButton_3.setObjectName("radioButton_3")
-        self.verticalLayout_33.addWidget(self.radioButton_3)
+        self.radioBtnB_fbx_custom_set = QtWidgets.QRadioButton(self.groupBox_15)
+        self.radioBtnB_fbx_custom_set.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.radioBtnB_fbx_custom_set.setChecked(True)
+        self.radioBtnB_fbx_custom_set.setObjectName("radioBtnB_fbx_custom_set")
+        self.verticalLayout_33.addWidget(self.radioBtnB_fbx_custom_set)
+        self.radioBtnB_fbx_custom_objs = QtWidgets.QRadioButton(self.groupBox_15)
+        self.radioBtnB_fbx_custom_objs.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.radioBtnB_fbx_custom_objs.setObjectName("radioBtnB_fbx_custom_objs")
+        self.verticalLayout_33.addWidget(self.radioBtnB_fbx_custom_objs)
         self.horizontalLayout_34.addLayout(self.verticalLayout_33)
         self.verticalLayout_37 = QtWidgets.QVBoxLayout()
         self.verticalLayout_37.setObjectName("verticalLayout_37")
-        self.lineEdit_6 = QtWidgets.QLineEdit(self.groupBox_15)
-        self.lineEdit_6.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.lineEdit_6.setObjectName("lineEdit_6")
-        self.verticalLayout_37.addWidget(self.lineEdit_6)
-        self.pushButton_5 = QtWidgets.QPushButton(self.groupBox_15)
-        self.pushButton_5.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.pushButton_5.setObjectName("pushButton_5")
-        self.verticalLayout_37.addWidget(self.pushButton_5)
+        self.LEditB_fbx_custom_set = QtWidgets.QLineEdit(self.groupBox_15)
+        self.LEditB_fbx_custom_set.setFocusPolicy(QtCore.Qt.StrongFocus)
+        self.LEditB_fbx_custom_set.setStyleSheet("QLineEdit{\n"
+"background-color:rgb(90, 90, 90);\n"
+"color:rgb(255, 255, 255);\n"
+"border-radius: 5px; \n"
+"border: 1px solid rgb(40, 40, 40);\n"
+"padding: 2px;\n"
+"}\n"
+"\n"
+"QLineEdit:hover {\n"
+"background-color:rgb(100, 100, 100);\n"
+"color:rgb(255, 255, 255);\n"
+"border-radius: 5px; \n"
+"border: 1px solid rgb(150, 150, 150);\n"
+"padding: 2px;\n"
+"}\n"
+"QLineEdit:pressed {\n"
+"background-color:rgb(110, 110, 110);\n"
+"color:rgb(255, 255, 255);\n"
+"border-radius: 5px; \n"
+"border: 1px solid rgb(70, 70, 70);\n"
+"padding: 2px;\n"
+"}\n"
+"\n"
+"QLineEdit:nameEdit {\n"
+"background-color:rgb(225, 225, 225);\n"
+"color:rgb(255, 255, 255);\n"
+"border-radius: 5px; \n"
+"border: 1px solid rgb(70, 70, 70);\n"
+"padding: 2px;\n"
+"}\n"
+"QLineEdit:read-only{\n"
+"background-color:rgb(225, 225, 225);\n"
+"color:rgb(255, 255, 255);\n"
+"border-radius: 5px; \n"
+"border: 1px solid rgb(70, 70, 70);\n"
+"padding: 2px;\n"
+"}\n"
+"")
+        self.LEditB_fbx_custom_set.setObjectName("LEditB_fbx_custom_set")
+        self.verticalLayout_37.addWidget(self.LEditB_fbx_custom_set)
+        self.horizontalLayout_9 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_9.setSpacing(15)
+        self.horizontalLayout_9.setObjectName("horizontalLayout_9")
+        self.labelB_fbx_custom_objs_count = QtWidgets.QLabel(self.groupBox_15)
+        self.labelB_fbx_custom_objs_count.setText("")
+        self.labelB_fbx_custom_objs_count.setObjectName("labelB_fbx_custom_objs_count")
+        self.horizontalLayout_9.addWidget(self.labelB_fbx_custom_objs_count)
+        self.labelB_fbx_custom_objs = QtWidgets.QLineEdit(self.groupBox_15)
+        self.labelB_fbx_custom_objs.setEnabled(False)
+        self.labelB_fbx_custom_objs.setStyleSheet("QLineEdit{\n"
+"background-color:rgb(80, 80, 80);\n"
+"color:rgb(255, 255, 255);\n"
+"border-radius: 5px; \n"
+"border: 1px solid rgb(60, 60, 60);\n"
+"padding: 2px;\n"
+"}\n"
+"\n"
+"")
+        self.labelB_fbx_custom_objs.setObjectName("labelB_fbx_custom_objs")
+        self.horizontalLayout_9.addWidget(self.labelB_fbx_custom_objs)
+        self.BtnB_fbx_custom_objs_pick = QtWidgets.QPushButton(self.groupBox_15)
+        self.BtnB_fbx_custom_objs_pick.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.BtnB_fbx_custom_objs_pick.setObjectName("BtnB_fbx_custom_objs_pick")
+        self.horizontalLayout_9.addWidget(self.BtnB_fbx_custom_objs_pick)
+        self.verticalLayout_37.addLayout(self.horizontalLayout_9)
         self.horizontalLayout_34.addLayout(self.verticalLayout_37)
         self.verticalLayout_31.addWidget(self.groupBox_15)
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
@@ -664,21 +723,21 @@ class Ui_mainWindow(object):
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem6)
-        self.checkBox_4 = QtWidgets.QCheckBox(self.groupBox_14)
-        self.checkBox_4.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.checkBox_4.setChecked(True)
-        self.checkBox_4.setObjectName("checkBox_4")
-        self.horizontalLayout_4.addWidget(self.checkBox_4)
-        self.checkBox_3 = QtWidgets.QCheckBox(self.groupBox_14)
-        self.checkBox_3.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.checkBox_3.setChecked(True)
-        self.checkBox_3.setObjectName("checkBox_3")
-        self.horizontalLayout_4.addWidget(self.checkBox_3)
-        self.checkBox_6 = QtWidgets.QCheckBox(self.groupBox_14)
-        self.checkBox_6.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.checkBox_6.setChecked(True)
-        self.checkBox_6.setObjectName("checkBox_6")
-        self.horizontalLayout_4.addWidget(self.checkBox_6)
+        self.CBoxB_fbx_custom_backanimation = QtWidgets.QCheckBox(self.groupBox_14)
+        self.CBoxB_fbx_custom_backanimation.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.CBoxB_fbx_custom_backanimation.setChecked(True)
+        self.CBoxB_fbx_custom_backanimation.setObjectName("CBoxB_fbx_custom_backanimation")
+        self.horizontalLayout_4.addWidget(self.CBoxB_fbx_custom_backanimation)
+        self.CBoxB_fbx_custom_BakeResampleAnimation = QtWidgets.QCheckBox(self.groupBox_14)
+        self.CBoxB_fbx_custom_BakeResampleAnimation.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.CBoxB_fbx_custom_BakeResampleAnimation.setChecked(True)
+        self.CBoxB_fbx_custom_BakeResampleAnimation.setObjectName("CBoxB_fbx_custom_BakeResampleAnimation")
+        self.horizontalLayout_4.addWidget(self.CBoxB_fbx_custom_BakeResampleAnimation)
+        self.CBoxB_fbx_custom_cvfix = QtWidgets.QCheckBox(self.groupBox_14)
+        self.CBoxB_fbx_custom_cvfix.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.CBoxB_fbx_custom_cvfix.setChecked(True)
+        self.CBoxB_fbx_custom_cvfix.setObjectName("CBoxB_fbx_custom_cvfix")
+        self.horizontalLayout_4.addWidget(self.CBoxB_fbx_custom_cvfix)
         spacerItem7 = QtWidgets.QSpacerItem(60, 17, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem7)
         self.verticalLayout_31.addLayout(self.horizontalLayout_4)
@@ -1602,17 +1661,17 @@ class Ui_mainWindow(object):
         self.treeWidgetB.topLevelItem(4).setText(0, _translate("mainWindow", "New Item"))
         self.treeWidgetB.setSortingEnabled(__sortingEnabled)
         self.groupBox_12.setTitle(_translate("mainWindow", "FBX输出设置"))
-        self.radioButton.setText(_translate("mainWindow", "SN项目标准输出"))
-        self.radioButton_2.setText(_translate("mainWindow", "自定义输出"))
-        self.checkBox.setText(_translate("mainWindow", "输出Export_ani选择集"))
-        self.checkBox_8.setText(_translate("mainWindow", "root归零"))
+        self.radioBtnB_fbx_sn.setText(_translate("mainWindow", "SN项目标准输出"))
+        self.radioBtnB_fbx_custom.setText(_translate("mainWindow", "自定义输出"))
+        self.CBoxB_fbx_sn_export_ani_set.setText(_translate("mainWindow", "输出Export_ani选择集"))
+        self.CBoxB_fbx_sn_root_zero.setText(_translate("mainWindow", "root归零"))
         self.groupBox_15.setTitle(_translate("mainWindow", "导出对象"))
-        self.radioButton_4.setText(_translate("mainWindow", "自定义选择集"))
-        self.radioButton_3.setText(_translate("mainWindow", "自定义对象"))
-        self.pushButton_5.setText(_translate("mainWindow", "指定当前选择物体"))
-        self.checkBox_4.setText(_translate("mainWindow", "烘培动画"))
-        self.checkBox_3.setText(_translate("mainWindow", "全部重采样"))
-        self.checkBox_6.setText(_translate("mainWindow", "曲线修正"))
+        self.radioBtnB_fbx_custom_set.setText(_translate("mainWindow", "自定义选择集"))
+        self.radioBtnB_fbx_custom_objs.setText(_translate("mainWindow", "自定义对象"))
+        self.BtnB_fbx_custom_objs_pick.setText(_translate("mainWindow", "指定当前选择物体"))
+        self.CBoxB_fbx_custom_backanimation.setText(_translate("mainWindow", "烘培动画"))
+        self.CBoxB_fbx_custom_BakeResampleAnimation.setText(_translate("mainWindow", "全部重采样"))
+        self.CBoxB_fbx_custom_cvfix.setText(_translate("mainWindow", "曲线修正"))
         self.tabWidget_Anim.setTabText(self.tabWidget_Anim.indexOf(self.tab), _translate("mainWindow", "批量导出FBX"))
         self.groupBox_6.setTitle(_translate("mainWindow", "新的skin文件"))
         self.BtnA_newSkin.setToolTip(_translate("mainWindow", "指定max文件"))

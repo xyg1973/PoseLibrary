@@ -1,11 +1,12 @@
-import win32com.client
+from pymxs import runtime as rt
 
-MaxApp = "MAX.Application"
-script = "clearlistener(); for i = 1 to 100 do print i"
-max_functions = ["OLEExecuteScript","runscript"]
 
-conn = win32com.client.Dispatch(MaxApp)
-for funcs in max_functions: # add our OLE functions
-	conn._FlagAsMethod(funcs)
+selectionobjs = rt.selection
+objs = []
+if selectionobjs!=None:
+	for i in range(selectionobjs.count):
+		objs.append(selectionobjs[i].name)
 
-conn.runscript(script)
+textobjs = str(objs)
+objsname = eval(textobjs)
+print(objsname)

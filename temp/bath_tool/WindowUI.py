@@ -82,6 +82,25 @@ def getfileName(path):
     return filename
 
 
+
+def mxs_export_fbx_anim(filename, BackAnimation=True,UpAxis = "Y",BakeResampleAnimation=True,Skin=True):
+    #fbx导出设置
+    rt.FBXExporterSetParam( "ASCII" ,True)
+    rt.FBXExporterSetParam ("Cameras" ,True)
+    rt.FBXExporterSetParam ("BakeAnimation", BackAnimation)
+    rt.FBXExporterSetParam ("BakeFrameStart", rt.animationRange.start)
+    rt.FBXExporterSetParam ("BakeFrameEnd" ,rt.animationRange.end)
+    rt.FBXExporterSetParam ("BakeFrameStep" ,1)
+    rt.FBXExporterSetParam ("UpAxis" ,UpAxis)
+    rt.FBXExporterSetParam("BakeResampleAnimation",BakeResampleAnimation)   #全部重采样
+    rt.FBXExporterSetParam("UseSceneName", True)   #动画take名称，使用场景名称
+    rt.FBXExporterSetParam("Skin",Skin)
+    # rt.FBXExporterSetParam("SelectionSetExport",True)
+    # rt.FBXExporterSetParam("SelectionSet",SelectionSet)
+
+    rt.exportFile(filename, rt.Name("noPrompt"), selectedOnly=True, using='FBXEXP')
+    return filename
+
 def mxs_get_all_children(parent, node_type=None):
     """Handy function to get all the children of a given node
 
@@ -160,6 +179,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.LEditB_max_path.textEdited.connect(self.UpdataListB)
         self.ui.LEditB_max_path.textEdited.connect(self.UpdataListB)
         self.ui.BtnB_RefreshList.clicked.connect(self.UpdataListB)
+        self.ui.BtnB_List_select_all.clicked.connect(self.clicked_BtnB_List_select_all)
+        self.ui.BtnB_List_select_reverse.clicked.connect(self.clicked_BtnB_List_select_reverse)
+        self.ui.BtnB_fbx_custom_objs_pick.clicked.connect(self.clicked_BtnB_fbx_custom_objs_pick)
+        self.ui.radioBtnB_fbx_sn.clicked.connect(self.clicked_radioBtnB_fbx_sn)
+        self.ui.radioBtnB_fbx_custom.clicked.connect(self.clicked_radioBtnB_fbx_custom)
         pass
 
     def stepWindowUi(self):
@@ -208,10 +232,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.treeWidgetB.setColumnWidth(0,30)
         self.ui.treeWidgetB.setColumnWidth(1, 200)
         self.ui.treeWidgetB.setColumnWidth(2, 600)
-
         self.ui.groupBox_14.setVisible(False)
-
         self.ui.frame_message.setVisible(False)
+
+        #临时隐藏的ui
+        self.ui.CBoxB_List_subfolder.setVisible(False)
+        self.ui.BtnB_List_item_delete.setVisible(False)
+        self.ui.BtnB_List_item_Add.setVisible(False)
+        self.ui.CBoxA_List_subfolder.setVisible(False)
+        self.ui.BtnA_List_item_delete.setVisible(False)
+        self.ui.BtnA_List_item_add.setVisible(False)
 
 
     def actionshow_log(self):
@@ -306,6 +336,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ui.treeWidgetA.selectAll()
 
+    def clicked_BtnB_List_select_all(self):
+
+        self.ui.treeWidgetB.selectAll()
+
 
     def clicked_BtnA_List_select_reverse(self):
         selectitem = self.ui.treeWidgetA.selectedItems()
@@ -317,6 +351,15 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 item.setSelected(True)
 
+    def clicked_BtnB_List_select_reverse(self):
+        selectitem = self.ui.treeWidgetB.selectedItems()
+        tree_widget = self.ui.treeWidgetB
+        for i in range(tree_widget.topLevelItemCount()):
+            item = tree_widget.topLevelItem(i)
+            if self.ui.treeWidgetA.isItemSelected(item):
+                item.setSelected(False)
+            else:
+                item.setSelected(True)
 
     def clicked_BtnB_max_path(self):
         folder_path = self.dialog_getMaxFileDir()
@@ -351,6 +394,23 @@ class MainWindow(QtWidgets.QMainWindow):
         folder_path = max_folder_path + "/FBX"
         self.ui.LEditB_svae_path.setText(folder_path)
 
+    def clicked_BtnB_fbx_custom_objs_pick(self):
+        selectionobjs = rt.selection
+        objs = []
+        if selectionobjs!=None:
+            for i in range(selectionobjs.count):
+                objs.append(selectionobjs[i].name)
+            self.ui.labelB_fbx_custom_objs.setText(str(objs))
+            self.ui.labelB_fbx_custom_objs_count.setText(str(selectionobjs.count)+u" 个物体")
+
+    def clicked_radioBtnB_fbx_sn(self):
+        if self.ui.radioBtnB_fbx_sn.isChecked():
+            self.ui.groupBox_14.setVisible(False)
+            self.ui.groupBox_13.setVisible(True)
+    def clicked_radioBtnB_fbx_custom(self):
+        if self.ui.radioBtnB_fbx_custom.isChecked():
+            self.ui.groupBox_14.setVisible(True)
+            self.ui.groupBox_13.setVisible(False)
 
     def clicked_Menu_Right(self):
         item = self.ui.Menu_Right.selectedItems()
@@ -485,12 +545,19 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.progressBar.setValue(float(k) / float(max) * 100)
             for item in selectitems:
                 self.ui.progressBar.setValue(float(k) / float(max) * 100)
-                print ("开始执行导出FBX")
-
                 path = item.text(2)
-                print(path)
+                #加载max文件
                 rt.loadMaxFile(path, quiet=True)
+                fbxpath = savepath+"//"+item.text(1)+".fbx"
 
+                export_objs = self.get_export_objs()
+                if export_objs != None:
+                    print(export_objs)
+                    rt.select(export_objs)
+                    #导出fbx
+                    mxs_export_fbx_anim(filename=fbxpath)
+                else:
+                    print(item.text(1)+u":导出警告 导出物体为空")
                 k += 1
                 self.ui.progressBar.setValue(float(k) / float(max) * 100)
 
@@ -498,6 +565,42 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.BtnA_Apply.setEnabled(True)
             self.ui.frame_message.setVisible(True)
             self.Apply_message(num=0)
+
+    def get_export_objs(self):
+        if self.ui.radioBtnB_fbx_sn.isChecked():
+            sets = rt.selectionSets["Export_ani"]
+            objs = []
+            if sets:
+                for i in range(sets.count):
+                    objs.append(sets[i])
+                return objs
+            else:
+                return None
+        if self.ui.radioBtnB_fbx_custom.isChecked():
+            if self.ui.radioBtnB_fbx_custom_set.isChecked():
+                setsname= self.ui.LEditB_fbx_custom_set.text()
+                sets = rt.selectionSets[setsname]
+                if sets:
+                    objs = []
+                    for i in range(sets.count):
+                        objs.append(sets[i])
+                    return objs
+                else:
+                    return None
+            if self.ui.radioBtnB_fbx_custom_objs.isChecked():
+                textobjs = self.ui.labelB_fbx_custom_objs.text()
+                objsname = eval(textobjs)
+                if len(objsname) > 0:
+                    objs = []
+                    for i in range(len(objsname)):
+                        obj = rt.getNodeByName(objsname[i])
+                        objs.append(obj)
+                    return objs
+                else:
+                    return None
+
+
+
 
 
     def ApplyA_check(self):
