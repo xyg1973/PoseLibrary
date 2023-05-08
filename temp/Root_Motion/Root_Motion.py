@@ -24,8 +24,7 @@ class Ui_DockWidget(QtWidgets.QDockWidget):
 
         self.ui.frame_14.setVisible(False)
         self.ui.frame_8.setVisible(False)
-        self.ui.line_8.setVisible(False)
-        self.ui.line_9.setVisible(False)
+        self.ui.frame_10.setVisible(False)
         # self.ui.frame_5.setVisible(False)
         # self.ui.frame_3.setVisible(False)
 
@@ -59,14 +58,14 @@ class Ui_DockWidget(QtWidgets.QDockWidget):
         if ischeack:
             self.ui.frame_14.setVisible(True)
             self.ui.frame_8.setVisible(True)
-            self.ui.line_8.setVisible(True)
-            self.ui.line_9.setVisible(True)
+            self.ui.frame_10.setVisible(True)
+
 
         else:
             self.ui.frame_14.setVisible(False)
             self.ui.frame_8.setVisible(False)
-            self.ui.line_8.setVisible(False)
-            self.ui.line_9.setVisible(False)
+            self.ui.frame_10.setVisible(False)
+
 
     def clicked_Btn_root_pick(self):
         try:
