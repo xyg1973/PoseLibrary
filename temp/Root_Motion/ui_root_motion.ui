@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>337</width>
-    <height>751</height>
+    <width>374</width>
+    <height>723</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -761,14 +761,33 @@ padding: 2px;
                <string/>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,0">
+               <property name="leftMargin">
+                <number>2</number>
+               </property>
+               <property name="topMargin">
+                <number>2</number>
+               </property>
+               <property name="rightMargin">
+                <number>2</number>
+               </property>
+               <property name="bottomMargin">
+                <number>2</number>
+               </property>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_11">
                  <item>
                   <widget class="QGroupBox" name="groupBox_5">
                    <property name="title">
-                    <string>开始帧:       </string>
+                    <string/>
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_6">
+                    <item>
+                     <widget class="QLabel" name="label_5">
+                      <property name="text">
+                       <string>开始帧:</string>
+                      </property>
+                     </widget>
+                    </item>
                     <item>
                      <widget class="QSpinBox" name="spinBox_frame_start">
                       <property name="sizePolicy">
@@ -778,10 +797,10 @@ padding: 2px;
                        </sizepolicy>
                       </property>
                       <property name="minimum">
-                       <number>-99999999</number>
+                       <number>-99999</number>
                       </property>
                       <property name="maximum">
-                       <number>999999999</number>
+                       <number>99999</number>
                       </property>
                      </widget>
                     </item>
@@ -804,9 +823,16 @@ padding: 2px;
                  <item>
                   <widget class="QGroupBox" name="groupBox_6">
                    <property name="title">
-                    <string>结束帧:       </string>
+                    <string/>
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_7">
+                    <item>
+                     <widget class="QLabel" name="label_6">
+                      <property name="text">
+                       <string>结束帧:</string>
+                      </property>
+                     </widget>
+                    </item>
                     <item>
                      <widget class="QSpinBox" name="spinBox_frame_end">
                       <property name="sizePolicy">
@@ -816,10 +842,10 @@ padding: 2px;
                        </sizepolicy>
                       </property>
                       <property name="minimum">
-                       <number>-99999999</number>
+                       <number>-99999</number>
                       </property>
                       <property name="maximum">
-                       <number>999999999</number>
+                       <number>99999</number>
                       </property>
                      </widget>
                     </item>
@@ -837,13 +863,6 @@ padding: 2px;
                      </widget>
                     </item>
                    </layout>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="Line" name="line_2">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
                   </widget>
                  </item>
                 </layout>
