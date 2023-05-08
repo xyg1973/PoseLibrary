@@ -21,6 +21,11 @@ class Ui_DockWidget(QtWidgets.QDockWidget):
     def stepWindowUi(self):
         self.ui.progressBar.setVisible(False)
         self.ui.groupBox_4.setVisible(False)
+
+        self.ui.frame_14.setVisible(False)
+        self.ui.frame_8.setVisible(False)
+        self.ui.line_8.setVisible(False)
+        self.ui.line_9.setVisible(False)
         # self.ui.frame_5.setVisible(False)
         # self.ui.frame_3.setVisible(False)
 
@@ -50,11 +55,18 @@ class Ui_DockWidget(QtWidgets.QDockWidget):
 
     def clicked_cBox_posZ(self):
         pass
-        # ischeack = self.ui.cBox_posZ.isChecked()
-        # if ischeack:
-        #     self.ui.frame_5.setVisible(True)
-        # else:
-        #     self.ui.frame_5.setVisible(False)
+        ischeack = self.ui.cBox_posZ.isChecked()
+        if ischeack:
+            self.ui.frame_14.setVisible(True)
+            self.ui.frame_8.setVisible(True)
+            self.ui.line_8.setVisible(True)
+            self.ui.line_9.setVisible(True)
+
+        else:
+            self.ui.frame_14.setVisible(False)
+            self.ui.frame_8.setVisible(False)
+            self.ui.line_8.setVisible(False)
+            self.ui.line_9.setVisible(False)
 
     def clicked_Btn_root_pick(self):
         try:

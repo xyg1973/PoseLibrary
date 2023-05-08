@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>348</width>
-    <height>497</height>
+    <width>349</width>
+    <height>738</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,32 +18,29 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
-    <number>6</number>
+    <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>6</number>
+    <number>2</number>
    </property>
    <property name="topMargin">
-    <number>9</number>
+    <number>5</number>
    </property>
    <property name="rightMargin">
-    <number>6</number>
+    <number>2</number>
    </property>
    <property name="bottomMargin">
-    <number>9</number>
+    <number>2</number>
    </property>
    <item>
-    <widget class="QFrame" name="frame_7">
-     <property name="styleSheet">
-      <string notr="true"/>
+    <widget class="QGroupBox" name="groupBox_8">
+     <property name="title">
+      <string/>
      </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,0,0">
+     <layout class="QVBoxLayout" name="verticalLayout_11">
+      <property name="spacing">
+       <number>6</number>
+      </property>
       <property name="leftMargin">
        <number>0</number>
       </property>
@@ -57,176 +54,9 @@
        <number>0</number>
       </property>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_8">
-        <item>
-         <widget class="QFrame" name="frame_4">
-          <property name="styleSheet">
-           <string notr="true">QFrame#frame_4{
-	background-color:rgb(65, 65, 65);
-	border-radius:10px;
-}</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_14">
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_13">
-             <item>
-              <widget class="QGroupBox" name="groupBox">
-               <property name="font">
-                <font>
-                 <pointsize>12</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="title">
-                <string>根骨骼</string>
-               </property>
-               <layout class="QHBoxLayout" name="horizontalLayout">
-                <item>
-                 <widget class="QLineEdit" name="lineEdit">
-                  <property name="styleSheet">
-                   <string notr="true">QLineEdit{
-background-color:rgb(90, 90, 90);
-color:rgb(255, 255, 255);
-border-radius: 5px; 
-border: 1px solid rgb(40, 40, 40);
-padding: 2px;
-}
-
-QLineEdit:hover {
-background-color:rgb(100, 100, 100);
-color:rgb(255, 255, 255);
-border-radius: 5px; 
-border: 1px solid rgb(150, 150, 150);
-padding: 2px;
-}
-QLineEdit:pressed {
-background-color:rgb(110, 110, 110);
-color:rgb(255, 255, 255);
-border-radius: 5px; 
-border: 1px solid rgb(70, 70, 70);
-padding: 2px;
-}</string>
-                  </property>
-                  <property name="text">
-                   <string>root</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QToolButton" name="Btn_root_pick">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Ignored">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="text">
-                   <string>↙</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QFrame" name="frame_6">
-          <property name="styleSheet">
-           <string notr="true">QFrame#frame_6{
-	background-color:rgb(65, 65, 65);
-	border-radius:10px;
-}</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_15">
-           <item>
-            <widget class="QGroupBox" name="groupBox_2">
-             <property name="font">
-              <font>
-               <pointsize>12</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="title">
-              <string>质心</string>
-             </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_2">
-              <item>
-               <widget class="QLineEdit" name="lineEdit_2">
-                <property name="styleSheet">
-                 <string notr="true">QLineEdit{
-background-color:rgb(90, 90, 90);
-color:rgb(255, 255, 255);
-border-radius: 5px; 
-border: 1px solid rgb(40, 40, 40);
-padding: 2px;
-}
-
-QLineEdit:hover {
-background-color:rgb(100, 100, 100);
-color:rgb(255, 255, 255);
-border-radius: 5px; 
-border: 1px solid rgb(150, 150, 150);
-padding: 2px;
-}
-QLineEdit:pressed {
-background-color:rgb(110, 110, 110);
-color:rgb(255, 255, 255);
-border-radius: 5px; 
-border: 1px solid rgb(70, 70, 70);
-padding: 2px;
-}</string>
-                </property>
-                <property name="text">
-                 <string>Bip001</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QToolButton" name="Btn_Pelvis_pick">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Fixed" vsizetype="Ignored">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string>↙</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QFrame" name="frame_3">
+       <widget class="QFrame" name="frame_7">
         <property name="styleSheet">
-         <string notr="true">QFrame#frame_3{
-	background-color:rgb(65, 65, 65);
-	border-radius:10px;
-}</string>
+         <string notr="true"/>
         </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
@@ -234,22 +64,224 @@ padding: 2px;
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_14">
+        <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,0,0,0">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
-          <widget class="QGroupBox" name="groupBox_3">
-           <property name="title">
-            <string>提取位移轴</string>
+          <layout class="QHBoxLayout" name="horizontalLayout_8">
+           <item>
+            <widget class="QFrame" name="frame_4">
+             <property name="styleSheet">
+              <string notr="true">QFrame#frame_4{
+	background-color:rgb(65, 65, 65);
+	border-radius:10px;
+}</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_14">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_13">
+                <item>
+                 <widget class="QGroupBox" name="groupBox">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="title">
+                   <string>根骨骼</string>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout">
+                   <item>
+                    <widget class="QLineEdit" name="lineEdit">
+                     <property name="styleSheet">
+                      <string notr="true">QLineEdit{
+background-color:rgb(90, 90, 90);
+color:rgb(255, 255, 255);
+border-radius: 5px; 
+border: 1px solid rgb(40, 40, 40);
+padding: 2px;
+}
+
+QLineEdit:hover {
+background-color:rgb(100, 100, 100);
+color:rgb(255, 255, 255);
+border-radius: 5px; 
+border: 1px solid rgb(150, 150, 150);
+padding: 2px;
+}
+QLineEdit:pressed {
+background-color:rgb(110, 110, 110);
+color:rgb(255, 255, 255);
+border-radius: 5px; 
+border: 1px solid rgb(70, 70, 70);
+padding: 2px;
+}</string>
+                     </property>
+                     <property name="text">
+                      <string>root</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QToolButton" name="Btn_root_pick">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Fixed" vsizetype="Ignored">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>↙</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_6">
+             <property name="styleSheet">
+              <string notr="true">QFrame#frame_6{
+	background-color:rgb(65, 65, 65);
+	border-radius:10px;
+}</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_15">
+              <item>
+               <widget class="QGroupBox" name="groupBox_2">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="title">
+                 <string>质心</string>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_2">
+                 <item>
+                  <widget class="QLineEdit" name="lineEdit_2">
+                   <property name="styleSheet">
+                    <string notr="true">QLineEdit{
+background-color:rgb(90, 90, 90);
+color:rgb(255, 255, 255);
+border-radius: 5px; 
+border: 1px solid rgb(40, 40, 40);
+padding: 2px;
+}
+
+QLineEdit:hover {
+background-color:rgb(100, 100, 100);
+color:rgb(255, 255, 255);
+border-radius: 5px; 
+border: 1px solid rgb(150, 150, 150);
+padding: 2px;
+}
+QLineEdit:pressed {
+background-color:rgb(110, 110, 110);
+color:rgb(255, 255, 255);
+border-radius: 5px; 
+border: 1px solid rgb(70, 70, 70);
+padding: 2px;
+}</string>
+                   </property>
+                   <property name="text">
+                    <string>Bip001</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="Btn_Pelvis_pick">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Ignored">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>↙</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_5">
+           <property name="styleSheet">
+            <string notr="true">QFrame#frame_5{
+	background-color:rgb(65, 65, 65);
+	border-radius:10px;
+}</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_9">
             <item>
-             <widget class="QFrame" name="frame_13">
-              <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+             <widget class="QGroupBox" name="groupBox_3">
+              <property name="font">
+               <font>
+                <pointsize>12</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
               </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+              <property name="title">
+               <string>提取位移轴</string>
               </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <spacer name="horizontalSpacer_2">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
                <item>
                 <widget class="QCheckBox" name="cBox_posX">
                  <property name="font">
@@ -265,47 +297,18 @@ padding: 2px;
                 </widget>
                </item>
                <item>
-                <widget class="QRadioButton" name="radioButton_6">
-                 <property name="text">
-                  <string>首帧</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioButton_5">
-                 <property name="text">
-                  <string>无偏移</string>
-                 </property>
-                 <property name="checked">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_3">
+                <spacer name="horizontalSpacer_8">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
+                   <width>0</width>
                    <height>20</height>
                   </size>
                  </property>
                 </spacer>
                </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <widget class="QFrame" name="frame_14">
-              <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_16">
                <item>
                 <widget class="QCheckBox" name="cBox_posY">
                  <property name="font">
@@ -324,47 +327,18 @@ padding: 2px;
                 </widget>
                </item>
                <item>
-                <widget class="QRadioButton" name="radioButton_3">
-                 <property name="text">
-                  <string>首帧</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioButton_2">
-                 <property name="text">
-                  <string>无偏移</string>
-                 </property>
-                 <property name="checked">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_4">
+                <spacer name="horizontalSpacer_9">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
+                   <width>0</width>
                    <height>20</height>
                   </size>
                  </property>
                 </spacer>
                </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <widget class="QFrame" name="frame_15">
-              <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_18">
                <item>
                 <widget class="QCheckBox" name="cBox_posZ">
                  <property name="font">
@@ -380,9 +354,376 @@ padding: 2px;
                 </widget>
                </item>
                <item>
-                <widget class="QRadioButton" name="radioButton_9">
+                <spacer name="horizontalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_3">
+           <property name="styleSheet">
+            <string notr="true">QFrame#frame_3{
+	background-color:rgb(65, 65, 65);
+	border-radius:10px;
+}</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_14">
+            <property name="spacing">
+             <number>9</number>
+            </property>
+            <item>
+             <widget class="QGroupBox" name="groupBox_7">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="title">
+               <string>偏移设置</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_10">
+               <item>
+                <widget class="QFrame" name="frame_13">
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_9">
+                  <property name="leftMargin">
+                   <number>15</number>
+                  </property>
+                  <item>
+                   <widget class="QLabel" name="label_5">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>60</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>XY轴</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="radioButton_6">
+                    <property name="font">
+                     <font>
+                      <pointsize>8</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true"/>
+                    </property>
+                    <property name="text">
+                     <string>首帧</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="radioButton_5">
+                    <property name="font">
+                     <font>
+                      <pointsize>8</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true"/>
+                    </property>
+                    <property name="text">
+                     <string>无</string>
+                    </property>
+                    <property name="checked">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_3">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>0</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="Line" name="line_8">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QFrame" name="frame_14">
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_16">
+                  <property name="leftMargin">
+                   <number>15</number>
+                  </property>
+                  <item>
+                   <widget class="QLabel" name="label_6">
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>60</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Z轴</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="radioButton_3">
+                    <property name="font">
+                     <font>
+                      <pointsize>8</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true"/>
+                    </property>
+                    <property name="text">
+                     <string>首帧</string>
+                    </property>
+                    <property name="checked">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="radioButton_2">
+                    <property name="font">
+                     <font>
+                      <pointsize>8</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true"/>
+                    </property>
+                    <property name="text">
+                     <string>无</string>
+                    </property>
+                    <property name="checked">
+                     <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="radioButton_10">
+                    <property name="font">
+                     <font>
+                      <pointsize>8</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true"/>
+                    </property>
+                    <property name="text">
+                     <string>偏移帧</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_4">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>0</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="Line" name="line_9">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QFrame" name="frame_8">
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_12">
+                  <property name="leftMargin">
+                   <number>15</number>
+                  </property>
+                  <item>
+                   <widget class="QCheckBox" name="radioBtn_ZAxis_zero">
+                    <property name="text">
+                     <string>Z轴不小于0</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_5">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_4">
+                    <property name="text">
+                     <string>偏移帧：</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="spinBox_frame_reference">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QSpinBox{
+	background-color:rgb(100, 100, 100);
+	color:rgb(200,200,200);
+	border-radius:5px;
+}</string>
+                    </property>
+                    <property name="minimum">
+                     <number>-99999</number>
+                    </property>
+                    <property name="maximum">
+                     <number>99999</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QToolButton" name="Btn_frame_reference_pick">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="text">
+                     <string>↙</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_2">
+           <property name="styleSheet">
+            <string notr="true">QFrame#frame_2{
+	background-color:rgb(65, 65, 65);
+	border-radius:10px;
+}</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QGroupBox" name="groupBox_9">
+              <property name="title">
+               <string>时间范围设置</string>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_10">
+               <item>
+                <widget class="QRadioButton" name="radioButton">
                  <property name="text">
-                  <string>首帧</string>
+                  <string>滑块范围</string>
                  </property>
                  <property name="checked">
                   <bool>true</bool>
@@ -390,54 +731,132 @@ padding: 2px;
                 </widget>
                </item>
                <item>
-                <widget class="QRadioButton" name="radioButton_8">
+                <widget class="QRadioButton" name="radioBtn_custom_frame">
                  <property name="text">
-                  <string>无偏移</string>
+                  <string>自定义范围</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <layout class="QVBoxLayout" name="verticalLayout_8">
+                <widget class="QRadioButton" name="radioBtn_current_frame">
+                 <property name="text">
+                  <string>当前帧</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="Line" name="line">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBox_4">
+              <property name="title">
+               <string/>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,0">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_11">
                  <item>
-                  <widget class="QRadioButton" name="radioButton_10">
-                   <property name="text">
-                    <string>获取帧偏移值</string>
+                  <widget class="QGroupBox" name="groupBox_5">
+                   <property name="title">
+                    <string>开始帧:       </string>
                    </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_6">
+                    <item>
+                     <widget class="QSpinBox" name="spinBox_frame_start">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="minimum">
+                       <number>-99999999</number>
+                      </property>
+                      <property name="maximum">
+                       <number>999999999</number>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QToolButton" name="Btn_frame_start_pick">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="text">
+                       <string>↙</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
                   </widget>
                  </item>
                  <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_12">
-                   <item>
-                    <widget class="QSpinBox" name="spinBox_frame_reference">
-                     <property name="minimum">
-                      <number>-99999999</number>
-                     </property>
-                     <property name="maximum">
-                      <number>999999999</number>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QToolButton" name="Btn_frame_reference_pick">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="text">
-                      <string>指定</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
+                  <widget class="QGroupBox" name="groupBox_6">
+                   <property name="title">
+                    <string>结束帧:       </string>
+                   </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_7">
+                    <item>
+                     <widget class="QSpinBox" name="spinBox_frame_end">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="minimum">
+                       <number>-99999999</number>
+                      </property>
+                      <property name="maximum">
+                       <number>999999999</number>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QToolButton" name="Btn_frame_end_pick">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="text">
+                       <string>↙</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="Line" name="line_2">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </item>
                <item>
-                <widget class="QCheckBox" name="radioBtn_ZAxis_zero">
+                <widget class="QToolButton" name="Btn_frame_range_pick">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="text">
-                  <string>Z轴不小于0</string>
+                  <string>时间滑块范围</string>
                  </property>
                 </widget>
                </item>
@@ -447,209 +866,42 @@ padding: 2px;
            </layout>
           </widget>
          </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QFrame" name="frame_2">
-        <property name="styleSheet">
-         <string notr="true">QFrame#frame_2{
-	background-color:rgb(65, 65, 65);
-	border-radius:10px;
-}</string>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="QGroupBox" name="groupBox_9">
-           <property name="title">
-            <string/>
+          <widget class="QFrame" name="frame">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
            </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_10">
-            <item>
-             <widget class="QRadioButton" name="radioButton">
-              <property name="text">
-               <string>时间滑块范围</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="radioBtn_custom_frame">
-              <property name="text">
-               <string>自定义帧数范围</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="radioBtn_current_frame">
-              <property name="text">
-               <string>当前帧</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item>
-          <widget class="Line" name="line">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QGroupBox" name="groupBox_4">
-           <property name="title">
-            <string/>
-           </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="0,0,0,0,1">
+           <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="5">
+            <property name="topMargin">
+             <number>6</number>
+            </property>
+            <property name="bottomMargin">
+             <number>6</number>
+            </property>
             <item>
-             <widget class="QGroupBox" name="groupBox_5">
-              <property name="title">
-               <string>开始帧:       </string>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_6">
-               <item>
-                <widget class="QSpinBox" name="spinBox_frame_start">
-                 <property name="minimum">
-                  <number>-99999999</number>
-                 </property>
-                 <property name="maximum">
-                  <number>999999999</number>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="Btn_frame_start_pick">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Ignored">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>↙</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <widget class="Line" name="line_2">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QGroupBox" name="groupBox_6">
-              <property name="title">
-               <string>结束帧:       </string>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_7">
-               <item>
-                <widget class="QSpinBox" name="spinBox_frame_end">
-                 <property name="minimum">
-                  <number>-99999999</number>
-                 </property>
-                 <property name="maximum">
-                  <number>999999999</number>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="Btn_frame_end_pick">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Ignored">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>↙</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>0</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QToolButton" name="Btn_frame_range_pick">
+             <widget class="QToolButton" name="Btn_Apply">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="text">
-               <string>时间滑块范围</string>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>60</height>
+               </size>
               </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QFrame" name="frame">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="5">
-         <property name="topMargin">
-          <number>6</number>
-         </property>
-         <property name="bottomMargin">
-          <number>6</number>
-         </property>
-         <item>
-          <widget class="QToolButton" name="Btn_Apply">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>60</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QToolButton {
+              <property name="font">
+               <font>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QToolButton {
     background-color:rgb(40, 105, 254);
 	color: rgb(255, 255, 255);
     border-radius: 6px;
@@ -667,236 +919,236 @@ border-radius: 6px;
 }
 
 </string>
-           </property>
-           <property name="text">
-            <string>      应用      </string>
-           </property>
+              </property>
+              <property name="text">
+               <string>      应用      </string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
         </layout>
        </widget>
       </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QFrame" name="frame_9">
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,0">
-      <property name="spacing">
-       <number>0</number>
-      </property>
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
       <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
+       <widget class="QFrame" name="frame_9">
+        <property name="styleSheet">
+         <string notr="true"/>
         </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
         </property>
-       </spacer>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,0">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_17">
+           <property name="spacing">
+            <number>2</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <property name="spacing">
+              <number>2</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_3">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>7</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QLabel{
+	background-color:transparent;
+	color:rgb(120, 150, 254);
+}</string>
+               </property>
+               <property name="text">
+                <string>内部版本请勿外泄</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>7</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QLabel{
+	background-color:transparent;
+	color:rgb(120, 150, 254);
+}</string>
+               </property>
+               <property name="text">
+                <string>光子工作室-SN项目-美术组</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>7</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QLabel{
+	background-color:transparent;
+	color:rgb(120, 150, 254);
+}</string>
+               </property>
+               <property name="text">
+                <string>@2023</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_6">
+             <item>
+              <spacer name="verticalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QToolButton" name="Btn_About">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>关于</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <item>
+              <spacer name="verticalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QToolButton" name="Btn_language_switch">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>中文/EN</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_17">
-        <property name="spacing">
-         <number>2</number>
-        </property>
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <property name="spacing">
-           <number>2</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="label_3">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>7</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QLabel{
-	background-color:transparent;
-	color:rgb(120, 150, 254);
-}</string>
-            </property>
-            <property name="text">
-             <string>内部版本请勿外泄</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>7</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QLabel{
-	background-color:transparent;
-	color:rgb(120, 150, 254);
-}</string>
-            </property>
-            <property name="text">
-             <string>光子工作室-SN项目-美术组</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_2">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>7</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QLabel{
-	background-color:transparent;
-	color:rgb(120, 150, 254);
-}</string>
-            </property>
-            <property name="text">
-             <string>@2023</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_6">
-          <item>
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QToolButton" name="Btn_About">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>关于</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_7">
-          <item>
-           <spacer name="verticalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QToolButton" name="Btn_language_switch">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>中文/EN</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QProgressBar" name="progressBar">
-     <property name="styleSheet">
-      <string notr="true">QProgressBar
+       <widget class="QProgressBar" name="progressBar">
+        <property name="styleSheet">
+         <string notr="true">QProgressBar
 {
 background-color: rgb(120, 120, 120);
 color:rgb(255, 255, 255);
@@ -909,13 +1161,16 @@ background-color: rgb(60, 200, 0);
     border-radius: 6px;
 
 }</string>
-     </property>
-     <property name="value">
-      <number>24</number>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
+        </property>
+        <property name="value">
+         <number>24</number>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
   </layout>
