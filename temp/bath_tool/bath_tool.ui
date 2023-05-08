@@ -410,7 +410,7 @@ background: rgb(255, 0, 0);
                 <enum>Qt::NoFocus</enum>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <property name="usesScrollButtons">
                 <bool>false</bool>
