@@ -1,5 +1,6 @@
 from pymxs import runtime as rt
 
 
-obj = rt.selection[0]
-print(obj.transform.pos.x)
+obj = rt.selection
+for i in obj:
+	print(i.name)

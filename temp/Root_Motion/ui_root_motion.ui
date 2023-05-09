@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>374</width>
-    <height>723</height>
+    <width>296</width>
+    <height>579</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>SN_Root_Motion</string>
+   <string>SN_Root_Motion V1.0</string>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -148,6 +148,9 @@ padding: 2px;
                        <verstretch>0</verstretch>
                       </sizepolicy>
                      </property>
+                     <property name="toolTip">
+                      <string>指定当前选择物体</string>
+                     </property>
                      <property name="text">
                       <string>↙</string>
                      </property>
@@ -228,6 +231,9 @@ padding: 2px;
                      <verstretch>0</verstretch>
                     </sizepolicy>
                    </property>
+                   <property name="toolTip">
+                    <string>指定当前选择物体</string>
+                   </property>
                    <property name="text">
                     <string>↙</string>
                    </property>
@@ -294,6 +300,9 @@ padding: 2px;
                  <property name="focusPolicy">
                   <enum>Qt::NoFocus</enum>
                  </property>
+                 <property name="toolTip">
+                  <string>位移X轴</string>
+                 </property>
                  <property name="text">
                   <string>X</string>
                  </property>
@@ -323,6 +332,9 @@ padding: 2px;
                  </property>
                  <property name="focusPolicy">
                   <enum>Qt::NoFocus</enum>
+                 </property>
+                 <property name="toolTip">
+                  <string>位移Y轴</string>
                  </property>
                  <property name="text">
                   <string>Y</string>
@@ -356,6 +368,9 @@ padding: 2px;
                  </property>
                  <property name="focusPolicy">
                   <enum>Qt::NoFocus</enum>
+                 </property>
+                 <property name="toolTip">
+                  <string>位移Z轴</string>
                  </property>
                  <property name="text">
                   <string>Z</string>
@@ -427,7 +442,7 @@ padding: 2px;
                    <number>15</number>
                   </property>
                   <item>
-                   <widget class="QRadioButton" name="radioButton_5">
+                   <widget class="QRadioButton" name="radioButton_offsetXY_none">
                     <property name="font">
                      <font>
                       <pointsize>8</pointsize>
@@ -435,6 +450,9 @@ padding: 2px;
                     </property>
                     <property name="focusPolicy">
                      <enum>Qt::NoFocus</enum>
+                    </property>
+                    <property name="toolTip">
+                     <string>XY轴无偏移</string>
                     </property>
                     <property name="styleSheet">
                      <string notr="true"/>
@@ -448,7 +466,7 @@ padding: 2px;
                    </widget>
                   </item>
                   <item>
-                   <widget class="QRadioButton" name="radioButton_6">
+                   <widget class="QRadioButton" name="radioButton_offsetXY_start_frame">
                     <property name="font">
                      <font>
                       <pointsize>8</pointsize>
@@ -456,6 +474,9 @@ padding: 2px;
                     </property>
                     <property name="focusPolicy">
                      <enum>Qt::NoFocus</enum>
+                    </property>
+                    <property name="toolTip">
+                     <string>XY轴以时间滑块首帧偏移</string>
                     </property>
                     <property name="styleSheet">
                      <string notr="true"/>
@@ -530,7 +551,7 @@ padding: 2px;
                    <number>15</number>
                   </property>
                   <item>
-                   <widget class="QRadioButton" name="radioButton_2">
+                   <widget class="QRadioButton" name="radioButton_offsetZ_none">
                     <property name="font">
                      <font>
                       <pointsize>8</pointsize>
@@ -538,6 +559,9 @@ padding: 2px;
                     </property>
                     <property name="focusPolicy">
                      <enum>Qt::NoFocus</enum>
+                    </property>
+                    <property name="toolTip">
+                     <string>无偏移</string>
                     </property>
                     <property name="styleSheet">
                      <string notr="true"/>
@@ -551,7 +575,7 @@ padding: 2px;
                    </widget>
                   </item>
                   <item>
-                   <widget class="QRadioButton" name="radioButton_3">
+                   <widget class="QRadioButton" name="radioButton_offsetZ_start_frame">
                     <property name="font">
                      <font>
                       <pointsize>8</pointsize>
@@ -559,6 +583,9 @@ padding: 2px;
                     </property>
                     <property name="focusPolicy">
                      <enum>Qt::NoFocus</enum>
+                    </property>
+                    <property name="toolTip">
+                     <string>Z轴以时间滑块首帧偏移</string>
                     </property>
                     <property name="styleSheet">
                      <string notr="true"/>
@@ -572,7 +599,7 @@ padding: 2px;
                    </widget>
                   </item>
                   <item>
-                   <widget class="QRadioButton" name="radioButton_10">
+                   <widget class="QRadioButton" name="radioButton_offsetZ_offset_frame">
                     <property name="font">
                      <font>
                       <pointsize>8</pointsize>
@@ -628,6 +655,9 @@ padding: 2px;
                  <property name="focusPolicy">
                   <enum>Qt::NoFocus</enum>
                  </property>
+                 <property name="toolTip">
+                  <string>Z轴数值不小于0</string>
+                 </property>
                  <property name="text">
                   <string>Z轴不小于0</string>
                  </property>
@@ -679,6 +709,9 @@ padding: 2px;
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
+                 </property>
+                 <property name="toolTip">
+                  <string>指定当前时间滑块时间</string>
                  </property>
                  <property name="text">
                   <string>↙</string>
@@ -812,6 +845,9 @@ padding: 2px;
                         <verstretch>0</verstretch>
                        </sizepolicy>
                       </property>
+                      <property name="toolTip">
+                       <string>指定当前时间</string>
+                      </property>
                       <property name="text">
                        <string>↙</string>
                       </property>
@@ -857,6 +893,9 @@ padding: 2px;
                         <verstretch>0</verstretch>
                        </sizepolicy>
                       </property>
+                      <property name="toolTip">
+                       <string>指定当前时间</string>
+                      </property>
                       <property name="text">
                        <string>↙</string>
                       </property>
@@ -877,6 +916,9 @@ padding: 2px;
                  </property>
                  <property name="focusPolicy">
                   <enum>Qt::NoFocus</enum>
+                 </property>
+                 <property name="toolTip">
+                  <string>指定时间滑块时间范围</string>
                  </property>
                  <property name="text">
                   <string>时间滑块范围</string>
@@ -906,6 +948,9 @@ padding: 2px;
             </property>
             <item>
              <widget class="QToolButton" name="Btn_Apply">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
                 <horstretch>0</horstretch>
@@ -925,6 +970,9 @@ padding: 2px;
               </property>
               <property name="focusPolicy">
                <enum>Qt::NoFocus</enum>
+              </property>
+              <property name="toolTip">
+               <string>开始执行</string>
               </property>
               <property name="styleSheet">
                <string notr="true">QToolButton {
@@ -1132,6 +1180,9 @@ border-radius: 6px;
                <property name="focusPolicy">
                 <enum>Qt::NoFocus</enum>
                </property>
+               <property name="toolTip">
+                <string>关于</string>
+               </property>
                <property name="text">
                 <string>关于</string>
                </property>
@@ -1164,6 +1215,9 @@ border-radius: 6px;
                </property>
                <property name="focusPolicy">
                 <enum>Qt::NoFocus</enum>
+               </property>
+               <property name="toolTip">
+                <string>语言切换</string>
                </property>
                <property name="text">
                 <string>中文/EN</string>

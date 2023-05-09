@@ -3,8 +3,9 @@ from PySide2 import shiboken2
 from pymxs import runtime as rt
 import pymxs
 from PoseLibrary.temp.Root_Motion import ui_root_motion as ui_root_motion
+from PoseLibrary.temp.Root_Motion import ui_root_motion_Dialog as ui_root_motion_Dialog
 
-
+isButtonClickable = True
 
 reload(ui_root_motion)
 class Ui_DockWidget(QtWidgets.QDockWidget):
@@ -17,14 +18,20 @@ class Ui_DockWidget(QtWidgets.QDockWidget):
         self.widget.setLayout(self.ui.verticalLayout)
         self.setWidget(self.widget)
         self.stepWindowUi()
+        self.setWindowFlags(QtCore.Qt.Tool)
+        self.setAttribute(QtCore.Qt.WA_DeleteOnClose) #关闭原有的窗口
+
         self.creat_contion()
+
     def stepWindowUi(self):
+
         self.ui.progressBar.setVisible(False)
         self.ui.groupBox_4.setVisible(False)
 
         self.ui.frame_14.setVisible(False)
         self.ui.frame_8.setVisible(False)
         self.ui.frame_10.setVisible(False)
+        self.ui.Btn_language_switch.setVisible(False)
         # self.ui.frame_5.setVisible(False)
         # self.ui.frame_3.setVisible(False)
 
@@ -44,6 +51,7 @@ class Ui_DockWidget(QtWidgets.QDockWidget):
         self.ui.Btn_frame_reference_pick.clicked.connect(self.clicked_Btn_frame_reference_pick)
         self.ui.Btn_frame_range_pick.clicked.connect(self.clicked_Btn_frame_range_pick)
         self.ui.Btn_Apply.clicked.connect(self.Apply)
+        self.ui.Btn_About.clicked.connect(self.clicked_Btn_about)
 
     def clicked_radioBtn_custom_frame(self):
         ischeack = self.ui.radioBtn_custom_frame.isChecked()
@@ -105,6 +113,26 @@ class Ui_DockWidget(QtWidgets.QDockWidget):
         endtime = int(rt.animationRange.end.frame)
         self.ui.spinBox_frame_start.setValue(starttime)
         self.ui.spinBox_frame_end.setValue(endtime)
+
+
+
+
+    def clicked_Btn_about(self):
+        main_window_qwdgt = QtWidgets.QWidget.find(rt.windows.getMAXHWND())
+        # Then cast it as a QMainWindow for docking purposes:
+        main_window = shiboken2.wrapInstance(shiboken2.getCppPointer(main_window_qwdgt)[0], QtWidgets.QMainWindow)
+        self.dialog_about = QtWidgets.QDialog(main_window)
+        ui_dialog = ui_root_motion_Dialog.Ui_Dialog()
+        ui_dialog.setupUi(self.dialog_about)
+        self.dialog_about.setLayout(ui_dialog.verticalLayout)
+        self.dialog_about.setWindowTitle("关于SN_Root_Motion")
+
+        self.dialog_about.show()
+
+    def clicked_Btn_language_switch(self):
+
+        self.ui.Btn_language_switch()
+
     def set_spinBox_current_frame(self,spinBox):
         curentframe = int(rt.currentTime.frame)
         spinBox.setValue(curentframe)
@@ -126,82 +154,139 @@ class Ui_DockWidget(QtWidgets.QDockWidget):
         else:
             starttime = int(rt.animationRange.start.frame)
             endtime = int(rt.animationRange.end.frame)
-        print(starttime,endtime)
+        # print(starttime,endtime)
         return (starttime,endtime)
 
-    def Apply_do(self,root,Pelvis,offset = 0):
-        #获取质心的位移属性
-        Pelvis = Pelvis
-        root = root
-        #判断物体类型
-        poslist = []
-        rangetime = self.get_frame_range()
-        rt.disableSceneRedraw()
-        with pymxs.undo(True):
-            with pymxs.animate(True):
-                for i in range(rangetime[0], rangetime[1]+1):
-                    with pymxs.attime(i):
-                        rt.sliderTime = i
-                        Pelvispos = Pelvis.transform.pos
-                        if self.ui.cBox_posX.isChecked():
-                            rootposX = Pelvispos.x
-                        else:
-                            rootposX = 0
-                        if self.ui.cBox_posY.isChecked():
-                            rootposY = Pelvispos.y
-                        else:
-                            rootposY = 0
-                        if self.ui.cBox_posZ.isChecked():
+    def Apply_do(self, root, Pelvis, X_offset=None, Y_offset=None, Z_offset=None):
+        if X_offset is None:
+            X_offset = 0
+        if Y_offset is None:
+            Y_offset = 0
+        if Z_offset is None:
+            Z_offset = 0
+        self.ui.progressBar.setVisible(True)
+        self.ui.progressBar.setValue(0)
+        try:
+            # 获取质心的位移属性
+            Pelvis = Pelvis
+            root = root
+            # 判断物体类型
+            poslist = []
+            rangetime = self.get_frame_range()
+            max = rangetime[1]+1-rangetime[0]
+            k= 0
+            rt.disableSceneRedraw()
 
-                            rootposZ = Pelvispos.z - offset
-                            if self.ui.radioBtn_ZAxis_zero.isChecked():
-                                if rootposZ<0:
-                                    rootposZ = 0
-                        else:
-                            rootposZ = 0
-                        root.pos = rt.point3(rootposX,rootposY,rootposZ)
-                        poslist.append(Pelvispos)
-        rt.enableSceneRedraw()
-        rt.redrawViews()
+            with pymxs.undo(True):
+                with pymxs.animate(True):
+                    for i in range(rangetime[0], rangetime[1] + 1):
 
-        return poslist
+                        with pymxs.attime(i):
+                            rt.sliderTime = i
+                            Pelvispos = Pelvis.transform.pos
+                            if self.ui.cBox_posX.isChecked():
+                                rootposX = Pelvispos.x - X_offset
+                            else:
+                                rootposX = 0
+                            if self.ui.cBox_posY.isChecked():
+                                rootposY = Pelvispos.y - Y_offset
+                            else:
+                                rootposY = 0
+                            if self.ui.cBox_posZ.isChecked():
+                                rootposZ = Pelvispos.z - Z_offset
+                                if self.ui.radioBtn_ZAxis_zero.isChecked():
+                                    if rootposZ < 0:
+                                        rootposZ = 0
+                            else:
+                                rootposZ = 0
+                            root.pos = rt.point3(rootposX, rootposY, rootposZ)
+                            poslist.append(Pelvispos)
+                            k+=1
+                            self.ui.progressBar.setValue(float(k) / float(max) * 100)
+            self.ui.progressBar.setVisible(False)
+            rt.enableSceneRedraw()
+            rt.redrawViews()
+
+        except Exception as e:
+            rt.enableSceneRedraw()
+            rt.redrawViews()
+            print(u'Error occurred: {}'.format(str(e)))
+
+    def get_XY_Axis_offset(self,root,Pelvis):
+        if self.ui.radioButton_offsetXY_none.isChecked():
+            XAxis_offset = 0
+            YAxis_offset = 0
+        else:
+            rt.disableSceneRedraw()
+            currenttime = rt.currentTime.frame
+            framenum = rt.animationRange.start.frame
+            rt.sliderTime = framenum
+            XAxis_offset = Pelvis.transform.pos.x - root.transform.pos.x
+            YAxis_offset = Pelvis.transform.pos.y - root.transform.pos.y
+            rt.sliderTime = currenttime
+            rt.enableSceneRedraw()
+            rt.redrawViews()
+        return (XAxis_offset,YAxis_offset)
+
 
     def get_Z_Axis_offset(self,root,Pelvis):
-        rt.disableSceneRedraw()
-        try:
-            currenttime = rt.currentTime.frame
+        if self.ui.radioButton_offsetZ_none.isChecked():
+            offset = 0
+            return offset
+        else:
+            rt.disableSceneRedraw()
+            offset = 0
+            try:
+                currenttime = rt.currentTime.frame
+                if self.ui.radioButton_offsetZ_start_frame.isChecked():
+                    framenum = rt.animationRange.start.frame
+                else:
+                    framenum = self.ui.spinBox_frame_reference.value()
 
-            framenum = self.ui.spinBox_frame_reference.value()
-            rt.sliderTime = framenum
+                rt.sliderTime = framenum
+                offset = Pelvis.transform.pos.z - root.transform.pos.z
+                rt.sliderTime = currenttime
 
-            offset = Pelvis.transform.pos.z - root.transform.pos.z
-            rt.sliderTime = currenttime
-        except:
-            pass
-        rt.enableSceneRedraw()
-        rt.redrawViews()
-        return offset
+            except:
+                pass
+            rt.enableSceneRedraw()
+            rt.redrawViews()
+            return offset
+
 
     def Apply(self):
-        rootname = self.ui.lineEdit.text()
-        Pelvisname = self.ui.lineEdit_2.text()
+        self.ui.Btn_Apply.setEnabled(False)
+        try:
+            rt.redrawViews()
+            rootname = self.ui.lineEdit.text()
+            Pelvisname = self.ui.lineEdit_2.text()
 
-        root = rt.getNodeByName(rootname)
-        Pelvis = rt.getNodeByName(Pelvisname)
-        if root and Pelvis :
-            Z_Axis_offset = self.get_Z_Axis_offset(root,Pelvis)
-            self.Apply_do(root,Pelvis,offset=Z_Axis_offset)
+            root = rt.getNodeByName(rootname)
+            Pelvis = rt.getNodeByName(Pelvisname)
+            if root and Pelvis :
+                Z_Axis_offset = self.get_Z_Axis_offset(root,Pelvis)
+                XY_Axis_offset = self.get_XY_Axis_offset(root,Pelvis)
+                self.Apply_do(root,Pelvis,X_offset=XY_Axis_offset[0],Y_offset=XY_Axis_offset[1],Z_offset = Z_Axis_offset)
+
+        except Exception as e:
+            print("Error occurred: {}".format(str(e)))
+        self.ui.Btn_Apply.setEnabled(True)
+
 
 def main():
+
     #rt.resetMaxFile(rt.name('noPrompt'))
     # Cast the main window HWND to a QMainWindow for docking
     # First, get the QWidget corresponding to the Max windows HWND:
     main_window_qwdgt = QtWidgets.QWidget.find(rt.windows.getMAXHWND())
     # Then cast it as a QMainWindow for docking purposes:
     main_window = shiboken2.wrapInstance(shiboken2.getCppPointer(main_window_qwdgt)[0], QtWidgets.QMainWindow)
+
     w = Ui_DockWidget(parent=main_window) #
     w.setFloating(True)
     w.show()
+
+
 
 
 if __name__ == "__main__":
