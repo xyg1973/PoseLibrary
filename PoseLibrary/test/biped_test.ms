@@ -1,6 +1,6 @@
 scriptpathname = getThisScriptFilename()
 scriptpath  = getFilenamePath scriptpathname
-pypath = scriptpath+"\\main.py"
+pypath = scriptpath+"\\biped_test.py"
 python.ExecuteFile pypath
 
 

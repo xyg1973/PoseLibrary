@@ -1,0 +1,71 @@
+[
+  {
+    "type": "Anim"
+  },
+  {
+    "endtime": 42.0,
+    "starttime": 0.0,
+    "currenttime": 0.0
+  },
+  [
+    {
+      "type": "Pose"
+    },
+    {
+      "objscale": "[1,1,1]",
+      "obj": "$Box:Box001 @ [41.569649,-128.070618,0.000000]",
+      "objposition": "[41.5696,-128.071,0]",
+      "objparent": null,
+      "objname": "Box001",
+      "objtype": "Box",
+      "iskeyframe": true,
+      "objrotation": "(quat 0 0 0 1)",
+      "objtransform": "(matrix3 [1,0,0] [0,1,0] [0,0,1] [41.5696,-128.071,0])"
+    }
+  ],
+  [
+    {
+      "type": "Pose"
+    },
+    {
+      "objscale": "[1,1,1]",
+      "obj": "$Box:Box001 @ [41.944798,-128.070618,0.325035]",
+      "objposition": "[41.9448,-128.071,0.325035]",
+      "objparent": null,
+      "objname": "Box001",
+      "objtype": "Box",
+      "objrotation": "(quat 0 0 0 1)",
+      "objtransform": "(matrix3 [1,0,0] [0,1,0] [0,0,1] [41.9448,-128.071,0.325035])"
+    }
+  ],
+  [
+    {
+      "type": "Pose"
+    },
+    {
+      "objscale": "[1,1,1]",
+      "obj": "$Box:Box001 @ [43.019516,-128.070618,1.243610]",
+      "objposition": "[43.0195,-128.071,1.24361]",
+      "objparent": null,
+      "objname": "Box001",
+      "objtype": "Box",
+      "objrotation": "(quat 0 0 0 1)",
+      "objtransform": "(matrix3 [1,0,0] [0,1,0] [0,0,1] [43.0195,-128.071,1.24361])"
+    }
+  ],
+  [
+    {
+      "type": "Pose"
+    },
+    {
+      "objscale": "[1,1,1]",
+      "obj": "$Box:Box001 @ [44.717731,-128.070618,2.670936]",
+      "objposition": "[44.7177,-128.071,2.67094]",
+      "objparent": null,
+      "objname": "Box001",
+      "objtype": "Box",
+      "objrotation": "(quat 0 0 0 1)",
+      "objtransform": "(matrix3 [1,0,0] [0,1,0] [0,0,1] [44.7177,-128.071,2.67094])"
+    }
+  ]
+]
