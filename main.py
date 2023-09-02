@@ -1,68 +1,44 @@
-#sys.path.append("H:/pycharm_max_work/poselibray")
-#sys.path.remove("H:/pycharm_max_work/poselibray")
-def reloadmoudle():
-    reload(main)
-    reload(Card_Farme)
-    reload(List_Farme)
-    reload(QTcommand)
-    reload(Library_Frame)
+import sys
+import os
+
+current_work_dir = os.path.dirname(__file__)
+# poselibrary_path = current_work_dir
+
+if current_work_dir in sys.path:
+    pass
+else:
+    sys.path.append(current_work_dir)
+
+def reload_module(module_name):
+    if module_name in sys.modules:
+        try:
+            # Python 2
+            reload(sys.modules[module_name])
+        except NameError:
+            # Python 3
+            import importlib
+            importlib.reload(sys.modules[module_name])
+        except Exception as e:
+            print(e)
 
 
-reloadmoudle()
-#syspath = sys.path
-#for i in syspath:
-#	print(i)
-
-from UI.Temp import main, List_Farme, Library_Frame, Card_Farme
-from Tools import QTcommand
-from Tools import file
-from PySide2.QtCore import QTimer
-import gc
-
-DESINGNPATH ="H:\pycharm_maya_work\Design"
-
-DockWidget = main.main()
-
-# CardA = Card_Farme.Card_Frame(DockWidget.Card_Frame)
-# DockWidget.verticalLayout_12.addWidget(CardA)
-# CardA.show()
+def run():
+    pypath = os.getcwd()
+    pypath = pypath+"\python"
 
 
-ListA= List_Farme.List_Frame(DockWidget.dockWidget)
+    from PoseLibrary.UI import windowUI as windowUI
+    from PoseLibrary.Tools import file as file
+    try:
+        reload_module('PoseLibrary.UI.windowUI')
+        reload_module('PoseLibrary.Tools.file')
+    except:
+        pass
+    #
+    my_documents_path = os.path.expanduser('~/Documents')
+    file_path = file.check_and_create_file(my_documents_path, 'poselibrary', 'poselibrary.txt')
+    windowUI.pypath = pypath + "\PoseLibrary"
+    window = windowUI.main()
 
-DockWidget.verticalLayout_7.addWidget(ListA)
-ListA.show()
-
-LibraryA = Library_Frame.Library_Frame(DockWidget.Library_Frame)
-DockWidget.verticalLayout_11.addWidget(LibraryA)
-LibraryA.show()
-LibraryA.tableWidget.clear()
-AllItemFrame = QTcommand.updataLibraryItem("H:\pycharm_maya_work\Design//test", LibraryA.tableWidget, LibraryA.width())
-#List刷新
-
-QTcommand.itemsort(LibraryA.tableWidget, AllItemFrame)
-
-
-ListA.treeWidget.clear()
-ListA.treeWidget_2.clear()
-ListA.treeWidget_2.setVisible(False)
-QTcommand.updataListItem(DESINGNPATH, ListA.treeWidget)
-force_name = file.getforceName(DESINGNPATH)
-#print(force_name)
-
-def itemsort(table = LibraryA.tableWidget,allitem=AllItemFrame):
-    #time.sleep(0.25)
-    QTcommand.itemsort(table, allitem)
-
-
-def eventItemSort(w,h):
-    QTimer.singleShot(2,itemsort)
-    #print("yes yes yes")
-
-    gc.collect()#python内置清除内存函数
-#创建事件信号
-size_changed_signal = DockWidget.size_changed
-
-#给信号绑定事件
-size_changed_signal.connect(eventItemSort)
-
+if __name__ == "__main__":
+    run()

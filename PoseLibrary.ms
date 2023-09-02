@@ -1,3 +1,4 @@
-Maxpath = GetDir #maxroot
-poselibrayPath = Maxpath +"\python\PoseLibrary\\run.py"
-python.ExecuteFile poselibrayPath
+scriptpathname = getThisScriptFilename()
+scriptpath  = getFilenamePath scriptpathname
+pypath = scriptpath+"\\main.py"
+python.ExecuteFile pypath
